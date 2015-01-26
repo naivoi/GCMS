@@ -1,0 +1,3 @@
+article > header > h1.personnel:before, ul#dashboard > li.personnel > h3:before {
+	content: '\e658';
+}

@@ -1,0 +1,13 @@
+<form id=login_frm method=post action="{WEBURL}/index.php">
+	<fieldset class=facebook>
+		<img id=usericon src="{WEBURL}/modules/member/usericon.php?id={ID}" width=24 height=24 alt=usericon>
+		{LNG_LOGOUT_DISPLAYNAME}
+		<a id=login_editprofile href="{WEBURL}/index.php?module=editprofile" title="{LNG_MEMBER_EDIT_TITLE}" class="sender status{STATUS}">{DISPLAYNAME}</a>
+ 		<a id=login_logout title="{LNG_LOGOUT_TITLE}" class="button save">{LNG_LOGOUT}</a>
+	</fieldset>
+</form>
+<script>
+	$G(window).Ready(function() {
+		callClick('login_logout', doLogout);
+	});
+</script>

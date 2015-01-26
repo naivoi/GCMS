@@ -1,0 +1,32 @@
+.gbtnslide {
+	position: relative;
+}
+.gbtnslide p.button_container_gbtnslide {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 5px 0;
+}
+.gbtnslide .button_gbtnslide > a {
+	background-color: #FFF;
+	cursor: pointer;
+	font-size: 10px;
+	width: 1.5em;
+	height: 1.5em;
+	line-height: 1.5em;
+	padding: 0.1em 0.4em;
+	font-family: Arial;
+	margin: 0 5px;
+	color: #666;
+	-moz-opacity: .5;
+	filter:alpha(opacity=50);
+	opacity: .5;
+}
+.gbtnslide .button_gbtnslide > a.current {
+	background-color: #F00;
+	color: #FFF;
+}
+.gbtnslide .loading_gbtnslide {
+	background-image: url(img/loading.gif);
+	background-position: 50% 50%;
+}

@@ -1,0 +1,22 @@
+<form id=login_frm method=post action="{WEBURL}/index.php" autocomplete=off>
+	<fieldset>
+		<label>
+			<input placeholder="{LNG_EMAIL}" type=text name=login_email id=login_email size=15 maxlength=255 value="{EMAIL}" title="{LNG_PLEASE_FILL}">
+		</label>
+		<label>
+			<input placeholder="{LNG_PASSWORD}" type=password name=login_password id=login_password size=15 maxlength=20 value="{PASSWORD}" title="{LNG_PLEASE_FILL}">
+		</label>
+	</fieldset>
+	<fieldset class=facebook>
+		<input type=submit id=login_submit value="{LNG_LOGIN}" title="{LNG_LOGIN_SUBMIT_TITLE}" class="button save">
+		<a id=login_register href="{WEBURL}/index.php?module=register" title="{LNG_REGISTER_TITLE}" class="button light">{LNG_REGISTER}</a>
+		<a id=login_forgot href="{WEBURL}/index.php?module=forgot" title="{LNG_FORGOT_TITLE}" class="button light">{LNG_FORGOT}</a>
+		<a id=login_fb title="{LNG_FACEBOOK_LOGIN}" class="{FACEBOOK} button blue">{LNG_FACEBOOK_LOGIN}</a>
+	</fieldset>
+</form>
+<script>
+	$G(window).Ready(function() {
+		new GForm('login_frm', '{WEBURL}/modules/member/chklogin.php').onsubmit(doLoginSubmit);
+		callClick('login_fb', fbLogin);
+	});
+</script>
