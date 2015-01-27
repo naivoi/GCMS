@@ -5,7 +5,7 @@
 		$id = gcms::getVars('REQUEST,REQUEST', 'id,wbid', 0);
 		$page = gcms::getVars($_REQUEST, 'page', 0);
 		$cat = gcms::getVars($_REQUEST, 'cat', 0);
-		$search = empty($_REQUEST['q']) ? '' : preg_replace('/[+\s]+/u', ' ', $_REQUEST['q']);
+		$search = preg_replace('/[+\s]+/u', ' ', gcms::getVars($_REQUEST, 'q', ''));
 		// query ข้อมูล
 		$sql = "SELECT I.*,U.`status`,U.`id` AS `member_id`,M.`module`";
 		$sql .= ",CASE WHEN ISNULL(C.`config`) THEN M.`config` ELSE CONCAT(M.`config`,'\n',C.`config`) END AS `config`";
@@ -148,7 +148,7 @@
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $canonical;
-				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'",isset($matches[2]) ? (int)$matches[2] : 0);');
+				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'",gcms::getVars($matches,2,0);');
 				$replace[] = $index['pin'] == 0 ? 'un' : '';
 				$replace[] = $index['locked'] == 0 ? 'un' : '';
 				$replace[] = $index['pin'] == 0 ? $lng['LNG_PIN'] : $lng['LNG_UNPIN'];

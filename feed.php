@@ -3,8 +3,9 @@
 	header("content-type: text/xml; charset=UTF-8");
 	// inint
 	include 'bin/inint.php';
-	if (isset($_REQUEST['module']) && preg_match('/^[a-z]+$/', $_REQUEST['module'])) {
-		$module = gcms::getVars($_REQUEST, 'module', '');
+	// module
+	$module = gcms::getVars($_REQUEST, 'module', '');
+	if (preg_match('/^[a-z]+$/', $module)) {
 		// จำนวนที่ต้องการ ถ้าไม่กำหนด คืนค่า 10 รายการ
 		$count = gcms::getVars($_GET, 'count', 0);
 		if ($count == 0) {

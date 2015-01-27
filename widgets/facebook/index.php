@@ -25,7 +25,7 @@
 			$widget[] = '}';
 			$widget[] = 'var js = d.createElement("script");';
 			$widget[] = 'js.id = id;';
-			$widget[] = 'js.src = "//connect.facebook.net/th_TH/all.js#xfbml=1&appId='.$config['facebook']['appId'].'&version=v2.0";';
+			$widget[] = 'js.src = "//connect.facebook.net/th_TH/all.js#xfbml=1&appId='.(empty($config['facebook']['appId']) ? '' : $config['facebook']['appId']).'&version=v2.0";';
 			$widget[] = 'd.getElementsByTagName("head")[0].appendChild(js);';
 			$widget[] = '}(document, "facebook-jssdk"));';
 			$widget[] = '</script>';

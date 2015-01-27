@@ -86,9 +86,7 @@
 				$template = 'category';
 			}
 			// แสดงผลหน้าเว็บ
-			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/',
-				'/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e',
-				'/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
+			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';

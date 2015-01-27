@@ -5,7 +5,7 @@
 		$id = gcms::getVars($_REQUEST, 'id', 0);
 		$page = gcms::getVars($_REQUEST, 'page', 0);
 		$cat = gcms::getVars($_REQUEST, 'cat', 0);
-		$search = empty($_REQUEST['q']) ? '' : preg_replace('/[+\s]+/u', ' ', $_REQUEST['q']);
+		$search = preg_replace('/[+\s]+/u', ' ', gcms::getVars($_REQUEST, 'q', ''));
 		// query ข้อมูล
 		$sql = "SELECT I.`id`,I.`module_id`,I.`category_id`,D.`topic`,I.`picture`,D.`description`,D.`detail`,I.`create_date`,I.`last_update`,I.`visited`,I.`comments`";
 		$sql .= ",I.`alias`,D.`keywords`,D.`relate`,I.`can_reply`,I.`published`,M.`module`,M.`config`,0 AS `vote`,0 AS `vote_count`";

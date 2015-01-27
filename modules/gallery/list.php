@@ -122,8 +122,7 @@
 			$keywords = $index['topic'];
 			$description = $index['detail'];
 			// เลือกเมนู
-			$menu = $install_modules[$index['module']]['alias'];
-			$menu = $menu == '' ? $index['module'] : $menu;
+			$menu = empty($install_modules[$index['module']]['alias']) ? $index['module'] : $install_modules[$index['module']]['alias'];
 		} else {
 			$title = $lng['LNG_DATA_NOT_FOUND'];
 			$content = '<div class=error>'.$title.'</div>';

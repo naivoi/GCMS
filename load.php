@@ -7,7 +7,7 @@
 			$main_patt = array('/{TITLE}/', '/{CONTENT}/', '/{LANGUAGE}/', '/{WEBURL}/', '/{SKIN}/');
 			$main_replace = array();
 			$main_replace[] = strip_tags($config['web_title']);
-			$main_replace[] = $lng['MAINTENANCE_DETAIL'] == '' ? '<p style="padding: 20px; text-align: center; font-weight: bold;">ปิดปรับปรุงเว็บไซต์ชั่วคราว กรุณาลองใหม่ในอีกสักครู่...</p>' : $lng['MAINTENANCE_DETAIL'];
+			$main_replace[] = empty($lng['MAINTENANCE_DETAIL']) ? '<p style="padding: 20px; text-align: center; font-weight: bold;">ปิดปรับปรุงเว็บไซต์ชั่วคราว กรุณาลองใหม่ในอีกสักครู่...</p>' : $lng['MAINTENANCE_DETAIL'];
 			$main_replace[] = LANGUAGE;
 			$main_replace[] = WEB_URL;
 			$main_replace[] = SKIN;

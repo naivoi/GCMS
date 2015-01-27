@@ -3,7 +3,7 @@
 		session_start();
 		ob_start();
 		// current version
-		$version = '10.0.0';
+		$version = '10.0.1';
 		// header
 		echo '<!DOCTYPE html>';
 		echo '<html lang=TH dir=ltr>';
