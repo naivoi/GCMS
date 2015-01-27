@@ -10,10 +10,10 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
-			$save['name'] = $db->sql_trim_str(gcms::getVars($_POST, 'download_name', ''));
-			$save['detail'] = $db->sql_trim_str(gcms::getVars($_POST, 'download_description', ''));
+			$save['name'] = $db->sql_trim_str($_POST, 'download_name', '');
+			$save['detail'] = $db->sql_trim_str($_POST, 'download_description', '');
 			$save['category_id'] = gcms::getVars($_POST, 'download_category', 0);
-			$save['file'] = $db->sql_trim_str(gcms::getVars($_POST, 'download_file', ''));
+			$save['file'] = $db->sql_trim_str($_POST, 'download_file', '');
 			$file = $_FILES['download_upload'];
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			// ตรวจสอบค่าที่ส่งมา

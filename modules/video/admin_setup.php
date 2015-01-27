@@ -14,7 +14,7 @@
 			$q = array();
 			$q[] = "`module_id`='$index[id]'";
 			// ข้อความค้นหา
-			$search = empty($_GET['search']) ? '' : preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_GET['search']));
+			$search = preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_GET, 'search', ''));
 			$searchs = array();
 			foreach (explode(' ', $search) AS $item) {
 				// แยกข้อความค้นหาออกเป็นคำๆ ค้นหาข้อความที่มีความยาวมากกว่า 2 ตัวอักษร

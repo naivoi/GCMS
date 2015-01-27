@@ -6,9 +6,9 @@
 	 * @author กรกฎ วิริยะ (http://www.goragod.com)
 	 */
 	class sql {
-		protected $vesion = "11-10-55";
+		protected $vesion = "27-1-58";
 		protected $time = 0;
-		protected $dbconnection = false;
+		protected $connection = false;
 		/**
 		 * set debug (1 = debug ใช้งานขณะ ทดสอบเท่านั้น, 0 = no debug)
 		 *
@@ -39,7 +39,7 @@
 				$this->debug('mysql_connect()');
 				return false;
 			} else {
-				$this->dbconnection = $conn;
+				$this->connection = $conn;
 				$this->time = session_id();
 				return true;
 			}
@@ -47,13 +47,10 @@
 		/**
 		 * __destruct()
 		 * จบ class
-		 * สำเร็จคืนค่า true
-		 * ไม่สำเร็จคืนค่า false
 		 *
-		 * @return int
 		 */
 		public function __destruct() {
-			return $this->close();
+			$this->connection = null;
 		}
 		/**
 		 * connection()
@@ -62,7 +59,7 @@
 		 * @return int
 		 */
 		public function connection() {
-			return $this->dbconnection;
+			return $this->connection;
 		}
 		/**
 		 * close()
@@ -73,16 +70,7 @@
 		 * @return boolean
 		 */
 		public function close() {
-			return @mysql_close($this->dbconnection) === false ? false : true;
-		}
-		/**
-		 * Error()
-		 * อ่าน error ของ mysql
-		 *
-		 * @return string
-		 */
-		public function Error() {
-			return !$this->dbconnection ? 'Connection error' : mysql_error($this->dbconnection);
+			return @mysql_close($this->connection) === false ? false : true;
 		}
 		/**
 		 * Version()
@@ -102,7 +90,8 @@
 		 * @return boolean
 		 */
 		public function tableExists($table) {
-			$result = @mysql_query("SELECT 1 FROM `$table`", $this->dbconnection);
+			$result = @mysql_query("SELECT 1 FROM `$table`", $this->connection);
+			$this->time++;
 			if (!$result) {
 				return false;
 			} else {
@@ -110,7 +99,7 @@
 			}
 		}
 		/**
-		 * fieldexists($table, $field)
+		 * fieldExists($table, $field)
 		 * ตรวจสอบฟิลด์ในตาราง
 		 * คืนค่า true หากมีฟิลด์นี้อยู่
 		 * ไม่พบคืนค่า false
@@ -118,10 +107,11 @@
 		 * @return boolean
 		 */
 		public function fieldExists($table, $field) {
-			$result = @mysql_query("SHOW COLUMNS FROM `$table`", $this->dbconnection);
+			$result = @mysql_query("SHOW COLUMNS FROM `$table`", $this->connection);
 			if (!$result) {
 				$this->debug("fieldexists($table, $field)");
 			} elseif (mysql_num_rows($result) > 0) {
+				$this->time++;
 				$field = strtolower($field);
 				while ($row = mysql_fetch_assoc($result)) {
 					if (strtolower($row['Field']) == $field) {
@@ -161,12 +151,12 @@
 				}
 			}
 			$sql = "SELECT * FROM `$table` WHERE ".implode(' OR ', $search)." LIMIT 1;";
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("basicSearch($table)");
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				if (mysql_num_rows($query) == 0) {
 					return false;
 				} else {
@@ -190,12 +180,12 @@
 		 */
 		public function getRec($table, $id) {
 			$sql = "SELECT * FROM `$table` WHERE `id`=".(int)$id." LIMIT 1";
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("getRec($table, $id)");
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				if (mysql_num_rows($query) == 0) {
 					return false;
 				} else {
@@ -227,13 +217,13 @@
 			$sql = 'INSERT INTO `'.$table.'` (`'.implode('`,`', $keys);
 			$sql .= "`) VALUES ('".implode("','", $values);
 			$sql .= "');";
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("add($table)");
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
-				return mysql_insert_id($this->dbconnection);
+				$this->time++;
+				return mysql_insert_id($this->connection);
 			}
 		}
 		/**
@@ -265,12 +255,12 @@
 					$datas[] = "`$key`='$value'";
 				}
 				$sql = "UPDATE `$table` SET ".implode(",", $datas)." WHERE $id LIMIT 1";
-				$query = @mysql_query($sql, $this->dbconnection);
+				$query = @mysql_query($sql, $this->connection);
 				if ($query == false) {
 					$this->debug("edit($table, $id)");
 					return false;
 				} else {
-					$_SESSION[$this->time]++;
+					$this->time++;
 					return true;
 				}
 			}
@@ -288,9 +278,9 @@
 		 */
 		public function delete($table, $id) {
 			$sql = "DELETE FROM `$table` WHERE `id`=".(int)$id." LIMIT 1;";
-			$query = @mysql_query($sql, $this->dbconnection);
-			$_SESSION[$this->time]++;
-			return ($query == false) ? mysql_error($this->dbconnection) : '';
+			$query = @mysql_query($sql, $this->connection);
+			$this->time++;
+			return ($query == false) ? mysql_error($this->connection) : '';
 		}
 		/**
 		 * query($sql)
@@ -303,12 +293,12 @@
 		 * @return boolean
 		 */
 		public function query($sql) {
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("query($sql)");
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				return true;
 			}
 		}
@@ -324,11 +314,11 @@
 		 */
 		public function customQuery($sql) {
 			$recArr = array();
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("customQuery($sql)");
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				while ($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
 					$recArr[] = $row;
 				}
@@ -346,13 +336,13 @@
 		 */
 		function lastId($table) {
 			$sql = "SHOW TABLE STATUS LIKE '$table'";
-			$query = @mysql_query($sql, $this->dbconnection);
+			$query = @mysql_query($sql, $this->connection);
 			if ($query == false) {
 				$this->debug("lastId($table)");
 				return false;
 			} else {
 				$row = @mysql_fetch_assoc($query);
-				$_SESSION[$this->time]++;
+				$this->time++;
 				return (int)$row['Auto_increment'];
 			}
 		}
@@ -438,37 +428,46 @@
 			return str_replace('\\\\', '&#92;', $this->sql_clean($value));
 		}
 		/**
-		 * sql_trim($value)
+		 * sql_trim($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย /
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim($value) {
-			return $this->sql_quote(trim($value));
+		public function sql_trim($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(trim($key[$value]));
+			}
 		}
 		/**
-		 * sql_trim_str($value)
+		 * sql_trim_str($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย / และ แปลงอักขระ HTML
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim_str($value) {
-			return $this->sql_quote(htmlspecialchars(trim($value)));
-		}
-		/**
-		 * sql_str($value)
-		 * เติม string ด้วย / และ แปลงอักขระ HTML
-		 *
-		 * @param string $value ข้อความ
-		 *
-		 * @return string
-		 */
-		public function sql_str($value) {
-			return $this->sql_quote(htmlspecialchars($value));
+		public function sql_trim_str($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(htmlspecialchars(trim($array[$key])));
+			}
 		}
 		/**
 		 * sql_mktimetodate($mktime)
@@ -534,7 +533,7 @@
 			$mtime = microtime();
 			$mtime = explode(' ', $mtime);
 			$this->time_start = $mtime[1] + $mtime[0];
-			$_SESSION[$this->time] = 0;
+			$this->time = 0;
 			return true;
 		}
 		/**
@@ -558,9 +557,7 @@
 		 * @return int
 		 */
 		public function query_count() {
-			$t = $_SESSION[$this->time];
-			unset($_SESSION[$this->time]);
-			return (int)$t;
+			return $this->time;
 		}
 		/**
 		 * debug($text)
@@ -568,7 +565,7 @@
 		 */
 		private function debug($text) {
 			if ($this->debug == 1) {
-				echo preg_replace(array('/\r/', '/\n/', '/\t/'), array('', ' ', ' '), "Error : $text \nMessage : ".$this->Error());
+				echo preg_replace(array('/\r/', '/\n/', '/\t/'), array('', ' ', ' '), $text);
 			}
 		}
 	}

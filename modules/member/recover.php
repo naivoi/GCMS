@@ -9,7 +9,7 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// ค่าที่ส่งมา
-			$email = $db->sql_trim_str(gcms::getVars($_POST, 'forgot_email', ''));
+			$email = $db->sql_trim_str($_POST, 'forgot_email', '');
 			if ($email == '') {
 				$ret['input'] = 'forgot_email';
 				$ret['error'] = 'EMAIL_EMPTY';

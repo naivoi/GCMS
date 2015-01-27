@@ -19,7 +19,7 @@
 			// system.php
 			// web_title
 			if (isset($_POST['web_title'])) {
-				$config['web_title'] = htmlspecialchars($db->sql_trim($_POST['web_title']), ENT_QUOTES);
+				$config['web_title'] = htmlspecialchars($db->sql_trim($_POST, 'web_title', ''), ENT_QUOTES);
 				if ($config['web_title'] == '') {
 					$ret['ret_web_title'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
@@ -30,7 +30,7 @@
 			}
 			// web_description
 			if (isset($_POST['web_description'])) {
-				$config['web_description'] = htmlspecialchars($db->sql_trim($_POST['web_description']), ENT_QUOTES);
+				$config['web_description'] = htmlspecialchars($db->sql_trim($_POST, 'web_description', ''), ENT_QUOTES);
 				if ($config['web_description'] == '') {
 					$ret['ret_web_description'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
@@ -72,7 +72,7 @@
 			}
 			// noreply_email
 			if (isset($_POST['noreply_email'])) {
-				$config['noreply_email'] = $db->sql_trim(gcms::getVars($_POST, 'noreply_email', ''));
+				$config['noreply_email'] = $db->sql_trim($_POST, 'noreply_email', '');
 				if ($config['noreply_email'] == '') {
 					$ret['ret_noreply_email'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
@@ -150,7 +150,7 @@
 			}
 			// wordrude_replace
 			if (isset($_POST['wordrude_replace'])) {
-				$config['wordrude_replace'] = $db->sql_trim(gcms::getVars($_POST, 'wordrude_replace', ''));
+				$config['wordrude_replace'] = $db->sql_trim($_POST, 'wordrude_replace', '');
 				$config['wordrude_replace'] = $config['wordrude_replace'] == '' ? 'xxx' : $config['wordrude_replace'];
 				$ret['wordrude_replace'] = $config['wordrude_replace'];
 			}
@@ -176,11 +176,11 @@
 			}
 			// facebook_secret
 			if (isset($_POST['facebook_secret'])) {
-				$config['facebook']['secret'] = $db->sql_trim_str(gcms::getVars($_POST, 'facebook_secret', ''));
+				$config['facebook']['secret'] = $db->sql_trim_str($_POST, 'facebook_secret', '');
 			}
 			// facebook_message
 			if (isset($_POST['facebook_message'])) {
-				$config['facebook_message'] = strip_tags($db->sql_trim($_POST['facebook_message']));
+				$config['facebook_message'] = strip_tags($db->sql_trim($_POST, 'facebook_message', ''));
 			}
 			// facebook_picture
 			if (isset($_FILES['facebook_picture'])) {
@@ -276,7 +276,7 @@
 			}
 			// ftp_host
 			if (isset($_POST['ftp_host'])) {
-				$config['ftp_host'] = $db->sql_trim(gcms::getVars($_POST, 'ftp_host', ''));
+				$config['ftp_host'] = $db->sql_trim($_POST, 'ftp_host', '');
 				$ret['ftp_host'] = rawurlencode($config['ftp_host']);
 			}
 			// ftp_port
@@ -291,8 +291,8 @@
 					$config['ftp_username'] = '';
 					$config['ftp_password'] = '';
 				} else {
-					$username = $db->sql_trim(gcms::getVars($_POST, 'ftp_username', ''));
-					$password = $db->sql_trim(gcms::getVars($_POST, 'ftp_password', ''));
+					$username = $db->sql_trim($_POST, 'ftp_username', '');
+					$password = $db->sql_trim($_POST, 'ftp_password', '');
 					if ($username != '' || $password != '') {
 						if ($password == '') {
 							$error = 'PASSWORD_EMPTY';

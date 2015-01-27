@@ -7,8 +7,8 @@
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		// ค่าที่ส่งมา
 		$action = gcms::getVars($_POST, 'action', '');
-		$language = $db->sql_trim_str(gcms::getVars($_POST, 'lng', ''));
-		$value = addslashes($db->sql_trim_str($_POST['val']));
+		$language = $db->sql_trim_str($_POST, 'lng', '');
+		$value = addslashes($db->sql_trim_str($_POST, 'val', ''));
 		$id = gcms::getVars($_POST, 'id', 0);
 		if ($action == 'module') {
 			if (!preg_match('/^[a-z0-9]{1,}$/', $value)) {

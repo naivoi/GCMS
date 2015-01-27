@@ -6,7 +6,7 @@
 	 * @author กรกฎ วิริยะ (http://www.goragod.com)
 	 */
 	class sql {
-		protected $vesion = "3-10-56";
+		protected $vesion = "27-1-58";
 		protected $time = 0;
 		/**
 		 * MySQLi instance
@@ -50,13 +50,10 @@
 		/**
 		 * __destruct()
 		 * จบ class
-		 * สำเร็จคืนค่า true
-		 * ไม่สำเร็จคืนค่า false
 		 *
-		 * @return int
 		 */
 		public function __destruct() {
-			return $this->connection->close();
+			$this->connection = null;
 		}
 		/**
 		 * connection()
@@ -79,15 +76,6 @@
 			return $this->connection->close();
 		}
 		/**
-		 * Error()
-		 * อ่าน error ของ mysql
-		 *
-		 * @return string
-		 */
-		public function Error() {
-			return $this->connection->connect_error ? $this->connection->connect_error : $this->connection->error;
-		}
-		/**
 		 * Version()
 		 * อ่านเวอร์ชั่นของ class
 		 *
@@ -106,7 +94,7 @@
 		 */
 		public function tableExists($table) {
 			$result = @mysql_query("SELECT 1 FROM `$table`", $this->dbconnection);
-			$_SESSION[$this->time]++;
+			$this->time++;
 			if (!$result) {
 				return false;
 			} else {
@@ -114,20 +102,20 @@
 			}
 		}
 		/**
-		 * fieldexists($table, $field)
+		 * fieldExists($table, $field)
 		 * ตรวจสอบฟิลด์ในตาราง
 		 * คืนค่า true หากมีฟิลด์นี้อยู่
 		 * ไม่พบคืนค่า false
 		 *
 		 * @return boolean
 		 */
-		public function fieldexists($table, $field) {
+		public function fieldExists($table, $field) {
 			$sql = "SHOW COLUMNS FROM `$table`";
 			$result = $this->connection->query($sql);
 			if (!$result) {
 				$this->debug($sql);
 			} elseif ($result->num_rows > 0) {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				$field = strtolower($field);
 				while ($row = $result->fetch_assoc()) {
 					if (strtolower($row['Field']) == $field) {
@@ -172,7 +160,7 @@
 				$this->debug($sql);
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				if ($this->connection->num_rows == 0) {
 					return false;
 				} else {
@@ -201,7 +189,7 @@
 				$this->debug($sql);
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				if ($result->num_rows == 0) {
 					return false;
 				} else {
@@ -238,7 +226,7 @@
 				$this->debug($sql);
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				return $this->connection->insert_id;
 			}
 		}
@@ -276,7 +264,7 @@
 					$this->debug($sql);
 					return false;
 				} else {
-					$_SESSION[$this->time]++;
+					$this->time++;
 					return true;
 				}
 			}
@@ -295,7 +283,7 @@
 		public function delete($table, $id) {
 			$sql = "DELETE FROM `$table` WHERE `id`=".(int)$id." LIMIT 1;";
 			$result = $this->connection->query($sql);
-			$_SESSION[$this->time]++;
+			$this->time++;
 			return !$result ? $this->connection->error : '';
 		}
 		/**
@@ -314,7 +302,7 @@
 				$this->debug($sql);
 				return false;
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				return true;
 			}
 		}
@@ -334,7 +322,7 @@
 			if (!$result) {
 				$this->debug($sql);
 			} else {
-				$_SESSION[$this->time]++;
+				$this->time++;
 				while ($row = $result->fetch_assoc()) {
 					$recArr[] = $row;
 				}
@@ -357,7 +345,7 @@
 				return false;
 			} else {
 				$row = $result->fetch_assoc();
-				$_SESSION[$this->time]++;
+				$this->time++;
 				return (int)$row['Auto_increment'];
 			}
 		}
@@ -437,37 +425,46 @@
 			return str_replace('\\\\', '&#92;', $this->sql_clean($value));
 		}
 		/**
-		 * sql_trim($value)
+		 * sql_trim($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย /
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim($value) {
-			return $this->sql_quote(trim($value));
+		public function sql_trim($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(trim($key[$value]));
+			}
 		}
 		/**
-		 * sql_trim_str($value)
+		 * sql_trim_str($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย / และ แปลงอักขระ HTML
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim_str($value) {
-			return $this->sql_quote(htmlspecialchars(trim($value)));
-		}
-		/**
-		 * sql_str($value)
-		 * เติม string ด้วย / และ แปลงอักขระ HTML
-		 *
-		 * @param string $value ข้อความ
-		 *
-		 * @return string
-		 */
-		public function sql_str($value) {
-			return $this->sql_quote(htmlspecialchars($value));
+		public function sql_trim_str($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(htmlspecialchars(trim($array[$key])));
+			}
 		}
 		/**
 		 * sql_mktimetodate($mktime)
@@ -533,7 +530,7 @@
 			$mtime = microtime();
 			$mtime = explode(' ', $mtime);
 			$this->time_start = $mtime[1] + $mtime[0];
-			$_SESSION[$this->time] = 0;
+			$this->time = 0;
 			return true;
 		}
 		/**
@@ -557,9 +554,7 @@
 		 * @return int
 		 */
 		public function query_count() {
-			$t = $_SESSION[$this->time];
-			unset($_SESSION[$this->time]);
-			return (int)$t;
+			return $this->time;
 		}
 		/**
 		 * debug($text)
@@ -567,7 +562,7 @@
 		 */
 		private function debug($text) {
 			if ($this->debug == 1) {
-				echo preg_replace(array('/\r/', '/\n/', '/\t/'), array('', ' ', ' '), "Error : $text \nMessage : ".$this->Error());
+				echo preg_replace(array('/\r/', '/\n/', '/\t/'), array('', ' ', ' '), $text);
 			}
 		}
 	}

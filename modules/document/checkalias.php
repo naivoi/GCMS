@@ -7,7 +7,7 @@
 	if (gcms::isReferer() && gcms::isMember()) {
 		// ค่าที่ส่งมา
 		$action = gcms::getVars($_POST, 'action', '');
-		$value = addslashes($db->sql_trim_str($_POST['val']));
+		$value = addslashes($db->sql_trim_str($_POST, 'val', ''));
 		$id = gcms::getVars($_POST, 'id', 0);
 		// ตรวจสอบค่าที่ส่งมา
 		if ($action == 'alias') {

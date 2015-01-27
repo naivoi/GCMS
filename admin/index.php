@@ -78,7 +78,7 @@
 		$action = gcms::getVars($_GET, 'action', '');
 		if ($action == 'recover') {
 			// ขอรหัสผ่านใหม่
-			$forgot_email = $db->sql_trim_str(gcms::getVars($_POST, 'email', ''));
+			$forgot_email = $db->sql_trim_str($_POST, 'email', '');
 			if ($forgot_email == '') {
 				$message_type = 'error';
 				$message = "$lng[LNG_PLEASE_FILL] $lng[LNG_EMAIL]";
@@ -129,8 +129,8 @@
 			setCookie(PREFIX.'_login_remember', '', time());
 		} elseif (isset($_POST['email'])) {
 			// มาจากการ login
-			$login_email = $db->sql_trim_str(gcms::getVars($_POST, 'email', ''));
-			$login_password = $db->sql_trim_str(gcms::getVars($_POST, 'password', ''));
+			$login_email = $db->sql_trim_str($_POST, 'email', '');
+			$login_password = $db->sql_trim_str($_POST, 'password', '');
 			$login_remember = gcms::getVars($_POST, 'remember', 0);
 			if ($login_email == '') {
 				$message_type = 'error';

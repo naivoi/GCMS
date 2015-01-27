@@ -24,7 +24,7 @@
 			$orderoptions[] = '<option value='.$i.$sel.'>'.$item[0].'</option>';
 		}
 		// ข้อความค้นหา
-		$search = $db->sql_trim_str(gcms::getVars($_GET, 'search', ''));
+		$search = $db->sql_trim_str($_GET, 'search', '');
 		// ค้นหาสมาชิกจาก ชื่อ และ email
 		if ($search != '') {
 			$where = "U.`fname` LIKE '%$search%' OR U.`lname` LIKE '%$search%' OR U.`displayname` LIKE '%$search%' OR U.`email` LIKE '%$search%'";

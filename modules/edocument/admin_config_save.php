@@ -18,7 +18,7 @@
 					}
 				}
 			}
-			$edocument_format_no = $db->sql_trim_str(gcms::getVars($_POST, 'config_format_no', ''));
+			$edocument_format_no = $db->sql_trim_str($_POST, 'config_format_no', '');
 			// ตรวจสอบค่าที่ส่งมา
 			$ret['ret_config_format_no'] = '';
 			$ret['ret_config_file_typies'] = '';

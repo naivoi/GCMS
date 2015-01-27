@@ -56,7 +56,7 @@
 				}
 			}
 			// ข้อความค้นหา
-			$search = $db->sql_trim_str(gcms::getVars($_REQUEST, 'q', ''));
+			$search = $db->sql_trim_str($_REQUEST, 'q', '');
 			if ($search != '') {
 				$q[] = "(`name` LIKE '%$search%' OR `ext` LIKE '%$search%' OR `detail` LIKE '%$search%')";
 			}

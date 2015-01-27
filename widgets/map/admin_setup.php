@@ -2,12 +2,12 @@
 	// widgets/map/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin) {
 		// ตรวจสอบค่า default
-		$config['map_latigude'] = empty($config['map_latigude']) ? '14.132081110519639' : $config['map_latigude'];
-		$config['map_lantigude'] = empty($config['map_lantigude']) ? '99.69822406768799' : $config['map_lantigude'];
-		$config['map_info_latigude'] = empty($config['map_info_latigude']) ? '14.132081110519639' : $config['map_info_latigude'];
-		$config['map_info_lantigude'] = empty($config['map_info_lantigude']) ? '99.69822406768799' : $config['map_info_lantigude'];
-		$config['map_zoom'] = empty($config['map_zoom']) ? 5 : (int)$config['map_zoom'];
-		$config['map_height'] = empty($config['map_height']) ? 400 : (int)$config['map_height'];
+		$config['map_latigude'] = gcms::getVars($config, 'map_latigude', '14.132081110519639');
+		$config['map_lantigude'] = gcms::getVars($config, 'map_lantigude', '99.69822406768799');
+		$config['map_info_latigude'] = gcms::getVars($config, 'map_info_latigude', '14.132081110519639');
+		$config['map_info_lantigude'] = gcms::getVars($config, 'map_info_lantigude', '99.69822406768799');
+		$config['map_zoom'] = gcms::getVars($config, 'map_zoom', 5);
+		$config['map_height'] = gcms::getVars($config, 'map_height', 400);
 		// title
 		$title = $lng['LNG_WIDGETS_MAP_SETTINGS'];
 		$a = array();

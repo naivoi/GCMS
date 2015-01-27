@@ -6,7 +6,7 @@
 	 * @author กรกฎ วิริยะ (http://www.goragod.com)
 	 */
 	class sql {
-		protected $vesion = "8-10-56";
+		protected $vesion = "27-1-58";
 		protected $time = 0;
 		/**
 		 * PDO instance
@@ -53,10 +53,7 @@
 		/**
 		 * __destruct()
 		 * จบ class
-		 * สำเร็จคืนค่า true
-		 * ไม่สำเร็จคืนค่า false
 		 *
-		 * @return int
 		 */
 		public function __destruct() {
 			$this->connection = null;
@@ -439,37 +436,46 @@
 			return $this->sql_clean(str_replace('\\\\', '&#92;', $value));
 		}
 		/**
-		 * sql_trim($value)
+		 * sql_trim($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย /
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim($value) {
-			return $this->sql_quote(trim($value));
+		public function sql_trim($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(trim($key[$value]));
+			}
 		}
 		/**
-		 * sql_trim_str($value)
+		 * sql_trim_str($array, $key, $default)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย / และ แปลงอักขระ HTML
 		 *
-		 * @param string $value ข้อความ
+		 * @param array $array มาจาก $_POST $_GET
+		 * @param string $key ของ $array
+		 * @param mixed $default ค่า default หากไม่พบ $key
 		 *
-		 * @return string
+		 * @return mixed คืนค่าตามชนิดของ $default
 		 */
-		public function sql_trim_str($value) {
-			return $this->sql_quote(htmlspecialchars(trim($value)));
-		}
-		/**
-		 * sql_str($value)
-		 * เติม string ด้วย / และ แปลงอักขระ HTML
-		 *
-		 * @param string $value ข้อความ
-		 *
-		 * @return string
-		 */
-		public function sql_str($value) {
-			return $this->sql_quote(htmlspecialchars($value));
+		public function sql_trim_str($array, $key, $default) {
+			if (!isset($array[$key])) {
+				return $default;
+			} elseif (is_int($default)) {
+				return (int)$array[$key];
+			} elseif (is_float($default)) {
+				return (float)$array[$key];
+			} else {
+				return $this->sql_quote(htmlspecialchars(trim($array[$key])));
+			}
 		}
 		/**
 		 * sql_mktimetodate($mktime)
@@ -562,7 +568,7 @@
 			return $this->time;
 		}
 		/**
-		 * debug($sql)
+		 * debug($text)
 		 * @param string $sql ข้อความที่จะแสดง (error)
 		 */
 		private function debug($text) {

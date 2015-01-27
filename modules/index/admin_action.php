@@ -71,7 +71,7 @@
 			} elseif ($action == 'get' && isset($_POST['parent'])) {
 				// query menu
 				$sql = "SELECT `id`,`level`,`menu_text`,`menu_tooltip`";
-				$sql .= " FROM `".DB_MENUS."` WHERE `parent`='".$db->sql_trim_str($_POST['parent'])."'";
+				$sql .= " FROM `".DB_MENUS."` WHERE `parent`='".$db->sql_trim_str($_POST, 'parent', '')."'";
 				$sql .= " ORDER BY `menu_order` ASC";
 				foreach ($db->customQuery($sql) AS $item) {
 					$text = '';

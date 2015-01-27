@@ -9,10 +9,10 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// ค่าที่ส่งมา
-			$topic = $db->sql_trim_str(gcms::getVars($_POST, 'mail_topic', ''));
+			$topic = $db->sql_trim_str($_POST, 'mail_topic', '');
 			$detail = gcms::ckClean($_POST['mail_detail']);
 			$sender = $_SESSION['login'];
-			$to = $db->sql_trim_str(gcms::getVars($_POST, 'mail_to', ''));
+			$to = $db->sql_trim_str($_POST, 'mail_to', '');
 			if (!preg_match('/[0-9,]{1,}/', $to)) {
 				$ret['error'] = 'EMAIL_RECIEVER_NOT_FOUND';
 			} else {

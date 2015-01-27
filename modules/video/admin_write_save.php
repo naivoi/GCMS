@@ -11,8 +11,8 @@
 			// ค่าที่ส่งมา
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			$youtube = trim(gcms::getVars($_POST, 'write_youtube', ''));
-			$topic = $db->sql_trim_str(gcms::getVars($_POST, 'write_topic', ''));
-			$description = $db->sql_trim(gcms::getVars($_POST, 'write_description', ''));
+			$topic = $db->sql_trim_str($_POST, 'write_topic', '');
+			$description = $db->sql_trim($_POST, 'write_description', '');
 			// ตรวจสอบรายการและโมดูลที่เลือก
 			if ($id > 0) {
 				$sql = "SELECT C.`id`,C.`module_id`,M.`module`";

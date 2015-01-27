@@ -18,9 +18,9 @@
 			$user = $user[0];
 			// password
 			if ($user['fb'] == 0 && isset($_POST['register_password'])) {
-				$password = $db->sql_trim_str(gcms::getVars($_POST, 'register_password', ''));
+				$password = $db->sql_trim_str($_POST, 'register_password', '');
 				if ($password != '') {
-					$repassword = $db->sql_trim_str(gcms::getVars($_POST, 'register_repassword', ''));
+					$repassword = $db->sql_trim_str($_POST, 'register_repassword', '');
 					if (mb_strlen($password) < 4) {
 						$ret['ret_register_password'] = 'REGISTER_PASSWORD_SHORT';
 						$input = !$input ? 'register_password' : $input;
@@ -45,7 +45,7 @@
 			}
 			// displayname
 			if (isset($_POST['register_displayname'])) {
-				$save['displayname'] = $db->sql_trim_str(gcms::getVars($_POST, 'register_displayname', ''));
+				$save['displayname'] = $db->sql_trim_str($_POST, 'register_displayname', '');
 				if (mb_strlen($save['displayname']) < 2) {
 					$ret['ret_register_displayname'] = 'REGISTER_DISPLAYNAME_SHORT';
 					$input = !$input ? 'register_displayname' : $input;
@@ -125,7 +125,7 @@
 			}
 			// fname
 			if (isset($_POST['register_fname'])) {
-				$save['fname'] = $db->sql_trim_str(gcms::getVars($_POST, 'register_fname', ''));
+				$save['fname'] = $db->sql_trim_str($_POST, 'register_fname', '');
 				if ($save['fname'] == '') {
 					$ret['ret_register_fname'] = 'FNAME_EMPTY';
 					$input = !$input ? 'register_fname' : $input;
@@ -140,7 +140,7 @@
 			}
 			// lname
 			if (isset($_POST['register_lname'])) {
-				$save['lname'] = $db->sql_trim_str(gcms::getVars($_POST, 'register_lname', ''));
+				$save['lname'] = $db->sql_trim_str($_POST, 'register_lname', '');
 				if ($save['lname'] == '') {
 					$ret['ret_register_lname'] = 'LNAME_EMPTY';
 					$input = !$input ? 'register_lname' : $input;
@@ -155,7 +155,7 @@
 			}
 			// phone
 			if (isset($_POST['register_phone1'])) {
-				$save['phone1'] = $db->sql_trim_str(gcms::getVars($_POST, 'register_phone1', ''));
+				$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone1', '');
 				if ($save['phone1'] != '') {
 					if (!preg_match('/[0-9]{9,10}/', $save['phone1'])) {
 						$ret['ret_register_phone1'] = 'INVALID_PHONE_NUMBER';

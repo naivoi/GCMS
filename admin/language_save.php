@@ -10,9 +10,9 @@
 		} else {
 			$save = array();
 			if (isset($_POST['languageadd']) && $_POST['languageadd'] == 1) {
-				$name = strtolower($db->sql_trim_str($_POST['lang_name']));
-				$copy = $db->sql_trim_str(gcms::getVars($_POST, 'lang_copy', ''));
-				$id = $db->sql_trim_str(gcms::getVars($_POST, 'save_id', ''));
+				$name = strtolower($db->sql_trim_str($_POST, 'lang_name', ''));
+				$copy = $db->sql_trim_str($_POST, 'lang_copy', '');
+				$id = $db->sql_trim_str($_POST, 'save_id', '');
 				// ตรวจสอบภาษาที่ติดตั้ง
 				$install_languages = array();
 				$l = array('id', 'key', 'type', 'owner', 'js');
@@ -95,9 +95,9 @@
 				}
 			} elseif ($_POST['languageedit'] == 1) {
 				$save['js'] = gcms::getVars($_POST, 'save_js', 0);
-				$save['type'] = $db->sql_trim_str(gcms::getVars($_POST, 'save_type', ''));
-				$save['owner'] = $db->sql_trim_str(gcms::getVars($_POST, 'save_owner', ''));
-				$save['key'] = $db->sql_trim_str(gcms::getVars($_POST, 'save_key', ''));
+				$save['type'] = $db->sql_trim_str($_POST, 'save_type', '');
+				$save['owner'] = $db->sql_trim_str($_POST, 'save_owner', '');
+				$save['key'] = $db->sql_trim_str($_POST, 'save_key', '');
 				$id = gcms::getVars($_POST, 'save_id', 0);
 				if ($save['key'] == '') {
 					$ret['input'] = 'save_key';

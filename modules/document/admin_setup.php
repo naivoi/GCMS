@@ -23,7 +23,7 @@
 			// ค่าที่ส่งมา
 			$q = array();
 			// ข้อความค้นหา
-			$search = empty($_GET['search']) ? '' : preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_GET['search']));
+			$search = preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_GET, 'search', ''));
 			if (mb_strlen($search) > 2) {
 				$q[] = "(D.`topic` LIKE '%$search%' OR D.`detail` LIKE '%$search%')";
 				$url_query['search'] = urlencode($search);

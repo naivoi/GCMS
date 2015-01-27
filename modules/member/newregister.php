@@ -6,11 +6,11 @@
 	// referer
 	if (gcms::isReferer()) {
 		// ค่าที่ส่งมา
-		$password = $db->sql_trim_str(gcms::getVars($_POST, 'register_password', ''));
-		$repassword = $db->sql_trim_str(gcms::getVars($_POST, 'register_repassword', ''));
-		$save['email'] = $db->sql_trim_str(gcms::getVars($_POST, 'register_email', ''));
-		$save['phone1'] = empty($_POST['register_phone']) ? '' : $db->sql_trim_str($_POST['register_phone']);
-		$save['idcard'] = empty($_POST['register_idcard']) ? '' : $db->sql_trim_str($_POST['register_idcard']);
+		$password = $db->sql_trim_str($_POST, 'register_password', '');
+		$repassword = $db->sql_trim_str($_POST, 'register_repassword', '');
+		$save['email'] = $db->sql_trim_str($_POST, 'register_email', '');
+		$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone', '');
+		$save['idcard'] = $db->sql_trim_str($_POST, 'register_idcard', '');
 		// ตรวจสอบข้อมูลที่กรอก
 		$error = false;
 		$input = false;
@@ -108,7 +108,7 @@
 			}
 			// invite
 			if (isset($_POST['register_invite'])) {
-				$invite = $db->sql_trim_str(gcms::getVars($_POST, 'register_invite', ''));
+				$invite = $db->sql_trim_str($_POST, 'register_invite', '');
 				if ($invite != '') {
 					$counselor = $db->basicSearch(DB_USER, 'email', $invite);
 					if ($counselor) {

@@ -14,7 +14,7 @@
 			$sqls = array();
 			$sqls[] = "`module_id`='$index[id]'";
 			// ข้อความค้นหา
-			$search = $db->sql_trim_str(gcms::getVars($_GET, 'search', ''));
+			$search = $db->sql_trim_str($_GET, 'search', '');
 			if ($search != '') {
 				$sqls[] = "(`name` LIKE '%$search%' OR `email` LIKE '%$search%')";
 				$url_query['search'] = urlencode($search);

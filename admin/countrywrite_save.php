@@ -10,7 +10,7 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save['iso'] = strtoupper($_POST['write_iso']);
-			$save['printable_name'] = $db->sql_trim_str(gcms::getVars($_POST, 'write_name', ''));
+			$save['printable_name'] = $db->sql_trim_str($_POST, 'write_name', '');
 			$save['zone'] = gcms::getVars($_POST, 'write_zone', 0);
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			// ตรวจสอบค่าที่ส่งมา

@@ -2,7 +2,7 @@
 	// widgets/textlink/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin && defined('DB_TEXTLINK')) {
 		// ค่าที่ส่งมา
-		$type = empty($_GET['type']) ? '' : $db->sql_trim_str($_GET['type']);
+		$type = $db->sql_trim_str($_GET, 'type', '');
 		// title
 		$title = $lng['LNG_TEXTLINK_TITLE'];
 		$a = array();

@@ -13,7 +13,7 @@
 		// ค่าที่ส่งมา
 		$config['facebook_width'] = max(100, (int)$_POST['facebook_width']);
 		$config['facebook_height'] = max(100, (int)$_POST['facebook_height']);
-		$config['facebook_user'] = $db->sql_trim_str(gcms::getVars($_POST, 'facebook_user', ''));
+		$config['facebook_user'] = $db->sql_trim_str($_POST, 'facebook_user', '');
 		$config['facebook_faces'] = gcms::getVars($_POST, 'facebook_faces', 0);
 		$config['facebook_stream'] = gcms::getVars($_POST, 'facebook_stream', 0);
 		$config['facebook_header'] = gcms::getVars($_POST, 'facebook_header', 0);

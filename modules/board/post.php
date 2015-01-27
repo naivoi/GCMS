@@ -10,10 +10,10 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
-			$save['topic'] = $db->sql_trim_str(gcms::getVars($_POST, 'board_topic', ''));
+			$save['topic'] = $db->sql_trim_str($_POST, 'board_topic', '');
 			$save['detail'] = gcms::txtClean($_POST['board_detail']);
-			$password = empty($_POST['board_password']) ? '' : $db->sql_trim_str($_POST['board_password']);
-			$email = empty($_POST['board_email']) ? '' : $db->sql_trim_str($_POST['board_email']);
+			$password = $db->sql_trim_str($_POST, 'board_password', '');
+			$email = $db->sql_trim_str($_POST, 'board_email', '');
 			$category_id = gcms::getVars($_POST, 'board_category', 0);
 			$board_id = gcms::getVars($_POST, 'board_id', 0);
 			$module_id = gcms::getVars($_POST, 'module_id', 0);

@@ -176,7 +176,7 @@
 						$save['category_id'] = gcms::getVars($_POST, 'write_category', 0);
 						$save['ip'] = gcms::getip();
 						$save['published'] = $_POST['write_published'] == '1' ? '1' : '0';
-						$save['published_date'] = $db->sql_trim_str(gcms::getVars($_POST, 'write_published_date', ''));
+						$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date', '');
 						if ($id == 0) {
 							// ใหม่
 							$save['module_id'] = $index['module_id'];

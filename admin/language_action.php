@@ -21,7 +21,7 @@
 				$ret['remove'] = "L_$id";
 			} elseif ($action == 'droplang') {
 				// ลบชื่อภาษา
-				$lang = $db->sql_trim_str(gcms::getVars($_POST, 'lang', ''));
+				$lang = $db->sql_trim_str($_POST, 'lang', '');
 				if (preg_match('/^[a-z]{2,2}$/', $lang)) {
 					$db->query("ALTER TABLE `".DB_LANGUAGE."` DROP `$lang`");
 					// ลบไอคอนและไฟล์ภาษา

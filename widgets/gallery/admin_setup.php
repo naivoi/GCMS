@@ -2,10 +2,10 @@
 	// widgets/gallery/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin) {
 		// ตรวจสอบค่า default
-		$config['widget_gallery_cols'] = empty($config['widget_gallery_cols']) ? 2 : $config['widget_gallery_cols'];
-		$config['widget_gallery_rows'] = empty($config['widget_gallery_rows']) ? 3 : $config['widget_gallery_rows'];
-		$config['widget_gallery_width'] = empty($config['widget_gallery_width']) ? 75 : $config['widget_gallery_width'];
-		$config['widget_gallery_url'] = empty($config['widget_gallery_url']) ? 'http://gallery.gcms.in.th/gallery.rss' : $config['widget_gallery_url'];
+		$config['widget_gallery_cols'] = gcms::getVars($config, 'widget_gallery_cols', 2);
+		$config['widget_gallery_rows'] = gcms::getVars($config, 'widget_gallery_rows', 3);
+		$config['widget_gallery_width'] = gcms::getVars($config, 'widget_gallery_width', 75);
+		$config['widget_gallery_url'] = gcms::getVars($config, 'widget_gallery_url', 'http://gallery.gcms.in.th/gallery.rss');
 		// title
 		$title = $lng['LNG_WIDGETS_GALLERY_SETTINGS'];
 		$a = array();

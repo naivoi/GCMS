@@ -2,7 +2,7 @@
 	// modules/index/admin_insmod.php
 	if (MAIN_INIT == 'admin' && $isAdmin) {
 		// ข้อความค้นหา
-		$search = $db->sql_trim_str(gcms::getVars($_GET, 'search', ''));
+		$search = $db->sql_trim_str($_GET, 'search', '');
 		// ค้นหาจากชื่อโมดูลหรือหัวข้อ
 		if ($search != '') {
 			$where = "WHERE `owner`='$search' OR `module`='$search' OR `topic` LIKE '%$search%'";

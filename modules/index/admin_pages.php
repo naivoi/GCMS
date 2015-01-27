@@ -7,7 +7,7 @@
 		$sql1 .= " INNER JOIN `".DB_INDEX_DETAIL."` AS D ON D.`module_id`=M.`id`";
 		$sql1 .= " INNER JOIN `".DB_INDEX."` AS I ON I.`id`=D.`id` AND I.`module_id`=M.`id` AND I.`language`=D.`language`";
 		// ข้อความค้นหา
-		$search = $db->sql_trim_str(gcms::getVars($_GET, 'search', ''));
+		$search = $db->sql_trim_str($_GET, 'search', '');
 		// ค้นหาจากชื่อโมดูลหรือหัวข้อ
 		$sql1 .= " WHERE M.`owner`='index'";
 		if ($search != '') {

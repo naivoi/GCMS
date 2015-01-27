@@ -14,7 +14,7 @@
 			$index = $db->customQuery($sql);
 			$index = sizeof($index) == 0 ? false : $index[0];
 		} else {
-			$index['owner'] = $db->sql_trim_str(gcms::getVars($_GET, 'owner', 'index'));
+			$index['owner'] = $db->sql_trim_str($_GET, 'owner', 'index');
 			$index['id'] = 0;
 			$index['published'] = 1;
 			$index['module'] = '';

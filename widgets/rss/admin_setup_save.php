@@ -11,7 +11,7 @@
 			$ret = array();
 			$save = array();
 			// ค่าที่ส่งมา
-			$topic = $db->sql_trim_str(gcms::getVars($_POST, 'rss_topic', ''));
+			$topic = $db->sql_trim_str($_POST, 'rss_topic', '');
 			$cols = max(1, (int)$_POST['rss_cols']);
 			$rows = max(1, (int)$_POST['rss_rows']);
 			$url = trim(gcms::getVars($_POST, 'rss_url', ''));

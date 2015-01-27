@@ -2,9 +2,9 @@
 	// widgets/facebook/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin) {
 		// ตรวจสอบค่า default
-		$config['facebook_width'] = empty($config['facebook_width']) ? 295 : $config['facebook_width'];
-		$config['facebook_height'] = empty($config['facebook_height']) ? 250 : $config['facebook_height'];
-		$config['facebook_user'] = empty($config['facebook_user']) ? 'gcms7s' : $config['facebook_user'];
+		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 295);
+		$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
+		$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcms7s');
 		// title
 		$title = $lng['LNG_FACEBOOK_SETTINGS'];
 		$a = array();

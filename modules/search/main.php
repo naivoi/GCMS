@@ -4,7 +4,7 @@
 		// รายการแสดงต่อหน้า
 		$list_per_page = gcms::getVars($config, 'search_list_per_page', 20);
 		// ค่าที่ส่งมา
-		$search = preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str(gcms::getVars($_REQUEST, 'q', '')));
+		$search = preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_REQUEST, 'q', ''));
 		$page = max(1, gcms::getVars($_REQUEST, 'page', 1));
 		// ค้นหาข้อความ
 		$word_count = 0;

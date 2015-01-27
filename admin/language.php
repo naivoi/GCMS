@@ -25,7 +25,7 @@
 		$where = "WHERE `js`='$js'";
 		$where .= isset($design_mode) && $design_mode == 'design' ? '' : " AND `owner`!='sysadmin'";
 		// ข้อความค้นหา
-		$search = $db->sql_trim_str(gcms::getVars($_GET, 'search', ''));
+		$search = $db->sql_trim_str($_GET, 'search', '');
 		// ค้นหาจาก key และ ภาษา
 		if ($search != '') {
 			$q = array();

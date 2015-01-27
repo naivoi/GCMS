@@ -3,8 +3,8 @@
 	// inint
 	include '../../bin/inint.php';
 	// ตรวจสอบค่า default
-	$config['facebook_width'] = empty($config['facebook_width']) ? 295 : $config['facebook_width'];
-	$config['facebook_height'] = empty($config['facebook_height']) ? 250 : $config['facebook_height'];
+	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 295);
+	$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
 	// หน้าเว็บ Facebook
 	$facebook = array();
 	$facebook[] = '<!DOCTYPE html>';

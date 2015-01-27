@@ -7,7 +7,7 @@
 			$menu = $db->getRec(DB_MENUS, $id);
 		} else {
 			$menu = array();
-			$menu['parent'] = strtoupper($db->sql_trim_str($_GET['menu']));
+			$menu['parent'] = strtoupper($db->sql_trim_str($_GET, 'menu', ''));
 			$menu['published'] = 1;
 		}
 		if ($id > 0 && !$menu) {

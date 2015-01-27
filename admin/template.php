@@ -10,7 +10,7 @@
 				$message = '<aside class=error>{LNG_DATA_NOT_FOUND}</aside>';
 			} else {
 				$action = gcms::getVars($_GET, 'action', '');
-				$theme = preg_replace('/[\/\\\\]/ui', '', $db->sql_trim_str($_GET['theme']));
+				$theme = preg_replace('/[\/\\\\]/ui', '', $db->sql_trim_str($_GET, 'theme', ''));
 				if (is_dir($dir."/$theme")) {
 					if ($action == 'use') {
 						$save = $config;

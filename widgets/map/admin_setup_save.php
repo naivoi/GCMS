@@ -15,7 +15,7 @@
 			}
 			// ค่าที่ส่งมา
 			$config['map_height'] = max(100, (int)$_POST['map_height']);
-			$config['map_info'] = $db->sql_trim(gcms::getVars($_POST, 'map_info', ''));
+			$config['map_info'] = $db->sql_trim($_POST, 'map_info', '');
 			$config['map_zoom'] = gcms::getVars($_POST, 'map_zoom', 0);
 			$config['map_latigude'] = trim(gcms::getVars($_POST, 'map_latigude', ''));
 			$config['map_lantigude'] = trim(gcms::getVars($_POST, 'map_lantigude', ''));

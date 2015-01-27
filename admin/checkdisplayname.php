@@ -6,7 +6,7 @@
 	// referer
 	if (gcms::isReferer()) {
 		$id = gcms::getVars($_POST, 'id', 0);
-		$value = $db->sql_trim_str(gcms::getVars($_POST, 'value', ''));
+		$value = $db->sql_trim_str($_POST, 'value', '');
 		// ตรวจสอบชื่อสมาชิก
 		if ($value != '') {
 			// ตรวจสอบชื่อซ้ำ

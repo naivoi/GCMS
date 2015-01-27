@@ -14,8 +14,8 @@
 			$error = false;
 			$input = false;
 			// ค่าที่ส่งมา
-			$save['topic'] = $db->sql_trim_str(gcms::getVars($_POST, 'gallery_topic', ''));
-			$save['detail'] = $db->sql_trim_str(gcms::getVars($_POST, 'gallery_detail', ''));
+			$save['topic'] = $db->sql_trim_str($_POST, 'gallery_topic', '');
+			$save['detail'] = $db->sql_trim_str($_POST, 'gallery_detail', '');
 			$file = $_FILES['gallery_pic'];
 			// แก้ไขอัลบัม
 			$id = gcms::getVars($_POST, 'galleryId', 0);

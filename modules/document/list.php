@@ -123,7 +123,7 @@
 			$replace[] = is_file(ROOT_PATH.'modules/document/write.php') && gcms::canConfig(explode(',', $index['can_write'])) ? '' : 'hidden';
 			$replace[] = (int)$cat;
 			$replace[] = $index['topic'];
-			$replace[] = empty($index['detail']) ? '' : $index['detail'];
+			$replace[] = gcms::getVars($index, 'detail', '');
 			$replace[] = $splitpage;
 			$replace[] = LANGUAGE;
 			$replace[] = 'gcms::getWidgets';

@@ -10,7 +10,7 @@
 				}
 			}
 		} elseif (isset($_GET['mail'])) {
-			$emails[] = $db->sql_trim_str(gcms::getVars($_GET, 'mail', ''));
+			$emails[] = $db->sql_trim_str($_GET, 'mail', '');
 		}
 		// แสดงผล
 		$content[] = '<div class=breadcrumbs><ul><li><span class=icon-email>{LNG_MAILBOX}</span></li></ul></div>';
