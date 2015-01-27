@@ -266,13 +266,15 @@ time,
 time {
 	color: #616161;
 }
-.php,
+.php {
+	color: rgb(0, 0, 230);
+}
 .payment1 {
 	color: rgb(206, 103, 0);
 }
 .count,
 .no {
-	color: #9C27B0;
+	color: #007FAE;
 }
 .ip,
 .payment2 {
@@ -281,7 +283,7 @@ time {
 .asp,
 .payment3,
 .icon-upload:before {
-	color: #E91E63;
+	color: rgb(108, 61, 3);
 }
 .comment,
 .comments,
@@ -291,7 +293,7 @@ time {
 }
 .xml,
 .icon-published1:before {
-	color: #8BC34A;
+	color: rgb(0, 0, 124);
 }
 .visited,
 .css,
@@ -305,7 +307,7 @@ time {
 .html,
 .icon-unpin:before,
 .icon-pin:before {
-	color: #26A69A;
+	color: #E91E63;
 }
 .icon-published0:before,
 .reply0:before,
@@ -324,7 +326,7 @@ time {
 .htaccess,
 .icon-unlock:before,
 .icon-lock:before {
-	color: #607D8B;
+	color: rgb(71, 87, 173);
 }
 em,
 .payment5,

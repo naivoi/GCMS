@@ -15,7 +15,7 @@
 		$sql .= " INNER JOIN `".DB_INDEX_DETAIL."` AS D ON D.`id`=I.`id` AND D.`module_id`=I.`module_id` AND D.`language` IN ('".LANGUAGE."','')";
 		$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=I.`member_id`";
 		$sql .= " LEFT JOIN `".DB_CATEGORY."` AS C ON C.`category_id`=I.`category_id` AND C.`module_id`=I.`module_id`";
-		$sql .= $modules[4] != '' ? " WHERE I.`alias`='".addslashes($modules[4])."'" : " WHERE I.`id`='$id'";
+		$sql .= !empty($modules[4]) ? " WHERE I.`alias`='".addslashes($modules[4])."'" : " WHERE I.`id`='$id'";
 		$sql .= " AND I.`index`='0' LIMIT 1";
 		if (isset($_REQUEST['visited'])) {
 			// มาจากการ post ไม่ต้องโหลดจากแคช
