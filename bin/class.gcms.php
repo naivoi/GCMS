@@ -1252,14 +1252,16 @@
 			} elseif ($item['module'] != '') {
 				$c[] = $item['module'];
 			}
-			if (isset($item['published']) && $item['published'] != 1) {
-				if (gcms::isMember()) {
-					if ($item['published'] == '3') {
-						$c[] = 'hidden';
-					}
-				} else {
-					if ($item['published'] == '2') {
-						$c[] = 'hidden';
+			if (isset($item['published'])) {
+				if ($item['published'] != 1) {
+					if (gcms::isMember()) {
+						if ($item['published'] == '3') {
+							$c[] = 'hidden';
+						}
+					} else {
+						if ($item['published'] == '2') {
+							$c[] = 'hidden';
+						}
 					}
 				}
 			}
