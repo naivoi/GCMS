@@ -1685,8 +1685,10 @@
 		 */
 		public static function get2Input($q) {
 			$ret = array();
-			foreach ($q AS $k => $v) {
-				$ret[$k] = '<input type=hidden name="_'.$k.'" value="'.$v.'">';
+			if (isset($q)) {
+				foreach ($q AS $k => $v) {
+					$ret[$k] = '<input type=hidden name="_'.$k.'" value="'.$v.'">';
+				}
 			}
 			return implode('', $ret);
 		}
