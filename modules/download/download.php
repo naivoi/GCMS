@@ -14,7 +14,7 @@
 			$status = isset($_SESSION['login']['status']) ? $_SESSION['login']['status'] : -1;
 			// ไฟล์ดาวน์โหลด
 			$download = $db->getRec(DB_DOWNLOAD, $id);
-			$file_path = DATA_PATH."download/$download[file]";
+			$file_path = ROOT_PATH.$download['file'];
 			// ตรวจสอบสถานะการดาวน์โหลด
 			if (!$download || !is_file($file_path)) {
 				$ret['error'] = 'DOWNLOAD_FILE_NOT_FOUND';

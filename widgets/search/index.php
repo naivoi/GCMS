@@ -6,6 +6,6 @@
 		$replace[] = '';
 		$replace[] = 'gcms::getLng';
 		$replace[] = WEB_URL;
-		$replace[] = isset($_GET['q']) ? preg_replace('/[\+\s]+/u', ' ', $_GET['q']) : '';
+		$replace[] = preg_replace('/[\+\s]+/u', ' ', gcms::getVars($_GET, 'q', ''));
 		$widget = gcms::pregReplace($patt, $replace, file_get_contents(ROOT_PATH.'widgets/search/search.html'));
 	}

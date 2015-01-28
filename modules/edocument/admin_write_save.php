@@ -56,7 +56,7 @@
 					}
 				}
 				// reciever
-				if ($save['reciever'] == '') {
+				if (empty($save['reciever'])) {
 					$ret['ret_edocument_reciever'] = 'EDOCUMENT_RECIEVER_EMPTY';
 					$input = !$input ? 'edocument_reciever' : $input;
 					$error = !$error ? 'EDOCUMENT_RECIEVER_EMPTY' : $error;
@@ -119,10 +119,10 @@
 						$db->edit(DB_EDOCUMENT, $id, $save);
 						$ret['error'] = 'EDIT_SUCCESS';
 					}
-					if ($config['sendmail'] == 1 && $_POST['send_email'] == 1) {
+					if ($config['sendmail'] == 1 && isset($_POST['send_email']) && $_POST['send_email'] == 1) {
 						// ส่งอีเมล์แจ้งสมาชิก
 						$reciever = array();
-						foreach (explode(',',$save['reciever']) AS $item) {
+						foreach (explode(',', $save['reciever']) AS $item) {
 							if ($item != -1) {
 								$reciever[$item] = $item;
 							}
@@ -141,7 +141,7 @@
 						}
 					}
 					// ส่งค่ากลับ
-					$ret['location'] = rawurlencode(WEB_URL."/admin/index.php?module=edocument-setup");
+					$ret['location'] = gcms::retURL(WEB_URL.'/admin/index.php', array('module' => 'edocument-setup'));
 				} else {
 					$ret['error'] = $error;
 					$ret['input'] = $input;

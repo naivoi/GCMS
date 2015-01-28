@@ -25,7 +25,7 @@
 			// ไม่พบรายการหรือยังไม่ได้ติดตั้ง
 			$title = $lng['LNG_DATA_NOT_FOUND'];
 			$content = '<div class=error>'.$title.'</div>';
-		} elseif (!gcms::canConfig($config['edocument_can_upload'])) {
+		} elseif (empty($config['edocument_can_upload']) || !gcms::canConfig($config['edocument_can_upload'])) {
 			// ไม่สามารถอัปโหลดได้
 			$title = $lng['ACTION_FORBIDDEN'];
 			$content = '<div class=error>'.$title.'</div>';
@@ -44,6 +44,10 @@
 				$reciever = explode(',', $index['reciever']);
 			} else {
 				$index['document_no'] = sprintf($config['edocument_format_no'], (int)$index['document_no'] + 1);
+				$index['topic'] = '';
+				$index['detail'] = '';
+				$index['ext'] = '';
+				$index['id'] = 0;
 				$reciever = array();
 			}
 			if ($id == 0 || $canEdit) {
@@ -79,7 +83,7 @@
 				$replace[] = gcms::formatFileSize($config['edocument_upload_size']);
 				$replace[] = $antispam;
 				$replace[] = $isAdmin ? $_SESSION[$antispam] : '';
-				$replace[] = (int)$index['id'];
+				$replace[] = $index['id'];
 				$replace[] = $index['document_no'];
 				$replace[] = $index['topic'];
 				$replace[] = $index['detail'];

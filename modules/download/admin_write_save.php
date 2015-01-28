@@ -23,7 +23,7 @@
 				$sql .= " WHERE C.`id`=$id AND M.`owner`='download' LIMIT 1";
 			} else {
 				// ใหม่ ตรวจสอบโมดูล
-				$sql = "SELECT `id` AS `module_id` FROM `".DB_MODULES."` WHERE `owner`='download' LIMIT 1";
+				$sql = "SELECT '' AS `file`,`id` AS `module_id` FROM `".DB_MODULES."` WHERE `owner`='download' LIMIT 1";
 			}
 			$index = $db->customQuery($sql);
 			$index = $index[0];
@@ -38,12 +38,12 @@
 				$ret['ret_download_description'] = 'DOWNLOAD_DESCRIPTION_EMPTY';
 				$ret['error'] = 'DOWNLOAD_DESCRIPTION_EMPTY';
 				$ret['input'] = 'download_description';
-			} elseif ($file['tmp_name'] == '' && $id == 0) {
+			} elseif (empty($file['tmp_name']) && $id == 0) {
 				// ใหม่ ต้องมีไฟล์
 				$ret['ret_download_upload'] = 'DOWNLOAD_FILE_EMPTY';
 				$ret['error'] = 'DOWNLOAD_FILE_EMPTY';
 				$ret['input'] = 'download_upload';
-			} elseif ($file['tmp_name'] != '') {
+			} elseif (!empty($file['tmp_name'])) {
 				if (preg_match('/^(.*)\.(.*)$/', $file['name'], $match)) {
 					$file_name = $match[1];
 					$save['ext'] = $match[2];

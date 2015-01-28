@@ -18,6 +18,7 @@
 			$index = $index[0];
 			if ($id == 0) {
 				$index['name'] = '';
+				$index['ext'] = '';
 				$index['detail'] = '';
 				$index['file'] = '';
 				$index['category_id'] = 0;
@@ -41,7 +42,7 @@
 			// download_name
 			$content[] = '<div class=item>';
 			$content[] = '<label for=download_name>{LNG_DOWNLOAD_NAME}</label>';
-			$content[] = '<span class="g-input icon-edit"><input type=text id=download_name name=download_name title="{LNG_DOWNLOAD_NAME_COMMENT}" value="'.$index['name'].'.'.$index['ext'].'"></span>';
+			$content[] = '<span class="g-input icon-edit"><input type=text id=download_name name=download_name title="{LNG_DOWNLOAD_NAME_COMMENT}" value="'.$index['name'].'"></span>';
 			$content[] = '<div class=comment id=result_download_name>{LNG_DOWNLOAD_NAME_COMMENT}</div>';
 			$content[] = '</div>';
 			// download_description
@@ -78,9 +79,9 @@
 			$content[] = '</fieldset>';
 			// submit
 			$content[] = '<fieldset class=submit>';
-			$content[] = '<input type=submit class="button large save" value="{LNG_DOWNLOAD_SAVE}">';
+			$content[] = '<input type=submit class="button large save" value="{LNG_SAVE}">';
 			$content[] = gcms::get2Input($_GET);
-			$content[] = '<input type=hidden id=write_id name=write_id value='.(int)$index['id'].'>';
+			$content[] = '<input type=hidden name=write_id value='.(int)$index['id'].'>';
 			$content[] = '</fieldset>';
 			$content[] = '</form>';
 			$content[] = '</section>';

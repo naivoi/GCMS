@@ -100,11 +100,11 @@
 					$tr = '<tr class="'.$bg.' status'.$i.'">';
 					$tr .= '<th>'.$item.'</th>';
 					// can_upload
-					$tr .= '<td><label data-text="{LNG_UPLOAD}" ><input type=checkbox name=config_can_upload[]'.(is_array($config['edocument_can_upload']) && in_array($i, $config['edocument_can_upload']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_UPLOAD_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_UPLOAD}" ><input type=checkbox name=config_can_upload[]'.(isset($config['edocument_can_upload']) && in_array($i, $config['edocument_can_upload']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_UPLOAD_COMMENT}"></label></td>';
 					// moderator
-					$tr .= '<td><label data-text="{LNG_MODERATOR}" ><input type=checkbox name=config_moderator[]'.(is_array($config['edocument_moderator']) && in_array($i, $config['edocument_moderator']) ? ' checked' : '').' value='.$i.' title="{LNG_EDOCUMENT_MODERATOR_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_MODERATOR}" ><input type=checkbox name=config_moderator[]'.(isset($config['edocument_moderator']) && in_array($i, $config['edocument_moderator']) ? ' checked' : '').' value='.$i.' title="{LNG_EDOCUMENT_MODERATOR_COMMENT}"></label></td>';
 					// can_config
-					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}" ><input type=checkbox name=config_can_config[]'.(is_array($config['edocument_can_config']) && in_array($i, $config['edocument_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}" ><input type=checkbox name=config_can_config[]'.(isset($config['edocument_can_config']) && in_array($i, $config['edocument_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
 					$tr .= '</tr>';
 					$content[] = $tr;
 				}

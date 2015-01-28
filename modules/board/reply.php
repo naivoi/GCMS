@@ -112,7 +112,7 @@
 					$ret['ret_reply_email'] = 'DO_NOT_REPLY';
 				} else {
 					// ชื่อสมาชิกใช้งานได้
-					$sender = $user['displayname'] == '' ? $user['email'] : $user['displayname'];
+					$sender = empty($user['displayname']) ? $user['email'] : $user['displayname'];
 					$post['member_id'] = $user['id'];
 					$post['email'] = $user['email'];
 				}

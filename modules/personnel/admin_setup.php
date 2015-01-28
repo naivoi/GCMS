@@ -89,10 +89,6 @@
 			$content[] = '<fieldset>';
 			$content[] = '<input type=submit class="button go" value="{LNG_GO}">';
 			$content[] = '</fieldset>';
-			// add
-			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=personnel-write}"><span class=icon-add>{LNG_ADD_NEW} {LNG_PERSONNEL}</span></a>';
-			$content[] = '</fieldset>';
 			// search
 			$content[] = '<fieldset class=search>';
 			$content[] = '<label accesskey=f><input type=text name=search value="'.$search.'" placeholder="{LNG_SEARCH_TITLE}" title="{LNG_SEARCH_TITLE}"></label>';
@@ -172,6 +168,10 @@
 			$content[] = '<fieldset>';
 			$content[] = '<select id=sel_action><option value=delete>{LNG_DELETE}</option></select>';
 			$content[] = '<label accesskey=e for=sel_action class="button go" id=btn_action><span>{LNG_SELECT_ACTION}</span></label>';
+			$content[] = '</fieldset>';
+			// add
+			$content[] = '<fieldset>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=personnel-write}"><span class=icon-add>{LNG_ADD_NEW} {LNG_PERSONNEL}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

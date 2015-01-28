@@ -1,6 +1,7 @@
 <?php
 	// widgets/like/index.php
 	if (defined('MAIN_INIT')) {
+		$module = empty($module) ? '' : $module;
 		$likes = array('g-plusone', 'fb-likebox');
 		foreach ($likes AS $item) {
 			$widget[] = '<div id='.$item.'></div>';

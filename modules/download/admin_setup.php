@@ -113,7 +113,7 @@
 			$sql = "SELECT * FROM `".DB_DOWNLOAD."` $where ORDER BY `last_update` DESC LIMIT $start,$list_per_page";
 			foreach ($db->customQuery($sql) AS $item) {
 				$id = $item['id'];
-				$file_exists = file_exists(DATA_PATH."download/$item[file]");
+				$file_exists = file_exists(ROOT_PATH.$item['file']);
 				$icon = "skin/ext/$item[ext].png";
 				$icon = WEB_URL.(is_file(ROOT_PATH.$icon) ? "/$icon" : "/skin/ext/file.png");
 				$tr = '<tr id="M_'.$id.'">';

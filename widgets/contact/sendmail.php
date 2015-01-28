@@ -9,7 +9,7 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// อีเมล์ผู้รับ
-			if ($_SESSION['emails'] != '') {
+			if (!empty($_SESSION['emails'])) {
 				$emails = explode(',', $_SESSION['emails']);
 			} else {
 				$emails = array();

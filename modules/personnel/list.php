@@ -36,8 +36,15 @@
 			// หน้าหลัก
 			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 			// โมดูล
-			$m = $install_modules[$index['module']]['menu_text'];
-			$breadcrumbs['MODULE'] = gcms::breadcrumb('', gcms::getURL($index['module']), $install_modules[$index['module']]['menu_tooltip'], ($m == '' ? $index['module'] : $m), $breadcrumb);
+			if (isset($install_modules[$index['module']]['menu_text'])) {
+				$m = $install_modules[$index['module']]['menu_text'];
+				$t = $install_modules[$index['module']]['menu_tooltip'];
+			} else {
+				$m = ucwords($index['module']);
+				$t = $m;
+			}
+			$canonical = gcms::getURL($index['module']);
+			$breadcrumbs['MODULE'] = gcms::breadcrumb('', $canonical, $t, $m, $breadcrumb);
 			// กลุ่ม
 			if ($id > 0) {
 				$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', 0, 0, "cat=$id"), $categories[$id], $categories[$id], $breadcrumb);

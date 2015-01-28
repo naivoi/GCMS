@@ -135,11 +135,11 @@
 			$replace[] = $config['web_title'];
 			$replace[] = $error == '' ? $config['web_description'] : '<span class=error>'.$error.'</span>';
 			$replace[] = WEB_URL;
-			$replace[] = $login_result['displayname'] == '' ? $login_result['email'] : $login_result['displayname'];
+			$replace[] = empty($login_result['displayname']) ? $login_result['email'] : $login_result['displayname'];
 			$replace[] = $login_result['id'];
-			$replace[] = $login_result['point'];
+			$replace[] = gcms::getVars($login_result, 'point', '');
 			$replace[] = $login_result['status'];
-			$replace[] = $login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1 ? 'admin' : ' hidden';
+			$replace[] = isset($login_result['admin_access']) && ($login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1) ? 'admin' : ' hidden';
 			$replace[] = 'gcms::getLng';
 			$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
 			$template = gcms::loadtemplate('member', 'member', 'member');

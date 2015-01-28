@@ -96,12 +96,12 @@
 				$tr = '<tr class="'.$bg.' status'.$i.'">';
 				$tr .= '<th>'.$item.'</th>';
 				// download_can_download
-				$tr .= '<td><label data-text="{LNG_DOWNLOAD}"><input type=checkbox name=config_can_download[]'.(is_array($config['download_can_download']) && in_array($i, $config['download_can_download']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_DOWNLOAD_COMMENT}"></label></td>';
+				$tr .= '<td><label data-text="{LNG_DOWNLOAD}"><input type=checkbox name=config_can_download[]'.(isset($config['download_can_download']) && in_array($i, $config['download_can_download']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_DOWNLOAD_COMMENT}"></label></td>';
 				if ($i > 1) {
 					// download_can_upload
-					$tr .= '<td><label data-text="{LNG_UPLOAD}"><input type=checkbox name=config_can_upload[]'.(is_array($config['download_can_upload']) && in_array($i, $config['download_can_upload']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_UPLOAD_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_UPLOAD}"><input type=checkbox name=config_can_upload[]'.(isset($config['download_can_upload']) && in_array($i, $config['download_can_upload']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_UPLOAD_COMMENT}"></label></td>';
 					// download_can_config
-					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}"><input type=checkbox name=config_can_config[]'.(is_array($config['download_can_config']) && in_array($i, $config['download_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}"><input type=checkbox name=config_can_config[]'.(isset($config['download_can_config']) && in_array($i, $config['download_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
 				} else {
 					$tr .= '<td colspan=2></td>';
 				}

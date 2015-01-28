@@ -43,9 +43,9 @@
 					$tr = '<tr class="'.$bg.' status'.$i.'">';
 					$tr .= '<th>'.$item.'</th>';
 					// can_write
-					$tr .= '<td><label data-text="{LNG_CAN_WRITE}"><input type=checkbox name=config_can_write[]'.(is_array($config['event_can_write']) && in_array($i, $config['event_can_write']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_WRITE_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_CAN_WRITE}"><input type=checkbox name=config_can_write[]'.(isset($config['event_can_write']) && in_array($i, $config['event_can_write']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_WRITE_COMMENT}"></label></td>';
 					// can_config
-					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}"><input type=checkbox name=config_can_config[]'.(is_array($config['event_can_config']) && in_array($i, $config['event_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
+					$tr .= '<td><label data-text="{LNG_CAN_CONFIG}"><input type=checkbox name=config_can_config[]'.(isset($config['event_can_config']) && in_array($i, $config['event_can_config']) ? ' checked' : '').' value='.$i.' title="{LNG_CAN_CONFIG_COMMENT}"></label></td>';
 					$tr .= '</tr>';
 					$content[] = $tr;
 				}

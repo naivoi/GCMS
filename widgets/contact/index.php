@@ -9,7 +9,7 @@
 		$widget[] = '<div class=item><label for=mail_sender>{LNG_EMAIL_SEND} {LNG_TO}</label><span class="g-input icon-email-sent"><select name=mail_reciever id=mail_reciever>';
 		$emails = array();
 		$subject = '';
-		if ($module != '') {
+		if (!empty($module)) {
 			foreach (explode(',', $module) AS $item) {
 				if (gcms::validMail($item)) {
 					$emails = explode(',', $module);

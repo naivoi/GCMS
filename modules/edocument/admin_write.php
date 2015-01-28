@@ -27,6 +27,10 @@
 			if ($id == 0) {
 				$a[] = '{LNG_ADD}';
 				$index['document_no'] = sprintf($config['edocument_format_no'], (int)$index['document_no'] + 1);
+				$index['ext'] = '';
+				$index['id'] = 0;
+				$index['topic'] = '';
+				$index['detail'] = '';
 				$reciever = array();
 			} else {
 				$a[] = '{LNG_EDIT}';
@@ -87,8 +91,9 @@
 			$content[] = '</fieldset>';
 			// submit
 			$content[] = '<fieldset class=submit>';
-			$content[] = '<input class="button large save" type=submit value="{LNG_SAVE}">';
+			$content[] = '<input type=submit class="button large save" value="{LNG_SAVE}">';
 			$content[] = '&nbsp;<label>{LNG_EDOCUMENT_SEND_EMAIL_TO}&nbsp;<input type=checkbox name=send_email value=1></label>';
+			$content[] = gcms::get2Input($_GET);
 			$content[] = '<input type=hidden name=write_id value='.(int)$index['id'].'>';
 			$content[] = '</fieldset>';
 			$content[] = '</form>';

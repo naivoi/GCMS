@@ -38,7 +38,6 @@
 			$patt2 = array('/{SEARCH}/', '/{COUNT}/', '/{PAGE}/', '/{TOTALPAGE}/', '/{START}/', '/{END}/');
 			$replace2 = array($search, $count[0]['count'], $page, $totalpage, $s, $e);
 			// save cookie
-			setCookie('edocument_cat', $cat, time() + 3600 * 24 * 365);
 			setCookie('edocument_listperpage', $list_per_page, time() + 3600 * 24 * 365);
 			// title
 			$m = ucwords($index['module']);
@@ -65,10 +64,6 @@
 			// submit
 			$content[] = '<fieldset>';
 			$content[] = '<input type=submit class="button go" value="{LNG_GO}">';
-			$content[] = '</fieldset>';
-			// add
-			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=edocument-write&src=edocument-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_EDOCUMENT_ITEM}</span></a>';
 			$content[] = '</fieldset>';
 			// search
 			$content[] = '<fieldset class=search>';
@@ -107,7 +102,7 @@
 				$icon = "skin/ext/$item[ext].png";
 				$icon = WEB_URL.(is_file(ROOT_PATH.$icon) ? "/$icon" : "/skin/ext/file.png");
 				$tr .= '<td headers="r'.$id.' c0" class=menu>';
-				$tr .= !$file_exists ? '' : '<a href="'.WEB_URL.'/modules/edocument/admin_download.php?id='.$id.'" target=_blank title="{LNG_CLICK_TO} {LNG_DOWNLOAD}"><img src="'.$icon.'" alt='.$item['ext'].'></a>';
+				$tr .= $file_exists ? '<a href="'.WEB_URL.'/modules/edocument/admin_download.php?id='.$id.'" target=_blank title="{LNG_CLICK_TO} {LNG_DOWNLOAD}"><img src="'.$icon.'" alt='.$item['ext'].'></a>' : '';
 				$tr .= '</td>';
 				$tr .= '<td headers="r'.$id.' c1" class=check-column><a id=check_'.$id.' class=icon-uncheck href=""></a></td>';
 				$tr .= '<td headers="r'.$id.' c2" title="'.$item['detail'].'" class=tablet>'.$item['detail'].'</td>';
@@ -156,6 +151,10 @@
 			$content[] = '<fieldset>';
 			$content[] = '<select id=sel_action><option value=delete>{LNG_DELETE}</option></select>';
 			$content[] = '<label accesskey=e for=sel_action class="button go" id=btn_action><span>{LNG_SELECT_ACTION}</span></label>';
+			$content[] = '</fieldset>';
+			// add
+			$content[] = '<fieldset>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=edocument-write&src=edocument-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_EDOCUMENT_ITEM}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

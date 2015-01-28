@@ -11,7 +11,7 @@
 		if (sizeof($result) == 1) {
 			$result = $result[0];
 			// breadcrumbs
-			$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
+			$breadcrumb = gcms::loadtemplate('', '', 'breadcrumb');
 			$breadcrumbs = array();
 			// หน้าหลัก
 			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);

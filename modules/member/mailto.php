@@ -25,10 +25,10 @@
 				}
 				$ret = array();
 				// ตรวจสอบค่าที่ส่งมา
-				if ($sender == '') {
+				if (empty($sender['email'])) {
 					$ret['error'] = 'SENDER_EMPTY';
 					$ret['input'] = 'mail_sender';
-				} elseif (!gcms::validMail($sender)) {
+				} elseif (!gcms::validMail($sender['email'])) {
 					$ret['error'] = 'REGISTER_INVALID_EMAIL';
 					$ret['input'] = 'mail_sender';
 				} elseif (sizeof($emails) == 0) {

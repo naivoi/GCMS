@@ -11,7 +11,7 @@
 		// datas
 		$file = $_SESSION[$_GET['id']];
 		if (in_array($status, $config['download_can_download'])) {
-			$file_path = DATA_PATH."download/$file[file]";
+			$file_path = ROOT_PATH.$file['file'];
 			if (is_file($file_path)) {
 				// ดาวน์โหลดไฟล์
 				header('Cache-Control: private');
