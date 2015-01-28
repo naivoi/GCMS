@@ -123,7 +123,7 @@
 			}
 			$splitpage .= ($i < $totalpage) ? str_replace('%d', $totalpage, $url) : '';
 			$splitpage = $splitpage == '' ? '<strong title="{LNG_DISPLAY_PAGE} '.$i.'">1</strong>' : $splitpage;
-			$content[] = '<p class=splitpage>'.$splitpage.'</p>';
+			$content[] = '<div class=splitpage>'.$splitpage.'</div>';
 			$content[] = '</section>';
 			$content[] = '<script>';
 			$content[] = '$G(window).Ready(function(){';

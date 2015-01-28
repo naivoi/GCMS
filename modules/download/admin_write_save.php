@@ -10,10 +10,10 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
-			$save['name'] = $db->sql_trim_str($_POST, 'download_name', '');
-			$save['detail'] = $db->sql_trim_str($_POST, 'download_description', '');
+			$save['name'] = $db->sql_trim_str($_POST, 'download_name');
+			$save['detail'] = $db->sql_trim_str($_POST, 'download_description');
 			$save['category_id'] = gcms::getVars($_POST, 'download_category', 0);
-			$save['file'] = $db->sql_trim_str($_POST, 'download_file', '');
+			$save['file'] = $db->sql_trim_str($_POST, 'download_file');
 			$file = $_FILES['download_upload'];
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			// ตรวจสอบค่าที่ส่งมา
@@ -38,7 +38,7 @@
 				$ret['ret_download_description'] = 'DOWNLOAD_DESCRIPTION_EMPTY';
 				$ret['error'] = 'DOWNLOAD_DESCRIPTION_EMPTY';
 				$ret['input'] = 'download_description';
-			} elseif ($file['tmp_name'] == '' && $save['file'] == '' && $id == 0) {
+			} elseif ($file['tmp_name'] == '' && $id == 0) {
 				// ใหม่ ต้องมีไฟล์
 				$ret['ret_download_upload'] = 'DOWNLOAD_FILE_EMPTY';
 				$ret['error'] = 'DOWNLOAD_FILE_EMPTY';

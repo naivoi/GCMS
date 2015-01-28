@@ -12,10 +12,7 @@
 			$index = $db->customQuery($sql);
 			$cache->save($sql, $index);
 		}
-		if (sizeof($index) == 0) {
-			$title = $lng['LNG_DATA_NOT_FOUND'];
-			$content = '<div class=error>'.$title.'</div>';
-		} else {
+		if (sizeof($index) == 1) {
 			$index = $index[0];
 			// breadcrumbs
 			$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
@@ -37,7 +34,7 @@
 			}
 			// login id (guest = -1)
 			$status = $isMember ? $_SESSION['login']['status'] : -1;
-			$login_id = isset($_SESSION['login']) ? (int)$_SESSION['login']['id'] : 0;
+			$login_id = isset($_SESSION['login']['id']) ? (int)$_SESSION['login']['id'] : 0;
 			// default query
 			$where = " WHERE D.`module_id`='$index[module_id]' AND (D.`sender_id`='$login_id' OR D.`reciever` REGEXP '(^|,)$status($|,)')";
 			// จำนวนทั้งหมด
@@ -85,7 +82,7 @@
 					$replace[] = $item['ext'];
 					$replace[] = WEB_URL.'/skin/ext/'.(is_file(ROOT_PATH."skin/ext/$item[ext].png") ? $item['ext'] : 'file').'.png';
 					$replace[] = $item['detail'];
-					$replace[] = gcms::mktime2date($item['last_update']);
+					$replace[] = gcms::mktime2date($item['last_update'], 'd M Y');
 					$replace[] = $item['document_no'];
 					$replace[] = gcms::formatFileSize($item['size']);
 					$sender = trim("$item[fname] $item[lname]");
@@ -94,6 +91,27 @@
 					$replace[] = $item['sender_id'];
 					$list[] = preg_replace($patt, $replace, $listitem);
 				}
+				// แบ่งหน้า
+				$maxlink = 9;
+				// query สำหรับ URL
+				$url = '<a href="'.gcms::getURL($index['module'], '', 0, 0, 'page=%1').'">%1</a>';
+				if ($totalpage > $maxlink) {
+					$start = $page - floor($maxlink / 2);
+					if ($start < 1) {
+						$start = 1;
+					} elseif ($start + $maxlink > $totalpage) {
+						$start = $totalpage - $maxlink + 1;
+					}
+				} else {
+					$start = 1;
+				}
+				$splitpage = ($start > 2) ? str_replace('%1', 1, $url) : '';
+				for ($i = $start; $i <= $totalpage && $maxlink > 0; $i++) {
+					$splitpage .= ($i == $page) ? '<strong>'.$i.'</strong>' : str_replace('%1', $i, $url);
+					$maxlink--;
+				}
+				$splitpage .= ($i < $totalpage) ? str_replace('%1', $totalpage, $url) : '';
+				$splitpage = $splitpage == '' ? '<strong>1</strong>' : $splitpage;
 				// แสดงผล list รายการ
 				$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/',
 					'/{MODULE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e');
@@ -112,5 +130,10 @@
 			$title = $index['topic'];
 			$keywords = $index['keywords'];
 			$description = $index['description'];
+			// เลือกเมนู
+			$menu = empty($install_modules[$index['module']]['alias']) ? $index['module'] : $install_modules[$index['module']]['alias'];
+		} else {
+			$title = $lng['LNG_DATA_NOT_FOUND'];
+			$content = '<div class=error>'.$title.'</div>';
 		}
 	}

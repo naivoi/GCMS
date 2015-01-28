@@ -22,9 +22,9 @@
 				'/{(LNG_[A-Z0-9_]+)}/e', '/{ANTISPAM}/', '/{WEBURL}/', '/{MODAL}/', '/{INVITE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
-			$replace[] = (int)$config['member_phone'] == 0 ? '' : '\\1';
-			$replace[] = (int)$config['member_idcard'] == 0 ? '' : '\\1';
-			$replace[] = $config['member_invitation'] == 0 ? '' : '\\1';
+			$replace[] = gcms::getVars($config, 'member_phone', 0) ? '' : '\\1';
+			$replace[] = gcms::getVars($config, 'member_idcard', 0) ? '' : '\\1';
+			$replace[] = gcms::getVars($config, 'member_invitation', 0) ? '' : '\\1';
 			$replace[] = 'gcms::getLng';
 			$replace[] = $register_antispamchar;
 			$replace[] = WEB_URL;

@@ -35,15 +35,15 @@
 				$ret = array('error' => 'ACTION_ERROR');
 			} else {
 				// ค่าที่ส่งมา
-				$language = $db->sql_trim_str($_POST, 'write_language', '');
+				$language = $db->sql_trim_str($_POST, 'write_language');
 				$module = empty($_POST['write_module']) ? '' : strtolower($db->sql_trim_str($_POST, 'write_module', ''));
-				$detail_save['topic'] = $db->sql_trim_str($_POST, 'write_topic', '');
+				$detail_save['topic'] = $db->sql_trim_str($_POST, 'write_topic');
 				$keywords = gcms::getTags($_POST['write_keywords']);
 				$detail_save['keywords'] = $db->sql_clean(gcms::cutstring(preg_replace('/[\'\"\r\n\s]{1,}/isu', ' ', ($keywords == '' ? gcms::getTags($_POST['write_topic']) : $keywords)), 149));
 				$detail_save['detail'] = gcms::ckDetail($_POST['write_detail']);
 				$description = trim(gcms::getVars($_POST, 'write_description', ''));
 				$detail_save['description'] = $db->sql_trim_str(gcms::cutstring(gcms::html2txt($description == '' ? $_POST['write_detail'] : $description), 149));
-				$index_save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date', '');
+				$index_save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date');
 				$index_save['published'] = $_POST['write_published'] == '0' ? '0' : '1';
 				// owner ที่สามารถใช้ซ้ำได้
 				if ($owner == 'index' || isset($config[$owner]['description'])) {

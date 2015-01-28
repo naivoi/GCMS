@@ -1,2 +1,0 @@
-# GCMS
-Thai Ajax CMS

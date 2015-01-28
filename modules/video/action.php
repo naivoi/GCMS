@@ -8,12 +8,12 @@
 		$mv = $db->getRec(DB_VIDEO, $match[1]);
 		// get video info
 		if (function_exists('curl_init') && $ch = @curl_init()) {
-			curl_setopt($ch, CURLOPT_URL, "http://gdata.youtube.com/feeds/api/videos/{$mv[youtube]}?v=2");
+			curl_setopt($ch, CURLOPT_URL, 'http://gdata.youtube.com/feeds/api/videos/'.$mv['youtube'].'?v=2');
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			$feed = curl_exec($ch);
 			curl_close($ch);
 		} else {
-			$feed = file_get_contents("http://gdata.youtube.com/feeds/api/videos/{$mv[youtube]}?v=2");
+			$feed = file_get_contents('http://gdata.youtube.com/feeds/api/videos/'.$mv['youtube'].'?v=2');
 		}
 		if ($feed != '') {
 			$xml = simplexml_load_string($feed);

@@ -43,7 +43,7 @@
 				}
 				foreach ($saved AS $item) {
 					$url = gcms::getURL($module['module'], '', 0, 0, "cat=$item[category_id]");
-					$widget[] = '<li><a href="'.$url.'"><span>'.gcms::ser2Str($item['topic']).'</span></a></li>';
+					$widget[] = '<li><a href="'.$url.'"><span>'.gcms::ser2Str($item, 'topic').'</span></a></li>';
 				}
 				$widget[] = '</ul></nav>';
 			}

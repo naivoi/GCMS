@@ -9,8 +9,8 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// ค่าที่ส่งมา
-			$reciever = $db->sql_trim_str($_POST, 'share_reciever', '');
-			$topic = $db->sql_trim_str($_POST, 'share_subject', '');
+			$reciever = $db->sql_trim_str($_POST, 'share_reciever');
+			$topic = $db->sql_trim_str($_POST, 'share_subject');
 			$url = trim(gcms::getVars($_POST, 'share_address', ''));
 			$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'email' => '', 'password' => ''));
 			// ตรวจสอบค่าที่ส่งมา

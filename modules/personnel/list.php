@@ -28,7 +28,7 @@
 				$cache->save($sql, $saved);
 			}
 			foreach ($saved AS $category) {
-				$categories[$category['category_id']] = gcms::ser2Str($category['topic']);
+				$categories[$category['category_id']] = gcms::ser2Str($category, 'topic');
 			}
 			// breadcrumbs
 			$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
@@ -97,7 +97,7 @@
 			$replace[] = sizeof($items) == 0 ? '<div class=error>{LNG_LIST_EMPTY}</div>' : '<article>'.implode("\n", $items).'</ul></article>';
 			$replace[] = $index['topic'];
 			$replace[] = $index['detail'];
-			$replace[] = isset($categories[$id]) ? $categories[$id] : '';
+			$replace[] = gcms::getVars($categories, $id, '');
 			$replace[] = 'gcms::getWidgets';
 			$replace[] = 'gcms::getLng';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'personnel', 'main'));

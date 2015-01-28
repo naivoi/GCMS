@@ -13,8 +13,7 @@
 			$default_icon = $_FILES['config_default_icon'];
 			$icon_width = max(32, (int)$_POST['config_icon_width']);
 			$icon_height = max(32, (int)$_POST['config_icon_height']);
-			$news_count = max(0, (int)$_POST['config_news_count']);
-			$can_view = isset($_POST['config_can_view']) ? $_POST['config_can_view'] : array();
+			$can_view = gcms::getVars($_POST, 'config_can_view', array());
 			$can_view[] = 1;
 			$moderator = isset($_POST['config_moderator']) ? $_POST['config_moderator'] : array();
 			$moderator[] = 1;
@@ -91,7 +90,7 @@
 					$cfg[] = 'icon_category_type='.$icon_category_type;
 					$cfg[] = 'list_per_page='.(int)$_POST['config_list_per_page'];
 					$cfg[] = 'category_display='.(int)$_POST['config_category_display'];
-					$cfg[] = 'news_count='.$news_count;
+					$cfg[] = 'news_count='.max(0, (int)$_POST['config_news_count']);
 					$cfg[] = 'can_view='.implode(',', $can_view);
 					$cfg[] = 'viewing='.(int)$_POST['config_viewing'];
 					$cfg[] = 'new_date='.(int)$_POST['config_new_date'] * 86400;

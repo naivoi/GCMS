@@ -68,12 +68,12 @@
 			} elseif (!is_writable($dest)) {
 				$chk = $dest;
 			}
-			if ($chk != '') {
+			if (!empty($chk)) {
 				$chmod = fileperms($chk);
 				$this->chmod($chk, 0757);
 			}
 			$f = @copy($source, $dest);
-			if ($chk != '') {
+			if (!empty($chk)) {
 				$this->chmod($chk, $chmod);
 			}
 			return $f;
@@ -111,7 +111,7 @@
 				fwrite($f, $string);
 				fclose($f);
 			}
-			if ($chk != '') {
+			if (!empty($chk)) {
 				$this->chmod($chk, $chmod);
 			}
 			return $f;
@@ -177,7 +177,7 @@
 			} elseif (!is_writable($new_file)) {
 				$chk = $new_file;
 			}
-			if ($chk != '') {
+			if (!empty($chk)) {
 				$chmod = fileperms($chk);
 				$this->chmod($chk, 0757);
 			}
@@ -185,7 +185,7 @@
 			if (!$f && $this->login()) {
 				$f = @ftp_rename($this->connection, $old_file, $new_file);
 			}
-			if ($chk != '') {
+			if (!empty($chk)) {
 				$this->chmod($chk, $chmod);
 			}
 			return $f;

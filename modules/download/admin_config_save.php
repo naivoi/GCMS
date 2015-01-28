@@ -51,9 +51,9 @@
 					} else {
 						unset($config['download_can_download']);
 					}
-					$config['download_can_upload'] = isset($_POST['config_can_upload']) ? $_POST['config_can_upload'] : array();
+					$config['download_can_upload'] = gcms::getVars($_POST, 'config_can_upload', array());
 					$config['download_can_upload'][] = 1;
-					$config['download_can_config'] = isset($_POST['config_can_config']) ? $_POST['config_can_config'] : array();
+					$config['download_can_config'] = gcms::getVars($_POST, 'config_can_config', array());
 					$config['download_can_config'][] = 1;
 					$config['download_list_per_page'] = gcms::getVars($_POST, 'config_list_per_page', 0);
 					$config['download_upload_size'] = gcms::getVars($_POST, 'config_upload_size', 0);

@@ -31,7 +31,7 @@
 						$ret = array('error' => 'INVALID_FILE_TYPE');
 					} else {
 						while (is_file($dir."$save[count].$info[ext]")) {
-							$save['count'] ++;
+							$save['count']++;
 						}
 						$save['image'] = "$save[count].$info[ext]";
 						// อัปโหลดรูปภาพจริง

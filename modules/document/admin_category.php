@@ -53,9 +53,9 @@
 				gcms::r2config($item['config'], $save);
 				$save['category_id'] = $item['category_id'];
 				$save['c1'] = $item['c1'];
-				$topics = empty($item['topic']) ? array() : gcms::ser2Array($item['topic']);
-				$details = empty($item['detail']) ? array() : gcms::ser2Array($item['detail']);
-				$icons = empty($item['icon']) ? array() : gcms::ser2Array($item['icon']);
+				$topics = gcms::ser2Array($item, 'topic');
+				$details = gcms::ser2Array($item, 'detail');
+				$icons = gcms::ser2Array($item, 'icon');
 				foreach ($topics AS $k => $v) {
 					$save['topic'] = empty($topics[$k]) ? (isset($topics[LANGUAGE]) ? $topics[LANGUAGE] : '') : $topics[$k];
 					$save['detail'] = empty($details[$k]) ? (isset($details[LANGUAGE]) ? $details[LANGUAGE] : '') : $details[$k];

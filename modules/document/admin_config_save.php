@@ -14,7 +14,7 @@
 			$icon_height = max(32, (int)$_POST['config_icon_height']);
 			$config_list_per = max(1, (int)$_POST['config_list_per_page']);
 			$news_count = max(0, (int)$_POST['config_news_count']);
-			$can_view = isset($_POST['config_can_view']) ? $_POST['config_can_view'] : array();
+			$can_view = gcms::getVars($_POST, 'config_can_view', array());
 			$can_view[] = 1;
 			$moderator = isset($_POST['config_moderator']) ? $_POST['config_moderator'] : array();
 			$moderator[] = 1;

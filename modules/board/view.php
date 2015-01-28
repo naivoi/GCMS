@@ -68,7 +68,7 @@
 				}
 				// category
 				if ($index['category_id'] > 0 && $index['category'] != '') {
-					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', $index['category_id']), gcms::ser2Str($index['cat_tooltip']), gcms::ser2Str($index['category']), $breadcrumb);
+					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', $index['category_id']), gcms::ser2Str($index, 'cat_tooltip'), gcms::ser2Str($index, 'category'), $breadcrumb);
 				}
 				// dir ของรูปภาพอัปโหลด
 				$imagedir = DATA_PATH.'board/';
@@ -148,7 +148,7 @@
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $canonical;
-				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'",gcms::getVars($matches,2,0);');
+				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
 				$replace[] = $index['pin'] == 0 ? 'un' : '';
 				$replace[] = $index['locked'] == 0 ? 'un' : '';
 				$replace[] = $index['pin'] == 0 ? $lng['LNG_PIN'] : $lng['LNG_UNPIN'];

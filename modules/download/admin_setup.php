@@ -14,7 +14,7 @@
 			$sqls = array();
 			$sqls[] = "`module_id`='$index[id]'";
 			// ข้อความค้นหา
-			$search = $db->sql_trim_str($_GET, 'search', '');
+			$search = $db->sql_trim_str($_GET, 'search');
 			if ($search != '') {
 				$sqls[] = "(`name` LIKE '%$search%' OR `ext` LIKE '%$search%' OR `detail` LIKE '%$search%')";
 				$url_query['search'] = urlencode($search);
@@ -73,7 +73,7 @@
 			$categories[0] = '{LNG_ALL} {LNG_CATEGORY}';
 			$sql = "SELECT `category_id`,`topic` FROM `".DB_CATEGORY."` WHERE `module_id`='$index[id]' ORDER BY `category_id`";
 			foreach ($db->customQuery($sql) AS $item) {
-				$categories[$item['category_id']] = gcms::ser2Str($item['topic']);
+				$categories[$item['category_id']] = gcms::ser2Str($item, 'topic');
 			}
 			$content[] = '<fieldset>';
 			$content[] = '<label>{LNG_CATEGORY} <select name=cat>';
@@ -113,7 +113,7 @@
 			$sql = "SELECT * FROM `".DB_DOWNLOAD."` $where ORDER BY `last_update` DESC LIMIT $start,$list_per_page";
 			foreach ($db->customQuery($sql) AS $item) {
 				$id = $item['id'];
-				$file_exists = file_exists(iconv('UTF-8', 'TIS-620', ROOT_PATH.$item['file']));
+				$file_exists = file_exists(DATA_PATH."download/$item[file]");
 				$icon = "skin/ext/$item[ext].png";
 				$icon = WEB_URL.(is_file(ROOT_PATH.$icon) ? "/$icon" : "/skin/ext/file.png");
 				$tr = '<tr id="M_'.$id.'">';

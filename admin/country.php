@@ -25,7 +25,7 @@
 			$url_query['zone'] = $zone;
 		}
 		// ค้นหาจาก printable_name และ iso
-		$search = $db->sql_trim_str($_GET, 'search', '');
+		$search = $db->sql_trim_str($_GET, 'search');
 		if ($search != '') {
 			$qs[] = "(`printable_name` LIKE '%$search%' OR `iso` LIKE '%$search%')";
 			$url_query['search'] = urlencode($search);

@@ -50,15 +50,10 @@
 					$categories = array();
 					$sql = "SELECT `id`,`icon` FROM `".DB_CATEGORY."` WHERE `id` IN ($id) AND `module_id`='$index[id]'";
 					foreach ($db->customQuery($sql) AS $item) {
-						if ($item['icon'] != '') {
-							$icons = @unserialize($item['icon']);
-							if (is_array($icons)) {
-								foreach ($icons AS $icon) {
-									if (is_file(DATA_PATH."$index[owner]/$icon")) {
-										// ลบไอคอนของหมวด
-										unlink(DATA_PATH."$index[owner]/$icon");
-									}
-								}
+						foreach (gcms::str2Array($item, 'icon') AS $icon) {
+							if (is_file(DATA_PATH."$index[owner]/$icon")) {
+								// ลบไอคอนของหมวด
+								unlink(DATA_PATH."$index[owner]/$icon");
 							}
 						}
 						// รายการที่ลบ category_detail

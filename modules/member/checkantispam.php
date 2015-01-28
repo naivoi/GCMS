@@ -4,6 +4,6 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer
-	if (gcms::isReferer() && $_POST['value'] != $_SESSION[$_POST['antispam']]) {
+	if (gcms::isReferer() && $db->sql_trim_str($_POST, 'value') != $_SESSION[$_POST['antispam']]) {
 		echo 'ANTISPAM_INCORRECT';
 	}

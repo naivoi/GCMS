@@ -15,10 +15,10 @@
 			$description = trim(gcms::getVars($_POST, 'write_description', ''));
 			$save['description'] = $db->sql_trim_str(gcms::cutstring(gcms::html2txt($description == '' ? $_POST['write_detail'] : $description), 149));
 			$save['detail'] = gcms::ckDetail($_POST['write_detail']);
-			$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date', '');
+			$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date');
 			$save['published'] = $_POST['write_published'] == '1' ? '1' : '0';
 			$save['begin_date'] = "$_POST[write_d] $_POST[write_h]:$_POST[write_m]:00";
-			$save['color'] = $db->sql_trim_str($_POST, 'write_color', '');
+			$save['color'] = $db->sql_trim_str($_POST, 'write_color');
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			if ($id > 0) {
 				// ตรวจสอบโมดูล หรือ เรื่องที่เลือก (แก้ไข)

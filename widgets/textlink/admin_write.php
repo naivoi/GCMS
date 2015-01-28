@@ -3,7 +3,7 @@
 	if (MAIN_INIT == 'admin' && $isAdmin && defined('DB_TEXTLINK')) {
 		// รายการที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
-		$type = $db->sql_trim_str($_GET, 'type', '');
+		$type = $db->sql_trim_str($_GET, 'type');
 		unset($_GET['id']);
 		unset($_GET['type']);
 		// รายการที่เลือก

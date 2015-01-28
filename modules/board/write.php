@@ -46,7 +46,7 @@
 			foreach ($list AS $item) {
 				if ($isAdmin || $cat == $item['category_id']) {
 					$sel = $cat == $item['category_id'] ? ' selected' : '';
-					$categories[$item['category_id']] = "<option value=$item[category_id]$sel>".gcms::ser2Str($item['topic'])."</option>";
+					$categories[$item['category_id']] = "<option value=$item[category_id]$sel>".gcms::ser2Str($item, 'topic')."</option>";
 				}
 			}
 			if (sizeof($categories) > 1) {

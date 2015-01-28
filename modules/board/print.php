@@ -44,8 +44,8 @@
 					$row .= '<div class=detail>'.$picture.gcms::showDetail($item['detail'], true).'</div>';
 					$row .= '<footer>';
 					$row .= '<p><strong>{LNG_COMMENT_NO}#'.$i.'</strong></p>';
-					$row .= '<p><strong>{LNG_BY}</strong>: '.($index['displayname'] == '' ? $index['email'] : $index['displayname']).'</p>';
-					$row .= '<p><strong>{LNG_POSTED}</strong>: '.gcms::mktime2date($index['last_update']).'</p>';
+					$row .= '<p><strong>{LNG_BY}</strong>: '.(empty($item['displayname']) ? $item['email'] : $item['displayname']).'</p>';
+					$row .= '<p><strong>{LNG_POSTED}</strong>: '.gcms::mktime2date($item['last_update']).'</p>';
 					$row .= '<p><strong>{LNG_IP}</strong>: '.gcms::showip($item['ip']).'</p>';
 					$row .= '</footer>';
 					$row .= '</article>';
@@ -63,7 +63,7 @@
 				$content .= '<footer>';
 				$content .= '<p><strong>{LNG_BY}</strong> : '.($index['displayname'] == '' ? $index['email'] : $index['displayname']).'</p>';
 				$content .= '<p><strong>{LNG_POSTED}</strong>: '.gcms::mktime2date($index['create_date']).'</p>';
-				$content .= '<p><strong>{LNG_URL}</strong> : '.gcms::getURL($modules['module'], '', $index['category_id'], 0, "wbid=$index[id]").'</p>';
+				$content .= '<p><strong>{LNG_URL}</strong> : '.gcms::getURL($modules['module'], '', 0, 0, "wbid=$index[id]").'</p>';
 				$content .= '</footer>';
 				$content .= '</article>';
 				$content .= implode("\n", $comments);

@@ -3,7 +3,7 @@
 	if (defined('MAIN_INIT')) {
 		$qs = array();
 		// อัลบัมของสมาชิกที่เลือก
-		$mid = isset($_REQUEST['mid']) ? (int)$_REQUEST['mid'] : 0;
+		$mid = gcms::getVars($_REQUEST, 'mid', 0);
 		if ($mid > 0) {
 			$qs[] = "mid=$mid";
 		}

@@ -179,7 +179,7 @@
 			$sql = "SELECT `category_id`,`topic` FROM `".DB_CATEGORY."` WHERE `module_id`='$index[module_id]' ORDER BY `category_id`";
 			foreach ($db->customQuery($sql) AS $item) {
 				$sel = $index['category_id'] == $item['category_id'] ? ' selected' : '';
-				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item['topic']).'</option>';
+				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item, 'topic').'</option>';
 			}
 			$content[] = '</select></span>';
 			$content[] = '<div class=comment id=result_category_'.$index['module_id'].'>{LNG_CATEGORY_SELECT}</div>';
@@ -198,7 +198,7 @@
 			// published date
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_published_date>{LNG_PUBLISHED_DATE}</label>';
-			$content[] = '<span class="g-input icon-calendar"><input type=date id=write_published_date name=write_published_date value="'.(empty($index['published_date']) ? date('Y-m-d', $mmktime) : $index['published_date']).'" title="{LNG_PUBLISHED_DATE_COMMENT}"></span>';
+			$content[] = '<span class="g-input icon-calendar"><input type=date id=write_published_date name=write_published_date value="'.gcms::getVars($index, 'published_date', date('Y-m-d', $mmktime)).'" title="{LNG_PUBLISHED_DATE_COMMENT}"></span>';
 			$content[] = '<div class=comment>{LNG_PUBLISHED_DATE_COMMENT}</div>';
 			$content[] = '</div>';
 			// published

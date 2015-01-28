@@ -10,8 +10,8 @@
 		} else {
 			// ค่าที่ส่งมา
 			$id = gcms::getVars($_POST, 'id', 0);
-			$lng = $db->sql_trim_str($_POST, 'lng', '');
-			$action = $db->sql_trim_str($_POST, 'action', '');
+			$lng = $db->sql_trim_str($_POST, 'lng');
+			$action = $db->sql_trim_str($_POST, 'action');
 			if ($id > 0 && $lng != '') {
 				if ($action == 'copy_menu') {
 					// สำเนาเมนู, ตรวจสอบเมนู

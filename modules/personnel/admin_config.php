@@ -49,6 +49,7 @@
 			$content[] = '</thead>';
 			$content[] = '<tbody>';
 			// สถานะสมาชิก
+			$bg = 'bg2';
 			foreach ($config['member_status'] AS $i => $item) {
 				if ($i > 1) {
 					$bg = $bg == 'bg1' ? 'bg2' : 'bg1';

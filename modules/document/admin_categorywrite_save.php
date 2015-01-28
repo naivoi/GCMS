@@ -74,7 +74,7 @@
 				// icon
 				if (!$error && $index['img_typies'] != '') {
 					// old icon
-					$icon = gcms::ser2Array($index['icon']);
+					$icon = gcms::ser2Array($index, 'icon');
 					if (sizeof($icon) == 1) {
 						$icon = array();
 					}

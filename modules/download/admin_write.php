@@ -24,7 +24,7 @@
 				$index['id'] = 0;
 			}
 			// title
-			$title = "$lng[LNG_UPLOAD]/$lng[LNG_EDIT] $lng[LNG_DOWNLOAD_FILES]";
+			$title = "$lng[LNG_UPLOAD]-$lng[LNG_EDIT] $lng[LNG_DOWNLOAD_FILES]";
 			$a = array();
 			$a[] = '<span class=icon-download>{LNG_MODULES}</span>';
 			$a[] = '<a href="{URLQUERY?module=download-config&id=0}">{LNG_DOWNLOAD}</a>';
@@ -41,7 +41,7 @@
 			// download_name
 			$content[] = '<div class=item>';
 			$content[] = '<label for=download_name>{LNG_DOWNLOAD_NAME}</label>';
-			$content[] = '<span class="g-input icon-edit"><input type=text id=download_name name=download_name title="{LNG_DOWNLOAD_NAME_COMMENT}" value="'.$index['name'].'"></span>';
+			$content[] = '<span class="g-input icon-edit"><input type=text id=download_name name=download_name title="{LNG_DOWNLOAD_NAME_COMMENT}" value="'.$index['name'].'.'.$index['ext'].'"></span>';
 			$content[] = '<div class=comment id=result_download_name>{LNG_DOWNLOAD_NAME_COMMENT}</div>';
 			$content[] = '</div>';
 			// download_description
@@ -57,7 +57,7 @@
 			$content[] = '<span class="g-input icon-category"><select name=download_category id=download_category title="{LNG_CATEGORY_SELECT}">';
 			foreach ($db->customQuery($sql) AS $item) {
 				$sel = $item['category_id'] == $index['category_id'] ? ' selected' : '';
-				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item['topic']).'</option>';
+				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item, 'topic').'</option>';
 			}
 			$content[] = '</select></span>';
 			$content[] = '<div class=comment id=result_download_category>{LNG_CATEGORY_SELECT}</div>';

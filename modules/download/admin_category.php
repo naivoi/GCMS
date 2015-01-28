@@ -25,7 +25,7 @@
 				$row = '<dd id=config_category_'.$id.'>';
 				$row .= '<span class=no>['.$item['category_id'].']</span>';
 				$row .= '<span class=icon-delete id=config_category_delete_'.$id.' title="{LNG_DELETE} {LNG_CATEGORY}"></span>';
-				$row .= '{LNG_CATEGORY} <span id=config_category_name_'.$id.' title="{LNG_CLICK_TO} {LNG_EDIT}">'.htmlspecialchars(gcms::ser2Str($item['topic'])).'</span>';
+				$row .= '{LNG_CATEGORY} <span id=config_category_name_'.$id.' title="{LNG_CLICK_TO} {LNG_EDIT}">'.htmlspecialchars(gcms::ser2Str($item, 'topic')).'</span>';
 				$row .= '</dd>';
 				$content[] = $row;
 			}

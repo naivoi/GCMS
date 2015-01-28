@@ -43,7 +43,7 @@
 			$content[] = '<span class="g-input icon-category"><select name=write_category id=write_category title="{LNG_PLEASE_SELECT}">';
 			foreach ($db->customQuery($sql) AS $item) {
 				$sel = $item['category_id'] == $index['category_id'] ? ' selected' : '';
-				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item['topic']).'</option>';
+				$content[] = '<option value='.$item['category_id'].$sel.'>'.gcms::ser2Str($item, 'topic').'</option>';
 			}
 			$content[] = '</select></span>';
 			$content[] = '</div>';

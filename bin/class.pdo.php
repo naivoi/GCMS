@@ -436,45 +436,43 @@
 			return $this->sql_clean(str_replace('\\\\', '&#92;', $value));
 		}
 		/**
-		 * sql_trim($array, $key, $default)
+		 * sql_trim($array, $key)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย /
 		 *
-		 * @param array $array มาจาก $_POST $_GET
-		 * @param string $key ของ $array
-		 * @param mixed $default ค่า default หากไม่พบ $key
+		 * @param mixed $array
+		 * @param string $key key ของ $array
 		 *
-		 * @return mixed คืนค่าตามชนิดของ $default
+		 * @return string
 		 */
-		public function sql_trim($array, $key, $default) {
-			if (!isset($array[$key])) {
-				return $default;
-			} elseif (is_int($default)) {
-				return (int)$array[$key];
-			} elseif (is_float($default)) {
-				return (float)$array[$key];
+		public function sql_trim($array, $key = '') {
+			if (is_array($array)) {
+				if (!isset($array[$key])) {
+					return '';
+				} else {
+					return $this->sql_quote(trim($array[$key]));
+				}
 			} else {
-				return $this->sql_quote(trim($key[$value]));
+				return $this->sql_quote(trim($array));
 			}
 		}
 		/**
-		 * sql_trim_str($array, $key, $default)
+		 * sql_trim_str($array, $key)
 		 * ลบช่องว่างหัวท้ายออกจากข้อความ และ เติม string ด้วย / และ แปลงอักขระ HTML
 		 *
-		 * @param array $array มาจาก $_POST $_GET
-		 * @param string $key ของ $array
-		 * @param mixed $default ค่า default หากไม่พบ $key
+		 * @param mixed $array
+		 * @param string $key key ของ $array
 		 *
-		 * @return mixed คืนค่าตามชนิดของ $default
+		 * @return string
 		 */
-		public function sql_trim_str($array, $key, $default) {
-			if (!isset($array[$key])) {
-				return $default;
-			} elseif (is_int($default)) {
-				return (int)$array[$key];
-			} elseif (is_float($default)) {
-				return (float)$array[$key];
+		public function sql_trim_str($array, $key = '') {
+			if (is_array($array)) {
+				if (!isset($array[$key])) {
+					return '';
+				} else {
+					return $this->sql_quote(htmlspecialchars(trim($array[$key])));
+				}
 			} else {
-				return $this->sql_quote(htmlspecialchars(trim($array[$key])));
+				return $this->sql_quote(htmlspecialchars(trim($array)));
 			}
 		}
 		/**

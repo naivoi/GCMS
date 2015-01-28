@@ -79,7 +79,7 @@
 				}
 				// category
 				if ($index['category_id'] > 0 && $index['category'] != '') {
-					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', $index['category_id']), gcms::ser2Str($index['cat_tooltip']), gcms::ser2Str($index['category']), $breadcrumb);
+					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', $index['category_id']), gcms::ser2Str($index, 'cat_tooltip'), gcms::ser2Str($index, 'category'), $breadcrumb);
 				}
 				// ความคิดเห็น
 				$comments = array();
@@ -150,7 +150,7 @@
 				$replace[] = implode("\n", $breadcrumbs);
 				$replace[] = sizeof($comments) == 0 ? '' : implode("\n", $comments);
 				$replace[] = $canonical;
-				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'",isset($matches[2]) ? (int)$matches[2] : 0);');
+				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
 				$replace[] = $canReply ? gcms::loadtemplate($index['module'], 'document', 'reply') : '';
 				$replace[] = $isMember ? '' : '$1';
 				$replace[] = $canEdit ? '\\1' : 'hidden';

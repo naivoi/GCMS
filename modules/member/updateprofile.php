@@ -9,7 +9,7 @@
 		$save = array();
 		$error = false;
 		// แก้ไขข้อมูลสมาชิก
-		$sql = "SELECT *,(SELECT `name` FROM `".DB_PROVINCE."` WHERE `id`='".(int)$_POST['register_provinceID']."' LIMIT 1) AS `province`";
+		$sql = "SELECT *,(SELECT `name` FROM `".DB_PROVINCE."` WHERE `id`='".gcms::getVars($_POST, 'register_provinceID', 0)."' LIMIT 1) AS `province`";
 		$sql .= " FROM `".DB_USER."` WHERE `id`=".(int)$_SESSION['login']['id']." LIMIT 1";
 		$user = $db->customQuery($sql);
 		if (sizeof($user) == 0 || $user[0]['id'] != (int)$_POST['register_id']) {
@@ -18,9 +18,9 @@
 			$user = $user[0];
 			// password
 			if ($user['fb'] == 0 && isset($_POST['register_password'])) {
-				$password = $db->sql_trim_str($_POST, 'register_password', '');
+				$password = $db->sql_trim_str($_POST, 'register_password');
 				if ($password != '') {
-					$repassword = $db->sql_trim_str($_POST, 'register_repassword', '');
+					$repassword = $db->sql_trim_str($_POST, 'register_repassword');
 					if (mb_strlen($password) < 4) {
 						$ret['ret_register_password'] = 'REGISTER_PASSWORD_SHORT';
 						$input = !$input ? 'register_password' : $input;
@@ -45,7 +45,7 @@
 			}
 			// displayname
 			if (isset($_POST['register_displayname'])) {
-				$save['displayname'] = $db->sql_trim_str($_POST, 'register_displayname', '');
+				$save['displayname'] = $db->sql_trim_str($_POST, 'register_displayname');
 				if (mb_strlen($save['displayname']) < 2) {
 					$ret['ret_register_displayname'] = 'REGISTER_DISPLAYNAME_SHORT';
 					$input = !$input ? 'register_displayname' : $input;
@@ -83,8 +83,8 @@
 				$save['subscrib'] = gcms::getVars($_POST, 'register_subscrib', 0);
 			}
 			// ตรวจสอบรูปภาพอัปโหลดสมาชิก
-			$register_usericon = $_FILES['register_usericon'];
-			if ($register_usericon['tmp_name'] != '') {
+			if (!empty($_FILES['register_usericon']['tmp_name'])) {
+				$register_usericon = $_FILES['register_usericon'];
 				// ตรวจสอบไฟล์อัปโหลด
 				$info = gcms::isValidImage($config['user_icon_typies'], $register_usericon);
 				if (!$info) {
@@ -125,7 +125,7 @@
 			}
 			// fname
 			if (isset($_POST['register_fname'])) {
-				$save['fname'] = $db->sql_trim_str($_POST, 'register_fname', '');
+				$save['fname'] = $db->sql_trim_str($_POST, 'register_fname');
 				if ($save['fname'] == '') {
 					$ret['ret_register_fname'] = 'FNAME_EMPTY';
 					$input = !$input ? 'register_fname' : $input;
@@ -140,7 +140,7 @@
 			}
 			// lname
 			if (isset($_POST['register_lname'])) {
-				$save['lname'] = $db->sql_trim_str($_POST, 'register_lname', '');
+				$save['lname'] = $db->sql_trim_str($_POST, 'register_lname');
 				if ($save['lname'] == '') {
 					$ret['ret_register_lname'] = 'LNAME_EMPTY';
 					$input = !$input ? 'register_lname' : $input;
@@ -155,7 +155,7 @@
 			}
 			// phone
 			if (isset($_POST['register_phone1'])) {
-				$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone1', '');
+				$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone1');
 				if ($save['phone1'] != '') {
 					if (!preg_match('/[0-9]{9,10}/', $save['phone1'])) {
 						$ret['ret_register_phone1'] = 'INVALID_PHONE_NUMBER';
@@ -183,13 +183,13 @@
 			foreach ($_POST AS $key => $value) {
 				$key = str_replace('register_', '', $key);
 				if (in_array($key, $address)) {
-					$save[$key] = $db->sql_trim_str($value);
+					$save[$key] = $db->sql_trim_str($_POST, $key);
 				}
 			}
 			if (!$error) {
 				if (sizeof($save) > 0) {
 					// จังหวัด
-					if ($save['country'] == 'TH') {
+					if (isset($save['country']) && $save['country'] == 'TH') {
 						$save['province'] = $user['province'];
 					}
 					// แก้ไข

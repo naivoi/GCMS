@@ -9,7 +9,7 @@
 			$cache->save($sql, $datas);
 		}
 		foreach ($datas AS $item) {
-			$widget[] = '<li><a href="'.gcms::getURL($index['module'], '', $item['category_id']).'">'.gcms::ser2Str($item['topic']).'</a></li>';
+			$widget[] = '<li><a href="'.gcms::getURL($index['module'], '', $item['category_id']).'">'.gcms::ser2Str($item, 'topic').'</a></li>';
 		}
 	}
 	if (sizeof($widget) > 0) {

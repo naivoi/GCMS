@@ -9,9 +9,9 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// ค่าที่ส่งมา
-			$save['email'] = $db->sql_trim_str($_POST, 'register_email', '');
-			$password = $db->sql_trim_str($_POST, 'register_password', '');
-			$repassword = $db->sql_trim_str($_POST, 'register_repassword', '');
+			$save['email'] = $db->sql_trim_str($_POST, 'register_email');
+			$password = $db->sql_trim_str($_POST, 'register_password');
+			$repassword = $db->sql_trim_str($_POST, 'register_repassword');
 			$save['status'] = gcms::getVars($_POST, 'register_status', 0);
 			// ตรวจสอบข้อมูลที่กรอก
 			$error = false;

@@ -74,7 +74,7 @@
 				// icon
 				if (!$error && !empty($index['img_typies'])) {
 					// old icon
-					$icon = gcms::ser2Array($index['icon']);
+					$icon = gcms::ser2Array($index, 'icon');
 					if (sizeof($icon) == 1) {
 						$icon = array();
 					}
@@ -124,11 +124,11 @@
 					$cfg = array();
 					$can_post = isset($_POST['category_can_post']) ? $_POST['category_can_post'] : array();
 					$can_post[] = 1;
-					$can_view = isset($_POST['category_can_view']) ? $_POST['category_can_view'] : array();
+					$can_view = gcms::getVars($_POST, 'category_can_view', array());
 					$can_view[] = 1;
-					$can_reply = isset($_POST['category_can_reply']) ? $_POST['category_can_reply'] : array();
+					$can_reply = gcms::getVars($_POST, 'category_can_reply', array());
 					$can_reply[] = 1;
-					$moderator = isset($_POST['category_moderator']) ? $_POST['category_moderator'] : array();
+					$moderator = gcms::getVars($_POST, 'category_moderator', array());
 					$moderator[] = 1;
 					$img_upload_size = gcms::getVars($_POST, 'category_img_upload_size', 0);
 					$img_law = gcms::getVars($_POST, 'category_img_law', 0);

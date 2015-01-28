@@ -25,9 +25,9 @@
 				$ret = array('error' => 'ACTION_ERROR');
 			} else {
 				// ค่าที่ส่งมา
-				$save['language'] = $db->sql_trim_str($_POST, 'email_language', '');
-				$save['from_email'] = $db->sql_trim_str($_POST, 'email_from_email', '');
-				$save['subject'] = $db->sql_trim_str($_POST, 'email_subject', '');
+				$save['language'] = $db->sql_trim_str($_POST, 'email_language');
+				$save['from_email'] = $db->sql_trim_str($_POST, 'email_from_email');
+				$save['subject'] = $db->sql_trim_str($_POST, 'email_subject');
 				// มีการแก้ไขภาษา ให้บันทึกเป็นรายการใหม่
 				$ret['ret_email_language'] = '';
 				if ($id > 0 && $save['language'] != $email['language']) {

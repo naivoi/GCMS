@@ -18,7 +18,7 @@
 					}
 				}
 			}
-			$edocument_format_no = $db->sql_trim_str($_POST, 'config_format_no', '');
+			$edocument_format_no = $db->sql_trim_str($_POST, 'config_format_no');
 			// ตรวจสอบค่าที่ส่งมา
 			$ret['ret_config_format_no'] = '';
 			$ret['ret_config_file_typies'] = '';
@@ -57,11 +57,11 @@
 					$config['edocument_file_typies'] = array_keys($typies);
 					$config['edocument_listperpage'] = gcms::getVars($_POST, 'config_listperpage', 0);
 					$config['edocument_upload_size'] = gcms::getVars($_POST, 'config_upload_size', 0);
-					$config['edocument_can_upload'] = isset($_POST['config_can_upload']) ? $_POST['config_can_upload'] : array();
+					$config['edocument_can_upload'] = gcms::getVars($_POST, 'config_can_upload', array());
 					$config['edocument_can_upload'][] = 1;
-					$config['edocument_moderator'] = isset($_POST['config_moderator']) ? $_POST['config_moderator'] : array();
+					$config['edocument_moderator'] = gcms::getVars($_POST, 'config_moderator', array());
 					$config['edocument_moderator'][] = 1;
-					$config['edocument_can_config'] = isset($_POST['config_can_config']) ? $_POST['config_can_config'] : array();
+					$config['edocument_can_config'] = gcms::getVars($_POST, 'config_can_config', array());
 					$config['edocument_can_config'][] = 1;
 					// บันทึก config.php
 					if (gcms::saveconfig(CONFIG, $config)) {

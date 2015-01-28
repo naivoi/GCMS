@@ -11,9 +11,9 @@
 		} else {
 			// ค่าที่ส่งมา
 			$id = gcms::getVars($_POST, 'download_id', 0);
-			$original_name = $db->sql_trim_str($_POST, 'download_name', '');
+			$original_name = $db->sql_trim_str($_POST, 'download_name');
 			$name = str_replace(array('"', "'", '|', ':', '\\', '/', '*', '?', '&', '[', ']'), '', $original_name);
-			$save['description'] = $db->sql_trim_str($_POST, 'download_description', '');
+			$save['description'] = $db->sql_trim_str($_POST, 'download_description');
 			// ไฟล์อัปโหลด
 			$file_upload = $_FILES['download_file'];
 			$thumbnail = $_FILES['download_thumbnail'];

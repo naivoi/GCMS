@@ -59,7 +59,7 @@
 				foreach ($db->customQuery($sql) AS $item) {
 					if ($moderator || $index['category_id'] == $item['category_id']) {
 						$sel = $index['category_id'] == $item['category_id'] ? ' selected' : '';
-						$categories[$item['category_id']] = "<option value=$item[category_id]$sel>".gcms::ser2Str($item['topic'])."</option>";
+						$categories[$item['category_id']] = "<option value=$item[category_id]$sel>".gcms::ser2Str($item, 'topic')."</option>";
 					}
 				}
 				if (sizeof($categories) > 1) {
@@ -80,7 +80,7 @@
 			$replace[] = $isAdmin ? $_SESSION[$register_antispamchar] : '';
 			$replace[] = (int)$index['index_id'];
 			$replace[] = (int)$index['comment_id'];
-			$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'",isset($matches[2]) ? (int)$matches[2] : 0);');
+			$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
 			$replace[] = gcms::txtQuote($index['detail']);
 			$replace[] = $index['img_upload_size'];
 			$replace[] = $index['img_upload_type'];

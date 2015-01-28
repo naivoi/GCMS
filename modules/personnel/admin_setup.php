@@ -14,7 +14,7 @@
 			$sqls = array();
 			$sqls[] = "`module_id`='$index[id]'";
 			// ข้อความค้นหา
-			$search = $db->sql_trim_str($_GET, 'search', '');
+			$search = $db->sql_trim_str($_GET, 'search');
 			if ($search != '') {
 				$sqls[] = "(`name` LIKE '%$search%' OR `email` LIKE '%$search%')";
 				$url_query['search'] = urlencode($search);
@@ -75,7 +75,7 @@
 			$categories[0] = '{LNG_ALL} {LNG_PERSONNEL_CATEGORY}';
 			$sql = "SELECT `category_id`,`topic` FROM `".DB_CATEGORY."` WHERE `module_id`='$index[id]' ORDER BY `category_id`";
 			foreach ($db->customQuery($sql) AS $item) {
-				$categories[$item['category_id']] = gcms::ser2Str($item['topic']);
+				$categories[$item['category_id']] = gcms::ser2Str($item, 'topic');
 			}
 			$content[] = '<fieldset>';
 			$content[] = '<label>{LNG_PERSONNEL_CATEGORY} <select name=cat>';

@@ -71,7 +71,7 @@
 							}
 						}
 						$search_result[$i]['id'] = $item['id'];
-						$search_result[$i]['category_id'] = isset($item['category_id']) ? $item['category_id'] : 0;
+						$search_result[$i]['category_id'] = gcms::getVars($item, 'category_id', 0);
 						$search_result[$i]['topic'] = $item['topic'];
 						$search_result[$i]['alias'] = $item['alias'];
 						$search_result[$i]['index'] = $item['index'];

@@ -10,12 +10,12 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
-			$save['name'] = $db->sql_trim_str($_POST, 'write_name', '');
-			$save['email'] = $db->sql_trim_str($_POST, 'write_email', '');
-			$save['position'] = $db->sql_trim_str($_POST, 'write_position', '');
-			$save['phone'] = $db->sql_trim_str($_POST, 'write_phone', '');
-			$save['address'] = $db->sql_trim_str($_POST, 'write_address', '');
-			$save['detail'] = $db->sql_trim_str($_POST, 'write_detail', '');
+			$save['name'] = $db->sql_trim_str($_POST, 'write_name');
+			$save['email'] = $db->sql_trim_str($_POST, 'write_email');
+			$save['position'] = $db->sql_trim_str($_POST, 'write_position');
+			$save['phone'] = $db->sql_trim_str($_POST, 'write_phone');
+			$save['address'] = $db->sql_trim_str($_POST, 'write_address');
+			$save['detail'] = $db->sql_trim_str($_POST, 'write_detail');
 			$save['category_id'] = gcms::getVars($_POST, 'write_category', 0);
 			$save['order'] = min(99, max(0, (int)$_POST['write_order']));
 			$icon = $_FILES['write_picture'];

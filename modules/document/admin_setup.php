@@ -66,7 +66,7 @@
 			$categories = array();
 			$sql = "SELECT `category_id`,`topic` FROM `".DB_CATEGORY."` WHERE `module_id`='$index[id]' ORDER BY `category_id`";
 			foreach ($db->customQuery($sql) AS $item) {
-				$categories[$item['category_id']] = gcms::ser2Str($item['topic']);
+				$categories[$item['category_id']] = gcms::ser2Str($item, 'topic');
 			}
 			// title
 			$m = ucwords($index['module']);

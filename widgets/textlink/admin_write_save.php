@@ -11,9 +11,9 @@
 			$error = false;
 			$ret = array();
 			$save = array();
-			$save['description'] = $db->sql_trim_str($_POST, 'textlink_description', '');
+			$save['description'] = $db->sql_trim_str($_POST, 'textlink_description');
 			$save['type'] = $_POST['textlink_type'].((int)$_POST['textlink_prefix'] == 0 ? '' : (int)$_POST['textlink_prefix']);
-			$save['text'] = $db->sql_trim($_POST, 'textlink_text', '');
+			$save['text'] = $db->sql_trim($_POST, 'textlink_text');
 			$save['url'] = trim(gcms::getVars($_POST, 'textlink_url', ''));
 			$save['target'] = trim(gcms::getVars($_POST, 'textlink_target', ''));
 			if (isset($_POST['textlink_template']) && $_POST['textlink_type'] == 'custom') {

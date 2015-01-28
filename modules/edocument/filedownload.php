@@ -11,13 +11,13 @@
 		// datas
 		$file = $_SESSION[$_GET['id']];
 		if ($status == $file['status']) {
-			$file_path = iconv('UTF-8', 'TIS-620', DATA_PATH."edocument/$file[file]");
+			$file_path = DATA_PATH."edocument/$file[file]";
 			if (is_file($file_path)) {
 				// ดาวน์โหลดไฟล์
 				header('Cache-Control: private');
 				header("Content-Type: application/octet-stream");
 				header("Content-Type: application/download");
-				header("Content-Disposition: attachment; filename=".iconv('UTF-8', 'TIS-620', $file['name']));
+				header('Content-Disposition: attachment; filename="'.iconv('UTF-8', 'TIS-620', $file['name']).'"');
 				header('Content-Transfer-Encoding: binary');
 				header('Accept-Ranges: bytes');
 				set_time_limit(0);

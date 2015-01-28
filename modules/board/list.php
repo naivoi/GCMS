@@ -42,9 +42,9 @@
 			$content = '<div class=error>'.$title.'</div>';
 		} else {
 			if ($cat > 0) {
-				$index['topic'] = empty($index['topic']) ? '' : gcms::ser2Str($index['topic']);
-				$index['description'] = empty($index['description']) ? '' : gcms::ser2Str($index['description']);
-				$index['icon'] = empty($index['icon']) ? '' : gcms::ser2Str($index['icon']);
+				$index['topic'] = gcms::ser2Str($index, 'topic');
+				$index['description'] = gcms::ser2Str($index, 'description');
+				$index['icon'] = gcms::ser2Str($index, 'icon');
 			}
 			// อ่าน config
 			gcms::r2config($index['config'], $index);
@@ -86,7 +86,9 @@
 				$template = 'category';
 			}
 			// แสดงผลหน้าเว็บ
-			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
+			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/',
+				'/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e',
+				'/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';

@@ -10,8 +10,8 @@
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
-			$save['document_no'] = $db->sql_trim_str($_POST, 'edocument_no', '');
-			$save['topic'] = $db->sql_trim_str($_POST, 'edocument_topic', '');
+			$save['document_no'] = $db->sql_trim_str($_POST, 'edocument_no');
+			$save['topic'] = $db->sql_trim_str($_POST, 'edocument_topic');
 			$save['detail'] = gcms::ckClean($_POST['edocument_detail']);
 			if (isset($_POST['edocument_reciever'])) {
 				$save['reciever'] = implode(',', $_POST['edocument_reciever']);

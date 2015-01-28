@@ -18,7 +18,7 @@
 				$q[] = "D.`member_id`='$u'";
 			}
 			// ค้นหา จาก topic, detail
-			$search = $db->sql_trim_str($_GET, 'search', '');
+			$search = $db->sql_trim_str($_GET, 'search');
 			if ($search != '') {
 				$q[] = "(D.`topic`LIKE'%$search%' OR D.`detail`LIKE'%$search%')";
 				$url_query['search'] = urlencode($search);

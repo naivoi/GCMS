@@ -12,8 +12,8 @@
 		}
 		if (isset($_REQUEST['login_email']) && isset($_REQUEST['login_password'])) {
 			// login
-			$login_email = $db->sql_trim_str($_POST, 'login_email', '');
-			$login_password = $db->sql_trim_str($_POST, 'login_password', '');
+			$login_email = $db->sql_trim_str($_POST, 'login_email');
+			$login_password = $db->sql_trim_str($_POST, 'login_password');
 			// ตรวจสอบการกรอก
 			if ($login_email == '') {
 				$error = $lng['LNG_EMAIL_EMPTY'];

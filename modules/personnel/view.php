@@ -35,7 +35,7 @@
 			$breadcrumbs['MODULE'] = gcms::breadcrumb('', gcms::getURL($index['module']), $install_modules[$index['module']]['menu_tooltip'], ($m == '' ? $index['module'] : $m), $breadcrumb);
 			// อัลบัม
 			$canonical = gcms::getURL($index['module'], '', 0, 0, "id=$index[category_id]");
-			$index['category'] = gcms::ser2Str($index['category']);
+			$index['category'] = gcms::ser2Str($index, 'category');
 			$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', $canonical, $index['category'], $index['category'], $breadcrumb);
 			// แสดงผล list รายการ
 			$patt = array('/{BREADCRUMS}/', '/{NAME}/', '/{POSITION}/', '/{CATEGORY}/',

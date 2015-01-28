@@ -6,8 +6,8 @@
 	// ตรวจสอบ referer
 	if (gcms::isReferer()) {
 		// ค่าที่ส่งมา
-		$email = $db->sql_trim_str($_POST, 'reply_email', '');
-		$password = $db->sql_trim_str($_POST, 'reply_password', '');
+		$email = $db->sql_trim_str($_POST, 'reply_email');
+		$password = $db->sql_trim_str($_POST, 'reply_password');
 		$detail = gcms::txtClean($_POST['reply_detail']);
 		$index_id = gcms::getVars($_POST, 'index_id', 0);
 		$module_id = gcms::getVars($_POST, 'module_id', 0);

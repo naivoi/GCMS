@@ -6,7 +6,7 @@
 	// referer
 	if (gcms::isReferer()) {
 		$id = gcms::getVars($_POST, 'id', 0);
-		$value = $db->sql_trim_str($_POST, 'value', '');
+		$value = $db->sql_trim_str($_POST, 'value');
 		// phone
 		if ($config['member_phone'] == 1 && $value == '') {
 			echo 'PHONE_EMPTY';

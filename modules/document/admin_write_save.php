@@ -15,11 +15,11 @@
 			$details = array();
 			$alias_topic = '';
 			foreach ($config['languages'] AS $value) {
-				$topic = $db->sql_trim_str($_POST["write_topic_$value"]);
+				$topic = $db->sql_trim_str($_POST, "write_topic_$value");
 				$alias = gcms::aliasName($_POST["write_topic_$value"]);
-				$relate = $db->sql_trim($_POST["write_relate_$value"]);
+				$relate = $db->sql_trim($_POST, "write_relate_$value");
 				$keywords = gcms::getTags($_POST["write_keywords_$value"]);
-				$description = $db->sql_trim($_POST["write_description_$value"]);
+				$description = $db->sql_trim($_POST, "write_description_$value");
 				if ($topic != '') {
 					$save = array();
 					$save['topic'] = $topic;
@@ -176,7 +176,7 @@
 						$save['category_id'] = gcms::getVars($_POST, 'write_category', 0);
 						$save['ip'] = gcms::getip();
 						$save['published'] = $_POST['write_published'] == '1' ? '1' : '0';
-						$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date', '');
+						$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date');
 						if ($id == 0) {
 							// ใหม่
 							$save['module_id'] = $index['module_id'];
@@ -201,6 +201,10 @@
 							$sql2 = "SELECT COUNT(*) FROM `".DB_COMMENT."` WHERE `index_id` IN ($sql2) AND `module_id`='$index[module_id]'";
 							$sql = "UPDATE `".DB_CATEGORY."` AS C SET C.`c1`=($sql1),C.`c2`=($sql2) WHERE C.`module_id`='$index[module_id]'";
 							$db->query($sql);
+						}
+						if (is_file(ROOT_PATH.'modules/document/news.php')) {
+							// news
+							include ROOT_PATH.'modules/document/news.php';
 						}
 						// return
 						$ret['error'] = 'SAVE_COMPLETE';

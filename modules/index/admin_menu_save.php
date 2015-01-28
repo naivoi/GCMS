@@ -9,14 +9,14 @@
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
 			// ค่าที่ส่งมา
-			$save['menu_text'] = $db->sql_trim_str($_POST, 'write_menu_text', '');
-			$save['menu_tooltip'] = $db->sql_trim_str($_POST, 'write_menu_tooltip', '');
+			$save['menu_text'] = $db->sql_trim_str($_POST, 'write_menu_text');
+			$save['menu_tooltip'] = $db->sql_trim_str($_POST, 'write_menu_tooltip');
 			$save['accesskey'] = strtolower($db->sql_trim_str($_POST, 'write_accesskey', ''));
-			$save['alias'] = $db->sql_trim_str($_POST, 'write_alias', '');
+			$save['alias'] = $db->sql_trim_str($_POST, 'write_alias');
 			$save['parent'] = strtoupper($db->sql_trim_str($_POST, 'write_parent', ''));
-			$save['menu_url'] = $db->sql_trim_str($_POST, 'write_menu_url', '');
-			$save['menu_target'] = $db->sql_trim_str($_POST, 'write_target', '');
-			$save['language'] = $db->sql_trim_str($_POST, 'write_language', '');
+			$save['menu_url'] = $db->sql_trim_str($_POST, 'write_menu_url');
+			$save['menu_target'] = $db->sql_trim_str($_POST, 'write_target');
+			$save['language'] = $db->sql_trim_str($_POST, 'write_language');
 			$save['published'] = gcms::getVars($_POST, 'write_published', 0);
 			$type = gcms::getVars($_POST, 'write_type', 0);
 			$toplvl = gcms::getVars($_POST, 'write_order', 0);

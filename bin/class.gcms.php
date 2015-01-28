@@ -827,7 +827,7 @@
 		public static function getWidgets($matches) {
 			global $config, $lng, $db, $cache, $mmktime, $install_modules, $install_owners, $module_list;
 			$owner = strtolower($matches[1]);
-			$module = !empty($matches[4]) ? $matches[4] : '';
+			$module = isset($matches[4]) ? $matches[4] : '';
 			if (isset($matches[3]) && $matches[3] == ' ') {
 				foreach (explode(';', $module) AS $item) {
 					list($key, $value) = explode('=', $item);
@@ -1252,7 +1252,7 @@
 			} elseif ($item['module'] != '') {
 				$c[] = $item['module'];
 			}
-			if ($item['published'] != 1) {
+			if (isset($item['published']) && $item['published'] != 1) {
 				if (gcms::isMember()) {
 					if ($item['published'] == '3') {
 						$c[] = 'hidden';
@@ -1481,18 +1481,27 @@
 			return false;
 		}
 		/**
-		 * ser2Array($text)
+		 * ser2Array($datas, $key)
 		 * unserialize
-		 * $text (string) ข้อความ serialize
+		 * $datas (mixed) ข้อความ serialize
+		 * $key (string) optional ถั้า $datas เป็น array ต้องระบุ $key ด้วย
 		 *
 		 * @return (array)
 		 */
-		public static function ser2Array($text) {
-			$text = trim($text);
-			if ($text != '') {
-				$text = unserialize($text);
+		public static function ser2Array($datas, $key = '') {
+			if (is_array($datas)) {
+				if (isset($datas[$key])) {
+					$result = trim($datas[$key]);
+				} else {
+					return array();
+				}
+			} else {
+				$result = trim($datas);
 			}
-			return is_array($text) ? $text : array();
+			if ($result != '') {
+				$result = @unserialize($result);
+			}
+			return is_array($result) ? $result : array();
 		}
 		/**
 		 * array2Ser($array)
@@ -1516,18 +1525,28 @@
 			return serialize($new_array);
 		}
 		/**
-		 * ser2Str($datas)
+		 * ser2Str($datas, $key)
 		 * อ่านหมวดหมู่ในรูป serialize ตามภาษาที่เลือก
-		 * $datas (string) ข้อความ serialize
+		 * $datas (mixed) ข้อความ serialize
+		 * $key (string) optional ถั้า $datas เป็น array ต้องระบุ $key ด้วย
 		 *
 		 * @return (string)
 		 */
-		public static function ser2Str($datas) {
-			if ($datas == '') {
+		public static function ser2Str($datas, $key = '') {
+			if (is_array($datas)) {
+				if (isset($datas[$key])) {
+					$result = $datas[$key];
+				} else {
+					return '';
+				}
+			} else {
+				$result = $datas;
+			}
+			if ($result == '') {
 				return '';
 			} else {
-				$datas = unserialize($datas);
-				return empty($datas[LANGUAGE]) ? $datas[''] : $datas[LANGUAGE];
+				$result = @unserialize($result);
+				return empty($result[LANGUAGE]) ? $result[''] : $result[LANGUAGE];
 			}
 		}
 		/**
@@ -1593,29 +1612,29 @@
 		 */
 		private static function filterVars($type, $key) {
 			switch ($type) {
-				case  'REQUEST':
+				case 'REQUEST':
 					if (isset($_POST[$key])) {
 						return $_POST[$key];
 					} else if (isset($_GET[$key])) {
 						return $_GET[$key];
 					}
-				case  'POST':
+				case 'POST':
 					if (isset($_POST[$key])) {
 						return $_POST[$key];
 					}
-				case  'GET':
+				case 'GET':
 					if (isset($_GET[$key])) {
 						return $_GET[$key];
 					}
-				case  'SESSION':
+				case 'SESSION':
 					if (isset($_SESSION[$key])) {
 						return $_SESSION[$key];
 					}
-				case  'COOKIE':
+				case 'COOKIE':
 					if (isset($_COOKIE[$key])) {
 						return $_COOKIE[$key];
 					}
-				case  'SERVER':
+				case 'SERVER':
 					if (isset($_SERVER[$key])) {
 						return $_SERVER[$key];
 					}

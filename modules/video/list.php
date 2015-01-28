@@ -105,7 +105,7 @@
 				$replace[] = implode("\n", $items);
 				$replace[] = $splitpage;
 				$replace[] = $config['video_cols'];
-				$replace[] = $index['id'];
+				$replace[] = $index['module_id'];
 				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'video', 'list'));
 			}
 			// title,keywords,description

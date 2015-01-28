@@ -72,7 +72,7 @@
 			}
 			// noreply_email
 			if (isset($_POST['noreply_email'])) {
-				$config['noreply_email'] = $db->sql_trim($_POST, 'noreply_email', '');
+				$config['noreply_email'] = $db->sql_trim($_POST, 'noreply_email');
 				if ($config['noreply_email'] == '') {
 					$ret['ret_noreply_email'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
@@ -150,7 +150,7 @@
 			}
 			// wordrude_replace
 			if (isset($_POST['wordrude_replace'])) {
-				$config['wordrude_replace'] = $db->sql_trim($_POST, 'wordrude_replace', '');
+				$config['wordrude_replace'] = $db->sql_trim($_POST, 'wordrude_replace');
 				$config['wordrude_replace'] = $config['wordrude_replace'] == '' ? 'xxx' : $config['wordrude_replace'];
 				$ret['wordrude_replace'] = $config['wordrude_replace'];
 			}
@@ -176,7 +176,7 @@
 			}
 			// facebook_secret
 			if (isset($_POST['facebook_secret'])) {
-				$config['facebook']['secret'] = $db->sql_trim_str($_POST, 'facebook_secret', '');
+				$config['facebook']['secret'] = $db->sql_trim_str($_POST, 'facebook_secret');
 			}
 			// facebook_message
 			if (isset($_POST['facebook_message'])) {
@@ -276,7 +276,7 @@
 			}
 			// ftp_host
 			if (isset($_POST['ftp_host'])) {
-				$config['ftp_host'] = $db->sql_trim($_POST, 'ftp_host', '');
+				$config['ftp_host'] = $db->sql_trim($_POST, 'ftp_host');
 				$ret['ftp_host'] = rawurlencode($config['ftp_host']);
 			}
 			// ftp_port
@@ -291,8 +291,8 @@
 					$config['ftp_username'] = '';
 					$config['ftp_password'] = '';
 				} else {
-					$username = $db->sql_trim($_POST, 'ftp_username', '');
-					$password = $db->sql_trim($_POST, 'ftp_password', '');
+					$username = $db->sql_trim($_POST, 'ftp_username');
+					$password = $db->sql_trim($_POST, 'ftp_password');
 					if ($username != '' || $password != '') {
 						if ($password == '') {
 							$error = 'PASSWORD_EMPTY';

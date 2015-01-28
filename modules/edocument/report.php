@@ -86,6 +86,27 @@
 				$replace[] = $item['member_id'];
 				$list[] = preg_replace($patt, $replace, $listitem);
 			}
+			// แบ่งหน้า
+			$maxlink = 9;
+			// query สำหรับ URL
+			$url = '<a href="'.gcms::getURL($index['module'], '', 0, 0, 'page=%1').'">%1</a>';
+			if ($totalpage > $maxlink) {
+				$start = $page - floor($maxlink / 2);
+				if ($start < 1) {
+					$start = 1;
+				} elseif ($start + $maxlink > $totalpage) {
+					$start = $totalpage - $maxlink + 1;
+				}
+			} else {
+				$start = 1;
+			}
+			$splitpage = ($start > 2) ? str_replace('%1', 1, $url) : '';
+			for ($i = $start; $i <= $totalpage && $maxlink > 0; $i++) {
+				$splitpage .= ($i == $page) ? '<strong>'.$i.'</strong>' : str_replace('%1', $i, $url);
+				$maxlink--;
+			}
+			$splitpage .= ($i < $totalpage) ? str_replace('%1', $totalpage, $url) : '';
+			$splitpage = $splitpage == '' ? '<strong>1</strong>' : $splitpage;
 			// แสดงผล list รายการ
 			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{SPLITPAGE}/', '/{(LNG_[A-Z0-9_]+)}/e');
 			$replace = array();

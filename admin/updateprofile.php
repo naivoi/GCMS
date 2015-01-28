@@ -11,22 +11,22 @@
 			// แอดมินสูงสุด สามารถแก้ไขข้อมูลสมาชิกได้ทุกรายการ
 			$isAdmin = gcms::isAdmin();
 			// ค่าที่ส่งมา
-			$password = $db->sql_trim_str($_POST, 'register_password', '');
-			$repassword = $db->sql_trim_str($_POST, 'register_repassword', '');
+			$password = $db->sql_trim_str($_POST, 'register_password');
+			$repassword = $db->sql_trim_str($_POST, 'register_repassword');
 			$save['sex'] = trim(gcms::getVars($_POST, 'register_sex', ''));
-			$save['company'] = $db->sql_trim_str($_POST, 'register_company', '');
-			$save['pname'] = $db->sql_trim_str($_POST, 'register_pname', '');
-			$save['fname'] = $db->sql_trim_str($_POST, 'register_fname', '');
-			$save['lname'] = $db->sql_trim_str($_POST, 'register_lname', '');
-			$save['address1'] = $db->sql_trim_str($_POST, 'register_address1', '');
-			$save['address2'] = $db->sql_trim_str($_POST, 'register_address2', '');
+			$save['company'] = $db->sql_trim_str($_POST, 'register_company');
+			$save['pname'] = $db->sql_trim_str($_POST, 'register_pname');
+			$save['fname'] = $db->sql_trim_str($_POST, 'register_fname');
+			$save['lname'] = $db->sql_trim_str($_POST, 'register_lname');
+			$save['address1'] = $db->sql_trim_str($_POST, 'register_address1');
+			$save['address2'] = $db->sql_trim_str($_POST, 'register_address2');
 			$save['provinceID'] = $db->sql_trim_str($_POST['register_provinceID']);
-			$save['province'] = $db->sql_trim_str($_POST, 'register_province', '');
-			$save['zipcode'] = $db->sql_trim_str($_POST, 'register_zipcode', '');
-			$save['country'] = $db->sql_trim_str($_POST, 'register_country', '');
-			$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone1', '');
-			$save['phone2'] = $db->sql_trim_str($_POST, 'register_phone2', '');
-			$save['birthday'] = $db->sql_trim_str($_POST, 'register_birthday', '');
+			$save['province'] = $db->sql_trim_str($_POST, 'register_province');
+			$save['zipcode'] = $db->sql_trim_str($_POST, 'register_zipcode');
+			$save['country'] = $db->sql_trim_str($_POST, 'register_country');
+			$save['phone1'] = $db->sql_trim_str($_POST, 'register_phone1');
+			$save['phone2'] = $db->sql_trim_str($_POST, 'register_phone2');
+			$save['birthday'] = $db->sql_trim_str($_POST, 'register_birthday');
 			$save['subscrib'] = $_POST['register_subscrib'] == 1 ? 1 : 0;
 			$save['admin_access'] = $_POST['register_admin_access'] == 1 ? 1 : 0;
 			$save['status'] = gcms::getVars($_POST, 'register_status', 0);
@@ -45,7 +45,7 @@
 			} else {
 				if ($user['fb'] == 0) {
 					if ($isAdmin) {
-						$save['email'] = $db->sql_trim_str($_POST, 'register_email', '');
+						$save['email'] = $db->sql_trim_str($_POST, 'register_email');
 						if (isset($_POST['register_point'])) {
 							$save['point'] = gcms::getVars($_POST, 'register_point', 0);
 						}
@@ -124,7 +124,7 @@
 				}
 				// displayname
 				if (isset($_POST['register_displayname'])) {
-					$save['displayname'] = $db->sql_trim_str($_POST, 'register_displayname', '');
+					$save['displayname'] = $db->sql_trim_str($_POST, 'register_displayname');
 					if ($save['displayname'] != '') {
 						// ตรวจสอบ displayname
 						$sql = "SELECT `id` FROM `".DB_USER."` WHERE `displayname`='".addslashes($save['displayname'])."' LIMIT 1";

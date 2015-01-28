@@ -85,9 +85,9 @@
 			$content[] = '</div>';
 			$content[] = '</fieldset>';
 			// topic,detail,icon
-			$topic = empty($index['topic']) ? array() : gcms::ser2Array($index['topic']);
-			$detail = empty($index['detail']) ? array() : gcms::ser2Array($index['detail']);
-			$icon = empty($index['icon']) ? array() : gcms::ser2Array($index['icon']);
+			$topic = gcms::ser2Array($index, 'topic');
+			$detail = gcms::ser2Array($index, 'detail');
+			$icon = gcms::ser2Array($index, 'icon');
 			$multi_language = sizeof($config['languages']) > 1;
 			foreach ($config['languages'] AS $item) {
 				$content[] = '<fieldset>';

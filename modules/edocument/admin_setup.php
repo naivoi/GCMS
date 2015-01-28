@@ -13,7 +13,7 @@
 			// sql
 			$q = array("D.`module_id`='$index[id]'");
 			// ค้นหาจาก นามสกุลของไฟล์, เลขที่, ชื่อเอกสาร
-			$search = $db->sql_trim_str($_GET, 'search', '');
+			$search = $db->sql_trim_str($_GET, 'search');
 			if ($search != '') {
 				$q[] = "(`ext`='$search' OR `document_no` LIKE '%$search%' OR `topic` LIKE '%$search%')";
 				$url_query['search'] = urlencode($search);
