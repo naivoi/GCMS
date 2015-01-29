@@ -17,7 +17,7 @@
 			}
 		}
 		// ชื่อฐานข้อมูล
-		$fname = "$config[db_name].sql";
+		$fname = 'datas.sql';
 		// memory limit
 		ini_set('memory_limit', '512M');
 		// ส่งออกเป็นไฟล์
@@ -84,7 +84,7 @@
 								} elseif ($field == 'id') {
 									unset($record['id']);
 								} else {
-									$record[$field] = addslashes($value);
+									$record[$field] = addslashes(str_replace(WEB_URL, '{WEBURL}', $value));
 								}
 							}
 							$sqls[] = preg_replace(array('/[\r]/u', '/[\n]/u'), array('\r', '\n'), sprintf($data, implode("','", $record)));
@@ -95,7 +95,7 @@
 					$records = $db->customQuery("SELECT * FROM ".$table['Name']);
 					foreach ($records AS $record) {
 						foreach ($record AS $field => $value) {
-							$record[$field] = addslashes($value);
+							$record[$field] = addslashes(str_replace(WEB_URL, '{WEBURL}', $value));
 						}
 						$sqls[] = preg_replace(array('/[\r]/u', '/[\n]/u'), array('\r', '\n'), sprintf($data, implode("','", $record)));
 					}

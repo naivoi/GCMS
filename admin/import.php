@@ -16,7 +16,7 @@
 			$fr = file($file['tmp_name']);
 			// query ทีละบรรทัด
 			foreach ($fr AS $value) {
-				$sql = str_replace(array('\r', '\n', '{prefix}', '/{WEBMASTER}/'), array("\r", "\n", PREFIX, $_SESSION['login']['email']), trim($value));
+				$sql = str_replace(array('\r', '\n', '{prefix}', '/{WEBMASTER}/', '/{WEBURL}/'), array("\r", "\n", PREFIX, $_SESSION['login']['email'], WEB_URL), trim($value));
 				if ($sql != '') {
 					$db->query($sql);
 				}

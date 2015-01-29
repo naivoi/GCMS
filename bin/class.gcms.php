@@ -727,7 +727,7 @@
 				if (!$login_result) {
 					// ไม่พบ email คืนค่า 0
 					// รหัสผ่านผิด คืนค่า 3
-					return isset($item) ? 3 : 0;
+					return isset($item) && is_array($item) ? 3 : 0;
 				} elseif (trim($login_result['activatecode']) != '') {
 					// ยังไม่ได้ activate
 					return 1;

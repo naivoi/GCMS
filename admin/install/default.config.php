@@ -15,7 +15,7 @@
 	// 1 = xxx.html (mod rewrite)
 	$config['module_url'] = 1;
 	$config['web_description'] = 'GCMS Ajax CMS';
-	$config['web_title'] = 'Gcms';
+	$config['web_title'] = 'GCMS';
 	$config['user_icon_typies'] = array('jpg', 'gif', 'png');
 	$config['user_icon_h'] = 50;
 	$config['user_icon_w'] = 50;
@@ -53,15 +53,31 @@
 	$config['hour'] = +0;
 	// ภาษาที่ติดตั้ง
 	$config['languages'] = array('th');
-	// skin ที่เลือกใช้
-	$config['skin'] = 'default';
-	// สถานะของสมาชิก
-	$config['member_status']['0'] = 'สมาชิกทั่วไป';
-	$config['member_status']['1'] = 'แอดมิน';
-	$config['member_status']['2'] = 'ผู้ช่วยแอดมิน';
-	$config['color_status']['0'] = '#006600';
-	$config['color_status']['1'] = '#FF0000';
-	$config['color_status']['2'] = '#0E74FF';
+	if ($_SESSION['typ'] == 'gcmss') {
+		// skin ที่เลือกใช้
+		$config['skin'] = 'gts';
+		// สถานะของสมาชิก
+		$config['member_status']['0'] = 'นักเรียน นักศึกษา';
+		$config['member_status']['1'] = 'แอดมิน';
+		$config['member_status']['2'] = 'ครู อาจารย์';
+		$config['member_status']['3'] = 'แผนกบุคคล';
+		$config['member_status']['4'] = 'ลูกจ้างชั่วคราว';
+		$config['color_status']['0'] = '#006600';
+		$config['color_status']['1'] = '#FF0000';
+		$config['color_status']['2'] = '#0E74FF';
+		$config['color_status']['3'] = '#B51C1C';
+		$config['color_status']['4'] = '#821CFF';
+	} else {
+		// skin ที่เลือกใช้
+		$config['skin'] = 'default';
+		// สถานะของสมาชิก
+		$config['member_status']['0'] = 'สมาชิกทั่วไป';
+		$config['member_status']['1'] = 'แอดมิน';
+		$config['member_status']['2'] = 'ผู้ช่วยแอดมิน';
+		$config['color_status']['0'] = '#006600';
+		$config['color_status']['1'] = '#FF0000';
+		$config['color_status']['2'] = '#0E74FF';
+	}
 	$config['admin_access'] = array('1');
 	// Charset ของจดหมาย (utf-8,tis-620)
 	$config['email_charset'] = 'tis-620';
@@ -80,6 +96,12 @@
 	$config['mimeTypes']['gif'] = 'image/gif';
 	$config['mimeTypes']['jpg'] = 'image/jpeg';
 	$config['mimeTypes']['png'] = 'image/png';
+	$config['mimeTypes']['rar'] = 'application/x-rar-compressed';
+	$config['mimeTypes']['zip'] = 'application/zip';
+	$config['mimeTypes']['pdf'] = 'application/pdf';
+	$config['mimeTypes']['doc'] = 'application/msword';
+	$config['mimeTypes']['docx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+	$config['mimeTypes']['ico'] = 'image/x-icon';
 	// admin theme
 	$config['admin_skin'] = 'v8';
 	// demo mode
@@ -95,3 +117,9 @@
 	$config['rss_tabs']['2']['2'] = '';
 	$config['rss_tabs']['2']['3'] = 2;
 	$config['rss_tabs']['2']['4'] = 2;
+	// other
+	$config['member_invitation'] = 0;
+	$config['member_login_phone'] = 0;
+	$config['member_phone'] = 0;
+	$config['member_idcard'] = 0;
+	$config['login_action'] = 1;

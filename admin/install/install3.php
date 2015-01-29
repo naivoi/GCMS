@@ -1,10 +1,10 @@
 <?php
 	if (INSTALL_INIT == 'install') {
-		$password = $_SESSION['password'] == '' ? 'admin' : $_SESSION['password'];
-		$email = $_SESSION['email'] == '' ? 'admin@localhost.com' : $_SESSION['email'];
+		$password = empty($_SESSION['password']) ? 'admin' : $_SESSION['password'];
+		$email = empty($_SESSION['email']) ? 'admin@localhost.com' : $_SESSION['email'];
 		echo '<h2>ข้อมูลสมาชิกผู้ดูแลระบบ</h2>';
 		echo '<p>กรอกข้อมูลส่วนตัวสำหรับการ Login ของผู้ดูแลระบบ</p>';
-		if ($error) {
+		if (!empty($error)) {
 			echo '<p class=error>'.$error.'</p>';
 		}
 		echo '<form method=post action=index.php autocomplete=off>';

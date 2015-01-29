@@ -1,10 +1,11 @@
 <?php
 	if (INSTALL_INIT == 'install') {
+		$error = false;
 		// ftp datas
 		$ftp_host = trim(gcms::getVars($_POST, 'ftp_host', ''));
-		$_SESSION['ftp_username'] = trim($_POST['ftp_username']);
-		$_SESSION['ftp_password'] = trim($_POST['ftp_password']);
-		$_SESSION['document_root'] = trim($_POST['document_root']);
+		$_SESSION['ftp_username'] = trim(gcms::getVars($_POST, 'ftp_username', ''));
+		$_SESSION['ftp_password'] = trim(gcms::getVars($_POST, 'ftp_password', ''));
+		$_SESSION['document_root'] = trim(gcms::getVars($_POST, 'document_root', ''));
 		$ftp_port = gcms::getVars($_POST, 'ftp_port', 0);
 		$ftp_root = trim(gcms::getVars($_POST, 'ftp_root', ''));
 		$_SESSION['ftp_host'] = $ftp_host == '' ? $_SERVER['REMOTE_ADDR'] : $ftp_host;
@@ -24,6 +25,14 @@
 		} else {
 			echo '<li class=incorrect><strong>FTP</strong> <em>ไม่สามารถใช้งานได้</em> แต่สามารถติดตั้งต่อไปได้</li>';
 		}
+		if (is_dir(DATA_PATH)) {
+			$datas_dir = ROOT_PATH."$mmktime/";
+			if (@rename(DATA_PATH, $datas_dir)) {
+				copyDir($datas_dir, DATA_PATH);
+			}
+			gcms::rm_dir($datas_dir);
+			echo '<li class=correct>นำเข้าโฟลเดอร์ <strong>'.DATA_FOLDER.'</strong> <i>เรียบร้อยแล้ว</i></li>';
+		}
 		$files = array();
 		$files[] = ROOT_PATH.".htaccess";
 		$files[] = ROOT_PATH."robots.txt";
@@ -40,13 +49,7 @@
 				echo '<li class=incorrect>ไฟล์ <strong>'.str_replace(ROOT_PATH, '', $file).'</strong> <em>ไม่สามารถเขียนหรือสร้างได้</em> กรุณาสร้างไฟล์นี้และปรับ chmod ให้เป็น 757 ด้วยตัวเอง</li>';
 			}
 		}
-		if (is_dir(DATA_PATH)) {
-			$datas_dir = ROOT_PATH."$mmktime/";
-			if (@rename(DATA_PATH, $datas_dir)) {
-				copyDir($datas_dir, DATA_PATH);
-			}
-			gcms::rm_dir($datas_dir);
-		}
+
 		$folders = array();
 		$folders[0] = DATA_PATH;
 		$dir = ROOT_PATH."modules/";

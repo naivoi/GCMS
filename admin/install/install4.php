@@ -4,25 +4,26 @@
 			$_SESSION['password'] = trim($_POST['password']);
 			$_SESSION['email'] = trim($_POST['email']);
 		}
-		if ($_SESSION['email'] == '') {
+		if (empty($_SESSION['email'])) {
 			$error = 'กรุณากรอก ที่อยู่อีเมล์';
 		} elseif (!gcms::validMail($_SESSION['email'])) {
 			$error = 'ที่อยู่อีเมล์ ไม่ถูกต้อง';
-		} elseif ($_SESSION['password'] == '') {
+		} elseif (empty($_SESSION['password'])) {
 			$error = 'กรุณากรอก รหัสผ่าน';
 		} elseif (!preg_match('/^[a-z0-9]{4,}$/u', $_SESSION['password'])) {
 			$error = 'รหัสผ่าน ภาษาอังกฤษตัวพิมพ์เล็กและตัวเลข ไม่น้อยกว่า 4 หลัก';
 		}
-		if ($error) {
+		$prefix = isset($_SESSION['prefix']) ? $_SESSION['prefix'] : 'gcms';
+		if (!empty($error)) {
 			include (ROOT_PATH.'admin/install/install3.php');
 		} else {
-			$db_weburl = $_SESSION['db_weburl'] == '' ? WEB_URL : $_SESSION['db_weburl'];
-			$hostname = $_SESSION['hostname'] == '' ? str_replace(array('http://', 'www.'), '', WEB_URL) : $_SESSION['hostname'];
-			$db_username = $_SESSION['db_username'] == '' ? $config['db_username'] : $_SESSION['db_username'];
-			$db_password = $_SESSION['db_password'] == '' ? $config['db_password'] : $_SESSION['db_password'];
-			$db_server = $_SESSION['db_server'] == '' ? $config['db_server'] : $_SESSION['db_server'];
-			$db_name = $_SESSION['db_name'] == '' ? $config['db_name'] : $_SESSION['db_name'];
-			$reply = $_SESSION['reply'] == '' ? "no-reply@$baseurl" : $_SESSION['reply'];
+			$db_weburl = empty($_SESSION['db_weburl']) ? WEB_URL : $_SESSION['db_weburl'];
+			$hostname = empty($_SESSION['hostname']) ? str_replace(array('http://', 'www.'), '', WEB_URL) : $_SESSION['hostname'];
+			$db_username = empty($_SESSION['db_username']) ? $config['db_username'] : $_SESSION['db_username'];
+			$db_password = empty($_SESSION['db_password']) ? $config['db_password'] : $_SESSION['db_password'];
+			$db_server = empty($_SESSION['db_server']) ? $config['db_server'] : $_SESSION['db_server'];
+			$db_name = empty($_SESSION['db_name']) ? $config['db_name'] : $_SESSION['db_name'];
+			$reply = empty($_SESSION['reply']) ? "no-reply@$baseurl" : $_SESSION['reply'];
 			echo '<h2>ค่ากำหนดของฐานข้อมูล</h2>';
 			echo '<form method=post action=index.php autocomplete=off>';
 			echo '<p>ระบุที่อยู่โดเมนที่ถูกต้องของเว็บไซต์</p>';
@@ -44,9 +45,10 @@
 			echo '<p class=row><label for=db_name>ชื่อฐานข้อมูล</label><input type=text size=50 id=db_name name=db_name value="'.$db_name.'"></p>';
 			echo '<p class=row><label for=newdb>&nbsp;</label><input type=checkbox id=newdb name=newdb>สร้างฐานข้อมูลใหม่ (ข้อมูลเดิมจะถูกลบออกทั้งหมด)</p>';
 			echo '<p class="row comment">เซิร์ฟเวอร์บางแห่งอาจไม่ยอมให้สร้างฐานข้อมูลใหม่ คุณอาจต้องกำหนดเป็นฐานข้อมูลที่คุณมีอยู่แล้ว</p>';
-			echo '<p class=row><label for=prefix>คำนำหน้าตารางฐานข้อมูล</label><input type=text size=50 id=prefix name=prefix value="'.(defined('PREFIX') ? PREFIX : 'gcms').'"></p>';
+			echo '<p class=row><label for=prefix>คำนำหน้าตาราง</label><input type=text size=50 id=prefix name=prefix value="'.$prefix.'"></p>';
 			echo '<p class="row comment">ใช้สำหรับแยกฐานข้อมูลของ GCMS ออกจากฐานข้อมูลอื่นๆ หากมีการติดตั้งข้อมูลอื่นๆร่วมกันบนฐานข้อมูลนี้ หรือมีการติดตั้ง GCMS มากกว่า 1 ตัว บนฐานข้อมูลนี้ (ภาษาอังกฤษตัวพิมพ์เล็กและตัวเลขเท่านั้น เช่น cms4)</p>';
-			echo '<p class=row><label for=import>นำเข้าข้อมูลตัวอย่าง</label><input type=checkbox id=import name=import value=1 checked>&nbsp;เอาตัวเลือกนี้ออกหากต้องการติดตั้ง GCMS โดยไม่มีข้อมูลเริ่มต้นใดๆเลย</p>';
+			echo '<p class=row><label for=import>นำเข้าข้อมูลตัวอย่าง</label><input type=checkbox id=import name=import value=1 checked>&nbsp;ตัวติดตั้งจะติดตั้งข้อมูลตัวอย่างสำหรับ <em>'.$database_typies[$_SESSION['typ']].'</em></p>';
+			echo '<p class="row comment">เอาตัวเลือกนี้ออกหากต้องการติดตั้ง GCMS โดยไม่มีข้อมูลเริ่มต้นใดๆเลย</p>';
 			echo '<input type=hidden name=step value=5>';
 			echo '<p><input class=button type=submit value=ติดตั้ง.></p>';
 			echo '</form>';

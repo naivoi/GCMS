@@ -1,7 +1,5 @@
 <?php
 	if (defined('ROOT_PATH')) {
-		session_start();
-		ob_start();
 		// current version
 		$version = '10.0.1';
 		// header
@@ -9,7 +7,7 @@
 		echo '<html lang=TH dir=ltr>';
 		echo '<head>';
 		echo '<meta charset=utf-8>';
-		if (version_compare(VERSION, '4.5.0') == -1 || empty($config['skin']) || empty($config['db_username']) || empty($config['db_name'])) {
+		if (!defined('VERSION') || version_compare(VERSION, '4.5.0') == -1 || empty($config['skin']) || empty($config['db_username']) || empty($config['db_name'])) {
 			DEFINE('INSTALL_INIT', 'install');
 			echo '<title>การติดตั้ง GCMS &rsaquo; Setup Configuration File</title>';
 		} elseif (!$db->connection()) {
@@ -19,7 +17,8 @@
 			DEFINE('INSTALL_INIT', 'upgrade');
 			echo '<title>การปรับรุ่น GCMS '.$version.' &rsaquo; Setup Configuration File</title>';
 		} else {
-			echo '<title>ติดตั้ง GCMS เวอร์ชั่น '.$version.' เรียบร้อย</title>';
+			DEFINE('INSTALL_INIT', $version);
+			echo '<title>ติดตั้ง GCMS เวอร์ชั่น '.INSTALL_INIT.' เรียบร้อย</title>';
 		}
 		echo '<link rel=stylesheet href="'.WEB_URL.'/admin/install/install.css">';
 		echo '</head>';
@@ -29,6 +28,15 @@
 		flush();
 		$step = isset($_REQUEST['step']) ? (int)$_REQUEST['step'] : 0;
 		if (INSTALL_INIT == 'install') {
+			$database_typies = array();
+			if (is_file(ROOT_PATH.'admin/install/mydata/datas.php')) {
+				$database_typies['mydata'] = 'เว็บไซต์ของฉัน';
+			}
+			$database_typies['gcms'] = 'เว็บไซต์ทั่วไป';
+			$database_typies['gcmss'] = 'เว็บไซต์โรงเรียนหรือ อบต.';
+			if ($step == 1 && isset($_POST['typ'])) {
+				$_SESSION['typ'] = $_POST['typ'];
+			}
 			include (ROOT_PATH."admin/install/default.config.php");
 			if ($step > 0 && is_file(ROOT_PATH.'admin/install/install'.$step.'.php')) {
 				include (ROOT_PATH.'admin/install/install'.$step.'.php');
@@ -62,7 +70,7 @@
 	// function
 	function writeVar($defines) {
 		global $version, $prefix;
-		foreach (array(ROOT_PATH.'admin/install/vars.php',ROOT_PATH.'bin/vars.php') AS $_var) {
+		foreach (array(ROOT_PATH.'admin/install/vars.php', ROOT_PATH.'bin/vars.php') AS $_var) {
 			if (is_file($_var)) {
 				$fr = file($_var);
 				foreach ($fr AS $value) {

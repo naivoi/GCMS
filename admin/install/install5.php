@@ -15,12 +15,13 @@
 		$config['ftp_password'] = $_SESSION['ftp_password'];
 		$config['ftp_root'] = $_SESSION['ftp_root'];
 		$config['ftp_port'] = $_SESSION['ftp_port'];
-		$prefix = (string)$_POST['prefix'];
+		$_SESSION['prefix'] = (string)$_POST['prefix'];
+		$prefix = $_SESSION['prefix'];
 		$password = $_SESSION['password'];
 		$import = gcms::getVars($_POST, 'import', 0);
 		$config['noreply_email'] = $_SESSION['reply'];
 		// เรียกใช้งานฐานข้อมูล
-		if ($_POST['newdb']) {
+		if (isset($_POST['newdb'])) {
 			// สร้าง database ใหม่
 			$db = new sql($config['db_server'], $config['db_username'], $config['db_password'], '');
 			$sql = "CREATE DATABASE IF NOT EXISTS `$config[db_name]` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci";
@@ -34,7 +35,7 @@
 			echo '<ul>';
 			echo '<li>เซิร์ฟเวอร์ของฐานข้อมูลของคุณไม่สามารถใช้งานได้ในขณะนี้</li>';
 			echo '<li>ไม่มีฐานข้อมูลที่ต้องการติดตั้ง ให้ลองเลือกให้โปรแกรมสร้างฐานข้อมูลให้</li>';
-			if ($_POST['newdb']) {
+			if (isset($_POST['newdb'])) {
 				echo '<li>ไม่สามารถสร้างฐานข้อมูลได้ อาจเป็นเพราะคุณไม่มีสิทธิ์ ให้ลองเลือกใช้ฐานข้อมูลที่คุณมีอยู่ก่อนแล้ว</li>';
 			}
 			echo '</ul>';
@@ -64,7 +65,7 @@
 					if (is_file($dir.$text.'/default.config.php')) {
 						$newconfig = array();
 						include ($dir.$text.'/default.config.php');
-						if (is_array($newconfig[$text])) {
+						if (isset($newconfig[$text]) && is_array($newconfig[$text])) {
 							$config = array_merge($config, $newconfig[$text]);
 						}
 					}
@@ -77,6 +78,18 @@
 			echo '<ol>';
 			ob_flush();
 			flush();
+			if ($import == 1) {
+				if (is_file(ROOT_PATH.'admin/install/mydata/config.php')) {
+					$old_config = $config;
+					$config = array();
+					include ROOT_PATH.'admin/install/mydata/config.php';
+					unset($config['db_server']);
+					unset($config['db_username']);
+					unset($config['db_password']);
+					unset($config['db_name']);
+					$config = array_merge($newconfig, $config);
+				}
+			}
 			gcms::saveConfig(ROOT_PATH.'bin/config.php', $config);
 			echo '<li class="'.($f ? 'correct' : 'incorrect').'">Update file <b>config.php</b> ...</li>';
 			ob_flush();
@@ -103,7 +116,11 @@
 			$f = opendir($dir);
 			while (false !== ($text = readdir($f))) {
 				if ($text != '.' && $text != '..' && $text != 'index') {
-					$dirs[$text]++;
+					if (!isset($dirs[$text])) {
+						$dirs[$text] = 1;
+					} else {
+						$dirs[$text]++;
+					}
 				}
 			}
 			closedir($f);
@@ -115,7 +132,9 @@
 				}
 			}
 			if ($import == 1) {
-				$sqlfiles[] = ROOT_PATH.'admin/install/datas.php';
+				if (is_file(ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.php')) {
+					$sqlfiles[] = ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.php';
+				}
 			}
 			$dir = ROOT_PATH."widgets/";
 			$f = opendir($dir);
@@ -146,7 +165,7 @@
 			foreach ($sqlfiles AS $folder) {
 				$fr = file($folder);
 				foreach ($fr AS $value) {
-					$sql = str_replace(array('{prefix}', '{WEBMASTER}', '\r', '\n'), array($prefix, $_SESSION['email'], "\r", "\n"), trim($value));
+					$sql = str_replace(array('{prefix}', '{WEBMASTER}', '{WEBURL}', '\r', '\n'), array($prefix, $_SESSION['email'], WEB_URL, "\r", "\n"), trim($value));
 					if ($sql != '') {
 						if (preg_match('/^<\?.*\?>$/', $sql)) {
 							// php code
@@ -174,7 +193,7 @@
 							}
 						} elseif (preg_match('/INSERT[\s]+INTO[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
 							$ret = $db->query($sql);
-							if ($q != $match[1]) {
+							if (isset($q) && $q != $match[1]) {
 								$q = $match[1];
 								echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">INSERT INTO <b>$match[1]</b> ...</li>";
 							}
@@ -249,7 +268,7 @@
 			flush();
 			// บันทึกไฟล์ภาษา
 			if (!defined('DB_LANGUAGE')) {
-				define('DB_LANGUAGE', PREFIX.'_language');
+				define('DB_LANGUAGE', $prefix.'_language');
 			}
 			foreach (gcms::saveLanguage($prefix.'_language') AS $item) {
 				@copy(ROOT_PATH."admin/install/img/$item.gif", DATA_PATH."language/$item.gif");

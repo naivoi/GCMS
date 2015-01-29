@@ -140,7 +140,7 @@
 			}
 			// ไม่มีโมดูลใช้โมดูลแรกสุด
 			if ($module == '') {
-				if ($menus[0]['menu_url'] != '') {
+				if (!empty($menus[0]['menu_url'])) {
 					list($a, $b) = explode('?', $menus[0]['menu_url']);
 					if ($b != '') {
 						foreach (explode('&amp;', $b) AS $c) {
