@@ -87,7 +87,12 @@
 					unset($config['db_username']);
 					unset($config['db_password']);
 					unset($config['db_name']);
-					$config = array_merge($newconfig, $config);
+					unset($config['ftp_host']);
+					unset($config['ftp_username']);
+					unset($config['ftp_password']);
+					unset($config['ftp_root']);
+					unset($config['ftp_port']);
+					$config = array_merge($old_config, $config);
 				}
 			}
 			gcms::saveConfig(ROOT_PATH.'bin/config.php', $config);
@@ -134,6 +139,8 @@
 			if ($import == 1) {
 				if (is_file(ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.php')) {
 					$sqlfiles[] = ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.php';
+				} elseif (is_file(ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.sql')) {
+					$sqlfiles[] = ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.sql';
 				}
 			}
 			$dir = ROOT_PATH."widgets/";

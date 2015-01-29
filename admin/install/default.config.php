@@ -53,7 +53,7 @@
 	$config['hour'] = +0;
 	// ภาษาที่ติดตั้ง
 	$config['languages'] = array('th');
-	if ($_SESSION['typ'] == 'gcmss') {
+	if (isset($_SESSION['typ']) && $_SESSION['typ'] == 'gcmss') {
 		// skin ที่เลือกใช้
 		$config['skin'] = 'gts';
 		// สถานะของสมาชิก
@@ -91,6 +91,12 @@
 	$config['cron'] = 1;
 	// กำหนดวิธีการเข้าระบบ 0=เข้ระบบได้ทั่วไป,1=สมาชิกจะสามารถเข้าระบบได้เพียง IP เดียว ต่อช่วงเวลาหนึ่งเท่านั้น
 	$config['member_only_ip'] = 0;
+	// ftp settings
+	$config['ftp_host'] = '';
+	$config['ftp_username'] = '';
+	$config['ftp_password'] = '';
+	$config['ftp_root'] = '';
+	$config['ftp_port'] = 21;
 	// default mime type
 	$config['mimeTypes']['swf'] = 'application/x-shockwave-flash';
 	$config['mimeTypes']['gif'] = 'image/gif';

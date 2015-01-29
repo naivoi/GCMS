@@ -13,14 +13,14 @@
 			// ค่าที่ส่งมา
 			$password = $db->sql_trim_str($_POST, 'register_password');
 			$repassword = $db->sql_trim_str($_POST, 'register_repassword');
-			$save['sex'] = trim(gcms::getVars($_POST, 'register_sex', ''));
+			$save['sex'] = $db->sql_trim_str($_POST, 'register_sex');
 			$save['company'] = $db->sql_trim_str($_POST, 'register_company');
 			$save['pname'] = $db->sql_trim_str($_POST, 'register_pname');
 			$save['fname'] = $db->sql_trim_str($_POST, 'register_fname');
 			$save['lname'] = $db->sql_trim_str($_POST, 'register_lname');
 			$save['address1'] = $db->sql_trim_str($_POST, 'register_address1');
 			$save['address2'] = $db->sql_trim_str($_POST, 'register_address2');
-			$save['provinceID'] = $db->sql_trim_str($_POST['register_provinceID']);
+			$save['provinceID'] = $db->sql_trim_str($_POST, 'register_provinceID');
 			$save['province'] = $db->sql_trim_str($_POST, 'register_province');
 			$save['zipcode'] = $db->sql_trim_str($_POST, 'register_zipcode');
 			$save['country'] = $db->sql_trim_str($_POST, 'register_country');

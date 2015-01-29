@@ -2,7 +2,8 @@
 	// admin/report.php
 	if (MAIN_INIT == 'admin' && $canAdmin) {
 		// ค่าที่ส่งมา
-		$date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d', $mmktime);
+		$date = gcms::getVars($_GET, 'date', date('Y-m-d', $mmktime));
+		$type = gcms::getVars($_GET, 'type', '');
 		list($y, $m, $d) = explode('-', $date);
 		$counter_dat = DATA_PATH.'counter/'.(int)$y.'/'.(int)$m.'/'.(int)$d.'.dat';
 		if (is_file($counter_dat)) {
@@ -12,26 +13,25 @@
 			$ips = array();
 			foreach (file($counter_dat) AS $item) {
 				list($sid, $sip, $sref, $sagent) = explode(chr(1), $item);
-				$ssid[$sid]++;
-				$ips[$sip]++;
-				$k = $_GET['type'] == 'ip' ? $sip : $sref;
+				$ssid[$sid] = empty($ssid[$sid]) ? 1 : $ssid[$sid] + 1;
+				$ssid[$sip] = empty($ssid[$sip]) ? 1 : $ssid[$sip] + 1;
+				$k = $type == 'ip' ? $sip : $sref;
 				$datas[$k]['ip'] = $sip;
 				$datas[$k]['agent'] = $sagent;
 				$datas[$k]['referer'] = $sref;
 				if (preg_match('/.*(Googlebot|Baiduspider|bingbot|MJ12bot|yahoo).*/isu', $sagent, $match)) {
-					$agents[$match[1]]++;
+					$agents[$match[1]] = empty($agents[$match[1]]) ? 1 : $agents[$match[1]] + 1;
 				} else {
-					$datas[$k]['total']++;
+					$datas[$k]['total'] = empty($datas[$k]['total']) ? 1 : $datas[$k]['total'] + 1;
 				}
 			}
-			if ($_GET['type'] == 'ip') {
+			if ($type == 'ip') {
 				// เรียงลำดับตาม ip
 				gcms::sortby($datas, 'ip');
 			} else {
 				// เรียงลำดับตาม referer
 				gcms::sortby($datas, 'referer');
 			}
-			$i = 0;
 			$graphs['Google Search'] = 0;
 			$graphs['Google Cached'] = 0;
 			$graphs['Inbound'] = 0;
@@ -39,9 +39,16 @@
 			$graphs['Direct'] = 0;
 			$graphs['other'] = 0;
 			$list = array();
+			$total = 0;
+			$i = 0;
+			$bg = 'bg2';
 			foreach ($datas AS $item) {
 				$i++;
-				$total = $total + $item['total'];
+				if (isset($item['total'])) {
+					$total = $total + $item['total'];
+				} else {
+					$item['total'] = 0;
+				}
 				if (preg_match('/^(https?.*(www\.)?google(usercontent)?.*)\/.*[\&\?]q=(.*)($|\&.*)/iU', $item['referer'], $match) && $match[4] != '') {
 					// จาก google
 					$a = $match[1].'/search?q='.htmlspecialchars($match[4]);
@@ -67,13 +74,13 @@
 					$name = '<a href="'.htmlspecialchars($item['referer']).'" target=_blank>'.$text.'</a>';
 				}
 				$bg = $bg == 'bg1' ? 'bg2' : 'bg1';
-				$list[] = '<tr class='.$bg.'><td class="center mobile">'.$i.'</td><td class=mobile>'.$item['ip'].'</td><td class=tablet>'.$item['total'].'</td><td>'.$name.'</td></tr>';
+				$list[] = '<tr class='.$bg.'><td class="center mobile">'.$i.'</td><td class=mobile>'.$item['ip'].'</td><td class="center tablet">'.$item['total'].'</td><td>'.$name.'</td></tr>';
 			}
 			// รวม bot
 			foreach ($agents AS $a => $b) {
 				$total = $total + $b;
 			}
-			$title = sprintf($lng['USERONLINE_REPORT_TITLE'], sql::sql_date2date($date));
+			$title = sprintf($lng['USERONLINE_REPORT_TITLE'], $db->sql_date2date($date));
 			// แสดงผล
 			$content[] = '<div class=breadcrumbs><ul><li><span class=icon-summary>'.$title.'</span></li></ul></div>';
 			$content[] = '<section>';
@@ -84,7 +91,7 @@
 			$content[] = '<tr>';
 			$content[] = '<th id=c0 scope=col class=mobile>&nbsp;</th>';
 			$content[] = '<th id=c1 scope=col class=mobile><a href="index.php?module=report&amp;date='.$date.'&amp;type=ip">{LNG_IP}</a></th>';
-			$content[] = '<th id=c2 scope=col class=tablet>{LNG_COUNT}</th>';
+			$content[] = '<th id=c2 scope=col class="center tablet">{LNG_COUNT}</th>';
 			$content[] = '<th id=c3 scope=col><a href="index.php?module=report&amp;date='.$date.'">{LNG_REFERER}</a></th>';
 			$content[] = '</tr>';
 			$content[] = '</thead>';

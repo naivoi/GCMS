@@ -2,6 +2,13 @@
 	if (defined('ROOT_PATH')) {
 		// current version
 		$version = '10.0.1';
+		// cookie
+		ob_end_clean();
+		ob_start();
+		$step = isset($_REQUEST['step']) ? (int)$_REQUEST['step'] : 0;
+		if ($step == 1 && isset($_POST['typ'])) {
+			$_SESSION['typ'] = $_POST['typ'];
+		}
 		// header
 		echo '<!DOCTYPE html>';
 		echo '<html lang=TH dir=ltr>';
@@ -26,17 +33,13 @@
 		echo '<h1 id=logo><em>G</em>CMS</h1>';
 		ob_flush();
 		flush();
-		$step = isset($_REQUEST['step']) ? (int)$_REQUEST['step'] : 0;
 		if (INSTALL_INIT == 'install') {
 			$database_typies = array();
-			if (is_file(ROOT_PATH.'admin/install/mydata/datas.php')) {
+			if (is_file(ROOT_PATH.'admin/install/mydata/datas.sql')) {
 				$database_typies['mydata'] = 'เว็บไซต์ของฉัน';
 			}
 			$database_typies['gcms'] = 'เว็บไซต์ทั่วไป';
 			$database_typies['gcmss'] = 'เว็บไซต์โรงเรียนหรือ อบต.';
-			if ($step == 1 && isset($_POST['typ'])) {
-				$_SESSION['typ'] = $_POST['typ'];
-			}
 			include (ROOT_PATH."admin/install/default.config.php");
 			if ($step > 0 && is_file(ROOT_PATH.'admin/install/install'.$step.'.php')) {
 				include (ROOT_PATH.'admin/install/install'.$step.'.php');

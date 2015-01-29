@@ -1,7 +1,7 @@
 <?php
 	// widgets/facebook/index.php
 	if (defined('MAIN_INIT')) {
-		$module = $module == '' ? $config['facebook_user'] : $module;
+		$module = empty($module) ? $config['facebook_user'] : $module;
 		if ($module == 'hidden') {
 			$widget = '';
 		} else {

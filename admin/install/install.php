@@ -11,6 +11,6 @@
 		}
 		echo '</select></p>';
 		echo '<input type=hidden name=step value=1>';
-		echo '<p><input type=submit value="ติดตั้ง !"></p>';
+		echo '<p><input class=button type=submit value="ติดตั้ง !"></p>';
 		echo '</form>';
 	}

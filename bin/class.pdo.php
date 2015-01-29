@@ -513,7 +513,7 @@
 				return '';
 			} else {
 				$month = $short ? $lng['MONTH_SHORT'] : $lng['MONTH_LONG'];
-				return $match[3].' '.$month[(int)$match[2] - 1].' '.((int)$match[1] + $lng['YEAR_OFFSET']).($time ? $match[4] : '');
+				return $match[3].' '.$month[(int)$match[2] - 1].' '.((int)$match[1] + $lng['YEAR_OFFSET']).($time && isset($match[4]) ? $match[4] : '');
 			}
 		}
 		/**

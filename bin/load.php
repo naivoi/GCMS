@@ -71,6 +71,11 @@
 	$config = array();
 	if (is_file(CONFIG)) {
 		include CONFIG;
+	} else {
+		// defailt
+		$config['hour'] = 0;
+		$config['languages'][0] = 'th';
+		$config['skin'] = 'default';
 	}
 	// gcms class
 	include ROOT_PATH.'bin/class.gcms.php';
@@ -99,9 +104,11 @@
 	include ROOT_PATH.'bin/class.ftp.php';
 	// cache class
 	include ROOT_PATH.'bin/class.cache.php';
-	// เรียกใช้งาน ftp
-	$ftp = new ftp($config['ftp_host'], $config['ftp_username'], $config['ftp_password'], $config['ftp_root'], $document_root, $config['ftp_port']);
-	if ($config['skin'] != '' && $config['db_username'] != '' && $config['db_name'] != '') {
+	if (isset($config['ftp_host'])) {
+		// เรียกใช้งาน ftp
+		$ftp = new ftp($config['ftp_host'], $config['ftp_username'], $config['ftp_password'], $config['ftp_root'], $document_root, $config['ftp_port']);
+	}
+	if (!empty($config['db_username']) || !empty($config['db_name'])) {
 		// เรียกใช้งานฐานข้อมูล
 		$db = new sql($config['db_server'], $config['db_username'], $config['db_password'], $config['db_name']);
 		// เริ่มต้นจับเวลาการประมวลผล

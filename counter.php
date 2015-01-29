@@ -41,7 +41,7 @@
 		// อ่านข้อมูล counter ล่าสุด
 		$sql = "SELECT * FROM `".DB_COUNTER."` ORDER BY `id` DESC LIMIT 1";
 		$my_counter = $db->customQuery($sql);
-		$my_counter = sizeof($my_counter) == 1 ? $my_counter[0] : array('date' => 0);
+		$my_counter = sizeof($my_counter) == 1 ? $my_counter[0] : array('date' => 0, 'counter' => 0);
 		if ($my_counter['date'] != $counter_day) {
 			// วันใหม่
 			$my_counter['visited'] = 0;
