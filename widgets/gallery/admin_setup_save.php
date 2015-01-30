@@ -25,7 +25,7 @@
 			$config['widget_gallery_rows'] = $config['widget_gallery_rows'] < 1 ? 1 : $config['widget_gallery_rows'];
 			$config['widget_gallery_cols'] = $config['widget_gallery_cols'] < 1 ? 1 : $config['widget_gallery_cols'];
 			$config['widget_gallery_width'] = $config['widget_gallery_width'] < 50 ? 50 : $config['widget_gallery_width'];
-			if ($config['widget_gallery_url'] == '') {
+			if (empty($config['widget_gallery_url'])) {
 				$ret['error'] = 'REGISTER_INVALID_WEBSITE';
 				$ret['input'] = 'gallery_url';
 			} else {

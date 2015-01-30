@@ -82,7 +82,7 @@
 			$es = array();
 			if (is_array($config['mimeTypes'])) {
 				foreach ($typies AS $ext) {
-					if ($config['mimeTypes'][$ext] != '') {
+					if (!empty($config['mimeTypes'][$ext])) {
 						$s[$ext] = $config['mimeTypes'][$ext];
 					} else {
 						$es[] = $ext;
@@ -436,7 +436,7 @@
 		// ฟังก์ชั่นส่งเมล์ (custom)
 		public static function customMail($mailto, $replyto, $subject, $msg) {
 			global $config;
-			$charset = $config['email_charset'] == '' ? 'utf-8' : $config['email_charset'];
+			$charset = empty($config['email_charset']) ? 'utf-8' : $config['email_charset'];
 			if ($replyto == '') {
 				$replyto = array($config['noreply_email'], strip_tags($config['web_title']));
 			} elseif (preg_match('/^(.*)<(.*?)>$/', $replyto, $match)) {
@@ -484,10 +484,10 @@
 				} else {
 					$mail->SMTPAuth = false;
 				}
-				if ($config['email_Host'] != '') {
+				if (!empty($config['email_Host'])) {
 					$mail->Host = $config['email_Host'];
 				}
-				if ($config['email_Port'] != '') {
+				if (!empty($config['email_Port'])) {
 					$mail->Port = $config['email_Port'];
 				}
 				try {

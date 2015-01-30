@@ -20,7 +20,7 @@
 			// web_title
 			if (isset($_POST['web_title'])) {
 				$config['web_title'] = htmlspecialchars($db->sql_trim($_POST, 'web_title', ''), ENT_QUOTES);
-				if ($config['web_title'] == '') {
+				if (empty($config['web_title'])) {
 					$ret['ret_web_title'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
 					$input = !$input ? 'web_title' : $input;
@@ -31,7 +31,7 @@
 			// web_description
 			if (isset($_POST['web_description'])) {
 				$config['web_description'] = htmlspecialchars($db->sql_trim($_POST, 'web_description', ''), ENT_QUOTES);
-				if ($config['web_description'] == '') {
+				if (empty($config['web_description'])) {
 					$ret['ret_web_description'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
 					$input = !$input ? 'web_description' : $input;
@@ -73,7 +73,7 @@
 			// noreply_email
 			if (isset($_POST['noreply_email'])) {
 				$config['noreply_email'] = $db->sql_trim($_POST, 'noreply_email');
-				if ($config['noreply_email'] == '') {
+				if (empty($config['noreply_email'])) {
 					$ret['ret_noreply_email'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;
 					$input = !$input ? 'noreply_email' : $input;
@@ -88,7 +88,7 @@
 			// email_charset
 			if (isset($_POST['email_charset'])) {
 				$config['email_charset'] = strtolower(trim($_POST['email_charset']));
-				$config['email_charset'] = $config['email_charset'] == '' ? 'tis-620' : $config['email_charset'];
+				$config['email_charset'] = empty($config['email_charset']) ? 'tis-620' : $config['email_charset'];
 				$ret['email_charset'] = $config['email_charset'];
 			}
 			// email_Port
@@ -151,7 +151,7 @@
 			// wordrude_replace
 			if (isset($_POST['wordrude_replace'])) {
 				$config['wordrude_replace'] = $db->sql_trim($_POST, 'wordrude_replace');
-				$config['wordrude_replace'] = $config['wordrude_replace'] == '' ? 'xxx' : $config['wordrude_replace'];
+				$config['wordrude_replace'] = empty($config['wordrude_replace']) ? 'xxx' : $config['wordrude_replace'];
 				$ret['wordrude_replace'] = $config['wordrude_replace'];
 			}
 			// index_page_cache
@@ -287,7 +287,7 @@
 			}
 			// ftp_username,ftp_password
 			if (isset($_POST['ftp_username'])) {
-				if ($config['ftp_host'] == '') {
+				if (empty($config['ftp_host'])) {
 					$config['ftp_username'] = '';
 					$config['ftp_password'] = '';
 				} else {

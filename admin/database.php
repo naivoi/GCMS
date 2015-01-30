@@ -39,7 +39,7 @@
 					$trs = array();
 					$sql = "SELECT `owner` FROM `".DB_LANGUAGE."` GROUP BY `owner`";
 					foreach ($db->customQuery($sql) AS $item3) {
-						if ($item3['owner'] != '' && ($design_mode || $item3['owner'] != 'sysadmin')) {
+						if ($item3['owner'] != '' && ($design_mode == 'design' || $item3['owner'] != 'sysadmin')) {
 							$trs[] = '<label><input type=checkbox name=language_owner[] value="'.$item3['owner'].'" checked>&nbsp;'.$item3['owner'].'</label>';
 						}
 					}

@@ -9,10 +9,10 @@
 		$config['map_info_lantigude'] = $match[1];
 		$config['map_info_latigude'] = $match[0];
 	}
-	$config['map_latigude'] = $config['map_latigude'] == '' ? '14.132081110519639' : $config['map_latigude'];
-	$config['map_lantigude'] = $config['map_lantigude'] == '' ? '99.69822406768799' : $config['map_lantigude'];
-	$config['map_info_latigude'] = $config['map_info_latigude'] == '' ? '14.132081110519639' : $config['map_info_latigude'];
-	$config['map_info_lantigude'] = $config['map_info_lantigude'] == '' ? '99.69822406768799' : $config['map_info_lantigude'];
+	$config['map_latigude'] = empty($config['map_latigude']) ? '14.132081110519639' : $config['map_latigude'];
+	$config['map_lantigude'] = empty($config['map_lantigude']) ? '99.69822406768799' : $config['map_lantigude'];
+	$config['map_info_latigude'] = empty($config['map_info_latigude']) ? '14.132081110519639' : $config['map_info_latigude'];
+	$config['map_info_lantigude'] = empty($config['map_info_lantigude']) ? '99.69822406768799' : $config['map_info_lantigude'];
 	$config['map_zoom'] = (int)$config['map_zoom'] == 0 ? 5 : $config['map_zoom'];
 	// หน้าเว็บ Google Map
 	$map[] = '<!DOCTYPE html>';
@@ -34,12 +34,12 @@
 	$map[] = 'mapTypeId:google.maps.MapTypeId.ROADMAP';
 	$map[] = '}';
 	$map[] = 'var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);';
-	if ($config['map_info'] != '') {
+	if (!empty($config['map_info'])) {
 		$map[] = "var infowindow = new google.maps.InfoWindow({content:'".str_replace(array('\r', '\n'), array('<br>', ''), $config['map_info'])."'});";
 	}
 	$map[] = "var info = new google.maps.LatLng('$config[map_info_latigude]','$config[map_info_lantigude]');";
 	$map[] = 'var marker = new google.maps.Marker({position:info,map:map});';
-	if ($config['map_info'] != '') {
+	if (!empty($config['map_info'])) {
 		$map[] = 'infowindow.open(map,marker);';
 		$map[] = 'google.maps.event.addListener(marker,"click",function(){';
 		$map[] = 'infowindow.open(map,marker);';

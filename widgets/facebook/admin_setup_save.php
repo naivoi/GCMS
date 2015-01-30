@@ -19,7 +19,7 @@
 		$config['facebook_header'] = gcms::getVars($_POST, 'facebook_header', 0);
 		$config['facebook_border'] = gcms::getVars($_POST, 'facebook_border', 0);
 		// ตรวจสอบค่าที่ส่งมา
-		if ($config['facebook_user'] == '' || !preg_match('/^[a-z\d.]{1,}$/i', $config['facebook_user'])) {
+		if (empty($config['facebook_user']) || !preg_match('/^[a-z\d.]{1,}$/i', $config['facebook_user'])) {
 			$ret['error'] = 'FACEBOOK_INVALID_USERNAME';
 			$ret['input'] = 'facebook_user';
 			$ret['ret_facebook_user'] = 'FACEBOOK_INVALID_USERNAME';

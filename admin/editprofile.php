@@ -43,7 +43,7 @@
 			$replace2[] = 'gcms::getLng';
 			$replace2[] = $config['user_icon_w'];
 			$replace2[] = $config['user_icon_h'] == 0 ? $config['user_icon_w'] : $config['user_icon_h'];
-			$replace2[] = $config['user_icon_typies'] == '' ? 'jpg' : implode(', ', $config['user_icon_typies']);
+			$replace2[] = empty($config['user_icon_typies']) ? 'jpg' : implode(', ', $config['user_icon_typies']);
 			$replace2[] = $isAdmin && $user['fb'] == 0 ? '' : 'disabled';
 			$replace2[] = gcms::getEccept(array('jpg', 'png', 'gif'));
 			foreach ($user AS $key => $value) {

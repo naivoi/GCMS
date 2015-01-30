@@ -3,11 +3,9 @@
 	if (isset($_GET['modules'])) {
 		$module = gcms::getVars($_GET, 'modules', '');
 		$src = 'modules';
-	} elseif (isset($_GET['widgets'])) {
+	} else {
 		$module = gcms::getVars($_GET, 'widgets', '');
 		$src = 'widgets';
-	} else {
-		$module = '';
 	}
 	if (MAIN_INIT == 'admin' && $isAdmin && preg_match('/^[a-z]+$/', $module) && is_file(ROOT_PATH."$src/$module/admin_install.php")) {
 		// title

@@ -35,7 +35,7 @@
 				$replace[] = empty($next) ? 'back' : $next;
 				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'loginfrm'));
 			}
-		} elseif ($config['custom_member'] != '' && is_file(ROOT_PATH.$config['custom_member'])) {
+		} elseif (!empty($config['custom_member']) && is_file(ROOT_PATH.$config['custom_member'])) {
 			// custom member form
 			include_once (ROOT_PATH.$config['custom_member']);
 		} else {
@@ -55,7 +55,7 @@
 			$replace[] = $login_result['status'];
 			$replace[] = $login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1 ? 'admin' : ' hidden';
 			$replace[] = 'gcms::getLng';
-			$replace[] = ($config['facebook']['appId'] == '' || $config['facebook']['secret'] == '') ? 'hidden' : 'facebook';
+			$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'memberfrm'));
 		}
 		// เลือกเมนู

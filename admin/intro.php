@@ -24,7 +24,7 @@
 		$content[] = '<div class="table collapse">';
 		$content[] = '<label for=write_mode>{LNG_SETTINGS}</label>';
 		$content[] = '<span class="g-input icon-config"><select name=write_mode id=write_mode title="{LNG_PLEASE_SELECT} {LNG_INTRO_PAGE}">';
-		$show_intro = isset($config['show_intro']) ? $config['show_intro'] : '';
+		$show_intro = gcms::getVars($config, 'show_intro', '');
 		foreach ($lng['OPEN_CLOSE'] AS $i => $item) {
 			$sel = $show_intro == $i ? ' selected' : '';
 			$content[] = '<option value='.$i.$sel.'>'.$item.'</option>';

@@ -83,7 +83,7 @@
 		$content[] = '<legend><span>{LNG_FTP_SETTINGS}</span></legend>';
 		// ftp_host
 		$content[] = '<div class=item>';
-		$ftp_host = $config['ftp_host'] == '' ? $_SERVER['SERVER_ADDR'] : $config['ftp_host'];
+		$ftp_host = empty($config['ftp_host']) ? $_SERVER['SERVER_ADDR'] : $config['ftp_host'];
 		$content[] = '<label for=ftp_host>{LNG_HOST}</label>';
 		$content[] = '<span class="g-input icon-world"><input type=text name=ftp_host id=ftp_host value="'.$ftp_host.'" title="{LNG_PLEASE_FILL}"></span>';
 		$content[] = '<div class=comment id=result_ftp_host>{LNG_FTP_HOST_COMMENT}</div>';
@@ -96,7 +96,7 @@
 		$content[] = '</div>';
 		// ftp_port
 		$content[] = '<div class=item>';
-		$ftp_port = $config['ftp_port'] == '' ? 20 : $config['ftp_port'];
+		$ftp_port = empty($config['ftp_port']) ? 20 : $config['ftp_port'];
 		$content[] = '<label for=ftp_port>{LNG_PORT}</label>';
 		$content[] = '<span class="g-input icon-config"><input type=number name=ftp_port id=ftp_port value="'.$ftp_port.'" title="{LNG_PLEASE_FILL}"></span>';
 		$content[] = '<div class=comment id=result_ftp_port>{LNG_FTP_PORT_COMMENT}</div>';

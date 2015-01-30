@@ -17,7 +17,7 @@
 		$content[] = '<div class=item>';
 		$content[] = '<label for=google_site_verification>{LNG_SITE_VERIFICATION_CODE}</label>';
 		$content[] = '<div class="table collapse"><span class="td tablet">&lt;meta name=&quot;google-site-verification&quot; content=&quot;</span><span class=td>';
-		$content[] = '<span class=g-input><input type=text id=google_site_verification name=google_site_verification value="'.(empty($config['google_site_verification']) ? '' : $config['google_site_verification']).'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"></span>';
+		$content[] = '<span class=g-input><input type=text id=google_site_verification name=google_site_verification value="'.gcms::getVars($config, 'google_site_verification'], '').'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"></span>';
 		$content[] = '</span><span class="td tablet">&quot;&nbsp;/&gt;</span></div>';
 		$content[] = '<div class=comment id=result_google_site_verification>{LNG_SITE_VERIFICATION_CODE_COMMENT}</div>';
 		$content[] = '</div>';
@@ -25,7 +25,7 @@
 		$content[] = '<div class=item>';
 		$content[] = '<label for=google_profile>{LNG_GOOGLE_PROFILE}</label>';
 		$content[] = '<div class="table collapse"><span class="td tablet">https://plus.google.com/</span><span class=td>';
-		$content[] = '<span class=g-input><input type=text id=google_profile name=google_profile value="'.(empty($config['google_profile']) ? '' : $config['google_profile']).'" title="{LNG_GOOGLE_PROFILE_COMMENT}"></span>';
+		$content[] = '<span class=g-input><input type=text id=google_profile name=google_profile value="'.gcms::getVars($config, 'google_profile', '').'" title="{LNG_GOOGLE_PROFILE_COMMENT}"></span>';
 		$content[] = '</span><span class="td tablet">/</span></div>';
 		$content[] = '<div class=comment id=result_google_profile>{LNG_GOOGLE_PROFILE_COMMENT}</div>';
 		$content[] = '</div>';
@@ -35,27 +35,28 @@
 		// msvalidate
 		$content[] = '<div class=item>';
 		$content[] = '<label for=msvalidate>{LNG_SITE_VERIFICATION_CODE}</label>';
-		$content[] = '<div><span class=tablet>&lt;meta name=&quot;msvalidate.01&quot; content=&quot;</span><input type=text class=wide id=msvalidate name=msvalidate value="'.(empty($config['msvalidate']) ? '' : $config['msvalidate']).'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"><span class=tablet>&quot;&nbsp;/&gt;</span></div>';
+		$content[] = '<div><span class=tablet>&lt;meta name=&quot;msvalidate.01&quot; content=&quot;</span><input type=text class=wide id=msvalidate name=msvalidate value="'.gcms::getVars($config, 'msvalidate', '').'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"><span class=tablet>&quot;&nbsp;/&gt;</span></div>';
 		$content[] = '<div class=comment id=result_msvalidate>{LNG_SITE_VERIFICATION_CODE_COMMENT}</div>';
 		$content[] = '</div>';
 		$content[] = '</fieldset>';
 		$content[] = '<fieldset>';
 		$content[] = '<legend><span class=icon-facebook>{LNG_FACEBOOK}</span></legend>';
 		// facebook_appId
+		$facebook = gcms::getVars($config, 'facebook', array());
 		$content[] = '<div class=item>';
 		$content[] = '<label for=facebook_appId>{LNG_FACEBOOK_APPID}</label>';
-		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.(empty($config['facebook']['appId']) ? '' : $config['facebook']['appId']).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
+		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId'], '' ).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
 		$content[] = '</div>';
 		// facebook_secret
 		$content[] = '<div class=item>';
 		$content[] = '<label for=facebook_secret>{LNG_FACEBOOK_APPSECRET}</label>';
-		$content[] = '<span class="g-input icon-password"><input id=facebook_secret name=facebook_secret type=text value="'.(empty($config['facebook']['secret']) ? '' : $config['facebook']['secret']).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
+		$content[] = '<span class="g-input icon-password"><input id=facebook_secret name=facebook_secret type=text value="'.gcms::getVars($facebook, 'secret', '').'" title="{LNG_FACEBOOK_COMMENT}"></span>';
 		$content[] = '<div class=comment id=result_facebook_secret>{LNG_FACEBOOK_COMMENT}</div>';
 		$content[] = '</div>';
 		// facebook_message
 		$content[] = '<div class=item>';
 		$content[] = '<label for=facebook_message>{LNG_FACEBOOK_WELCOME_MESSAGE}</label>';
-		$content[] = '<span class="g-input icon-config"><textarea id=facebook_message name=facebook_message title="{LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT}" cols=50 rows=5>'.(empty($config['facebook_message']) ? '' : gcms::detail2TXT(str_replace(array('\r', '\n'), array("\r", "\n"), $config['facebook_message']))).'</textarea></span>';
+		$content[] = '<span class="g-input icon-config"><textarea id=facebook_message name=facebook_message title="{LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT}" cols=50 rows=5>'.gcms::detail2TXT(str_replace(array('\r', '\n'), array("\r", "\n"), gcms::getVars($config, 'facebook_message', ''))).'</textarea></span>';
 		$content[] = '<div class=comment id=result_facebook_message>{LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT}</div>';
 		$content[] = '</div>';
 		// facebook_picture
