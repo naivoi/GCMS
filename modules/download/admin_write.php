@@ -1,6 +1,6 @@
 <?php
 	// modules/download/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['download_can_upload'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'download_can_upload')) {
 		// id ที่เลือก
 		$id = gcms::getVars($_GET, 'id', 0);
 		unset($_GET['id']);

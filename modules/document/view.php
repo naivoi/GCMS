@@ -39,7 +39,7 @@
 			// แสดงความคิดเห็นได้
 			$canReply = $index['can_reply'] == 1;
 			// ผู้ดูแล,เจ้าของเรื่อง (ลบ-แก้ไข บทความ,ความคิดเห็นได้)
-			$moderator = gcms::canConfig(explode(',', $index['moderator']));
+			$moderator = gcms::canConfig($index, 'moderator');
 			$moderator = $isMember && ($moderator || $index['member_id'] == $login['id']);
 			// guest มีสถานะเป็น -1
 			$status = $isMember ? $login['status'] : -1;

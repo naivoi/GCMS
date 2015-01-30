@@ -28,7 +28,7 @@
 			if ($index) {
 				// config
 				gcms::r2config($index['config'], $index);
-				if (!gcms::canConfig(explode(',', $index['can_config']))) {
+				if (!gcms::canConfig($index, 'can_config')) {
 					$index = false;
 				}
 			}

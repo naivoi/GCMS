@@ -34,7 +34,7 @@
 			// เจ้าของ
 			$canEdit = $isMember && $index['member_id'] == $login['id'];
 			// ผู้ดูแล
-			$moderator = gcms::canConfig(explode(',', $index['moderator']));
+			$moderator = gcms::canConfig($index, 'moderator');
 			// เจ้าของหรือผู้ดูแล แก้ไขได้
 			$canEdit = $canEdit || $moderator;
 			// เลือกเมนู

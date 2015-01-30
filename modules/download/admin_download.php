@@ -3,7 +3,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, can download
-	if (gcms::isReferer() && gcms::canConfig($config['download_can_upload'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'download_can_upload')) {
 		$file = $db->getRec(DB_DOWNLOAD, $_GET['id']);
 		$file_path = ROOT_PATH.$file['file'];
 		if ($file && is_file($file_path)) {

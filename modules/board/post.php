@@ -53,7 +53,7 @@
 				// login
 				$isMember = gcms::isMember();
 				// ผู้ดูแล
-				$moderator = $isMember && gcms::canConfig(explode(',', $index['moderator']));
+				$moderator = $isMember && gcms::canConfig($index, 'moderator');
 				// can reply
 				$can_post = explode(',', $index['can_post']);
 				// true = guest โพสต์ได้

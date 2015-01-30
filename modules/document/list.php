@@ -120,7 +120,7 @@
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';
-			$replace[] = is_file(ROOT_PATH.'modules/document/write.php') && gcms::canConfig(explode(',', $index['can_write'])) ? '' : 'hidden';
+			$replace[] = is_file(ROOT_PATH.'modules/document/write.php') && gcms::canConfig($index, 'can_write') ? '' : 'hidden';
 			$replace[] = (int)$cat;
 			$replace[] = $index['topic'];
 			$replace[] = gcms::getVars($index, 'detail', '');

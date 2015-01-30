@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, member
-	if (gcms::isReferer() && gcms::canConfig($config['video_can_write'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'video_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {

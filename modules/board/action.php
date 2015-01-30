@@ -48,7 +48,7 @@
 			// สมาชิก
 			$isMember = gcms::isMember();
 			// ผู้ดูแล
-			$moderator = $isMember && gcms::canConfig(explode(',', $index['moderator']));
+			$moderator = $isMember && gcms::canConfig($index, 'moderator');
 			if ($action == 'quote') {
 				// อ้างอิง
 				if ($index['detail'] == '') {

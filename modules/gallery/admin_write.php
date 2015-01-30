@@ -1,6 +1,6 @@
 <?php
 	// modules/gallery/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['gallery_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'gallery_can_write')) {
 		// อัลบัมที่แก้ไข
 		$album_id = gcms::getVars($_GET, 'id', 0);
 		// ตรวจสอบโมดูลที่เรียก

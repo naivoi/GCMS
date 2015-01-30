@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, admin
-	if (gcms::isReferer() && gcms::canConfig($config['edocument_moderator'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'edocument_moderator')) {
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
 			// ค่าที่ส่งมา
 			$action = gcms::getVars($_POST, 'action', '');

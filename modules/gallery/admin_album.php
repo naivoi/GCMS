@@ -1,6 +1,6 @@
 <?php
 	// modules/gallery/admin_album.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['gallery_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'gallery_can_write')) {
 		unset($url_query['id']);
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `id`,`module` FROM `".DB_MODULES."` WHERE `owner`='gallery' LIMIT 1";

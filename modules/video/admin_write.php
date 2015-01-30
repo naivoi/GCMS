@@ -1,6 +1,6 @@
 <?php
 	// modules/video/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['video_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'video_can_write')) {
 		// รายการที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
 		// ตรวจสอบโมดูลที่เรียก

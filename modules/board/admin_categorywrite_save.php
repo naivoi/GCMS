@@ -52,7 +52,7 @@
 				$ret['ret_category_topic_'.LANGUAGE] = '';
 				$ret['ret_category_detail_'.LANGUAGE] = '';
 				$ret['ret_category_id'] = '';
-				if (!gcms::canConfig(explode(',', $index['can_config']))) {
+				if (!gcms::canConfig($index, 'can_config')) {
 					$error = 'ACTION_ERROR';
 				} elseif ($category_id == 0) {
 					$ret['ret_category_id'] = 'ID_EMPTY';

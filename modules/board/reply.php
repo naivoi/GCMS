@@ -53,7 +53,7 @@
 			// true = guest โพสต์ได้
 			$guest = in_array(-1, $can_reply);
 			// ผู้ดูแล
-			$moderator = $isMember && gcms::canConfig(explode(',', $index['moderator']));
+			$moderator = $isMember && gcms::canConfig($index, 'moderator');
 			// login ใช้ email และ password ของคน login
 			if ($isMember) {
 				$email = $_SESSION['login']['email'];

@@ -1,6 +1,6 @@
 <?php
 	// modules/event/admin_config.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['event_can_config'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'event_can_config')) {
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `module` FROM `".DB_MODULES."` WHERE `owner`='event' LIMIT 1";
 		$index = $db->customQuery($sql);

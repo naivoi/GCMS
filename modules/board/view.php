@@ -39,7 +39,7 @@
 			$canview = in_array($login['status'], explode(',', $index['can_view']));
 			if ($canview || $index['viewing'] == 1) {
 				// ผู้ดูแล
-				$moderator = $isMember && gcms::canConfig(explode(',', $index['moderator']));
+				$moderator = $isMember && gcms::canConfig($index, 'moderator');
 				// สามารถลบได้ (mod=ลบ,สมาชิก=แจ้งลบ)
 				$canDelete = $moderator || ($isMember && defined('DB_PM'));
 				// อัปเดทการเปิดดู

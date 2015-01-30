@@ -1,6 +1,6 @@
 <?php
 	// modules/personnel/admin_setup.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['personnel_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'personnel_can_write')) {
 		unset($url_query['id']);
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `id` FROM `".DB_MODULES."` WHERE `owner`='personnel' LIMIT 1";

@@ -1,6 +1,6 @@
 <?php
 	// modules/download/admin_setup.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['download_can_upload'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'download_can_upload')) {
 		unset($url_query['id']);
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `id` FROM `".DB_MODULES."` WHERE `owner`='download' LIMIT 1";

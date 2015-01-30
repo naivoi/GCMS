@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, admin
-	if (gcms::isReferer() && gcms::canConfig($config['gallery_can_config'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'gallery_can_config')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {

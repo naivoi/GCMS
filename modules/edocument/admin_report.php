@@ -1,6 +1,6 @@
 <?php
 	// modules/edocument/admin_report.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['edocument_moderator'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'edocument_moderator')) {
 		// ตรวจสอบโมดูล และรายการที่เรียก
 		$sql = "SELECT D.*,M.`module`";
 		$sql .= " FROM `".DB_MODULES."` AS M";

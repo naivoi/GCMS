@@ -1,6 +1,6 @@
 <?php
 	// modules/personnel/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['personnel_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'personnel_can_write')) {
 		// อัลบัมที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
 		// ตรวจสอบโมดูลที่เรียก

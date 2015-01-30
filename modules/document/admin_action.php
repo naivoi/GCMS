@@ -26,9 +26,9 @@
 				// config
 				gcms::r2config($index['config'], $index);
 				// ผู้ดูแล
-				$moderator = gcms::canConfig(explode(',', $index['moderator']));
+				$moderator = gcms::canConfig($index, 'moderator');
 				// แอดมิน
-				$admin = gcms::canConfig(explode(',', $index['can_config']));
+				$admin = gcms::canConfig($index, 'can_config');
 				if ($moderator && $action == 'delete') {
 					// ลบ (บทความ)
 					$sql = "SELECT `picture` FROM `".DB_INDEX."` WHERE `id` IN($id) AND `module_id`='$index[id]' AND `picture`<>''";

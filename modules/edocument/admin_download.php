@@ -5,7 +5,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer
-	if (gcms::isReferer() && gcms::canConfig($config['edocument_moderator'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'edocument_moderator')) {
 		// ตรวจสอบไฟล์ดาวน์โหลด
 		$file = $db->getRec(DB_EDOCUMENT, $_GET['id']);
 		if ($file) {

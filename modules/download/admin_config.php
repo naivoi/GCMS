@@ -1,6 +1,6 @@
 <?php
 	// modules/download/admin_config.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['download_can_config'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'download_can_config')) {
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `id` FROM `".DB_MODULES."` WHERE `owner`='download' LIMIT 1";
 		$index = $db->customQuery($sql);

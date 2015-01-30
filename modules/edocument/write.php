@@ -25,7 +25,7 @@
 			// ไม่พบรายการหรือยังไม่ได้ติดตั้ง
 			$title = $lng['LNG_DATA_NOT_FOUND'];
 			$content = '<div class=error>'.$title.'</div>';
-		} elseif (empty($config['edocument_can_upload']) || !gcms::canConfig($config['edocument_can_upload'])) {
+		} elseif (empty($config['edocument_can_upload']) || !gcms::canConfig($config, 'edocument_can_upload')) {
 			// ไม่สามารถอัปโหลดได้
 			$title = $lng['ACTION_FORBIDDEN'];
 			$content = '<div class=error>'.$title.'</div>';
@@ -37,7 +37,7 @@
 				// เจ้าของ
 				$canEdit = $index['sender_id'] == $login['id'];
 				// ผู้ดูแล
-				$moderator = gcms::canConfig($config['edocument_moderator']);
+				$moderator = gcms::canConfig($config, 'edocument_moderator');
 				// เจ้าของหรือผู้ดูแล แก้ไขได้
 				$canEdit = $canEdit || $moderator;
 				// ผู้รับเอกสาร

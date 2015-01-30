@@ -40,7 +40,7 @@
 				if (in_array($index['owner'], array('document', 'board'))) {
 					// config
 					gcms::r2config($index['config'], $index);
-					$admin = gcms::canConfig(explode(',', $index['can_config']));
+					$admin = gcms::canConfig($index, 'can_config');
 				} else {
 					$admin = gcms::canConfig($config[$index['owner'].'_can_config']);
 				}

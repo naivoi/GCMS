@@ -5,10 +5,10 @@
 		$admin_menus['tools']['install']['edocument'] = '<a href="index.php?module=install&amp;modules=edocument"><span>E-Document</span></a>';
 	} else {
 		// เมนูแอดมิน
-		if (!gcms::canConfig($config['edocument_can_config'])) {
+		if (!gcms::canConfig($config, 'edocument_can_config')) {
 			unset($admin_menus['modules']['edocument']['config']);
 		}
-		if (gcms::canConfig($config['edocument_moderator'])) {
+		if (gcms::canConfig($config, 'edocument_moderator')) {
 			$admin_menus['modules']['edocument']['setup'] = '<a href="index.php?module=edocument-setup"><span>{LNG_EDOCUMENT_LIST}</span></a>';
 			foreach ($install_owners['edocument'] AS $items) {
 				// menu ของโมดูล

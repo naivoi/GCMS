@@ -1,6 +1,6 @@
 <?php
 	// modules/event/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['event_can_write'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'event_can_write')) {
 		// รายการที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
 		// หมวดที่เลือก

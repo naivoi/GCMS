@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, can config
-	if (gcms::isReferer() && gcms::canConfig($config['download_can_upload'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'download_can_upload')) {
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
 			// ค่าที่ส่งมา
 			$action = gcms::getVars($_POST, 'action', '');

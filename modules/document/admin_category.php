@@ -9,7 +9,7 @@
 			// อ่าน config ของโมดูล
 			gcms::r2config($index['config'], $index);
 			// ตรวจสอบสถานะที่สามารถเข้าหน้านี้ได้
-			if (!gcms::canConfig(explode(',', $index['can_config']))) {
+			if (!gcms::canConfig($index, 'can_config')) {
 				$index = false;
 			}
 		} else {

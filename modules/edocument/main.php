@@ -66,7 +66,7 @@
 					$cache->save($sql, $datas);
 				}
 				// ผู้ดุแล
-				$moderator = $isAdmin || gcms::canConfig($config['edocument_moderator']);
+				$moderator = $isAdmin || gcms::canConfig($config, 'edocument_moderator');
 				// อ่านรายการลงใน $list
 				$list = array();
 				$patt = array('/(edit\s{ID})/', '/(report\s{ID})/', '/(delete\s{ID})/', '/{ID}/', '/{NAME}/', '/{EXT}/',

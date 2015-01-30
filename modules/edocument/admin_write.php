@@ -1,6 +1,6 @@
 <?php
 	// modules/edocument/admin_write.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['edocument_moderator'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'edocument_moderator')) {
 		// รายการที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
 		if ($id > 0) {

@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// referer, member
-	if (gcms::isReferer() && gcms::canConfig($config['personnel_can_write'])) {
+	if (gcms::isReferer() && gcms::canConfig($config, 'personnel_can_write')) {
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
 			// ตรวจสอบ id
 			$ids = array();

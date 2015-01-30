@@ -778,10 +778,18 @@
 			return isset($_SESSION['login']) && (int)$_SESSION['login']['status'] == 1;
 		}
 		// ตรวจสอบแอดมินและสถานะที่กำหนด
-		public static function canConfig($cfg) {
+		public static function canConfig($cfg, $key) {
 			if (isset($_SESSION['login']['status'])) {
 				$status = $_SESSION['login']['status'];
-				return $status == 1 || (is_array($cfg) && in_array($status, $cfg));
+				if ($status == 1) {
+					return true;
+				} elseif (isset($cfg[$key])) {
+					if (is_array($cfg[$key])) {
+						return in_array($status, $cfg[$key]);
+					} else {
+						return in_array($status, explode(',', $cfg[$key]));
+					}
+				}
 			} else {
 				return false;
 			}

@@ -42,7 +42,7 @@
 			// สมาชิก
 			$isMember = gcms::isMember();
 			// ผู้ดูแล,เจ้าของเรื่อง (ลบ-แก้ไข บทความ,ความคิดเห็นได้)
-			$moderator = gcms::canConfig(explode(',', $index['moderator']));
+			$moderator = gcms::canConfig($index, 'moderator');
 			$moderator = $isMember && ($moderator || $index['member_id'] == $login['id']);
 			if ($action == 'quote') {
 				// อ้างอิง

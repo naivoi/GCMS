@@ -1,6 +1,6 @@
 <?php
 	// modules/edocument/admin_setup.php
-	if (MAIN_INIT == 'admin' && gcms::canConfig($config['edocument_moderator'])) {
+	if (MAIN_INIT == 'admin' && gcms::canConfig($config, 'edocument_moderator')) {
 		unset($url_query['id']);
 		// ตรวจสอบโมดูลที่เรียก
 		$sql = "SELECT `id`,`module` FROM `".DB_MODULES."` WHERE `owner`='edocument' LIMIT 1";
