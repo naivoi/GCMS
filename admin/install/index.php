@@ -2,9 +2,6 @@
 	if (defined('ROOT_PATH')) {
 		// current version
 		$version = '10.0.1';
-		// cookie
-		ob_end_clean();
-		ob_start();
 		$step = isset($_REQUEST['step']) ? (int)$_REQUEST['step'] : 0;
 		if ($step == 1 && isset($_POST['typ'])) {
 			$_SESSION['typ'] = $_POST['typ'];

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang={LANGUAGE} dir=ltr>
+	<head>
+		<title>{TITLE}</title>
+		<meta charset=utf-8>
+		<link rel="shortcut icon" href="{WEBURL}/favicon.ico">
+		<link rel=icon href="{WEBURL}/favicon.gif">
+		<link rel=stylesheet href={WEBURL}/{SKIN}css.php>
+		<script src="{WEBURL}/js/js.php"></script>
+		<script>
+			{SCRIPT}
+		</script>
+		<!--[if lt IE 9]>
+		<script src={WEBURL}/js/html5.js></script>
+		<![endif]-->
+		{META}
+	</head>
+	<body>
+		<a class=skip_content accesskey=s href=#content title="{LNG_SKIP_TO_CONTENT}"></a>
+		<div id=top-header>
+			<div id=top-wrapper>
+				<div class=block_left id=language_menu>{LNG_LANGUAGE} {LANGUAGES} {FONTSIZE}</div>
+				<div class=block_left>
+					<ul id=headmenu>
+						<li>
+							<a id=login-a title="{LNG_LOGIN_SUBMIT_TITLE}">{LNG_LOGIN}</a>
+							<section id=login-box>{LOGIN}</section>
+						</li>
+						<li><a href="index.php?module=forgot" title="{LNG_FORGOT_TITLE}">{LNG_FORGOT}</a></li>
+						<li><a href="index.php?module=register" title="{LNG_REGISTER_TITLE}">{LNG_REGISTER}</a></li>
+						<li><a id=facebook_login class=icon-facebook>{LNG_FACEBOOK_LOGIN}</a></li>
+					</ul>
+				</div>
+				<div class=block_right><div>{WIDGET_SEARCH}</div></div>
+			</div>
+		</div>
+		<div class="gcss-wrapper wrapper_bg_color wrapper_bg">
+			<header class="header header_bg">
+				<div id=logo>
+					<h1><a href="{WEBURL}">{WEBTITLE}</a></h1>
+					<p class=description>{WEBDESCRIPTION}</p>
+				</div>
+				<div id=scroll-to class="menu_wrapper menu_bg menu_bg_color">
+					<nav id=topmenu class="topmenu responsive fullwidth">
+						<ul>{MAINMENU}</ul>
+					</nav>
+				</div>
+			</header>
+			<div class="wrapper_top_bg wrapper_bg_color clear">
+				<main class="wrapper_bg clear">
+						<div id=content class="article content_bg content_bg_color">
+							{CONTENT}
+						</div>
+				</main>
+			</div>
+			<div id=text-links class=center>
+				<a href="http://www.goragod.com" title="Goragod.com"><img src="http://www.goragod.com/smalllogo.gif" alt="Goragod.com"></a>
+				<iframe src=http://www.webshopready.com/ad_small.html style="width:88px;height:31px;"></iframe>
+			</div>
+			<footer class="footer footer_bg_color footer_bg">
+				<p>Copyright &copy; 2014 <a href="{WEBURL}">{WEBTITLE}</a></p>
+				<p>
+					GCMS Version {VERSION} designed by <a href="http://www.goragod.com">Goragod.com</a>
+					{LNG_PAGE_PROCESS} <span id=db_elapsed>{ELAPSED}</span> {LNG_SECOND} (<span id=db_quries>{QURIES}</span> quries.)
+				</p>
+			</footer>
+		</div>
+		<div class=share>{WIDGET_SHARE}</div>
+		<script>
+			new GDPanel('login-a', 'login-box');
+			$G('facebook_login').addEvent('click', fbLogin);
+		</script>
+	</body>
+</html>

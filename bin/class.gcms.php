@@ -959,20 +959,28 @@
 			return $db->sql_clean(preg_replace($patt, $replace, $text));
 		}
 		/**
-		 * detail2TXT($text)
+		 * detail2TXT($array, $key)
 		 * เข้ารหัส อักขระพิเศษ และ {} ก่อนจะส่งให้กับ CKEditor
-		 * $text (string) ข้อความที่ต้องการแสดงใน CKEDitor
+		 * $array (mixed) array หรือ string
+		 * $key (string) $key ของ $array
 		 * คืนค่าข้อความ
 		 *
 		 * @return (string)
 		 */
-		public static function detail2TXT($text) {
-			return str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), htmlspecialchars($text));
+		public static function detail2TXT($array, $key = null) {
+			if ($key === null) {
+				$value = $array;
+			} elseif (isset($array[$key])) {
+				$value = $array[$key];
+			} else {
+				$value = '';
+			}
+			return $value == '' ? '' : str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), htmlspecialchars($value));
 		}
 		// ตรวจสอบ referer
 		public static function isReferer() {
-			$server = $_SERVER["HTTP_HOST"] == '' ? $_SERVER["SERVER_NAME"] : $_SERVER["HTTP_HOST"];
-			$referer = getenv('HTTP_REFERER') == '' ? $_SERVER['HTTP_REFERER'] : getenv('HTTP_REFERER');
+			$server = empty($_SERVER["HTTP_HOST"]) ? $_SERVER["SERVER_NAME"] : $_SERVER["HTTP_HOST"];
+			$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 			if (preg_match("/$server/ui", $referer)) {
 				return true;
 			} elseif (preg_match('/^(http(s)?:\/\/)(.*)(\/.*){0,}$/U', WEB_URL, $match)) {
@@ -1666,6 +1674,7 @@
 			if (is_array($typies)) {
 				$value = isset($typies[$keys]) ? $typies[$keys] : null;
 			} else {
+				$value = null;
 				$keys = explode(',', $keys);
 				foreach (explode(',', $typies) AS $i => $type) {
 					$value = gcms::filterVars($type, $keys[$i]);

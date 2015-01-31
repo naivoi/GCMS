@@ -50,7 +50,7 @@
 		// detail
 		$content[] = '<div class=item>';
 		$content[] = '<label for=write_detail>{LNG_CONTENTS}</label>';
-		$content[] = '<div><textarea name=write_detail id=write_detail>'.gcms::detail2TXT($search[$lang]).'</textarea></div>';
+		$content[] = '<div><textarea name=write_detail id=write_detail>'.gcms::detail2TXT($search, $lang).'</textarea></div>';
 		$content[] = '</div>';
 		$content[] = '</fieldset>';
 		// submit

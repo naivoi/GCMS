@@ -6,6 +6,8 @@
 		if (!isset($config['rss_tabs'])) {
 			$config['rss_tabs'] = array();
 		}
+		$config['widget_gallery_cols'] = gcms::getVars($config, 'widget_gallery_cols', 2);
+		$config['widget_gallery_rows'] = gcms::getVars($config, 'widget_gallery_rows', 3);
 		// title
 		$title = $lng['LNG_RSS_TAB'];
 		$a = array();

@@ -1,0 +1,261 @@
+/*
+ Name: Three D
+ Description: Template แบบ 2 คอลัมน์ ลายไทย
+ Author: Goragod.com
+ Author URI: http://www.goragod.com
+*/
+body {
+	background: #151600 url(img/main-bg.jpg) repeat-x;
+	color: #5a5955;
+}
+a {
+	color: #000;
+}
+.mainform, .member_section {
+	background-color: #f0eee4;
+	border: 1px dashed #BCC2B7;
+}
+.mainform {
+	padding: 10px;
+}
+#logo {
+	margin: 0 auto 10px;
+	width: 960px;
+	height: 110px;
+}
+#logo h1 {
+	font-size: 3.0em;
+	font-weight: bold;
+	padding: 30px 0 0 1.0em;
+}
+#logo h1 a {
+	color: #eeeadb;
+}
+#logo p {
+	color: #eeeadb;
+	padding: 1em 0 0 10em;
+	font-style: italic;
+}
+#logo h1 a:hover, .view .q h2 a, .footer a {
+	color: #fff;
+}
+.menu_wrapper {
+	margin: 0 auto;
+	width: 960px;
+	position: relative;
+	color: #EEE;
+}
+.menu_wrapper img.people {
+	position: absolute;
+	left: 0;
+	margin: -18px 0 0 20px;
+	z-index: 777;
+}
+.menu_wrapper nav {
+	background: transparent url(img/bg_nav.jpg) no-repeat;
+	height: 31px;
+	width: 770px;
+	z-index: 100;
+	margin-left: 165px;
+	color: #DDD;
+}
+.topmenu > ul > li.select > a,
+.topmenu > ul > li:hover > a {
+	color: #FFF;
+	text-decoration: underline;
+}
+.topmenu > ul ul > li:hover > a,
+.sidemenu li:hover > a {
+	background-color: #333;
+	color: #FFF;
+}
+.topmenu > ul ul {
+	color: #5a5955;
+}
+.wrapper {
+	margin: 0 auto 10px auto;
+	display: table;
+}
+.content_wrapper {
+	width: 960px;
+	display: table-cell;
+}
+.sidebar_bg {
+	background-image: url(img/bg_sidebar.jpg);
+	background-position: 0 0;
+	background-repeat: repeat-y;
+}
+.content_wrapper .sidebar {
+	float: left;
+	width: 220px;
+	padding: 10px;
+}
+.rightsidebar .sidebar {
+	width: 230px;
+	padding: 0 0 0 10px;
+}
+.wrapper_bg {
+	background-color: #FFFFFF;
+	background-image: url(img/bg_wrapper.gif);
+	background-position: 100% 0;
+	background-repeat: repeat-x;
+}
+.body-content {
+	float: right;
+	width: 738px;
+	padding: 10px;
+}
+.content h2 {
+	border-width: 1px;
+	border-style: none none dashed;
+	border-color: #666;
+	padding: 0 0 5px;
+	font-size: 1.5em;
+}
+.login header {
+	display: none;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.7em;
+}
+.homepage header > h2 {
+	background-color: #F4F2EA;
+	padding: 2px 5px;
+	border-style: dashed;
+	border-color: inherit;
+	margin: 0;
+}
+.sidebar header > h2, .login .head {
+	font-size: 1em;
+	color: #FFF;
+	padding: 0 5px;
+	border: none;
+	min-height: 22px;
+	line-height: 20px;
+	background-color: transparent;
+}
+.mainform legend > span, .member_section header h2 {
+	margin-bottom: 10px;
+	font-size: 150%;
+	display: block;
+	border: none;
+}
+.content .breadcrumbs {
+	font-style: italic;
+	color: #666;
+}
+.footer {
+	background-color: #4f4b3c;
+	border-top: 1px dashed #B3AD93;
+	color: #fff;
+	line-height: 2em;
+	margin-top: 10px;
+	padding: 1em 0;
+}
+.footer a:hover, #logout-div p.displayname a:hover {
+	text-decoration: underline;
+}
+.login {
+	padding: 27px 5px 5px;
+}
+.login p {
+	line-height: normal;
+	padding: 2px 0;
+}
+#login_frm {
+	background: transparent url(img/login-bkg.gif) 0 0 repeat-x;
+	border: 1px solid #000;
+	padding: 5px;
+	text-align: right;
+}
+.login .head {
+	margin: -34px -10px 10px;
+	text-align: center;
+}
+#login_frm .button {
+	border: none;
+	padding: 0 5px;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+#comment-list .r, #document-view .reaction, #board-view .body .reaction {
+	background-color: #f4f2ea;
+	text-align: right;
+	border-width: 1px;
+	border-style: dashed;
+	border-color: #BCC2B7;
+}
+#comment-list .clear {
+	padding: 10px 10px 0 10px;
+	text-align: left;
+}
+#comment-list .reaction {
+	background-color: #f4f2ea;
+	border-style: dashed none none none;
+	border-width: 1px;
+}
+.table_rss_class {
+	border-width: 1px;
+	border-style: none dashed dashed dashed;
+}
+.bg2 {
+	background-color: #F0F0F0;
+}
+#document-list > .row h3 {
+	border: none;
+}
+.sidebar .widget_bdr {
+	background-image: url(img/head-bkg.gif);
+	background-repeat: repeat-x;
+	background-color: #FFF;
+	border: 1px solid #000;
+}
+.widget_share a, #change_display a {
+	color: #FFF;
+}
+.widget-like {
+	text-align: right;
+}
+#widget-search-form {
+	margin: 5px;
+}
+.bdr_content > header, .widget_share, .language-menu {
+	margin-bottom: 10px;
+}
+.tab > ul > li > a {
+	border-style: dashed;
+	border-color: #BCC2B7;
+	background-color: transparent;
+}
+.tab > ul > li.select > a {
+	background-color: #F0EEE4;
+}
+a.facebook_login {
+	border: 1px solid #3D5D9A;
+	background-color: #517ABA;
+	background-image: url(img/facebook.png);
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+	padding: 3px 5px 3px 25px;
+	color: #FFF;
+	cursor: pointer;
+	display: inline;
+}
+.homepage .next {
+	text-align: right;
+	margin: 5px 0 0;
+	color: #78BD72;
+}
+#GModal_modaldiv > .modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+	border: none;
+}
+form dl.info {
+	background-color: #F9F9F9;
+	border: 1px dashed #DDD;
+	margin: 5px 0;
+	padding: 10px;
+}

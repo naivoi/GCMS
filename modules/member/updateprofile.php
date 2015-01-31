@@ -8,6 +8,7 @@
 		$ret = array();
 		$save = array();
 		$error = false;
+		$input = false;
 		// แก้ไขข้อมูลสมาชิก
 		$sql = "SELECT *,(SELECT `name` FROM `".DB_PROVINCE."` WHERE `id`='".gcms::getVars($_POST, 'register_provinceID', 0)."' LIMIT 1) AS `province`";
 		$sql .= " FROM `".DB_USER."` WHERE `id`=".(int)$_SESSION['login']['id']." LIMIT 1";

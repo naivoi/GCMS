@@ -19,7 +19,7 @@
 			$sql .= " WHERE D.`id`=".(int)$id." LIMIT 1";
 			$download = $db->customQuery($sql);
 			$download = sizeof($download) == 1 ? $download[0] : false;
-			$file_path = iconv('UTF-8', 'TIS-620', DATA_PATH."edocument/$download[file]");
+			$file_path = DATA_PATH."edocument/$download[file]";
 			// ตรวจสอบสถานะการดาวน์โหลด
 			if (!$download || !is_file($file_path)) {
 				$ret['error'] = 'DOWNLOAD_FILE_NOT_FOUND';
@@ -42,7 +42,7 @@
 				}
 				// URL สำหรับดาวน์โหลด
 				$fid = gcms::rndname(32);
-				$_SESSION[$fid]['file'] = $download['file'];
+				$_SESSION[$fid]['file'] = $file_path;
 				$_SESSION[$fid]['size'] = $download['size'];
 				$_SESSION[$fid]['name'] = "$download[topic].$download[ext]";
 				$_SESSION[$fid]['status'] = $status;

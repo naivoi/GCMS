@@ -56,7 +56,7 @@
 			// keywords,tags
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_keywords>{LNG_TAGS}</label>';
-			$content[] = '<span class="g-input icon-tags"><textarea name=write_keywords id=write_keywords rows=3 maxlength=149 title="{LNG_TAGS_COMMENT}">'.gcms::detail2TXT($index['keywords']).'</textarea></span>';
+			$content[] = '<span class="g-input icon-tags"><textarea name=write_keywords id=write_keywords rows=3 maxlength=149 title="{LNG_TAGS_COMMENT}">'.gcms::detail2TXT($index, 'keywords').'</textarea></span>';
 			$content[] = '<div class=comment id=result_write_keywords>{LNG_TAGS_COMMENT}</div>';
 			$content[] = '</div>';
 			// event_d,event_h,event_m
@@ -88,13 +88,13 @@
 			// description
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_description>{LNG_DESCRIPTION}</label>';
-			$content[] = '<span class="g-input icon-file"><textarea name=write_description id=write_description rows=3 maxlength=149 title="{LNG_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index['description']).'</textarea></span>';
+			$content[] = '<span class="g-input icon-file"><textarea name=write_description id=write_description rows=3 maxlength=149 title="{LNG_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index, 'description').'</textarea></span>';
 			$content[] = '<div class=comment id=result_write_description>{LNG_DESCRIPTION_COMMENT}</div>';
 			$content[] = '</div>';
 			// detail
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_detail>{LNG_DETAIL}</label>';
-			$content[] = '<div><textarea name=write_detail id=write_detail>'.gcms::detail2TXT($index['detail']).'</textarea></div>';
+			$content[] = '<div><textarea name=write_detail id=write_detail>'.gcms::detail2TXT($index, 'detail').'</textarea></div>';
 			$content[] = '</div>';
 			// published date
 			$content[] = '<div class=item>';

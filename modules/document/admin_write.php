@@ -118,13 +118,13 @@
 				// sdetail
 				$content[] = '<div class=item>';
 				$content[] = '<label for=write_description_'.$language.'>{LNG_DESCRIPTION}</label>';
-				$content[] = '<span class="g-input icon-file"><textarea id=write_description_'.$language.' name=write_description_'.$language.' rows=3 maxlength=149 title="{LNG_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($item['description']).'</textarea></span>';
+				$content[] = '<span class="g-input icon-file"><textarea id=write_description_'.$language.' name=write_description_'.$language.' rows=3 maxlength=149 title="{LNG_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($item, 'description').'</textarea></span>';
 				$content[] = '<div class=comment id=result_write_description_'.$language.'>{LNG_DESCRIPTION_COMMENT}</div>';
 				$content[] = '</div>';
 				// detail
 				$content[] = '<div class=item>';
 				$content[] = '<label for=write_detail_'.$language.'>{LNG_DETAIL}</label>';
-				$content[] = '<div><textarea name=write_detail_'.$language.' id=write_detail_'.$language.'>'.gcms::detail2TXT($item['detail']).'</textarea></div>';
+				$content[] = '<div><textarea name=write_detail_'.$language.' id=write_detail_'.$language.'>'.gcms::detail2TXT($item, 'detail').'</textarea></div>';
 				$content[] = '</div>';
 				$content[] = '</fieldset>';
 			}

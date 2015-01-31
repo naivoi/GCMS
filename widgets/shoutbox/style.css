@@ -1,0 +1,95 @@
+#shoutbox_div p {
+	margin: 0;
+	padding: 0;
+}
+#shoutbox_div {
+	position: relative;
+}
+#shoutbox_div #shoutbox_emoticon {
+	position: absolute;
+	background-color: #FFF;
+	border: 5px solid rgba(0,0,0,0.2);
+	padding: 3px;
+	display: none;
+}
+#shoutbox_div #shoutbox_emoticon > img {
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	padding: 1px;
+	width: 15px;
+	height: auto;
+}
+#shoutbox_div #shoutbox_emoticon > img:hover {
+	background-color: #C2CCE0;
+	border-color: #2F96B4;
+}
+#shoutbox_div form > fieldset {
+	margin: 5px;
+}
+#shoutbox_div form > fieldset > p {
+	display: table;
+	width: 100%;
+}
+#shoutbox_div form > fieldset > p > label, #shoutbox_div form > fieldset > p > span {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 1px 0;
+}
+#shoutbox_div form > fieldset > p > label {
+	width: 30%;
+}
+#shoutbox_div form > fieldset > p > span {
+	width: 70%;
+}
+#shoutbox_div form input[type=text] {
+	width: 95%;
+}
+#shoutbox_div form #shoutbox_emoticon img {
+	display: inline;
+}
+#shoutbox_div > dl {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 200px;
+}
+#shoutbox_div dd {
+	padding-bottom: 2px;
+}
+#shoutbox_div dd > p {
+	display: table;
+	width: 100%;
+	background-color: #F9F9F9;
+}
+#shoutbox_div dd > p.detail {
+	padding: 1px 2.5%;
+	border-bottom: 1px dashed #F3F3F3;
+}
+#shoutbox_div dd > p.head > span {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 1px 2.5%;
+	width: 50%;
+}
+#shoutbox_div dd > p.head > span.sender {
+	text-align: left;
+	font-weight: bold;
+}
+#shoutbox_div dd > p.head > span.time {
+	text-align: right;
+	font-size: 80%;
+}
+#shoutbox_div img[alt=emoticon], #shoutbox_div p.detail img {
+	margin-left: 5px;
+}
+#shoutbox_div .cuttext {
+	white-space: nowrap;
+ 	text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
+ 	-ms-text-overflow: ellipsis;
+ 	overflow: hidden;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}

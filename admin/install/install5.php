@@ -142,6 +142,13 @@
 				} elseif (is_file(ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.sql')) {
 					$sqlfiles[] = ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas.sql';
 				}
+				$datas_dir = ROOT_PATH.'admin/install/'.$_SESSION['typ'].'/datas';
+				if (is_dir($datas_dir)) {
+					// connect ftp
+					$ftp = new ftp($_SESSION['ftp_host'], $_SESSION['ftp_username'], $_SESSION['ftp_password'], $_SESSION['ftp_root'], $_SESSION['document_root'], $_SESSION['ftp_port']);
+					// สำเนาข้อมูลตัวอย่าง
+					copyDir("$datas_dir/", DATA_PATH);
+				}
 			}
 			$dir = ROOT_PATH."widgets/";
 			$f = opendir($dir);

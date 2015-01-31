@@ -1,0 +1,112 @@
+/*
+ Name: Silver
+ Description: Template เริ่มต้น ที่มีการกำหนด CSS ไว้เฉพาะเท่าที่จำเป็น เหมาะสำหรับการนำไปปรับปรุงหรือต่อยอด
+ Author: Goragod.com
+ Author URI: http://www.goragod.com
+ Responsive
+ */
+body {
+	background-color: #EEE;
+	color: #666;
+}
+a {
+	color: #000;
+}
+a:hover {
+	color: #06AFE4;
+}
+.gcss-wrapper {
+	background-color: #FFF;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+.wrapper_top_bg {
+	padding: 10px;
+}
+#logo h1 {
+	font-family: "Share Tech Mono";
+	text-shadow: 1px 1px 0 #FFF;
+}
+#logo p.description {
+	font-style: italic;
+	margin-left: 20px;
+}
+#text-links, .footer {
+	padding: 10px;
+	overflow: hidden;
+}
+.footer_bg_color {
+	background-color: #333;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	border-top: 1px solid rgba(255,255,255,0.1);
+	color: #AFAFAF;
+}
+#comment-list .reaction {
+	text-align: right;
+}
+.topmenu {
+	background-color: #333;
+	color: #EEE;
+}
+.topmenu > ul > li > a > span {
+	text-transform: uppercase;
+	padding: 10px;
+	font-size: 1.2em;
+}
+.topmenu li.select > a, .topmenu li:hover > a, .topmenu li.hover > a, .sidemenu li.select > a, .sidemenu li:hover > a, .sidemenu li.hover > a {
+	background-color: #06AFE4;
+	color: #FFF;
+}
+.topmenu > ul ul {
+	color: #333;
+}
+form fieldset > legend {
+	padding: 5px;
+	background-color: #EEE;
+	font-weight: bold;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+#comment-list .reaction, #document-view .reaction, #board-view .reaction {
+	border-width: 2px;
+	border-style: solid none none none;
+	border-color: #E8B5E8;
+	background-color: #F9ECF9;
+}
+#comment-list .reaction {
+	border-color: #B7DEFF;
+	background-color: #E5F3FF;
+}
+.bdr_content {
+	border-color: #DDD;
+}
+.widget header h2, .homepage header h2, .login .head {
+	color: #FFF;
+	background-color: #333;
+	padding: 3px 5px;
+	font-size: 1.4em;
+	border-top: 3px solid #06AFE4;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.7em;
+}
+.homepage header {
+	margin-bottom: 5px;
+}
+.homepage .next {
+	text-align: right;
+	margin: 5px 0 0;
+}
+#GModal_modaldiv > .modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+form dl.info {
+	background-color: #F5F5F5;
+	border: 1px dashed #EEE;
+	margin: 5px 0;
+	padding: 10px;
+}

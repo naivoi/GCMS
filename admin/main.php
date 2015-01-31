@@ -150,8 +150,7 @@
 				$menus[] = '<ul>';
 				foreach ($admin_menus[$section] AS $key => $value) {
 					if (is_array($value)) {
-						$k = 'LNG_'.strtoupper($key);
-						$text = isset($lng[$k]) ? $lng[$k] : '';
+						$text = gcms::getVars($lng, 'LNG_'.strtoupper($key), '');
 						$menus[] = '<li class="'.$key.'"><a class=menu-arrow tabindex=0><span>'.($text == '' ? ucfirst($key) : $text).'</span></a><ul>';
 						foreach ($value AS $key2 => $value2) {
 							$menus[] = '<li class="'.$key2.'">'.$value2.'</li>';
@@ -166,7 +165,7 @@
 			$menus[] = '</li>';
 		}
 		// โมดูลที่เรียก
-		$module = empty($_GET['module']) ? '' : preg_replace('/[\.\/]/', '', $_GET['module']);
+		$module = preg_replace('/[\.\/]/', '', gcms::getVars($_GET, 'module', ''));
 		if (is_file(ROOT_PATH."admin/$module.php")) {
 			require_once ROOT_PATH."admin/$module.php";
 		} elseif (preg_match('/^('.implode('|', array_keys($install_owners)).')(-(.*))?$/ui', $module, $modules)) {

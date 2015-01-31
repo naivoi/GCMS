@@ -1,0 +1,344 @@
+/*
+ Name: Office
+ Description: Template สำหรับ GCMS ใช้สำหรับทำโปรเจ็คทั่วไป เพื่อให้แก้ไขง่าย
+ Author: Goragod.com
+ */
+body {
+	background: #261C13 url(img/main-bg.jpg);
+	color: #856d65;
+}
+a {
+	color: #000;
+}
+.mainform .h {
+	background-color: #CC3300;
+	color: #FFF;
+	padding: 5px;
+}
+#header-wrapper {
+	background: Transparent url(img/header-bg.jpg);
+	border-bottom: 1px solid #FFFFFF;
+}
+.header_bg {
+	background-image: url(img/header-center.jpg);
+	background-position: center center;
+	border-bottom: 1px solid #FFFFFF;
+}
+.header_bg_color {
+	background-color: #271D14;
+}
+.header #logo {
+	margin: 0 auto;
+	width: 900px;
+	height: 136px;
+}
+.header h2 {
+	font-size: 500%;
+	font-weight: normal;
+	letter-spacing: 0.1em;
+	color: #EEEADB;
+	font-family: 'Audiowide', cursive;
+	padding-top: 0;
+}
+.header p.description {
+	font-style: italic;
+}
+.menu_wrapper {
+	height: 21px;
+	margin: 0 auto;
+	width: 900px;
+}
+#menu1 {
+	background: transparent url(img/nav-left.png) no-repeat left top;
+	height: 64px;
+	padding-left: 25px;
+	position: absolute;
+	margin-top: -21px;
+}
+#menu2 {
+	background: transparent url(img/nav-bg.png) no-repeat right top;
+	float: left;
+	height: 64px;
+	padding-right: 25px;
+}
+.topmenu > ul > li {
+	background: transparent url(img/nav-div.png) no-repeat left top;
+	display: inline;
+	float: left;
+	list-style-type: none;
+	padding-left: 2px;
+	position: relative;
+}
+.topmenu > ul > li a {
+	color: #B5D1E6;
+}
+.topmenu > ul > li > a > span {
+	padding: 8px 20px;
+}
+.topmenu > ul > li:hover a, .topmenu > ul > li.select a {
+	background-image: url(img/nav-active.png);
+	background-repeat: repeat-x;
+	background-position: left 1px;
+}
+#wrapper {
+	display: table;
+	margin: 10px auto;
+	width: 900px;
+}
+#content-wrapper {
+	background: transparent url(img/main-bg.jpg);
+}
+#content-wrapper #sidebar {
+	float: left;
+	width: 200px;
+}
+#content-wrapper .content {
+	float: right;
+	width: 690px;
+	border-color: #D5D1C1;
+	border-color: rgba(0,0,0,0.1);
+}
+body > footer {
+	background: Transparent url(img/header-bg.jpg);
+	border-top: 1px solid #FFFFFF;
+	color: #E7E0C7;
+	line-height: 2em;
+	padding: 1em 0;
+	text-align: center;
+}
+body > footer a {
+	color: #A59079;
+	text-decoration: underline;
+}
+body > footer a:hover {
+	text-decoration: none;
+}
+.widget.login {
+	padding: 27px 5px 5px;
+}
+.login p {
+	padding-left: 0;
+	padding-right: 0;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.7em;
+}
+.memberfrm a:hover {
+	color: #000;
+}
+#login_frm, .memberfrm {
+	background: #D3E4F5 url(img/login-bkg.gif) 0 0 repeat-x;
+	border: 1px solid #4377C3;
+	padding: 5px;
+	text-align: right;
+}
+.login .head {
+	margin: -34px -10px 10px;
+}
+.login .title, .login .subtitle {
+	font-size: 0.9em;
+	font-family: "Comic Sans MS", Tahoma, sans-serif;
+}
+.mainform dl.info {
+	background-color: #FFF;
+	border: 1px solid #000;
+	color: #000;
+	line-height: 1.8em;
+	margin: 5px auto;
+	padding: 10px;
+}
+.content .main {
+	width: 100%;
+}
+.comment_frm .h {
+	background-color: #FFC;
+	border-left: 3px solid #CC3300;
+}
+.comment_frm .h span {
+	color: #000;
+	font-weight: bold;
+	padding: 3px 10px;
+}
+.view {
+	width: 750px;
+}
+.view h2 {
+	display: block;
+	font-size: 200%;
+	text-align: center;
+}
+.view .q {
+	border: 1px solid #CC3300;
+}
+.view .q h2 {
+	background-color: #C30;
+	font-size: 100%;
+	padding: 5px;
+	position: relative;
+	text-align: left;
+}
+.view .q .detail {
+	background-color: #FFF;
+	margin: 1px;
+	padding: 10px;
+}
+.view .detail ul, .view .detail dl {
+	padding-left: 40px;
+}
+.register_div {
+	background-color: #FFF;
+	border: 5px solid #115C95;
+	padding: 10px;
+}
+.register_div .h {
+	position: relative;
+	width: 721px;
+}
+.register_div .h * {
+	line-height: 30px;
+}
+#board-list td {
+	border-bottom: 1px dashed #FFF;
+}
+#document-view .body, .school_menu {
+	margin-bottom: 10px;
+}
+#text-links {
+	padding: 10px;
+	text-align: center;
+	background: #f0f0f0;
+	border-top: 1px solid #999;
+	margin-top: 10px;
+}
+.login span#login_mail {
+	cursor: pointer;
+	font-size: 90%;
+	margin-left: 5px;
+}
+.login span.sender {
+	font-weight: bold;
+	cursor: pointer;
+}
+.login p {
+	padding-left: 0;
+	padding-right: 0;
+}
+.login .button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+.q .reaction, .r .reaction {
+	padding-bottom: 0 !important;
+	border-top: 1px dashed;
+}
+.r .reaction {
+	text-align: right;
+}
+.share-box, .language-menu {
+	margin-bottom: 10px;
+	text-align: right;
+}
+.widget-share {
+	text-align: right;
+}
+#widget-search-form {
+	margin: 5px;
+}
+.bdr_content, .homepage .widget_bdr, .rss_widget {
+	border-width: 1px;
+	border-style: solid;
+	border-color: inherit;
+	background-color: #EDE9D7;
+	background-color: rgba(255,255,255,0.3);
+}
+.bdr_content {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.homepage .widget_bdr {
+	padding: 0 10px;
+}
+.homepage .widget_bg_color {
+	padding: 0;
+}
+.widget_bdr .right {
+	margin: 10px 0 0;
+}
+.bdr_content header > h2, form fieldset legend {
+	font-size: 150%;
+	padding-left: 5px;
+}
+.sidebar .widget_bdr {
+	border-width: 1px;
+	border-color: #4377C3;
+	border-style: none solid solid solid;
+	background-color: #FFF;
+}
+.sidebar .widget_bdr {
+	background-image: url(img/head-bkg.gif);
+	background-repeat: repeat-x;
+}
+.content header > h2, form > fieldset > legend, .homepage header > h2 {
+	padding: 5px;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	margin-bottom: 5px;
+}
+.homepage header > h2 {
+	font-size: 150%;
+	color: inherit;
+}
+.sidebar header > h2, .login .head {
+	color: #FFF;
+	padding: 0 5px;
+	font-size: 100%;
+	line-height: 22px;
+	border: none;
+}
+.login header {
+	display: none;
+}
+.login .head {
+	text-align: center;
+	font-weight: bold;
+}
+.homepage .next {
+	color: #78BD72;
+	text-align: right;
+	padding: 5px 10px;
+	margin: 0;
+}
+.tab > ul {
+	margin-left: 10px;
+}
+.tab > ul > li > a {
+	background-color: #E6E2D0;
+	background-color: rgba(0,0,0,0.01);
+}
+.tab > ul > li.select > a, .member_section {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+.member_section {
+	padding: 0 10px;
+}
+.tab > ul > li.select > a {
+	border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+.member_section header h2 {
+	padding: 5px 10px;
+}
+#GModal_modaldiv > .modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+form dl.info {
+	background-color: #fff;
+	border: 1px dashed #DDD;
+	line-height: 1.8em;
+	margin: 5px 0;
+	padding: 10px;
+}

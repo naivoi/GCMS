@@ -100,7 +100,7 @@
 				$content[] = '<tr id=M_'.$i.'>';
 				$content[] = '<td data-text="{LNG_KEY}"><label class=g-input><input type=text name=save_array[] value="'.$key.'" title="{LNG_KEY}"></label></td>';
 				foreach ($install_languages AS $a => $k) {
-					$content[] = '<td data-text='.$k.'><label class=g-input><textarea rows=3 name=language_'.$k.'[] title="'.$k.'">'.(empty($value[$k]) ? '' : gcms::detail2TXT($value[$k])).'</textarea></label></td>';
+					$content[] = '<td data-text='.$k.'><label class=g-input><textarea rows=3 name=language_'.$k.'[] title="'.$k.'">'.gcms::detail2TXT($value, $k).'</textarea></label></td>';
 				}
 				$content[] = '<td class=icons><div><a class=icon-plus title="{LNG_ADD}"></a><a class=icon-minus title="{LNG_DELETE}"></a></div></td>';
 				$content[] = '</tr>';

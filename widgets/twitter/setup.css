@@ -1,0 +1,9 @@
+div.twitter-demo {
+	background-color: #F9F9F9;
+	padding: 20px;
+	text-align: center;
+}
+.icon-twitteruser:before {
+	content: '@';
+	font-family: inherit;
+}

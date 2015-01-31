@@ -3,8 +3,13 @@
 	// inint
 	include '../../bin/inint.php';
 	// ตรวจสอบค่า default
-	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 295);
+	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 960);
 	$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
+	$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcms7s');
+	$config['facebook_faces'] = gcms::getVars($config, 'facebook_faces', 0);
+	$config['facebook_border'] = gcms::getVars($config, 'facebook_border', 0);
+	$config['facebook_stream'] = gcms::getVars($config, 'facebook_stream', 0);
+	$config['facebook_header'] = gcms::getVars($config, 'facebook_header', 0);
 	// หน้าเว็บ Facebook
 	$facebook = array();
 	$facebook[] = '<!DOCTYPE html>';

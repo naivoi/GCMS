@@ -17,3 +17,4 @@
 	$newconfig['edocument']['mimeTypes']['gif'] = 'image/gif';
 	$newconfig['edocument']['mimeTypes']['jpg'] = 'image/jpeg';
 	$newconfig['edocument']['mimeTypes']['png'] = 'image/png';
+	$newconfig['edocument']['mimeTypes']['pdf'] = 'application/pdf';

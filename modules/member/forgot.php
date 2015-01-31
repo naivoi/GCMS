@@ -10,7 +10,7 @@
 		$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 		// url ของหน้านี้
 		$breadcrumbs['MODULE'] = gcms::breadcrumb('', gcms::getURL('forgot'), $lng['LNG_FORGOT_TITLE'], $lng['LNG_FORGOT_TITLE'], $breadcrumb);
-		if (!empty($config['custom_forgot']) && is_file(ROOT_PATH.$config['custom_forgot'])) {
+		if (isset($config['custom_forgot']) && is_file(ROOT_PATH.$config['custom_forgot'])) {
 			// custom register form
 			include (ROOT_PATH.$config['custom_forgot']);
 		} else {
@@ -20,7 +20,7 @@
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = 'gcms::getLng';
 			$replace[] = WEB_URL;
-			$replace[] = isset($_POST['action']) && $_POST['action'] == 'modal' ? 'true' : 'false';
+			$replace[] = gcms::getVars($_POST, 'action', '') == 'modal' ? 'true' : 'false';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'forgotfrm'));
 		}
 		// เลือกเมนู

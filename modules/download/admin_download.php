@@ -4,15 +4,14 @@
 	include '../../bin/inint.php';
 	// referer, can download
 	if (gcms::isReferer() && gcms::canConfig($config, 'download_can_upload')) {
+		// อ่านไฟล์ดาวน์โหลด
 		$file = $db->getRec(DB_DOWNLOAD, $_GET['id']);
 		$file_path = ROOT_PATH.$file['file'];
 		if ($file && is_file($file_path)) {
-			// อัปเดทดาวน์โหลด
-			$db->edit(DB_DOWNLOAD, $file['id'], array('downloads' => $file['downloads'] + 1));
 			// ดาวน์โหลดไฟล์
 			header('Cache-Control: private');
-			header("Content-Type: application/octet-stream");
-			header("Content-Type: application/download");
+			header('Content-Type: application/octet-stream');
+			header('Content-Type: application/download');
 			header('Content-Disposition: attachment; filename="'.iconv('UTF-8', 'TIS-620', "$file[name].$file[ext]")).'"';
 			header('Content-Transfer-Encoding: binary');
 			header('Accept-Ranges: bytes');

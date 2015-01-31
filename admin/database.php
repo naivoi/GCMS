@@ -15,7 +15,7 @@
 		$content[] = '<fieldset>';
 		$content[] = '<legend><span class=icon-export>{LNG_DATABASE_BACKUP}</span></legend>';
 		// backup database
-		$content[] = '<div class=subtitle>'.str_replace('%s', 'datas', $lng['LNG_DATABASE_EXPORT_TITLE']).'</div>';
+		$content[] = '<div class=subtitle>'.str_replace('%s', $config['db_name'], $lng['LNG_DATABASE_EXPORT_TITLE']).'</div>';
 		$content[] = '<div class=item>';
 		$content[] = '<table class="responsive database fullwidth"><tbody id=language_tbl>';
 		$content[] = '<tr><td class=tablet></td><td colspan=3 class=left><a href="javascript:setSelect(\'language_tbl\',true)">{LNG_SELECT_ALL}</a>&nbsp;|&nbsp;<a href="javascript:setSelect(\'language_tbl\',false)">{LNG_CLEAR_SELECTED}</a></td></tr>';
@@ -63,7 +63,7 @@
 		$content[] = '<fieldset>';
 		$content[] = '<legend><span class=icon-import>{LNG_DATABASE_RESTORE}</span></legend>';
 		$content[] = '<div class=item>';
-		$t = str_replace('%s', 'datas', $lng['LNG_DATABASE_BROWSER_COMMENT']);
+		$t = str_replace('%s', $config['db_name'], $lng['LNG_DATABASE_BROWSER_COMMENT']);
 		$content[] = '<label>'.str_replace('%s', ini_get('upload_max_filesize'), $lng['LNG_IMPORT_BROWSER']).'</label>';
 		$content[] = '<span class="g-input icon-upload"><input class=g-file type=file name=import_file placeholder="{LNG_BROWSE_FILE}" title="'.strip_tags($t).'"></span>';
 		$content[] = '<div class=comment id=result_import_file>'.$t.'</div>';

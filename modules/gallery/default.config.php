@@ -6,5 +6,5 @@
 	$newconfig['gallery']['gallery_can_write']['0'] = '1';
 	$newconfig['gallery']['gallery_can_config']['0'] = '1';
 	$newconfig['gallery']['gallery_image_type']['0'] = 'jpg';
-	$newconfig['gallery']['gallery_rows'] = 4;
-	$newconfig['gallery']['gallery_cols'] = 2;
+	$newconfig['gallery']['gallery_rows'] = 2;
+	$newconfig['gallery']['gallery_cols'] = 3;

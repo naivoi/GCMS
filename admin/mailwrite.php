@@ -82,7 +82,7 @@
 			// detail
 			$content[] = '<div class=item>';
 			$content[] = '<label for=email_detail>{LNG_DETAIL} </label>';
-			$content[] = '<div><textarea name=email_detail id=email_detail>'.gcms::detail2TXT($email['detail']).'</textarea></div>';
+			$content[] = '<div><textarea name=email_detail id=email_detail>'.gcms::detail2TXT($email, 'detail').'</textarea></div>';
 			$content[] = '</div>';
 			$content[] = '</fieldset>';
 			// submit

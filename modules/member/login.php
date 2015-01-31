@@ -92,7 +92,7 @@
 		// breadcrumbs
 		$breadcrumb = gcms::loadtemplate('member', '', 'breadcrumb');
 		$breadcrumbs = array();
-		if (isset($install_modules[$module_list[0]]['menu_tooltip'])) {
+		if (isset($module_list[0]) && isset($install_modules[$module_list[0]]['menu_tooltip'])) {
 			// หน้าหลัก
 			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 		}

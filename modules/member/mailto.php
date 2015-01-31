@@ -11,7 +11,7 @@
 			// ค่าที่ส่งมา
 			$topic = $db->sql_trim_str($_POST, 'mail_topic');
 			$detail = gcms::ckClean($_POST['mail_detail']);
-			$sender = $_SESSION['login'];
+			$sender = gcms::getVars($_SESSION, 'login', array());
 			$to = $db->sql_trim_str($_POST, 'mail_to');
 			if (!preg_match('/[0-9,]{1,}/', $to)) {
 				$ret['error'] = 'EMAIL_RECIEVER_NOT_FOUND';

@@ -33,6 +33,7 @@
 			gcms::rm_dir($datas_dir);
 			echo '<li class=correct>นำเข้าโฟลเดอร์ <strong>'.DATA_FOLDER.'</strong> <i>เรียบร้อยแล้ว</i></li>';
 		}
+		gcms::saveConfig(ROOT_PATH.'bin/config.php', $config);
 		$files = array();
 		$files[] = ROOT_PATH.".htaccess";
 		$files[] = ROOT_PATH."robots.txt";
@@ -49,7 +50,6 @@
 				echo '<li class=incorrect>ไฟล์ <strong>'.str_replace(ROOT_PATH, '', $file).'</strong> <em>ไม่สามารถเขียนหรือสร้างได้</em> กรุณาสร้างไฟล์นี้และปรับ chmod ให้เป็น 757 ด้วยตัวเอง</li>';
 			}
 		}
-
 		$folders = array();
 		$folders[0] = DATA_PATH;
 		$dir = ROOT_PATH."modules/";

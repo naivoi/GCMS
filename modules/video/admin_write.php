@@ -60,7 +60,7 @@
 			// description
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_description>{LNG_DESCRIPTION}</label>';
-			$content[] = '<span class="g-input icon-file"><textarea id=write_description name=write_description rows=3 title="{LNG_VIDEO_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index['description']).'</textarea></span>';
+			$content[] = '<span class="g-input icon-file"><textarea id=write_description name=write_description rows=3 title="{LNG_VIDEO_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index, 'description').'</textarea></span>';
 			$content[] = '<div class=comment id=result_write_description>{LNG_VIDEO_DESCRIPTION_COMMENT}</div>';
 			$content[] = '</div>';
 			$content[] = '</fieldset>';

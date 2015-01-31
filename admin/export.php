@@ -17,7 +17,7 @@
 			}
 		}
 		// ชื่อฐานข้อมูล
-		$fname = 'datas.sql';
+		$fname = $config['db_name'].'.sql';
 		// memory limit
 		ini_set('memory_limit', '512M');
 		// ส่งออกเป็นไฟล์

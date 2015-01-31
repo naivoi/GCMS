@@ -1,0 +1,257 @@
+/*
+ Name: Pipatpon
+ Description: Template แบบ 1 คอลัมน์ ซึ่งออกแบบโดยสมาชิกท่านหนึ่งบนเว็บและอนุญาติให้ผมนำมาเผยแพร่ได้
+ Author: pipatpon laithong
+ Modify By: http://www.goragod.com
+ Responsive
+ */
+body {
+	background-color: #EEEDED;
+}
+.header {
+	background-color: #232323;
+	border-bottom: 2px solid #C83939;
+	padding: 0 2.5%;
+}
+.header .float-right {
+	color: #FFF;
+}
+.header h1 {
+	color: #F10F5F;
+	font-size: 3em;
+	padding: 0;
+}
+.header .description {
+	color: #F39C12;
+	padding: 0 0 10px 0;
+}
+.body_wrapper {
+	margin: 0 auto;
+	float: none;
+	width: 960px;
+}
+.bg_slide {
+	background-color: #000;
+}
+.topmenu {
+	background-color: #232323;
+}
+.topmenu > ul > li > a > span {
+	padding: 20px;
+}
+.menu_wrapper .topmenu > ul > li > a {
+	color: #EEE;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.menu_wrapper .topmenu > ul > li:hover > a, .menu_wrapper .topmenu > ul > li.select > a {
+	background-color: #D63B37;
+	color: #FFF;
+}
+a.scroll {
+	font-size: 2em;
+	background-color: #C83939;
+	background-color: rgba(197,42,7,0.7);
+	color: #FFF;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	height: 1.6em;
+	width: 1.6em;
+	text-align: center;
+	line-height: 1.9em;
+}
+a.scroll:hover {
+	background-color: rgba(197,42,7,1);
+}
+.footer_bg_color {
+	background-color: #232322;
+	color: #A5A5A5;
+}
+.footer #text-links {
+	background-color: #C83939;
+}
+.footer .item {
+	padding: 20px 0;
+}
+#register_frm dl.info {
+	border: 1px dashed #DDD;
+	padding: 5px 10px;
+	line-height: 1.8em;
+}
+#register_frm dl.info dt {
+	padding-bottom: 5px;
+}
+.member_section {
+	background-color: #FFF;
+}
+.memberfrm a {
+	display: block;
+}
+.login p {
+	margin: 2px 0;
+}
+.reaction {
+	background-color: #F9F7EE;
+}
+fieldset > legend > span {
+	font-size: 1.6em;
+	padding-top: 10px;
+	overflow: hidden;
+	display: inline-block;
+}
+#comment-list {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#comment-list .r {
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+#comment-list .r-body > .detail {
+	z-Index: 2;
+	margin-left: 60px;
+	position: relative;
+}
+#comment-list .r > .reaction {
+	text-align: right;
+}
+#comment-list .r-body > img.usericon {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+.content {
+	border-color: #DDD;
+}
+.bdr_content > header {
+	margin-bottom: 10px;
+}
+.homepage header {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+.homepage .next {
+	text-align: right;
+	margin: 5px 0 10px 0;
+}
+#widget_share {
+	position: fixed;
+	background-color: #E9212D;
+	background-color: rgba(233,33,45,0.7);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	height: auto;
+	margin-top: -7.5em;
+	top: 50%;
+	width: 3em;
+	left: -2.8em;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	z-index: 10;
+	font-size: 1.4em;
+}
+#widget_share:hover {
+	left: 0;
+}
+#widget_share a:before {
+	padding: 0.3em;
+	background-color: #000;
+	color: #FFF;
+	border-radius: 50em;
+	-moz-border-radius: 50em;
+	-webkit-border-radius: 50em;
+}
+#widget_share a {
+	font-size: inherit;
+	margin: 0;
+	float: left;
+	width: 3em;
+	height: 3em;
+	text-align: center;
+	line-height: 3em;
+	border-bottom: 1px solid #CF0000;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-shadow: 0 1px 0 #BB0000;
+	-webkit-transition: background-color 0.5s ease;
+	-moz-transition: background-color 0.5s ease;
+	-o-transition: background-color 0.5s ease;
+	-ms-transition: background-color 0.5s ease;
+	transition: background-color 0.5s ease;
+}
+#widget_share a:hover, #widget_share a:focus {
+	background-color: #FFF;
+	box-shadow: 0 0 10px #333;
+}
+#widget-search-form input {
+	background-color: #333 !important;
+}
+.wrapper_bg_color {
+	background-color: #FFF;
+}
+p.right a.icon-next {
+	margin-right: 5px;
+}
+#GModal_modaldiv > div.modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+.mainform p {
+	padding-left: 0;
+	padding-right: 0;
+}
+.footer .gallery-box .table_rss_gallery_class a {
+	border: 3px solid #FFF;
+	box-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+.footer .gallery-box #rss_gallery {
+	margin-top: 10px;
+}
+.footer h2 {
+	color: #C83939;
+	text-shadow: 1px 1px 1px #000;
+	font-size: 1.8em;
+}
+.footer_top .td {
+	border-color: rgba(255,255,255,0.1);
+	border-width: 3px;
+	border-style: none none none solid;
+	vertical-align: top;
+	padding: 0 15px;
+	width: 33.33%;
+}
+.footer_top .td:first-child {
+	border-left: none;
+}
+@media only screen and (max-width: 768px) {
+	.footer_top > .td {
+		width: auto;
+		border-style: solid none none none;
+		padding: 15px 0;
+		display: block;
+	}
+	.footer_top > .td:first-child {
+		border-top: none;
+		padding-top: 0;
+	}
+}
+@media only screen and (max-width: 480px) {
+	.header > .table, .header .float-right {
+		margin: 0 auto;
+		width: auto;
+		float: none;
+		text-align: center;
+		display: table;
+	}
+	.header > .table > .td {
+		padding: 5px 10px;
+		display: block;
+	}
+}

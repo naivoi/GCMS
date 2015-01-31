@@ -1,0 +1,16 @@
+<div class=bdr_content>
+	<header>
+		<nav class=breadcrumbs>
+			<ul>{BREADCRUMS}</ul>
+		</nav>
+		<h2>{TOPIC}</h2>
+	</header>
+	<div class=detail>{DETAIL}</div>
+	<div id=download-list>{LIST}</div>
+	<footer class=splitpage>{SPLITPAGE}</footer>
+</div>
+<script>
+	$G(window).Ready(function(){
+		inintDownloadList('download-list');
+	});
+</script>

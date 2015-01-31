@@ -29,7 +29,7 @@
 			$content[] = '<section>';
 			$content[] = '<header><h1 class=icon-config>'.$title.'</h1></header>';
 			// form
-			$content[] = '<form id=setup_frm class=setup_frm method=post action=index.php autocomplete=off>';
+			$content[] = '<form id=setup_frm class=setup_frm method=post action=index.php>';
 			// thumbnail
 			$content[] = '<fieldset>';
 			$content[] = '<legend><span>{LNG_THUMBNAIL}</span></legend>';

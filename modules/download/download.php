@@ -18,7 +18,7 @@
 			// ตรวจสอบสถานะการดาวน์โหลด
 			if (!$download || !is_file($file_path)) {
 				$ret['error'] = 'DOWNLOAD_FILE_NOT_FOUND';
-			} elseif (!is_array($config['download_can_download'])) {
+			} elseif (!isset($config['download_can_download'])) {
 				$ret['error'] = 'DO_NOT_DOWNLOAD';
 			} elseif (!in_array($status, $config['download_can_download'])) {
 				$ret['error'] = 'NOT_LOGIN';
@@ -30,7 +30,7 @@
 				$db->edit(DB_DOWNLOAD, $download['id'], array('downloads' => $download['downloads']));
 				// URL สำหรับดาวน์โหลด
 				$fid = gcms::rndname(32);
-				$_SESSION[$fid]['file'] = $download['file'];
+				$_SESSION[$fid]['file'] = $file_path;
 				$_SESSION[$fid]['size'] = $download['size'];
 				$_SESSION[$fid]['name'] = "$download[name].$download[ext]";
 				// คืนค่า URL สำหรับดาวน์โหลด

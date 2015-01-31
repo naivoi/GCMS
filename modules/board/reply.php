@@ -185,7 +185,7 @@
 						$q['hassubpic'] = $index['hassubpic'] + 1;
 					}
 					// ลบรูปเก่า
-					if ($index['picture'] != '') {
+					if (!empty($index['picture'])) {
 						@unlink(DATA_PATH."board/$index[picture]");
 					}
 				}

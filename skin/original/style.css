@@ -1,0 +1,319 @@
+/*
+ Name: Goragod.com
+ Description: Template ของ Goragod.com ในเวอร์ชั่น  3
+ Author: Goragod.com
+ */
+body {
+	background: #455A71 url(img/bg_body.gif) 0 0 repeat-x;
+}
+a {
+	color: #3C5065;
+}
+.share-box {
+	text-align: right;
+	margin-bottom: 10px;
+}
+.widget-share {
+	text-align: right;
+}
+.language-menu {
+	margin-bottom: 10px;
+	text-align: right;
+}
+.widget.calendar-box {
+	border: none;
+}
+.widget.search-box form {
+	margin: 0 5px 5px 5px;
+}
+.member_section fieldset > legend, .mainform fieldset > legend, .content .member_section header > h2 {
+	background-color: inherit;
+	color: inherit;
+	border-style: none none dashed none;
+	border-width: 1px;
+	border-color: #BEBEBE;
+	border-color: rgba(0,0,0,0.2);
+	margin-bottom: 10px;
+	padding: 5px 0;
+	font-size: 150%;
+}
+.member_section {
+	padding: 5px 10px 0;
+}
+.gcss-wrapper, .footer, #text-links {
+	clear: both;
+	margin: 0 auto;
+	width: 910px;
+}
+.gcss-wrapper {
+	background-color: #FFF;
+	padding: 10px 0;
+}
+div.body-wrapper {
+	background: transparent url(img/bg-2.jpg) 50% 0 no-repeat;
+	display: block;
+}
+.wrapper_top_bg {
+	background: url(img/wrapper-top.gif) 100% -45px no-repeat;
+	height: 21px;
+	width: 924px;
+	clear: both;
+	margin: 0 auto;
+	position: relative;
+}
+.wrapper_top_bg > span.left-wrapper {
+	background: url(img/wrapper-top.gif) 0 -23px no-repeat;
+	height: 22px;
+	width: 7px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.wrapper_top_bg > span.mid-wrapper {
+	background: url(img/wrapper-top.gif) 0 0 repeat-x;
+	height: 21px;
+	width: 911px;
+	float: left;
+	margin-left: 6px;
+}
+.header {
+	width: 930px;
+	padding: 15px 0 0 0;
+	position: relative;
+	margin: 0 auto;
+	clear: both;
+}
+.header h1 {
+	color: #01B3EA;
+	font-size: 350%;
+	font-family: 'Audiowide', cursive;
+}
+.header p {
+	color: #6D86A7;
+	font-size: 90%;
+	margin-left: 30px;
+	font-style: italic;
+}
+.footer_bg_color {
+	background-color: #39362F;
+	border-bottom: 4px solid #354E6F;
+	color: #FEFEFE;
+	font-size: 90%;
+	padding: 10px;
+}
+.footer a {
+	color: inherit;
+}
+.footer a:hover {
+	text-decoration: underline;
+}
+.menu_wrapper .topmenu > ul > li > a > span {
+	padding: 10px 0;
+}
+.menu_wrapper .topmenu {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 2px 5px rgba(0,0,0,.4);
+	-moz-box-shadow: 0 2px 5px rgba(0,0,0,.4);
+	box-shadow: 0 2px 5px rgba(0,0,0,.4);
+}
+.menu_wrapper .topmenu > ul {
+	background: transparent url(img/menu.png) 0 0 repeat-x;
+}
+.menu_wrapper .topmenu > ul > li:hover > a, .menu_wrapper .topmenu > ul > li.select > a {
+	background: transparent url(img/menu.png) 0 -141px repeat-x;
+}
+.menu_wrapper .topmenu > ul ul {
+	color: #333;
+}
+.menu_wrapper .topmenu > ul > li {
+	border-right: 1px solid rgba(0,0,0,0.1);
+	border-left: 1px solid rgba(255,255,255,0.1);
+	color: #FEFEFE;
+}
+.menu_wrapper .topmenu > ul > li:first-child {
+	border-left: none;
+}
+.menu_wrapper .topmenu > ul > li:last-child {
+	border-right: none;
+}
+#sidebar {
+	float: right;
+	width: 220px;
+}
+#sidebar div.wrapper_sidebar {
+	margin: 0 10px;
+}
+#text-links {
+	background-color: #354D6F;
+	margin: 10px auto;
+	text-align: center;
+}
+#text-links a {
+	margin: 5px;
+	display: inline-block;
+}
+#wrapper-content {
+	float: left;
+	width: 690px;
+	padding-left: 10px;
+}
+.content h2 > span > a {
+	color: #FEFEFE;
+}
+.content .bdr_content > header {
+	margin-bottom: 10px;
+}
+.content header > h2 {
+	background-color: #42566D;
+	padding: 5px 10px;
+	color: #FEFEFE;
+	border-bottom: 2px solid #21305B;
+	border-right: 2px solid #21305B;
+	font-size: 150%;
+	text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+#document-view .reaction {
+	border-top: 3px solid #4C80BA;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+#board-view .q .detail:after, .r .detail:after {
+	position: absolute;
+	background-image: url(img/msg_arrow.gif);
+	content: ' ';
+	width: 11px;
+	height: 18px;
+	left: -11px;
+	top: 5px;
+}
+#board-view .q .detail, .r .detail {
+	border: 1px solid #CDCDCD;
+	background-color: #F3F3F3;
+	margin-left: 65px;
+	position: relative;
+	padding: 5px;
+}
+.bottomline {
+	background: #FFF url(img/bottom-content.png) 0 0 repeat-x;
+	border-bottom: 4px solid #354E6F;
+	border-top: 1px solid #DDDDDD;
+	padding: 5px 0;
+	text-align: right;
+}
+.bottomline span {
+	color: #aaa;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.login {
+	padding-bottom: 5px;
+}
+.login p {
+	padding: 2px 7px;
+	margin: 0;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.7em;
+}
+.login h2 {
+	text-align: center;
+}
+.login h2 span {
+	color: #093;
+}
+.login .title {
+	color: #36C;
+	text-align: center;
+}
+.login em {
+	font: 150% Arial;
+}
+.login .subtitle {
+	color: #093;
+	font-size: 90%;
+	text-align: center;
+}
+.login p.usericon {
+	margin: 3px 0;
+}
+.login .button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+img[alt=usericon] {
+	border: 1px solid #CCCCFF;
+	background-color: #FFF;
+	padding: 2px;
+}
+.widget_bdr {
+	border: 1px solid #F0EAD3;
+}
+.widget {
+	color: #856d65;
+}
+.widget_bg_color {
+	background-color: #F7F3E2;
+}
+.widget header {
+	color: #FFF;
+	background-image: url(img/bg.png);
+	background-position: 0 -81px;
+	background-repeat: repeat-x;
+	margin: 0;
+}
+.widget > header > h2 {
+	line-height: 2em;
+	font-size: 100%;
+	padding: 0 5px 6px 5px;
+}
+.content .widget header > h2 {
+	padding: 2px 5px;
+}
+.content .school_menu > header > h2 {
+	border: none;
+}
+form dl.info {
+	background-color: #fff;
+	border: 1px dashed #EEE;
+	background-color: #F9F9F9;
+	line-height: 1.8em;
+	margin: 5px 0;
+	padding: 10px;
+}
+.homepage .next {
+	text-align: right;
+	margin: 5px 0 0;
+	color: #006600;
+}
+.homepage .widget_bdr {
+	border: none;
+}
+.homepage header {
+	margin-bottom: 5px;
+}
+#document-list .row span {
+	font-size: 90%;
+}
+#comment-list .reaction {
+	text-align: right;
+}
+.tab > ul {
+	margin-left: 10px;
+}
+.tab > ul > li > a {
+	background-color: #FFF;
+}
+.tab > ul > li.select > a {
+	background-color: #F9F9F9;
+}
+#GModal_modaldiv > div.modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+.bdr_content {
+	border-color: #DDD;
+}

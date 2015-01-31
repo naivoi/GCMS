@@ -1,7 +1,13 @@
 <?php
 	// widgets/facebook/index.php
 	if (defined('MAIN_INIT')) {
-		$module = empty($module) ? $config['facebook_user'] : $module;
+		$module = empty($module) ? gcms::getVars($config, 'facebook_user', '') : $module;
+		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 960);
+		$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
+		$config['facebook_faces'] = gcms::getVars($config, 'facebook_faces', 0);
+		$config['facebook_border'] = gcms::getVars($config, 'facebook_border', 0);
+		$config['facebook_stream'] = gcms::getVars($config, 'facebook_stream', 0);
+		$config['facebook_header'] = gcms::getVars($config, 'facebook_header', 0);
 		if ($module == 'hidden') {
 			$widget = '';
 		} else {

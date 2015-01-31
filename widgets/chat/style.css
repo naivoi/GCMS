@@ -1,0 +1,68 @@
+div#gchat_div {
+	border: 1px solid #EEE;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+div#gchat_div form {
+	padding: 5px;
+	text-align: center;
+	background-color: #F9F9F9;
+	line-height: 1.3em;
+}
+div#gchat_div #gchat_text {
+	font-size: 1.3em;
+}
+div#gchat_div #gchat_smile img {
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	padding: 1px;
+}
+div#gchat_div #gchat_smile > img:hover {
+	background-color: #C2CCE0;
+	border-color: #2F96B4;
+}
+div#gchat_div #gchat_smile {
+	margin: 0;
+	padding: 5px 0 0 0;
+	border-top: 1px solid #EEE;
+	text-align: center;
+	background-color: #F9F9F9;
+}
+div#gchat_div dd.bg2 {
+	background-color: #F9F9F9;
+}
+div#gchat_div dd {
+	border-bottom: 1px dashed #EEE;
+	padding: 0 5px;
+	line-height: 2em;
+}
+div#gchat_div dd > * {
+	margin-right: 5px;
+}
+div#gchat_div dd > span.time {
+	font-size: 90%;
+}
+div#gchat_div dd > span.user {
+	font-weight: bold;
+}
+div#gchat_body > dl#gchat_content {
+	display: block;
+	height: 200px;
+	background-color: #FFF;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+div#gchat_body form > span#gchat_sound {
+	background-image: url(img/sound.png);
+	background-position: 0 -34px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+}
+div#gchat_body form > span#gchat_sound.soundoff {
+	background-position: 0 0;
+}

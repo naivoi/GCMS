@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang={LANGUAGE} dir=ltr>
+	<head>
+		<title>{TITLE}</title>
+		<meta charset=utf-8>
+		<link rel="shortcut icon" href="{WEBURL}/favicon.ico">
+		<link rel=icon href="{WEBURL}/favicon.gif">
+		<link rel=stylesheet href={WEBURL}/{SKIN}css.php>
+		<script src="{WEBURL}/js/js.php"></script>
+		<script>
+			{SCRIPT}
+		</script>
+		<!--[if lt IE 9]>
+		<script src={WEBURL}/js/html5.js></script>
+		<![endif]-->
+		{META}
+	</head>
+	<body>
+		<a class=skip_content accesskey=s href=#content title="{LNG_SKIP_TO_CONTENT}"></a>
+		<div id=header-wrapper>
+			<header class="header header_bg header_bg_color">
+				<div id=logo>
+					<h1><a href="{WEBURL}">{WEBTITLE}</a></h1>
+					<p class=description>{WEBDESCRIPTION}</p>
+				</div>
+			</header>
+		</div>
+		<div id=scroll-to class="menu_wrapper menu_bg menu_bg_color">
+			<img class=people src="{WEBURL}/{SKIN}img/people.png" alt="">
+			<nav class=topmenu>
+				<ul>{MAINMENU}</ul>
+			</nav>
+		</div>
+		<div class="wrapper wrapper_bg_color wrapper_bg">
+			<div class=content_wrapper>
+				<aside class="sidebar sidebar_bg sidebar_bg_color">
+					<div class="widget widget_bdr widget_bg widget_bg_color login">
+						<div id=login-box class=widget_body>{LOGIN}</div>
+					</div>
+					<div class="widget table collapse fullwidth"><div class=td>{FONTSIZE}</div><div class="td right">{LANGUAGES}</div></div>
+					<div class=widget>{WIDGET_CALENDAR}</div>
+					<div class=widget-like>{WIDGET_LIKE}</div>
+					<section class="widget widget_bdr widget_bg widget_bg_color search">
+						<header><h2>Search</h2></header>
+						<div class=widget_body>{WIDGET_SEARCH}</div>
+					</section>
+					<div class=widget-share>{WIDGET_SHARE}</div>
+					<section class="widget widget_bdr widget_bg widget_bg_color gallery">
+						<header><h2>Gallery</h2></header>
+						<div class=widget_body>{WIDGET_GALLERY}</div>
+					</section>
+					<section class="widget widget_bdr widget_bg widget_bg_color gallery counter">
+						<header><h2>Counter</h2></header>
+						<div class=widget_body>{WIDGET_COUNTER}</div>
+					</section>
+					<div class=center>
+						<a href="http://www.goragod.com" title="Goragod.com"><img src="http://www.goragod.com/smalllogo.gif" alt="Goragod.com"></a>
+						<iframe src=http://www.webshopready.com/ad_small.html style="width:88px;height:31px;"></iframe>
+					</div>
+				</aside>
+				<div class="body-content content_bg_color content_bg">
+					<div id=content class="content wrapper_top_bg wrapper_bg_color">{CONTENT}</div>
+				</div>
+			</div>
+		</div>
+		<footer class="center footer footer_bg_color footer_bg">
+			<p>
+				Copyright &copy; 2014 <a href="{WEBURL}">{WEBTITLE}</a> GCMS Version {VERSION}
+				designed by <a href="http://www.goragod.com">Goragod.com</a>
+				{LNG_PAGE_PROCESS} <span id=db_elapsed>{ELAPSED}</span> {LNG_SECOND} (<span id=db_quries>{QURIES}</span> quries.)
+			</p>
+		</footer>
+	</body>
+</html>

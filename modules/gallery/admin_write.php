@@ -44,7 +44,7 @@
 			// detail
 			$content[] = '<div class=item>';
 			$content[] = '<label for=gallery_detail>{LNG_DESCRIPTION}</label>';
-			$content[] = '<span class="g-input icon-file"><textarea id=gallery_detail name=gallery_detail rows=3 maxlength=200 title="{LNG_GALLERY_ALBUM_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index['detail']).'</textarea></span>';
+			$content[] = '<span class="g-input icon-file"><textarea id=gallery_detail name=gallery_detail rows=3 maxlength=200 title="{LNG_GALLERY_ALBUM_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index, 'detail').'</textarea></span>';
 			$content[] = '<div class=comment id=result_gallery_detail>{LNG_GALLERY_ALBUM_DESCRIPTION_COMMENT}</div>';
 			$content[] = '</div>';
 			// icon

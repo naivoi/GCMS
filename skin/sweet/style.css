@@ -1,0 +1,150 @@
+/*
+ Name: Sweet
+ Description: Template สีสวยหวาน แบบ สองคอลัมน์ เมนูหลักอยู่ที่ Sidebar
+ Author: Goragod.com
+ Responsive
+ */
+body {
+	background-image: url(img/bg.gif);
+	background-repeat: repeat;
+	background-attachment: fixed;
+	color: #837669;
+}
+a {
+	color: #D87EB4;
+}
+.content a:hover {
+	text-decoration: underline;
+}
+.gcss-wrapper {
+	background-color: #FFF;
+}
+.menu_wrapper nav > ul {
+	max-width: 960px;
+	margin: -20px auto 0;
+}
+.wrapper_top_bg {
+	padding: 10px;
+}
+.footer {
+	text-align: center;
+	font-family: 'Share Tech Mono', Tahoma;
+	padding: 30px 0;
+	border-top: 1px solid #FFF;
+	box-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+	color: #BBB;
+	background-color: #FFF;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZkZjNmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWZhZmQiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background-image: -moz-linear-gradient(top,  rgba(253,243,249,1) 0%, rgba(254,250,253,0) 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(253,243,249,1)), color-stop(100%,rgba(254,250,253,0)));
+	background-image: -webkit-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: -o-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: -ms-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: linear-gradient(to bottom,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf3f9', endColorstr='#00fefafd',GradientType=0 );
+}
+#text-links {
+	padding: 20px 0;
+}
+.header_bg {
+	margin: 0 5px;
+	background-color: #FFF;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZkZjNmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWZhZmQiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background-image: -moz-linear-gradient(top,  rgba(253,243,249,1) 0%, rgba(254,250,253,0) 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(253,243,249,1)), color-stop(100%,rgba(254,250,253,0)));
+	background-image: -webkit-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: -o-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: -ms-linear-gradient(top,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	background-image: linear-gradient(to bottom,  rgba(253,243,249,1) 0%,rgba(254,250,253,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf3f9', endColorstr='#00fefafd',GradientType=0 );
+}
+.header_bg #logo {
+	padding: 30px 15px;
+}
+#logo h1 {
+	font-size: 3em;
+	font-family: 'Share Tech Mono', sans-serif;
+}
+#logo h1 a {
+	color: inherit;
+}
+#logo .description {
+	color: #999;
+	font-size: 1em;
+	font-style: italic;
+	font-family: 'Share Tech Mono', sans-serif;
+}
+.breadcrumbs {
+	background-color: #F5F5F5;
+	padding: 0.3em 5px;
+}
+.widget header h2, form fieldset > legend, .login .head {
+	font-size: 1.4em;
+	color: #837669;
+	background-color: #F5F5F5;
+	border-left: 5px solid #EAB8D6;
+	padding: 0 5px;
+}
+.login .title {
+	color: #080;
+}
+.login .subtitle {
+	color: #EAB8D6;
+	font-style: italic;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.7em;
+}
+section.buttons a {
+	margin: 0 5px 5px 0;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+#comment-list .reaction, #document-view .reaction, #board-view .reaction {
+	border: 1px solid #B7DEFF;
+	background-color: #E5F3FF;
+}
+#comment-list .reaction {
+	text-align: right;
+}
+.next {
+	text-align: right;
+	margin: 5px 0 10px 0;
+}
+.topmenu {
+	background-color: #A4C592;
+	border-top: 20px solid #BB6F9E;
+}
+.topmenu > ul {
+	width: 960px;
+	max-width: 100%;
+	float: none;
+	border-top: 20px solid #D889B8;
+	margin: -20px auto 0;
+	background-color: #D8F3C9;
+}
+.topmenu > ul > li {
+	display: table-cell;
+	float: none;
+}
+.topmenu > ul > li > a {
+	display: table;
+	margin: 10px auto;
+}
+.topmenu li.select > a, .topmenu li:hover > a {
+	background-color: #A2CE89;
+	color: #FFF;
+}
+form dl.info {
+	border: 1px dashed #EEE;
+	padding: 10px;
+}
+dl.info dt {
+	margin-bottom: 10px;
+}
+#GModal_modaldiv > div.modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}

@@ -10,7 +10,7 @@
 		if ($id > 0) {
 			$textlink = $db->getRec(DB_TEXTLINK, $id);
 		} else {
-			$textlink = array('id' => 0, 'type' => $type, 'description' => '', 'text' => '', 'url' => '', 'logo' => '', 'publish_start' => $mmktime, 'publish_end' => $mmktime);
+			$textlink = array('id' => 0, 'type' => $type, 'description' => '', 'text' => '', 'url' => '', 'target' => '', 'logo' => '', 'publish_start' => $mmktime, 'publish_end' => $mmktime);
 		}
 		// title
 		$title = $lng['LNG_TEXTLINK_TITLE'];
@@ -28,14 +28,16 @@
 		// description
 		$content[] = '<div class=item>';
 		$content[] = '<label for=textlink_description>{LNG_DESCRIPTION}</label>';
-		$content[] = '<span class="g-input icon-file"><input type=text id=textlink_description name=textlink_description value="'.$textlink['description'].'" title="{LNG_TEXTLINK_DESCRIPTION_COMMENT}" autofocus></span>';
+		$content[] = '<span class="g-input icon-file"><input type=text id=textlink_description name=textlink_description maxlength=49 value="'.$textlink['description'].'" title="{LNG_TEXTLINK_DESCRIPTION_COMMENT}" autofocus></span>';
 		$content[] = '<div class=comment id=result_textlink_description>{LNG_TEXTLINK_DESCRIPTION_COMMENT}</div>';
 		$content[] = '</div>';
 		// โหลด styles
 		include (ROOT_PATH.'widgets/textlink/styles.php');
 		// type
 		$content[] = '<div class=item>';
-		preg_match('/([a-z]+)([0-9]{0,2})/', $textlink['type'], $match);
+		if (!preg_match('/([a-z]+)([0-9]{0,2})/', $textlink['type'], $match)) {
+			$match = array(1 => '', 2 => '');
+		}
 		$content[] = '<label for=textlink_type>{LNG_TYPE}</label>';
 		$content[] = '<div class="table fullwidth">';
 		$content[] = '<div class=td><span class="g-input icon-file"><select name=textlink_type id=textlink_type title="{LNG_TEXTLINK_TYPE_COMMENT}">';

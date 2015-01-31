@@ -46,7 +46,7 @@
 				// อัปโหลดรูปภาw
 				if ($icon['tmp_name'] != '') {
 					// ตรวจสอบไฟล์อัปโหลด
-					$info = gcms::isValidImage(array('jpg','gif','png'), $icon);
+					$info = gcms::isValidImage(array('jpg', 'gif', 'png'), $icon);
 					if (!$info) {
 						$ret['ret_write_picture'] = 'INVALID_FILE_TYPE';
 						$input = 'write_picture';

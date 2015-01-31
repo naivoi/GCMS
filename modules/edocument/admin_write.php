@@ -85,7 +85,7 @@
 			// detail
 			$content[] = '<div class=item>';
 			$content[] = '<label for=edocument_detail>{LNG_DESCRIPTION}</label>';
-			$content[] = '<span class="g-input icon-file"><textarea id=edocument_detail name=edocument_detail rows=5 title="{LNG_EDOCUMENT_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index['detail']).'</textarea></span>';
+			$content[] = '<span class="g-input icon-file"><textarea id=edocument_detail name=edocument_detail rows=5 title="{LNG_EDOCUMENT_DESCRIPTION_COMMENT}">'.gcms::detail2TXT($index, 'detail').'</textarea></span>';
 			$content[] = '<div class=comment id=result_edocument_detail>{LNG_EDOCUMENT_DESCRIPTION_COMMENT}</div>';
 			$content[] = '</div>';
 			$content[] = '</fieldset>';

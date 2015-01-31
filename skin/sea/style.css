@@ -1,0 +1,276 @@
+/*
+ Name: ทะเล
+ Description: Template โทนสีน้ำเงินเข้ม 2 คอลัมน์ HTML5 CSS3
+ Author: Goragod.com
+ */
+body {
+	background: #455E7F url(img/bg_body.gif) repeat-x;
+}
+a {
+	color: #3C5065;
+}
+.widget.calendar-box {
+	border: none;
+}
+.widget.search-box form {
+	margin: 0 5px 5px 5px;
+}
+.member_section fieldset > legend, .mainform fieldset > legend, .content .member_section header > h2 {
+	background-color: inherit;
+	color: inherit;
+	border-style: none none dashed none;
+	border-width: 1px;
+	border-color: #BEBEBE;
+	border-color: rgba(0,0,0,0.2);
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	font-size: 150%;
+	text-shadow: 1px 1px 0 #FFF;
+}
+.member_section {
+	background-color: #EEE;
+}
+#header, #wrapper, #text-links, .footer {
+	clear: both;
+	float: none;
+	margin: 0 auto;
+	width: 920px;
+}
+#header {
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+#header h1 {
+	color: #01B3EA;
+	font-size: 350%;
+	font-family: 'Audiowide', cursive;
+}
+#header p {
+	color: #6D86A7;
+	font-size: 90%;
+	margin: 0;
+}
+.footer {
+	clear: both;
+	padding-bottom: 20px;
+	padding-top: 10px;
+	text-align: right;
+	line-height: 1.5em;
+	color: #FEFEFE;
+}
+.footer > p > a {
+	color: #FFF;
+}
+.footer > p > a:hover {
+	text-decoration: underline;
+}
+.topmenu {
+	background: url("img/menu-bg.png") repeat-x scroll 0 0 #000000;
+	margin-top: 20px;
+	text-align: right;
+}
+.topmenu > ul > li > a {
+	color: #FEFEFE;
+}
+.topmenu ul > li:hover > a {
+	color: #A4DFED;
+}
+#sidebar {
+	float: left;
+	width: 220px;
+}
+.sidebar_bg {
+	padding: 10px;
+}
+.sidebar_bg_color {
+	background-color: #FFF;
+}
+#text-links {
+	background-color: #354D6F;
+	margin: 10px auto;
+	text-align: center;
+}
+#text-links a {
+	margin: 5px;
+	display: inline-block;
+}
+#wrapper-content {
+	float: right;
+	width: 690px;
+}
+#wrapper-content .content {
+	background: #FFF;
+	padding: 10px;
+}
+.content {
+	position: relative;
+}
+.wrapper_top_bg {
+	height: 8px;
+	overflow: hidden;
+	background-color: #EEE;
+	border: 1px solid #DDD;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+.content h2 > span > a {
+	color: #FEFEFE;
+}
+.content .bdr_content > header {
+	margin-bottom: 10px;
+}
+.content header > h2 {
+	background-color: #42566D;
+	padding: 5px 10px;
+	color: #FEFEFE;
+	border-bottom: 2px solid #21305B;
+	font-size: 150%;
+	text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+#document-view .reaction {
+	border-top: 3px solid #4C80BA;
+}
+#comment-list .r {
+	margin-bottom: 10px;
+}
+#comment-list .detail {
+	border: 1px solid #CDCDCD;
+	background-color: #F3F3F3;
+	margin-left: 65px;
+}
+#board-view .q .detail:after, .r .detail:after {
+	position: absolute;
+	background-image: url(img/msg_arrow.gif);
+	content: ' ';
+	width: 11px;
+	height: 18px;
+	left: -11px;
+	top: 5px;
+}
+#board-view .q .detail, .r .detail {
+	border: 1px solid #CDCDCD;
+	background-color: #F3F3F3;
+	margin-left: 65px;
+	position: relative;
+	padding: 5px;
+}
+#comment-list .r-body .reaction {
+	padding: 0;
+	background-color: transparent;
+}
+#comment-list .content-action {
+	top: 5px;
+	right: 5px;
+}
+.bottomline {
+	background: #FFF url(img/bottom-content.png) 0 0 repeat-x;
+	border-bottom: 4px solid #354E6F;
+	border-top: 1px solid #DDDDDD;
+	padding: 5px 0;
+	text-align: right;
+}
+.bottomline a {
+	color: #aaa;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.login {
+	padding-bottom: 4px;
+}
+.login p {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.login h2 {
+	text-align: center;
+}
+.login h2 span {
+	color: #093;
+}
+.login .title {
+	color: #36C;
+	text-align: center;
+}
+.login em {
+	font: 150% Arial;
+}
+.login .subtitle {
+	color: #093;
+	font-size: 90%;
+	text-align: center;
+}
+.login p.usericon {
+	margin: 3px 0;
+}
+.login .button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.memberfrm a {
+	display: block;
+	line-height: 1.8em;
+}
+p.usericon > img {
+	border: 1px solid #CCCCFF;
+	padding: 2px;
+	background-color: #FFF;
+}
+.sidebar .widget_bdr {
+	border: 1px solid #000000;
+}
+.widget {
+	margin-bottom: 10px;
+	color: #856d65;
+}
+.widget header {
+	background: url("img/menu-bg.png") repeat-x scroll 0 0 #000000;
+	color: #FFFFFF;
+	margin: 1px;
+}
+.widget header > h2 {
+	font-size: 100%;
+	padding: 5px;
+	background-color: transparent;
+	border: none;
+}
+.homepage header {
+	margin-bottom: 5px;
+}
+#document-list .row span {
+	font-size: 90%;
+}
+#comment-list .reaction {
+	text-align: right;
+}
+.homepage .next {
+	text-align: right;
+	margin-top: 5px;
+	font-size: 90%;
+	clear: both;
+	display: block;
+	color: #78BD72;
+}
+.tab > ul {
+	margin-left: 10px;
+}
+.tab > ul > li > a {
+	background-color: #FFF;
+}
+.tab > ul > li.select > a {
+	background-color: #EEE;
+}
+#GModal_modaldiv > div.modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+form dl.info {
+	background-color: #F9F9F9;
+	border: 1px dashed #EEE;
+	line-height: 1.8em;
+	margin: 5px 0;
+	padding: 10px;
+}
+.bdr_content {
+	border-color: #DDD;
+}
