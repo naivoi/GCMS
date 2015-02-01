@@ -17,7 +17,7 @@
 		$content[] = '<div class=item>';
 		$content[] = '<label for=google_site_verification>{LNG_SITE_VERIFICATION_CODE}</label>';
 		$content[] = '<div class="table collapse"><span class="td tablet">&lt;meta name=&quot;google-site-verification&quot; content=&quot;</span><span class=td>';
-		$content[] = '<span class=g-input><input type=text id=google_site_verification name=google_site_verification value="'.gcms::getVars($config, 'google_site_verification'], '').'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"></span>';
+		$content[] = '<span class=g-input><input type=text id=google_site_verification name=google_site_verification value="'.gcms::getVars($config, 'google_site_verification', '').'" title="{LNG_SITE_VERIFICATION_CODE_COMMENT}"></span>';
 		$content[] = '</span><span class="td tablet">&quot;&nbsp;/&gt;</span></div>';
 		$content[] = '<div class=comment id=result_google_site_verification>{LNG_SITE_VERIFICATION_CODE_COMMENT}</div>';
 		$content[] = '</div>';
@@ -45,7 +45,7 @@
 		$facebook = gcms::getVars($config, 'facebook', array());
 		$content[] = '<div class=item>';
 		$content[] = '<label for=facebook_appId>{LNG_FACEBOOK_APPID}</label>';
-		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId'], '' ).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
+		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId', '' ).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
 		$content[] = '</div>';
 		// facebook_secret
 		$content[] = '<div class=item>';
