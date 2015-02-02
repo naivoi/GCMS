@@ -687,3 +687,9 @@ li[class^="icon-"], li[class*=" icon-"] {
 .icon-gps:before {
 	content: "\e61b";
 }
+.icon-personnel:before {
+	content: '\e658';
+}
+.icon-estudent:before {
+	content: '\e6dc';
+}
