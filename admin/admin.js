@@ -303,6 +303,20 @@ function inintLanguages(id) {
 			callClick(this, doClick);
 		}
 	});
+	new GSortTable(id, {
+		'tag': 'dd',
+		'endDrag': function () {
+			var trs = new Array();
+			forEach($E(id).getElementsByTagName('dd'), function () {
+				if (this.id) {
+					trs.push(this.id);
+				}
+			});
+			if (trs.length > 1) {
+				send(WEB_URL + 'admin/language_action.php', 'action=move&data=' + trs.join(','), doFormSubmit);
+			}
+		}
+	});
 }
 function getUpdate() {
 	send('getupdate.php', null, function(xhr) {

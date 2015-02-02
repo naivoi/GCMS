@@ -8,19 +8,29 @@
 			$sql = "SELECT C.*,M.`module` FROM `".DB_MODULES."` AS M";
 			$sql .= " INNER JOIN `".DB_PERSONNEL."` AS C ON C.`module_id`=M.`id` AND C.`id`=$id";
 		} else {
-			$sql = "SELECT 0 AS `id`,M.`id` AS `module_id`,M.`module` FROM `".DB_MODULES."` AS M";
+			$sql = "SELECT M.`id` AS `module_id`,M.`module` FROM `".DB_MODULES."` AS M";
 		}
 		$sql .= " WHERE M.`owner`='personnel' LIMIT 1";
 		$index = $db->customQuery($sql);
 		if (sizeof($index) == 1) {
 			$index = $index[0];
+			if ($id == 0) {
+				$index['name'] = '';
+				$index['category_id'] = 0;
+				$index['id'] = 0;
+				$index['order'] = 1;
+				$index['position'] = '';
+				$index['detail'] = '';
+				$index['address'] = '';
+				$index['phone'] = '';
+				$index['email'] = '';
+				$index['picture'] = '';
+			}
 			// title
-			$m = ucwords($index['module']);
 			$title = "$lng[LNG_ADD]-$lng[LNG_EDIT] $lng[LNG_PERSONNEL]";
 			$a = array();
 			$a[] = '<span class=icon-modules>{LNG_MODULES}</span>';
-			$a[] = '<a href="{URLQUERY?module=personnel-config}">'.$m.'</a>';
-			$a[] = '<a href="{URLQUERY?module=personnel-category}">{LNG_PERSONNEL_CATEGORY}</a>';
+			$a[] = '<a href="{URLQUERY?module=personnel-config}">{LNG_PERSONNEL}</a>';
 			$a[] = '<a href="{URLQUERY?module=personnel-setup}">{LNG_PERSONNEL}</a>';
 			$a[] = $id == 0 ? '{LNG_ADD}' : '{LNG_EDIT}';
 			// แสดงผล

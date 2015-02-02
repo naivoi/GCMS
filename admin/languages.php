@@ -15,7 +15,8 @@
 		$content[] = '<div class=subtitle>{LNG_LANGUAGE_TITLE}</div>';
 		$content[] = '<dl class=editinplace_list id=languages>';
 		foreach ($install_languages AS $i => $item) {
-			$row = '<dd id=L_'.$item.'>';
+			$row = '<dd id=L_'.$item.' class=sort>';
+			$row .= '<span class=icon-move></span>';
 			$row .= '<span class=icon-delete id=delete_'.$item.' title="{LNG_DELETE} {LNG_LANGUAGE}"></span>';
 			$row .= '<a class=icon-edit href="index.php?module=languageadd&amp;id='.$item.'" title="{LNG_EDIT} {LNG_LANGUAGE}"></a>';
 			$sel = is_array($config['languages']) && in_array($item, $config['languages']) ? 'check' : 'uncheck';

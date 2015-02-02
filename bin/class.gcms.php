@@ -1431,16 +1431,16 @@
 					fwrite($f, implode("\n\t", $save[$language]));
 					fclose($f);
 				}
-				if (is_array($lng[$language]['MONTH_SHORT'])) {
+				if (isset($lng[$language]['MONTH_SHORT'])) {
 					$save2[$language][] = 'Date.monthNames = ["'.implode('","', $lng[$language]['MONTH_SHORT']).'"];';
 				}
-				if (is_array($lng[$language]['DATE_SHORT'])) {
+				if (isset($lng[$language]['DATE_SHORT'])) {
 					$save2[$language][] = 'Date.dayNames = ["'.implode('","', $lng[$language]['DATE_SHORT']).'"];';
 				}
 				if (isset($lng[$language]['YEAR_OFFSET'])) {
 					$save2[$language][] = 'Date.yearOffset = '.$lng[$language]['YEAR_OFFSET'].';';
 				}
-				if (sizeof($save2[$language]) > 0) {
+				if (isset($save2[$language]) && sizeof($save2[$language]) > 0) {
 					$f = fopen(DATA_PATH."language/$language.js", 'wb');
 					fwrite($f, implode("\n", $save2[$language]));
 					fclose($f);

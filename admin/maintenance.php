@@ -20,6 +20,7 @@
 		$content[] = '<legend><span>{LNG_MAINTENANCE}</span></legend>';
 		$content[] = '<aside class=message>{LNG_MAINTENANCE_COMMENT}</aside>';
 		// maintenance
+		$config['maintenance_mode'] = gcms::getVars($config, 'maintenance_mode', 0);
 		$content[] = '<div class=item>';
 		$content[] = '<div class=table>';
 		$content[] = '<label for=write_mode>{LNG_SETTINGS}</label>';
