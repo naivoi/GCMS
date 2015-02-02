@@ -160,7 +160,7 @@
 										$save[$k.'W'] = $index['icon_width'];
 										$save[$k.'H'] = $index['icon_height'];
 										// ลบรูปภาพเดิม
-										if ($index[$k] != $save[$k]) {
+										if (isset($index[$k]) && $index[$k] != $save[$k]) {
 											@unlink(DATA_PATH."document/$index[$k]");
 										}
 									}
