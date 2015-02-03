@@ -20,9 +20,8 @@
 		$content[] = '<label for=write_owner>{LNG_INSTALL_MODULE}</label>';
 		$content[] = '<span class="g-input icon-modules"><select name=owner id=owner title="{LNG_PLEASE_SELECT}" autofocus>';
 		foreach ($install_owners AS $owner => $item) {
-			if ($config[$owner]['description'] != '') {
-				$sel = $document['owner'] == $owner ? ' selected' : '';
-				$content[] = '<option value='.$owner.$sel.'>'.$config[$owner]['description'].' ['.$owner.']</option>';
+			if (!empty($config[$owner]['description'])) {
+				$content[] = '<option value='.$owner.'>'.$config[$owner]['description'].' ['.$owner.']</option>';
 			}
 		}
 		$content[] = '</select></span>';

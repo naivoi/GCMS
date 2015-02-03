@@ -12,6 +12,8 @@
 			$owner = strtolower($db->sql_trim_str($_POST, 'write_owner', ''));
 			// โหลด admin_inint
 			if (is_file(ROOT_PATH."modules/$owner/admin_inint.php")) {
+				define('MAIN_INIT', 'admin');
+				$isAdmin = true;
 				include ROOT_PATH."modules/$owner/admin_inint.php";
 			}
 			$id = gcms::getVars($_POST, 'write_id', 0);
