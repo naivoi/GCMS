@@ -10,8 +10,9 @@
 		$sql .= "FROM `".DB_COUNTER."` AS C ";
 		$sql .= "ORDER BY C.`id` DESC LIMIT 1";
 		$datas = $db->customQuery($sql);
-		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', (int)$datas[0]['visited']);
-		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', (int)$datas[0]['useronline']);
+		$datas = sizeof($datas) == 1 ? $datas[0] : array('visited' => 0, 'useronline' => 0);
+		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', (int)$datas['visited']);
+		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', (int)$datas['useronline']);
 		// สี สำหรับส่งให้ graphs
 		$color = "['".implode("', '", $colors)."']";
 		// title
@@ -50,17 +51,18 @@
 		$sql .= "FROM `".DB_COUNTER."` AS C ";
 		$sql .= "ORDER BY C.`id` DESC LIMIT 1";
 		$datas = $db->customQuery($sql);
+		$datas = sizeof($datas) == 1 ? $datas[0] : array('counter' => 0, 'visited' => 0, 'members' => 0, 'activate' => 0, 'ban' => 0, 'useronline' => 0);
 		$content[] = '<section class=section>';
 		$content[] = '<header><h1 class=icon-summary>{LNG_SITE_REPORT}</h1></header>';
 		$content[] = '<table class="summary fullwidth">';
 		$content[] = '<caption>{LNG_REPORT_MEMBER}</caption>';
 		$content[] = '<tbody>';
-		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=0">{LNG_REPORT_MEMBER_ALL}</a></th><td class=right>'.(int)$datas[0]['members'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=2">{LNG_MEMBER_NOT_CONFIRM}</a></th><td class=right>'.(int)$datas[0]['activate'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=9">{LNG_MEMBER_BAN}</a></th><td class=right>'.(int)$datas[0]['ban'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_ALL}</th><td class=right>'.(int)$datas[0]['counter'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr><th scope=row>{LNG_COUNTER_ONLINE}</th><td class=right>'.(int)$datas[0]['useronline'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=report">{LNG_COUNTER_TODAY}</a></th><td class=right>'.(int)$datas[0]['visited'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=0">{LNG_REPORT_MEMBER_ALL}</a></th><td class=right>'.(int)$datas['members'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=2">{LNG_MEMBER_NOT_CONFIRM}</a></th><td class=right>'.(int)$datas['activate'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=9">{LNG_MEMBER_BAN}</a></th><td class=right>'.(int)$datas['ban'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_ALL}</th><td class=right>'.(int)$datas['counter'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row>{LNG_COUNTER_ONLINE}</th><td class=right>'.(int)$datas['useronline'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=report">{LNG_COUNTER_TODAY}</a></th><td class=right>'.(int)$datas['visited'].' {LNG_PEOPLE}</td></tr>';
 		if (is_file(DATA_PATH.'index.php')) {
 			$date = file_get_contents(DATA_PATH.'index.php');
 			if (preg_match('/([0-9]+){0,2}-([0-9]+){0,2}-([0-9]+){0,4}\s([0-9]+){0,2}:([0-9]+){0,2}:([0-9]+){0,2}/', $date, $match)) {
