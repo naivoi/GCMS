@@ -29,7 +29,7 @@
 			$content[] = '<div class=item>';
 			$content[] = '<label for=save_js>{LNG_FILE}</label>';
 			$content[] = '<span class="g-input icon-config"><select name=save_js id=save_js title="{LNG_PLEASE_SELECT}">';
-			foreach (array('php','js') AS $k => $v) {
+			foreach (array('php', 'js') AS $k => $v) {
 				$sel = $k == $language['js'] ? ' selected' : '';
 				$content[] = '<option value='.$k.$sel.'>'.$v.'</option>';
 			}
@@ -40,7 +40,7 @@
 			$content[] = '<div class=item>';
 			$content[] = '<label for=save_type>{LNG_TYPE}</label>';
 			$content[] = '<span class="g-input icon-config"><select name=save_type id=save_type title="{LNG_PLEASE_SELECT}">';
-			foreach (array('text','int','array') AS $k) {
+			foreach (array('text', 'int', 'array') AS $k) {
 				$sel = $k == $language['type'] ? ' selected' : '';
 				$content[] = '<option value='.$k.$sel.'>'.$k.'</option>';
 			}

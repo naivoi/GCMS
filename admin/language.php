@@ -86,7 +86,7 @@
 		// ไฟล์
 		$content[] = '<fieldset>';
 		$content[] = '<label>{LNG_FILE} <select name=js>';
-		foreach (array('php','js') AS $k => $v) {
+		foreach (array('php', 'js') AS $k => $v) {
 			$sel = $k == $js ? ' selected' : '';
 			$content[] = '<option value='.$k.$sel.'>'.$v.'</option>';
 		}

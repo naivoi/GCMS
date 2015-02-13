@@ -385,7 +385,6 @@ mark {
 }
 /* layout */
 .gcss-wrapper {
-	max-width: 95%;
 	width: 960px;
 	margin: 0 auto;
 }
@@ -394,6 +393,9 @@ body.wide .gcss-wrapper {
 }
 body.fullwidth .gcss-wrapper {
 	width: 95%;
+}
+body.responsive .gcss-wrapper {
+	max-width: 95%;
 }
 .header h1 {
 	font-size: 4em;
@@ -2433,7 +2435,8 @@ table.fullwidth,
 	width: 49.5%;
 }
 .ggrid.margin-box > .row > .col3,
-.ggrid.margin-box > .col3 {
+.ggrid.margin-box > .col3,
+.document-list .col3 {
 	width: 32.66%;
 }
 .ggrid.margin-box > .row > .col4,
@@ -2477,6 +2480,7 @@ table.fullwidth,
 .ggrid > [class*="block"]:first-child,
 .ggrid.collapse > [class*="block"],
 .document-list .col2:nth-child(2n+1),
+.document-list .col3:nth-child(3n+1),
 .document-list .col4:nth-child(4n+1),
 .document-list .col6:nth-child(6n+1),
 .ggrid.margin-box > .col2:nth-child(2n+1),
@@ -3187,6 +3191,18 @@ header.list > h2 > :last-child {
 .document-list .listview img {
 	width: 16px;
 	height: 16px;
+}
+.document-list .thumbview .topic {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+	overflow: hidden;
+	display: block;
+}
+.document-list .thumbview .description {
+	height: 5em;
+	overflow: hidden;
 }
 .document-list .listview .description {
 	display: none;

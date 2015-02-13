@@ -47,7 +47,7 @@
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $config['web_title'];
-			$replace[] = $error == '' ? $config['web_description'] : '<span class=error>'.$error.'</span>';
+			$replace[] = empty($error) ? $config['web_description'] : '<span class=error>'.$error.'</span>';
 			$replace[] = WEB_URL;
 			$replace[] = $login_result['displayname'] == '' ? $login_result['email'] : $login_result['displayname'];
 			$replace[] = $login_result['id'];

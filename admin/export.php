@@ -13,13 +13,19 @@
 		$datas = array();
 		foreach ($_POST AS $table => $values) {
 			foreach ($values AS $k => $v) {
-				$datas[$table][$v]++;
+				if (isset($datas[$table][$v])) {
+					$datas[$table][$v]++;
+				} else {
+					$datas[$table][$v] = 1;
+				}
 			}
 		}
+		$web_url = str_replace(array('/http(s)?:\/\//', '/www\./'), '', WEBURL);
+		$web_url = '/http(s)?:\/\/(www\.)?'.preg_quote($web_url).'/';
 		// ชื่อฐานข้อมูล
 		$fname = $config['db_name'].'.sql';
 		// memory limit
-		ini_set('memory_limit', '512M');
+		ini_set('memory_limit', '1024M');
 		// ส่งออกเป็นไฟล์
 		header("Content-Type: application/force-download");
 		header("Content-Disposition: attachment; filename=$fname");
@@ -84,7 +90,7 @@
 								} elseif ($field == 'id') {
 									unset($record['id']);
 								} else {
-									$record[$field] = addslashes(str_replace(WEB_URL, '{WEBURL}', $value));
+									$record[$field] = addslashes(preg_replace($web_url, '{WEBURL}', $value));
 								}
 							}
 							$sqls[] = preg_replace(array('/[\r]/u', '/[\n]/u'), array('\r', '\n'), sprintf($data, implode("','", $record)));
@@ -95,7 +101,7 @@
 					$records = $db->customQuery("SELECT * FROM ".$table['Name']);
 					foreach ($records AS $record) {
 						foreach ($record AS $field => $value) {
-							$record[$field] = addslashes(str_replace(WEB_URL, '{WEBURL}', $value));
+							$record[$field] = addslashes(preg_replace($web_url, '{WEBURL}', $value));
 						}
 						$sqls[] = preg_replace(array('/[\r]/u', '/[\n]/u'), array('\r', '\n'), sprintf($data, implode("','", $record)));
 					}
