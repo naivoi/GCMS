@@ -23,7 +23,7 @@
 			$sql = "SELECT `id`,`status`,`email`,`displayname` FROM `".DB_USER."` WHERE ".implode(' OR ', $tos);
 			foreach ($db->customQuery($sql) AS $item) {
 				// ไม่สามารถส่งถึงตัวเองได้
-				if ($item['email'] != $_SESSION['login']['email']) {
+				if ($isMember && $item['email'] != $_SESSION['login']['email']) {
 					$emails[] = $item['displayname'] == '' ? $item['email'] : $item['displayname'];
 					$ids[] = $item['id'];
 					$status[] = $item['status'];
@@ -52,7 +52,7 @@
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = 'gcms::getLng';
 			$replace[] = $title;
-			$replace[] = $_SESSION['login']['email'];
+			$replace[] = $isMember ? $_SESSION['login']['email'] : '';
 			$replace[] = implode(',', $emails);
 			$replace[] = implode(',', $ids);
 			$replace[] = $register_antispamchar;

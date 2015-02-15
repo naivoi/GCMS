@@ -24,7 +24,7 @@
 			$sql .= " LIMIT 1";
 		} else {
 			// ใหม่ ตรวจสอบโมดูล
-			$sql = "SELECT 0 AS `id`,'' AS `alias`,'' AS `picture`,1 AS `can_reply`,M.`id` AS `module_id`,M.`module`,M.`owner`,C.`category_id`,'$mmktime' AS `create_date`";
+			$sql = "SELECT M.`id` AS `module_id`,M.`module`,M.`owner`,C.`category_id`,'$mmktime' AS `create_date`";
 			$sql .= ",(CASE WHEN ISNULL(C.`config`) THEN M.`config` ELSE CONCAT(M.`config`,'\n',C.`config`) END) AS `config`";
 			$sql .= " FROM `".DB_MODULES."` AS M";
 			$sql .= " INNER JOIN `".DB_INDEX."` AS I ON I.`module_id`=$module_id AND I.`index`='1' AND I.`language` IN ('".LANGUAGE."','')";
@@ -75,6 +75,10 @@
 			} else {
 				$a[] = '{LNG_ADD}';
 				$title = "$lng[LNG_ADD] $lng[LNG_CONTENTS] $m";
+				$index['id'] = 0;
+				$index['alias'] = '';
+				$index['picture'] = '';
+				$index['can_reply'] = 0;
 			}
 			// แสดงผล
 			$content[] = '<div class=breadcrumbs><ul><li>'.implode('</li><li>', $a).'</li></ul></div>';

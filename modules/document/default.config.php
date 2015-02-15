@@ -11,11 +11,11 @@
 	$default['document']['moderator'] = 1;
 	$default['document']['can_write'] = 1;
 	$default['document']['list_per_page'] = 20;
-	$default['document']['news_count'] = 15;
 	$default['document']['published'] = 1;
 	$default['document']['viewing'] = 0;
 	$default['document']['category_display'] = 1;
-	$default['document']['news_sort'] = 0;
 	$default['document']['default_icon'] = 'modules/document/img/document-icon.png';
 	$default['document']['sort'] = 0;
 	$default['document']['new_date'] = 0;
+	$default['document']['news_count'] = 15;
+	$default['document']['news_sort'] = 0;
