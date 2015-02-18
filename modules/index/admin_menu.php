@@ -9,6 +9,17 @@
 			$menu = array();
 			$menu['parent'] = strtoupper($db->sql_trim_str($_GET, 'menu', ''));
 			$menu['published'] = 1;
+			$menu['language'] = '';
+			$menu['menu_text'] = '';
+			$menu['menu_tooltip'] = '';
+			$menu['alias'] = '';
+			$menu['accesskey'] = '';
+			$menu['menu_order'] = 0;
+			$menu['level'] = 0;
+			$menu['menu_url'] = '';
+			$menu['index_id'] = 0;
+			$menu['menu_target'] = '';
+			$menu['id'] = 0;
 		}
 		if ($id > 0 && !$menu) {
 			$title = $lng['LNG_DATA_NOT_FOUND'];
