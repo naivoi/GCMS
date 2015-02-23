@@ -8,6 +8,7 @@
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
 			$ret = array('error' => 'EX_MODE_ERROR');
 		} else {
+			$error = false;
 			// ค่าที่ส่งมา
 			$save = array();
 			$save['name'] = $db->sql_trim_str($_POST, 'write_name');

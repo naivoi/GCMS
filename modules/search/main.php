@@ -12,6 +12,7 @@
 		$searchs2 = array();
 		$words = array();
 		$search_result = array();
+		$splitpage = '';
 		// inint timer
 		$mtime = microtime();
 		$mtime = explode(' ', $mtime);

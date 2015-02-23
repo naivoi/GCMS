@@ -13,7 +13,7 @@ function mTooltipShow(id, action, elem) {
 			cache: true
 		});
 	}
-	mtooltip.showAjax(elem, action, 'id=' + id, function(xhr) {
+	mtooltip.showAjax(elem, action, 'id=' + id, function (xhr) {
 		if (loader) {
 			loader.inint(this.tooltip);
 		}
@@ -22,17 +22,17 @@ function mTooltipShow(id, action, elem) {
 function send(target, query, callback, wait, c) {
 	var req = new GAjax();
 	req.inintLoading(wait || 'wait', false, c);
-	req.send(target, query, function(xhr) {
+	req.send(target, query, function (xhr) {
 		callback.call(this, xhr);
 	});
 }
-var hideModal = function() {
+var hideModal = function () {
 	if (modal != null) {
 		modal.hide();
 	}
 };
 function showModal(src, qstr, doClose) {
-	send(src, qstr, function(xhr) {
+	send(src, qstr, function (xhr) {
 		var ds = xhr.responseText.toJSON();
 		var content = '';
 		if (ds) {
@@ -130,7 +130,7 @@ function defaultSubmit(ds) {
 		}
 	}
 }
-var doFormSubmit = function(xhr) {
+var doFormSubmit = function (xhr) {
 	var datas = xhr.responseText.toJSON();
 	if (datas) {
 		defaultSubmit(datas[0]);
@@ -141,7 +141,7 @@ var doFormSubmit = function(xhr) {
 function inintWriteTab(id, sel) {
 	var a;
 	function _doclick(sel) {
-		forEach($E(id).getElementsByTagName('a'), function() {
+		forEach($E(id).getElementsByTagName('a'), function () {
 			a = this.id.replace('tab_', '');
 			if ($E(a)) {
 				this.className = a == sel ? 'select' : '';
@@ -150,9 +150,9 @@ function inintWriteTab(id, sel) {
 		});
 		$E('write_tab').value = sel;
 	}
-	forEach($E(id).getElementsByTagName('a'), function() {
+	forEach($E(id).getElementsByTagName('a'), function () {
 		if ($E(this.id.replace('tab_', ''))) {
-			callClick(this, function() {
+			callClick(this, function () {
 				_doclick(this.id.replace('tab_', ''));
 				return false;
 			});
@@ -162,14 +162,14 @@ function inintWriteTab(id, sel) {
 }
 function inintCheck(obj) {
 	var chk, patt = /check_[0-9]+/;
-	forEach($E(obj).getElementsByTagName('a'), function() {
+	forEach($E(obj).getElementsByTagName('a'), function () {
 		if ($G(this).hasClass('checkall')) {
 			if (this.onclick == null) {
 				this.title = SELECT_ALL;
-				callClick(this, function() {
+				callClick(this, function () {
 					this.focus();
 					chk = this.hasClass('icon-check');
-					forEach($E(obj).getElementsByTagName('a'), function() {
+					forEach($E(obj).getElementsByTagName('a'), function () {
 						if (patt.test(this.id)) {
 							this.className = chk ? 'icon-uncheck' : 'icon-check';
 							this.title = chk ? CHECK : UNCHECK;
@@ -184,12 +184,12 @@ function inintCheck(obj) {
 		} else if (patt.test(this.id)) {
 			if (this.onclick == null) {
 				this.title = CHECK;
-				callClick(this, function() {
+				callClick(this, function () {
 					this.focus();
 					chk = $G(this).hasClass('icon-check');
 					this.className = chk ? 'icon-uncheck' : 'icon-check';
 					this.title = chk ? CHECK : UNCHECK;
-					forEach($E(obj).getElementsByTagName('a'), function() {
+					forEach($E(obj).getElementsByTagName('a'), function () {
 						if (this.hasClass('checkall')) {
 							this.className = 'checkall icon-uncheck';
 							this.title = SELECT_ALL;
@@ -208,7 +208,7 @@ function setQueryURL(key, value) {
 	if (ls.length == 1) {
 		window.location = ls[0] + '?' + key + '=' + value;
 	} else {
-		forEach(ls[1].split('&'), function(item) {
+		forEach(ls[1].split('&'), function (item) {
 			if (!patt.test(item)) {
 				a.push(item);
 			}
@@ -226,7 +226,7 @@ function doAction(action, id, target, callback, customconfirm, input) {
 		query = '',
 		cs = new Array(),
 		chk = /check_[0-9]+/;
-	forEach($E(id).getElementsByTagName('a'), function() {
+	forEach($E(id).getElementsByTagName('a'), function () {
 		if (chk.test(this.id) && $G(this).hasClass('icon-check')) {
 			cs.push(this.id.replace('check_', ''));
 		}
@@ -271,7 +271,7 @@ function doAction(action, id, target, callback, customconfirm, input) {
 			var temp = this;
 			temp.action = action;
 			temp.query = query;
-			send(target, query, function(xhr) {
+			send(target, query, function (xhr) {
 				if (callback) {
 					callback.call(temp, xhr);
 				} else if (xhr.responseText !== '') {
@@ -295,7 +295,7 @@ function inintTR(id, patt, selId) {
 	function _doHighlight(hl) {
 		var c2;
 		var h = this.className.replace(' highlight', '').replace(' select', '');
-		forEach($E(id).getElementsByTagName('tr'), function() {
+		forEach($E(id).getElementsByTagName('tr'), function () {
 			var bg = $G(this).hasClass('bg1 bg2');
 			if (bg) {
 				c2 = this.className.replace(' highlight', '').replace(' select', '');
@@ -327,7 +327,7 @@ function inintTR(id, patt, selId) {
 	var old_over = '';
 	if (patt == null) {
 		var old_bg = '';
-		forEach($E(id).getElementsByTagName('tr'), function() {
+		forEach($E(id).getElementsByTagName('tr'), function () {
 			var bg = $G(this).hasClass('bg1 bg2');
 			if (bg) {
 				if (old_bg != bg) {
@@ -336,7 +336,7 @@ function inintTR(id, patt, selId) {
 				}
 				this.className = bg + ' H_' + a + (typeof select_tr == 'object' && select_tr.indexOf(this.id) > -1 ? ' select' : '');
 				if (this.onmouseover == null) {
-					this.onmouseover = function() {
+					this.onmouseover = function () {
 						if (old_over != this.id) {
 							old_over = this.id;
 							old_out = '';
@@ -345,7 +345,7 @@ function inintTR(id, patt, selId) {
 					};
 				}
 				if (this.onmouseout == null) {
-					this.onmouseout = function(e) {
+					this.onmouseout = function (e) {
 						var evt = window.event || e;
 						var toElement = evt.toElement || evt.relatedTarget;
 						try {
@@ -366,13 +366,13 @@ function inintTR(id, patt, selId) {
 		});
 	} else {
 		var bg = 'bg2';
-		forEach($E(id).getElementsByTagName('tr'), function() {
+		forEach($E(id).getElementsByTagName('tr'), function () {
 			if (patt.exec(this.id)) {
 				bg = bg == 'bg2' ? 'bg1' : 'bg2';
 				a++;
 				$G(this).replaceClass('select row bg1 bg2', (typeof select_tr == 'object' && select_tr.indexOf(this.id) > -1 ? 'select row ' : 'row ') + bg + ' H_' + a);
 				if (this.onmouseover == null) {
-					this.onmouseover = function() {
+					this.onmouseover = function () {
 						if (old_over != this.id) {
 							old_over = this.id;
 							old_out = '';
@@ -381,7 +381,7 @@ function inintTR(id, patt, selId) {
 					};
 				}
 				if (this.onmouseout == null) {
-					this.onmouseout = function(e) {
+					this.onmouseout = function (e) {
 						var evt = window.event || e;
 						var toElement = evt.toElement || evt.relatedTarget;
 						try {
@@ -505,11 +505,11 @@ function checkAlias() {
 	}
 }
 function selectChanged(src, action, callback) {
-	$G(src).addEvent('change', function() {
+	$G(src).addEvent('change', function () {
 		var temp = this;
 		var req = new GAjax();
 		req.inintLoading('wait', false);
-		req.send(action, 'id=' + temp.id + '&value=' + temp.value, function(xhr) {
+		req.send(action, 'id=' + temp.id + '&value=' + temp.value, function (xhr) {
 			if (xhr.responseText !== '') {
 				callback.call(temp, xhr);
 			}
@@ -517,7 +517,7 @@ function selectChanged(src, action, callback) {
 	});
 }
 function checkSaved(button, url, write_id, target) {
-	callClick(button, function() {
+	callClick(button, function () {
 		var id = floatval($E(write_id).value);
 		if (id == 0) {
 			alert(PLEASE_SAVE_BEFORE);
@@ -529,7 +529,7 @@ function checkSaved(button, url, write_id, target) {
 	});
 }
 function inintSearch(form, input, module) {
-	var _callSearch = function(e) {
+	var _callSearch = function (e) {
 		var q = $E(input);
 		if (q) {
 			var v = q.value.trim();
@@ -550,14 +550,14 @@ function inintSearch(form, input, module) {
 	$G(form).addEvent('submit', _callSearch);
 }
 function callModal(id, src, qstr) {
-	var doClick = function() {
+	var doClick = function () {
 		showModal(src, qstr);
 		return false;
 	};
 	callClick($E(id), doClick);
 }
 function callAction(input, action, id, target, callback, customconfirm) {
-	callClick(input, function() {
+	callClick(input, function () {
 		var a;
 		if (Object.isFunction(action)) {
 			a = action.call();
@@ -580,13 +580,13 @@ function _doCheckKey(input, e, patt) {
 	}
 	return true;
 }
-var numberOnly = function(e) {
+var numberOnly = function (e) {
 	return _doCheckKey(this, e, /[0-9]/);
 };
-var integerOnly = function(e) {
+var integerOnly = function (e) {
 	return _doCheckKey(this, e, /[0-9\-]/);
 };
-var currencyOnly = function(e) {
+var currencyOnly = function (e) {
 	return _doCheckKey(this, e, /[0-9\.]/);
 };
 function inputValidate(inp, typ) {
@@ -598,7 +598,7 @@ function inputValidate(inp, typ) {
 	} else {
 		input.addEvent('keypress', numberOnly);
 	}
-	var _check = function() {
+	var _check = function () {
 		var val = parseFloat(this.value);
 		if (typ == 'currency') {
 			if (isNaN(val)) {
@@ -617,7 +617,7 @@ function inputValidate(inp, typ) {
 	_check.call(input);
 }
 function inintInput(id) {
-	forEach($E(id).getElementsByTagName('input'), function() {
+	forEach($E(id).getElementsByTagName('input'), function () {
 		var c = this.className;
 		if (c == 'currency' || c == 'number' || c == 'integer') {
 			inputValidate(this, c);
@@ -625,13 +625,13 @@ function inintInput(id) {
 	});
 }
 function setSelect(id, value) {
-	forEach($E(id).getElementsByTagName('input'), function() {
+	forEach($E(id).getElementsByTagName('input'), function () {
 		if (this.type.toLowerCase() == 'checkbox') {
 			this.checked = value;
 		}
 	});
 }
-var galleryUploadResult = function(error, count) {
+var galleryUploadResult = function (error, count) {
 	if (error != "") {
 		alert(error);
 	}
@@ -646,7 +646,7 @@ var galleryUploadResult = function(error, count) {
 };
 function inintGalleryUpload(id, module) {
 	var patt = /(deletep)_([0-9]+)_([0-9]+)/;
-	var _galleryUploadAction = function() {
+	var _galleryUploadAction = function () {
 		var hs = patt.exec(this.id);
 		var action = '';
 		if (hs[1] == 'deletep' && confirm(CONFIRM_DELETE)) {
@@ -657,7 +657,7 @@ function inintGalleryUpload(id, module) {
 		}
 		return false;
 	};
-	forEach($E(id).getElementsByTagName('a'), function() {
+	forEach($E(id).getElementsByTagName('a'), function () {
 		if (patt.test(this.id)) {
 			callClick(this, _galleryUploadAction);
 		}
@@ -700,7 +700,7 @@ function replaceSelection(input, replaceString) {
 function catchTab(evt) {
 	if (GEvent.keyCode(evt) == 9) {
 		var temp = this;
-		var _focus = function() {
+		var _focus = function () {
 			temp.focus();
 		};
 		replaceSelection(this, String.fromCharCode(9));
@@ -711,12 +711,12 @@ function catchTab(evt) {
 function handleFileSelect(e) {
 	var input = GEvent.element(e);
 	var imgDiv = $E(input.get('data-img'));
-	forEach(input.files, function() {
+	forEach(input.files, function () {
 		if (!this.type.match("image.*")) {
 			return;
 		}
 		var reader = new FileReader();
-		reader.onload = function(e) {
+		reader.onload = function (e) {
 			var src = GEvent.element(e).result;
 			var a = document.createElement('a');
 			a.href = src;
@@ -729,7 +729,7 @@ function handleFileSelect(e) {
 	});
 }
 function inintFilesUpload(input, div, url) {
-	var doDelete = function() {
+	var doDelete = function () {
 		if (confirm(CONFIRM_DELETE)) {
 			send(url, 'id=' + this.id, doFormSubmit);
 		}
@@ -738,17 +738,17 @@ function inintFilesUpload(input, div, url) {
 	input = $G(input);
 	input.set('data-img', div);
 	input.addEvent('change', handleFileSelect);
-	forEach($E(div).getElementsByTagName('span'), function() {
+	forEach($E(div).getElementsByTagName('span'), function () {
 		callClick(this, doDelete);
 	});
 }
 var _scrolltop = 0;
-$G(window).Ready(function() {
+$G(window).Ready(function () {
 	if ($E('change_display')) {
-		forEach($E('change_display').getElementsByTagName('a'), function() {
+		forEach($E('change_display').getElementsByTagName('a'), function () {
 			var f = new Array('small', 'normal', 'large');
 			if (f.indexOf(this.className) > -1) {
-				callClick(this, function() {
+				callClick(this, function () {
 					var fontSize = floatval(Cookie.get('fontSize'));
 					fontSize = fontSize == 0 ? document.body.getStyle('fontSize').toInt() : fontSize;
 					if (this.className == 'small') {
@@ -765,23 +765,26 @@ $G(window).Ready(function() {
 			}
 		});
 	}
-	var _doMenuClick = function() {
+	var _doMenuClick = function () {
 		$E('wait').className = 'show';
 	};
-	forEach($E(document.body).getElementsByTagName('nav'), function(){
+	forEach($E(document.body).getElementsByTagName('nav'), function () {
 		if ($G(this).hasClass('topmenu sidemenu slidemenu')) {
 			new GDDMenu(this, _doMenuClick);
 		}
 	});
-	window.setInterval(function() {
-		var c = document.viewport.getscrollTop() > 100;
+	var toTop = $E('toTop') ? $G('toTop').getTop() : 100;
+	document.addEvent('scroll', function () {
+		var c = this.viewport.getscrollTop() > toTop;
 		if (_scrolltop != c) {
 			_scrolltop = c;
 			if (c) {
-				document.body.addClass('toTop');
+				this.body.addClass('toTop');
+				document.callEvent('toTopChange');
 			} else {
-				document.body.removeClass('toTop');
+				this.body.removeClass('toTop');
+				document.callEvent('toTopChange');
 			}
 		}
-	}, 500);
+	});
 });

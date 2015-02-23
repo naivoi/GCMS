@@ -167,4 +167,4 @@
 		$ret = array('error' => 'ACTION_ERROR');
 	}
 	// คืนค่าเป็น JSON
-	echo gcms::array2json($ret);
+	echo isset($ret) ? gcms::array2json($ret) : '';

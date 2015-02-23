@@ -775,7 +775,7 @@
 		}
 		// ตรวจสอบสถานะแอดมิน (สูงสุด)
 		public static function isAdmin() {
-			return isset($_SESSION['login']) && (int)$_SESSION['login']['status'] == 1;
+			return isset($_SESSION['login']) && $_SESSION['login']['status'] == 1;
 		}
 		// ตรวจสอบแอดมินและสถานะที่กำหนด
 		public static function canConfig($cfg, $key) {

@@ -69,7 +69,7 @@
 		}
 		unset($modules[0]);
 		// โมดูลที่เรียก
-		$module = $modules[1];
+		$module = gcms::getVars($modules, 1, '');
 		// เลือกเมนู
 		$menu = empty($install_modules[$module]['alias']) ? $module : $install_modules[$module]['alias'];
 	}

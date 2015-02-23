@@ -181,10 +181,9 @@
 				}
 			}
 			$address = array('company', 'address1', 'address2', 'provinceID', 'province', 'zipcode', 'country', 'phone2', 'company', 'sex', 'birthday');
-			foreach ($_POST AS $key => $value) {
-				$key = str_replace('register_', '', $key);
-				if (in_array($key, $address)) {
-					$save[$key] = $db->sql_trim_str($_POST, $key);
+			foreach ($address AS $key) {
+				if (isset($_POST['register_'.$key])) {
+					$save[$key] = $db->sql_trim_str($_POST, 'register_'.$key);
 				}
 			}
 			if (!$error) {

@@ -999,16 +999,17 @@ GAjax.prototype = {
 						temp.callback(xhr);
 					}
 					window.clearTimeout(temp.calltimeout);
-					temp.timeinterval = window.setTimeout(temp._getupdate.bind(temp), temp.interval);
+					_nextupdate();
 				}
 			};
-			var _calltimeout = function() {
-				window.clearTimeout(temp.calltimeout);
+			var _nextupdate = function() {
 				temp.timeinterval = window.setTimeout(temp._getupdate.bind(temp), temp.interval);
 			};
-			if (option.timeout > 0) {
-				this.calltimeout = window.setTimeout(_calltimeout, option.timeout);
-			}
+			this.calltimeout = window.setTimeout(function(){
+				window.clearTimeout(temp.timeinterval);
+				xhr.abort();
+				_nextupdate();
+			}, this.interval);
 		}
 	},
 	getRequestBody: function(pForm) {
@@ -1109,9 +1110,9 @@ GLoader.prototype = {
 		var temp = this;
 		var patt1 = new RegExp('^.*' + location.hostname + '/(.*?)$');
 		var patt2 = new RegExp('.*#.*?');
-		forEach($E(obj).getElementsByTagName('a'), function(a) {
-			if (a.target == '' && a.onclick == null && a.href != '' && patt1.exec(a.href) && !patt2.exec(a.href)) {
-				a.onclick = function(e) {
+		forEach($E(obj).getElementsByTagName('a'), function() {
+			if (this.target == '' && this.onclick == null && this.href != '' && patt1.exec(this.href) && !patt2.exec(this.href)) {
+				this.onclick = function(e) {
 					var evt = e || window.event;
 					if (!(evt.shiftKey || evt.ctrlKey || evt.metaKey || evt.altKey)) {
 						return temp.location(this.href);

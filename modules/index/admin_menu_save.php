@@ -22,9 +22,9 @@
 			$toplvl = gcms::getVars($_POST, 'write_order', 0);
 			$action = gcms::getVars($_POST, 'write_action', 0);
 			if ($action == 1 && preg_match('/^([a-z]+)_(([a-z]+)(_([a-z0-9]+))?|([0-9]+))$/', $_POST['write_index_id'], $match)) {
-				if ($match[6] == '') {
+				if (empty($match[6])) {
 					if (is_file(ROOT_PATH."modules/$match[1]/admin_inint.php")) {
-						$install_owners[$match[1]][] = array('module' => $match[5], 'owner' => $match[1]);
+						$install_owners[$match[1]][] = array('module' => gcms::getVars($match, 5, ''), 'owner' => $match[1]);
 						include (ROOT_PATH."modules/$match[1]/admin_inint.php");
 						$action = 2;
 						$save['menu_url'] = $module_menus[$match[1]][$match[2]][1];
@@ -38,6 +38,8 @@
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			if ($id > 0) {
 				$menu = $db->getRec(DB_MENUS, $id);
+			} else {
+				$menu = array('id' => 0);
 			}
 			// ตรวจสอบค่าที่ส่งมา
 			$error = false;
