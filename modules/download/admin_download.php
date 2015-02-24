@@ -12,7 +12,7 @@
 			header('Cache-Control: private');
 			header('Content-Type: application/octet-stream');
 			header('Content-Type: application/download');
-			header('Content-Disposition: attachment; filename="'.iconv('UTF-8', 'TIS-620', "$file[name].$file[ext]")).'"';
+			header("Content-Disposition: attachment; filename=\"$file[name].$file[ext]\"");
 			header('Content-Transfer-Encoding: binary');
 			header('Accept-Ranges: bytes');
 			set_time_limit(0);

@@ -98,7 +98,7 @@
 								$save['topic'] = $file_name;
 							}
 							$save['size'] = $file['size'];
-							if ($save['file'] != $index['file']) {
+							if (isset($index['file']) && $save['file'] != $index['file']) {
 								@unlink(DATA_PATH."edocument/$index[file]");
 							}
 							$ret['ret_edocument_file'] = '';
