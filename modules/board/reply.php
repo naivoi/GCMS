@@ -3,6 +3,7 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer
 	if (gcms::isReferer()) {
 		// ค่าที่ส่งมา
@@ -65,7 +66,6 @@
 		// ตรวจสอบค่าที่ส่งมา
 		$post = array();
 		$q = array();
-		$ret = array();
 		if (!$index) {
 			// ไม่พบ
 			$ret['error'] = 'ACTION_ERROR';

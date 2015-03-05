@@ -43,8 +43,8 @@
 					$config['languages'] = $languages;
 					if (gcms::saveConfig(CONFIG, $config)) {
 						// คืนค่ารายการที่ลบ
-						$ret['error'] = 'DELETE_SUCCESS';
 						$ret['remove'] = "L_$lang";
+						$ret['error'] = 'DELETE_SUCCESS';
 					} else {
 						$ret['error'] = 'DO_NOT_SAVE';
 					}

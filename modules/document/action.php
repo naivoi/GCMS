@@ -3,6 +3,7 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer
 	if (gcms::isReferer() && preg_match('/(quote|edit|delete|deleting|pin|lock|print|pdf)-([0-9]+)-([0-9]+)-([0-9]+)-(.*)$/', $_POST['id'], $match)) {
 		$action = $match[1];
@@ -30,7 +31,6 @@
 			$sql .= " LIMIT 1";
 		}
 		$index = $db->customQuery($sql);
-		$ret = array();
 		if (sizeof($index) == 0) {
 			$ret['error'] = 'ACTION_ERROR';
 		} else {

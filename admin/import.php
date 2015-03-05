@@ -8,7 +8,6 @@
 	// แอดมินเท่านั้น
 	if (gcms::isReferer() && gcms::isAdmin() && $file['tmp_name'] != '') {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			// คืนค่าเป็น JSON
 			echo gcms::array2json(array('error' => 'EX_MODE_ERROR'));
 		} else {
 			// long time

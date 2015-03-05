@@ -20,7 +20,7 @@
 				$list = $db->customQuery($sql);
 				$cache->save($sql, $list);
 			}
-			if ($cols == 0 && sizeof($list) == 1) {
+			if (empty($cols) && sizeof($list) == 1) {
 				$youtube = $list[0]['youtube'];
 			}
 		}

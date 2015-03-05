@@ -3,11 +3,10 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
-	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'video_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret['error'] = 'EX_MODE_ERROR';
+			echo gcms::array2json(array('error' => 'EX_MODE_ERROR'));
 		} else {
 			$action = gcms::getVars($_POST, 'action', '');
 			$ids = array();
@@ -27,6 +26,4 @@
 				}
 			}
 		}
-		// คืนค่าเป็น JSON
-		echo gcms::array2json($ret);
 	}

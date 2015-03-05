@@ -3,9 +3,9 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
-		$ret = array();
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
 			// ค่าที่ส่งมา
 			if (isset($_POST['data'])) {
