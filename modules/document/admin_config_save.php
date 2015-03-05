@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::isMember()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$img_typies = @implode(',', $_POST['config_img_typies']);
@@ -33,7 +34,7 @@
 			}
 			if (!$index) {
 				// ไม่พบ หรือไม่สามารถแก้ไขได้
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif ($img_typies == '') {
 				$ret['error'] = 'ICON_CATEGORY_TYPE_EMPTY';
 				$ret['input'] = 'config_img_typies';
@@ -112,7 +113,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

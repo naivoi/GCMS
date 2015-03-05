@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'gallery_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			$action = gcms::getVars($_POST, 'action', '');
 			$ids = array();

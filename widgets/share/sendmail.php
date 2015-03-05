@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include ('../../bin/inint.php');
+	$ret = array();
 	// ตรวจสอบ referer
 	if (gcms::isReferer()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$reciever = $db->sql_trim_str($_POST, 'share_reciever');
@@ -15,7 +16,7 @@
 			$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'email' => '', 'password' => ''));
 			// ตรวจสอบค่าที่ส่งมา
 			if ($topic == '' || $url == '' || $login['email'] == '') {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 				$ret['location'] = 'close';
 			} elseif ($reciever == '') {
 				$ret['ret_share_reciever'] = 'this';

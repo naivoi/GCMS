@@ -5,6 +5,7 @@
 	include '../../bin/inint.php';
 	// referer
 	if (gcms::isReferer()) {
+		$ret = array();
 		// ค่าที่ส่งมา
 		$action = gcms::getVars($_POST, 'action', '');
 		if ($action == 'download' || $action == 'downloading') {

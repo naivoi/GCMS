@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ สมาชิก
 	if (gcms::isReferer() && gcms::isMember()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$topic = htmlspecialchars(trim($_POST['email_subject']));
@@ -17,15 +18,14 @@
 			} else {
 				$sender = $_SESSION['login'];
 			}
-			$ret = array();
 			// ตรวจสอบค่าที่ส่งมา
 			if ($sender['email'] == '') {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif ($reciever == '') {
 				$ret['error'] = 'RECIEVER_EMPTY';
 				$ret['input'] = 'email_reciever';
 			} elseif ($sender == $reciever) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif ($topic == '') {
 				$ret['error'] = 'TOPIC_EMPTY';
 				$ret['input'] = 'email_subject';

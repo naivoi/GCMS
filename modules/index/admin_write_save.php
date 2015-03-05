@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ แอดมิน
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$owner = strtolower($db->sql_trim_str($_POST, 'write_owner', ''));
@@ -18,7 +19,6 @@
 			}
 			$id = gcms::getVars($_POST, 'write_id', 0);
 			// ตรวจสอบค่าที่ส่ง
-			$ret = array();
 			$error = false;
 			$input = false;
 			$module_id = 0;
@@ -34,7 +34,7 @@
 				$index = sizeof($index) == 0 ? false : $index[0];
 			}
 			if (($id > 0 && !$index) || !preg_match('/^[a-z]+$/', $owner) || !is_dir(ROOT_PATH."modules/$owner")) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} else {
 				// ค่าที่ส่งมา
 				$language = $db->sql_trim_str($_POST, 'write_language');
@@ -205,7 +205,8 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);
+	

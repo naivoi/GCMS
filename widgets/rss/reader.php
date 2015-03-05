@@ -34,23 +34,22 @@
 		}
 		$rss = RSStoArray($contents);
 		$listcount = $rows * $cols;
-		echo '<table class="'.$className.'"><tr class="bg1">';
+		echo '<table class="'.$className.'"><tr>';
 		for ($i = 0; $i < sizeof($rss) && $listcount > 0; $i++) {
 			if ($i > 0 && $i % $cols == 0) {
-				$bg = $bg == 'bg2' ? 'bg1' : 'bg2';
-				echo '</tr><tr class="'.$bg.'">';
+				echo '</tr><tr>';
 			}
 			echo '<td>';
 			$image = $rss[$i]['media:thumbnail']['url'] == '' ? $rss[$i]['enclosure']['url'] : $rss[$i]['media:thumbnail']['url'];
 			if ($rssimage && $image != '') {
-				if (!preg_match('/^http:\/\/.*$/', $image)) {
+				if (!preg_match('/^http(s)?:\/\/.*$/', $image)) {
 					$urls = parse_url($url);
 					$image = "$urls[scheme]://$urls[host]$image";
 				}
-				echo '<a style="max-width:'.$imageWidth.'px" href="'.$rss[$i]['link']['data'].'" target="_blank"><img src="'.$image.'" alt="" class="nozoom" /></a>';
-				echo '<a href="'.$rss[$i]['link']['data'].'" target="_blank">'.$rss[$i]['title']['data'].'</a>';
+				echo '<a href="'.$rss[$i]['link']['data'].'" target="_blank" class="thumbnail"><img src="'.$image.'" alt="" class="nozoom"></a>';
+				echo '<a href="'.$rss[$i]['link']['data'].'" target="_blank" class="topic">'.$rss[$i]['title']['data'].'</a>';
 			} else {
-				echo '<a class="icon-rss" href="'.$rss[$i]['link']['data'].'" target="_blank">'.$rss[$i]['title']['data'].'</a>';
+				echo '<a class="icon-rss topic" href="'.$rss[$i]['link']['data'].'" target="_blank">'.$rss[$i]['title']['data'].'</a>';
 			}
 			echo '<span>'._cutstr($rss[$i]['description']['data'], 0, $detaillen).'</span>';
 			echo '</td>';

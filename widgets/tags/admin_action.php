@@ -5,6 +5,7 @@
 	include '../../bin/inint.php';
 	// referer, admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
+		$ret = array();
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
 			// ค่าที่ส่งมา
 			if (isset($_POST['data'])) {
@@ -20,11 +21,10 @@
 				$db->query($sql);
 			} elseif ($action == 'edit') {
 				// เลือกเพื่อแก้ไข
-				$ret = array();
 				$tags = $db->getRec(DB_TAGS, $id);
 				// คืนค่า
 				if (!$tags) {
-					$ret = array('error' => 'ACTION_ERROR');
+					$ret['error'] = 'ACTION_ERROR';
 				} else {
 					$ret['tags_tag'] = rawurlencode($tags['tag']);
 					$ret['tags_id'] = $tags['id'];
@@ -32,6 +32,6 @@
 				}
 			}
 		}
-		// คืนค่า JSON
+		// คืนค่าเป็น JSON
 		echo gcms::array2json($ret);
 	}

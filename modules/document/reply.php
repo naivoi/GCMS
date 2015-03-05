@@ -61,7 +61,7 @@
 		$ret = array();
 		if (!$index || !$canReply) {
 			// ไม่พบ หรือ ปิดการ post
-			$ret = array('error' => 'ACTION_ERROR');
+			$ret['error'] = 'ACTION_ERROR';
 		} elseif ($_POST['reply_antispam'] != $_SESSION[$_POST['reply_antispamid']]) {
 			$ret['ret_reply_antispam'] = 'this';
 			$ret['input'] = 'reply_antispam';
@@ -131,7 +131,7 @@
 			}
 		} elseif (!($index['member_id'] == $login['id'] || $moderator)) {
 			// แก้ไขความคิดเห็น ตรวจสอบ เจ้าของหรือผู้ดูแล
-			$ret = array('error' => 'ACTION_ERROR');
+			$ret['error'] = 'ACTION_ERROR';
 		}
 		if (sizeof($ret) == 0 && $detail != '') {
 			// ตรวจสอบโพสต์ซ้ำภายใน 1 วัน

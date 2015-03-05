@@ -3,6 +3,7 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		// action
@@ -12,12 +13,12 @@
 			$cache = new gcmsCache(DATA_PATH.'cache/');
 			$errors = $cache->clear();
 			if (is_array($errors)) {
-				$ret = array('error' => 'SOME_FILE_NOT_DELETE');
+				$ret['error'] = 'SOME_FILE_NOT_DELETE';
 			} elseif ($errors) {
-				$ret = array('error' => 'CLEAR_CACHE_COMPLETE');
+				$ret['error'] = 'CLEAR_CACHE_COMPLETE';
 			}
 		} elseif (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			if (preg_match('/(deletemail)_([0-9]+)/', $_POST['data'], $match)) {
 				$email = $db->getRec(DB_EMAIL_TEMPLATE, $match[2]);
@@ -28,9 +29,10 @@
 						$db->query("DELETE FROM `".DB_MAILMERGE."` WHERE `email_id`= '$email[id]'");
 					}
 					// คืนค่า
-					$ret = array('error' => 'DELETE_SUCCESS', 'remove' => "M_{$email[id]}");
+					$ret['error'] = 'DELETE_SUCCESS';
+					$ret['remove'] = "M_{$email[id]}";
 				} else {
-					$ret = array('error' => 'ACTION_ERROR');
+					$ret['error'] = 'ACTION_ERROR';
 				}
 			} elseif ($action == 'zone' || ($action == 'delete' && $_POST['module'] == 'country')) {
 				// ตรวจสอบ id
@@ -49,7 +51,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

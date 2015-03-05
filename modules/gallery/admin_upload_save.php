@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'gallery_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// อัลบัมที่อัปโหลด
 			$id = gcms::getVars($_POST, 'albumId', 0);
@@ -28,7 +29,7 @@
 					// ตรวจสอบไฟล์อัปโหลด
 					$info = gcms::isValidImage($config['gallery_image_type'], $file);
 					if (!$info) {
-						$ret = array('error' => 'INVALID_FILE_TYPE');
+						$ret['error'] = 'INVALID_FILE_TYPE';
 					} else {
 						while (is_file($dir."$save[count].$info[ext]")) {
 							$save['count']++;
@@ -37,13 +38,13 @@
 						// อัปโหลดรูปภาพจริง
 						$res = gcms::resizeImage($file['tmp_name'], $dir, $save['image'], $info, $config['gallery_image_w']);
 						if (!$res) {
-							$ret = array('error' => 'DO_NOT_UPLOAD');
+							$ret['error'] = 'DO_NOT_UPLOAD';
 						} else {
 							$save['image'] = $res['name'];
 						}
 						// อัปโหลด thumbnail
 						if (!gcms::cropImage($file['tmp_name'], $dir."thumb_$save[image]", $info, $config['gallery_thumb_w'], $config['gallery_thumb_h'])) {
-							$ret = array('error' => 'DO_NOT_UPLOAD');
+							$ret['error'] = 'DO_NOT_UPLOAD';
 						} else {
 							// บันทึกลง db
 							$db->add(DB_GALLERY, $save);
@@ -55,11 +56,9 @@
 				$sql = "UPDATE `".DB_GALLERY_ALBUM."` AS C SET C.`count`=($sql1) WHERE C.`id`='$index[id]' AND C.`module_id`='$index[module_id]'";
 				$db->query($sql);
 			} else {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			}
 		}
-		if (isset($ret)) {
-			// คืนค่าเป็น JSON
-			echo gcms::array2json($ret);
-		}
+		// คืนค่าเป็น JSON
+		echo gcms::array2json($ret);
 	}

@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, admin
 	if (gcms::isReferer() && gcms::canConfig($config, 'video_can_config')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// โหลด config ใหม่
 			$config = array();
@@ -22,13 +23,14 @@
 			$config['video_can_config'][] = 1;
 			// บันทึก config.php
 			if (gcms::saveconfig(CONFIG, $config)) {
-				$ret = array('error' => 'SAVE_COMPLETE', 'location' => 'reload');
+				$ret['error'] = 'SAVE_COMPLETE';
+				$ret['location'] = 'reload';
 			} else {
-				$ret = array('error' => 'DO_NOT_SAVE');
+				$ret['error'] = 'DO_NOT_SAVE';
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

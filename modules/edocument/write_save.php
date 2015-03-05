@@ -3,6 +3,7 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer
 	if (gcms::isReferer() && gcms::isMember()) {
 		// ค่าที่ส่งมา
@@ -123,7 +124,7 @@
 					if ($config['sendmail'] == 1 && $config['edocument_send_mail'] == 1) {
 						// ส่งอีเมล์แจ้งสมาชิก
 						$reciever = array();
-						foreach (explode(',',$save['reciever']) AS $item) {
+						foreach (explode(',', $save['reciever']) AS $item) {
 							if ($item != -1) {
 								$reciever[$item] = $item;
 							}
@@ -157,7 +158,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

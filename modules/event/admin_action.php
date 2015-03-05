@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'event_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$action = gcms::getVars($_POST, 'action', '');
@@ -25,16 +26,14 @@
 					} elseif ($action == 'delete') {
 						// ลบ
 						$db->query("DELETE FROM `".DB_EVENTCALENDAR."` WHERE `id` IN($ids) AND `module_id`='$module[id]'");
-					} else {
-						print_r($_POST);
 					}
 				} else {
-					$ret = array('error' => 'ACTION_ERROR');
+					$ret['error'] = 'ACTION_ERROR';
 				}
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

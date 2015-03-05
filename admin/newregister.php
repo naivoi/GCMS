@@ -5,8 +5,9 @@
 	include '../bin/inint.php';
 	// ตรวจสอบ referer และ admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
+		$ret = array();
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$save['email'] = $db->sql_trim_str($_POST, 'register_email');

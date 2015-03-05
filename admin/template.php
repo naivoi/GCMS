@@ -98,7 +98,7 @@
 		if (isset($info['responsive'])) {
 			$content[] = '<span title=Responsive class=icon-responsive></span>';
 		}
-		$content[] = '<span class=preview style="background-image:url('.WEB_URL.'/'.SKIN.'screenshot.jpg)" title="{LNG_TEMPLATE_CURRENT}"></span>';
+		$content[] = '<span class=preview style="background-image:url('.WEB_URL.'/skin/'.$config['skin'].'/screenshot.jpg)" title="{LNG_TEMPLATE_CURRENT}"></span>';
 		$content[] = '<h3>'.$info['name'].'</h3>';
 		$content[] = '<p class=detail>'.$info['description'].'</p>';
 		$content[] = '<p class=folder>'.str_replace('%s', SKIN, $lng['LNG_TEMPLATE_FOLDER']).'</p>';

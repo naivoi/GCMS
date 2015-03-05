@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'video_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$id = gcms::getVars($_POST, 'write_id', 0);
@@ -24,7 +25,7 @@
 			$sql .= " WHERE M.`owner`='video' LIMIT 1";
 			$index = $db->customQuery($sql);
 			if (sizeof($index) == 0) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif (!preg_match('/[a-zA-Z0-9\-_]{11,11}/', $youtube)) {
 				$ret['ret_write_youtube'] = 'YOUTUBE_INVALID';
 				$ret['error'] = 'YOUTUBE_INVALID';
@@ -103,7 +104,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ admin
 	if (gcms::isReferer() && gcms::isMember()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// แอดมินสูงสุด สามารถแก้ไขข้อมูลสมาชิกได้ทุกรายการ
 			$isAdmin = gcms::isAdmin();
@@ -34,7 +35,6 @@
 			// ตรวจสอบข้อมูลที่กรอก
 			$error = false;
 			$input = false;
-			$ret = array();
 			if ($id > 0) {
 				// ตรวจสอบ id
 				$user = $db->getRec(DB_USER, $id);
@@ -246,7 +246,8 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);
+	

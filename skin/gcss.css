@@ -135,6 +135,7 @@ svg:not(:root) {
 	margin: 5px;
 }
 .textlink_image > a,
+a.thumbnail,
 figure {
 	display: inline-block;
 }
@@ -143,6 +144,7 @@ figure.center {
 	display: table;
 }
 .textlink_image img,
+a.thumbnail img,
 figure img,
 .figure img {
 	width: 100%;
@@ -3545,6 +3547,7 @@ ol.multi_step li.current:before {
 	body.responsive .menu_wrapper {
 		background-image: url();
 		padding: 0;
+		width: 100%;
 	}
 	body.responsive .topmenu.responsive {
 		font-size: 14px;

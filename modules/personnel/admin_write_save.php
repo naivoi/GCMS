@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, member
 	if (gcms::isReferer() && gcms::canConfig($config, 'personnel_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			$error = false;
 			// ค่าที่ส่งมา
@@ -33,7 +34,7 @@
 			$index = $db->customQuery($sql);
 			// ตรวจสอบค่าที่ส่งมา
 			if (sizeof($index) == 0) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif ($save['name'] == '') {
 				$ret['ret_write_name'] = 'FNAME_EMPTY';
 				$ret['error'] = 'FNAME_EMPTY';
@@ -92,7 +93,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

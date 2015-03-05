@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer
 	if (gcms::isReferer()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$topic = $db->sql_trim_str($_POST, 'mail_topic');
@@ -23,7 +24,6 @@
 				foreach ($db->customQuery($sql) AS $item) {
 					$emails[] = $item['email'];
 				}
-				$ret = array();
 				// ตรวจสอบค่าที่ส่งมา
 				if (empty($sender['email'])) {
 					$ret['error'] = 'SENDER_EMPTY';

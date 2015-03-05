@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// action
 			$action = gcms::getVars($_POST, 'action', '');
@@ -42,8 +43,8 @@
 					$config['languages'] = $languages;
 					if (gcms::saveConfig(CONFIG, $config)) {
 						// คืนค่ารายการที่ลบ
-						$ret['remove'] = "L_$lang";
 						$ret['error'] = 'DELETE_SUCCESS';
+						$ret['remove'] = "L_$lang";
 					} else {
 						$ret['error'] = 'DO_NOT_SAVE';
 					}
@@ -66,7 +67,7 @@
 						$languages[] = $lng;
 					}
 					if (sizeof($languages) == 0) {
-						$ret = array('error' => 'PLEASE_SELECT_ONE');
+						$ret['error'] = 'PLEASE_SELECT_ONE';
 					} else {
 						$config['languages'] = $languages;
 					}
@@ -77,9 +78,9 @@
 				if (!isset($ret)) {
 					// save
 					if (gcms::saveConfig(CONFIG, $config)) {
-						$ret = array('error' => 'SAVE_COMPLETE');
+						$ret['error'] = 'SAVE_COMPLETE';
 					} else {
-						$ret = array('error' => 'DO_NOT_SAVE');
+						$ret['error'] = 'DO_NOT_SAVE';
 					}
 				}
 			}

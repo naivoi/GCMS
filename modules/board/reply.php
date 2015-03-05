@@ -68,7 +68,7 @@
 		$ret = array();
 		if (!$index) {
 			// ไม่พบ
-			$ret = array('error' => 'ACTION_ERROR');
+			$ret['error'] = 'ACTION_ERROR';
 		} elseif ($index['locked'] == 1 && !$moderator) {
 			// บอร์ด lock (ผู้ดูแลสามารถ post ได้)
 			$ret['error'] = 'BOARD_LOCKED';
@@ -141,7 +141,7 @@
 			}
 		} elseif (!($index['member_id'] == $login['id'] || $moderator)) {
 			// แก้ไขความคิดเห็น ตรวจสอบ เจ้าของหรือผู้ดูแล
-			$ret = array('error' => 'ACTION_ERROR');
+			$ret['error'] = 'ACTION_ERROR';
 		}
 		if (sizeof($ret) == 0 && $detail != '' && $id == 0) {
 			// ตรวจสอบโพสต์ซ้ำภายใน 1 วัน

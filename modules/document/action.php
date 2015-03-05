@@ -32,7 +32,7 @@
 		$index = $db->customQuery($sql);
 		$ret = array();
 		if (sizeof($index) == 0) {
-			$ret = array('error' => 'ACTION_ERROR');
+			$ret['error'] = 'ACTION_ERROR';
 		} else {
 			$index = $index[0];
 			// config

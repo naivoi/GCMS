@@ -3,11 +3,12 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ แอดมิน
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		$action = gcms::getVars($_POST, 'action', '');
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo' && $action != 'get') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			if ($action == 'move' && isset($_POST['data'])) {
 				// move menu
@@ -164,7 +165,7 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
-	echo isset($ret) ? gcms::array2json($ret) : '';
+	echo gcms::array2json($ret);

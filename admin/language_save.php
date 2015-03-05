@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ แอดมิน
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			$save = array();
 			if (isset($_POST['languageadd']) && $_POST['languageadd'] == 1) {
@@ -69,7 +70,7 @@
 						// แก้ไขภาษา
 						if (!isset($install_languages[$id]) || $install_languages[$id] !== 1) {
 							// ไม่พบภาษาที่แก้ไข
-							$ret = array('error' => 'ACTION_ERROR');
+							$ret['error'] = 'ACTION_ERROR';
 						} elseif ($name != $id && isset($install_languages[$name])) {
 							// ไม่สามารถใช้ชื่อภาษานี้ได้
 							$ret['error'] = $install_languages[$id] == 1 ? 'LANGUAGE_EXISTS' : 'LANGUAGE_ERROR';
@@ -173,11 +174,11 @@
 					}
 				}
 			} else {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);

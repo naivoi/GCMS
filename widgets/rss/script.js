@@ -105,10 +105,9 @@ GRSSTab.prototype = {
 		}
 	},
 	select : function(id) {
-		this._showLoading();
+		this._showLoading(id);
 		var temp = this;
 		this.ajax.send(this.options[id].reader, this._query(id), function(xhr) {
-			temp._hideLoading();
 			temp.div.innerHTML = xhr.responseText;
 			temp._setselect(id);
 			if (temp.interval > 0) {
@@ -122,12 +121,6 @@ GRSSTab.prototype = {
 			}
 		});
 	},
-	_showLoading : function() {
-		this.loading.className = this.loadingClass;
-	},
-	_hideLoading : function() {
-		this.loading.className = 'hidden';
-	},
 	_query : function(id) {
 		var query = 'url=' + encodeURIComponent(this.feeds[id]);
 		query += '&rows=' + this.options[id].rows;
@@ -140,22 +133,16 @@ GRSSTab.prototype = {
 	},
 	_setselect : function(id) {
 		this.selectIndex = id;
-		var tab = this.tab.id + '_';
-		var as = this.tab.getElementsByTagName('a');
-		var flag = '';
-		forEach(as, function(item, index) {
-			if (index == 0) {
-				flag = ' first';
-			} else if (index < as.length - 1) {
-				flag = '';
-			} else {
-				flag = ' last';
-			}
-			if (item.id == tab + id) {
-				item.className = 'select' + flag;
-			} else {
-				item.className = '';
-			}
+		var tab = this.tab.id + '_' + id;
+		forEach(this.tab.getElementsByTagName('a'), function() {
+			this.className = this.id == tab ? 'select' : '';
+		});
+	},
+	_showLoading : function(id) {
+		var tab = this.tab.id + '_' + id;
+		var self = this;
+		forEach(this.tab.getElementsByTagName('a'), function() {
+			this.className = this.id == tab ? self.loadingClass : '';
 		});
 	}
 };

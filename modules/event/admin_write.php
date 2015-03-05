@@ -31,6 +31,11 @@
 			} else {
 				$a[] = '{LNG_ADD}';
 				$title = "$lng[LNG_ADD] $lng[LNG_EVENT]";
+				$index['id'] = 0;
+				$index['topic'] = '';
+				$index['color'] = '';
+				$index['begin_date'] = date('Y-m-d H:i:s');
+				$index['published_date'] = $index['begin_date'];
 			}
 			$title .= ' ('.ucwords($index['owner']).')';
 			// แสดงผล
@@ -119,7 +124,7 @@
 			$content[] = '<input type=submit class="button large save" value="{LNG_SAVE}">';
 			$content[] = '<input type=hidden id=write_id name=write_id value='.(int)$index['id'].'>';
 			$content[] = '</fieldset>';
-			$lastupdate = $index['last_update'] == '' ? '-' : gcms::mktime2date($index['last_update']);
+			$lastupdate = empty($index['last_update']) ? '-' : gcms::mktime2date($index['last_update']);
 			$content[] = '<div class=lastupdate><span class=comment>{LNG_WRITE_COMMENT}</span>{LNG_LAST_UPDATE}<span id=lastupdate>'.$lastupdate.'</span></div>';
 			$content[] = '</form>';
 			$content[] = '</section>';

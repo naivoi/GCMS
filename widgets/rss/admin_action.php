@@ -3,10 +3,10 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (empty($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo') {
-			$ret = array();
 			if (isset($_POST['data'])) {
 				list($action, $id) = explode('_', $_POST['data']);
 			} else {
@@ -49,20 +49,20 @@
 						$ret['rss_id'] = $id;
 						$ret['input'] = 'rss_url';
 					} else {
-						$ret = array('error' => 'ACTION_ERROR');
+						$ret['error'] = 'ACTION_ERROR';
 					}
 				} elseif ($_POST['action'] == 'move') {
 					$rss_tabs = $config['rss_tabs'];
 					$config['rss_tabs'] = array();
 					$n = 1;
-					foreach (explode(',',str_replace('L_','',$_POST['data'])) AS $id) {
+					foreach (explode(',', str_replace('L_', '', $_POST['data'])) AS $id) {
 						$config['rss_tabs'][$n] = $rss_tabs[$id];
 						$n++;
 					}
 					gcms::saveconfig(CONFIG, $config);
 				}
 			} else {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			}
 			// คืนค่า JSON
 			echo gcms::array2json($ret);

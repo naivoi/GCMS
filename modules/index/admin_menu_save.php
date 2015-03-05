@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ แอดมิน
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$save['menu_text'] = $db->sql_trim_str($_POST, 'write_menu_text');
@@ -44,7 +45,6 @@
 			// ตรวจสอบค่าที่ส่งมา
 			$error = false;
 			$input = false;
-			$ret = array();
 			if ($id > 0 && !$menu) {
 				$error = 'ID_NOT_FOUND';
 			} else {

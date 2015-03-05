@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer
 	if (gcms::isReferer()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// อีเมล์ผู้รับ
 			if (!empty($_SESSION['emails'])) {
@@ -28,7 +29,6 @@
 			$topic = htmlspecialchars(trim($_POST['mail_topic']));
 			$detail = gcms::txtClean($_POST['mail_detail']);
 			$sender = gcms::getVars($_POST, 'mail_sender', '');
-			$ret = array();
 			// ตรวจสอบค่าที่ส่งมา
 			if ($sender == '') {
 				$ret['error'] = 'SENDER_EMPTY';
@@ -37,7 +37,7 @@
 				$ret['error'] = 'REGISTER_INVALID_EMAIL';
 				$ret['input'] = 'mail_sender';
 			} elseif ($reciever == '') {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 				$ret['input'] = 'mail_reciever';
 			} elseif ($sender == $reciever) {
 				$ret['error'] = 'EMAIL_SEND_SELF';

@@ -3,13 +3,13 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// referer, admin
 	if (gcms::isReferer() && gcms::isAdmin()) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			$error = false;
-			$ret = array();
 			$save = array();
 			$save['description'] = $db->sql_trim_str($_POST, 'textlink_description');
 			$save['type'] = $_POST['textlink_type'].((int)$_POST['textlink_prefix'] == 0 ? '' : (int)$_POST['textlink_prefix']);
@@ -37,7 +37,7 @@
 			}
 			$textlink = $db->customQuery($sql);
 			if (sizeof($textlink) == 0) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 				$error = true;
 			} elseif ($save['type'] == '') {
 				$ret['error'] = 'TEXTLINK_TYPE_EMPTY';

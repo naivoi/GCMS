@@ -1656,6 +1656,10 @@
 					if (isset($_SERVER[$key])) {
 						return $_SERVER[$key];
 					}
+				case 'config':
+					if (isset($config[$key])) {
+						return $config[$key];
+					}
 				default:
 					return null;
 			}

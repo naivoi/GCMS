@@ -5,8 +5,9 @@
 	include '../../bin/inint.php';
 	// ตรวจสอบ referer
 	if (gcms::isReferer()) {
+		$ret = array();
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$save = array();
@@ -67,10 +68,9 @@
 				$index = false;
 			}
 			// ตรวจสอบค่าที่ส่งมา
-			$ret = array();
 			if (!$index) {
 				// ไม่พบบอร์ด
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} elseif ($save['topic'] == '') {
 				// คำถาม ไม่ได้กรอกคำถาม
 				$ret['input'] = 'board_topic';
@@ -144,7 +144,7 @@
 				}
 			} elseif (!($index['member_id'] == $login['id'] || $moderator)) {
 				// แก้ไขกระทู้ ตรวจสอบ เจ้าของหรือผู้ดูแล
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			}
 			// flood กระทู้
 			if (sizeof($ret) == 0 && $board_id == 0) {

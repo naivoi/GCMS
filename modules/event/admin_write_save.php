@@ -3,10 +3,11 @@
 	header("content-type: text/html; charset=UTF-8");
 	// inint
 	include '../../bin/inint.php';
+	$ret = array();
 	// ตรวจสอบ referer และ สมาชิก
 	if (gcms::isReferer() && gcms::canConfig($config, 'event_can_write')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			$ret = array('error' => 'EX_MODE_ERROR');
+			$ret['error'] = 'EX_MODE_ERROR';
 		} else {
 			// ค่าที่ส่งมา
 			$save['topic'] = gcms::getTags($_POST['write_topic']);
@@ -33,7 +34,7 @@
 			}
 			$index = $db->customQuery($sql);
 			if (sizeof($index) == 0) {
-				$ret = array('error' => 'ACTION_ERROR');
+				$ret['error'] = 'ACTION_ERROR';
 			} else {
 				$index = $index[0];
 				// login
@@ -63,7 +64,6 @@
 					$save['last_update'] = $mmktime;
 					if ($id == 0) {
 						// เขียนเรื่องใหม่
-						$save['id'] = $last_id;
 						$save['create_date'] = $mmktime;
 						$save['member_id'] = $login['id'];
 						$save['module_id'] = $index['module_id'];
@@ -84,7 +84,8 @@
 			}
 		}
 	} else {
-		$ret = array('error' => 'ACTION_ERROR');
+		$ret['error'] = 'ACTION_ERROR';
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);
+	
