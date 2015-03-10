@@ -104,10 +104,8 @@
 	include ROOT_PATH.'bin/class.ftp.php';
 	// cache class
 	include ROOT_PATH.'bin/class.cache.php';
-	if (isset($config['ftp_host'])) {
-		// เรียกใช้งาน ftp
-		$ftp = new ftp($config['ftp_host'], $config['ftp_username'], $config['ftp_password'], $config['ftp_root'], $document_root, $config['ftp_port']);
-	}
+	// เรียกใช้งาน ftp
+	$ftp = new ftp($config['ftp_host'], $config['ftp_username'], $config['ftp_password'], $config['ftp_root'], $document_root, $config['ftp_port']);
 	if (!empty($config['db_username']) || !empty($config['db_name'])) {
 		// เรียกใช้งานฐานข้อมูล
 		$db = new sql($config['db_server'], $config['db_username'], $config['db_password'], $config['db_name']);

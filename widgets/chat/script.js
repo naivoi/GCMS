@@ -16,10 +16,9 @@ GChat.prototype = {
 		var content = $G('gchat_content');
 		var text = $G('gchat_text');
 		var gchat_sound = $G('gchat_sound');
-		gchat_sound.style.cursor = 'pointer';
 		forEach($E('gchat_smile').getElementsByTagName('img'), function () {
 			gchat_smiles.push(new RegExp(':(' + this.alt + '):', 'g'));
-			callClick(this, function() {
+			callClick(this, function () {
 				if (!text.disabled) {
 					text.value = text.value + ':' + this.alt + ':';
 					text.focus();
@@ -29,28 +28,41 @@ GChat.prototype = {
 		function limitContent() {
 			for (var i = content.childNodes.length - gchat_lines - 1; i >= 0; i--) {
 				content.removeChild(content.childNodes[i]);
-			};
+			}
 		}
 		function playSound(id) {
-			if (gchat_sound.className == 'soundon') {
-				var play_sound = $E('play_sound');
-				if (!play_sound) {
-					play_sound = document.createElement('div');
-					play_sound.style.position = 'absolute';
-					play_sound.style.left = '-10000px';
-					play_sound.style.top = '-10000px';
-					play_sound.id = 'play_sound';
-					document.body.appendChild(play_sound);
+			if (gchat_sound.className == 'icon-vol-up') {
+				var audio = null;
+				var src = WEB_URL + 'widgets/chat/sound/' + id + '.mp3';
+				if (window.HTMLAudioElement) {
+					audio = new Audio();
+					if (!!(audio.canPlayType && audio.canPlayType('audio/mpeg;').replace(/no/, ''))) {
+						audio.src = src;
+						audio.play();
+					} else {
+						audio = null;
+					}
 				}
-				if ($E('live_audio')) {
-					play_sound.removeChild($E('live_audio'));
+				if (audio == null) {
+					var play_sound = $E('play_sound');
+					if (!play_sound) {
+						play_sound = document.createElement('div');
+						play_sound.style.position = 'absolute';
+						play_sound.style.left = '-10000px';
+						play_sound.style.top = '-10000px';
+						play_sound.id = 'play_sound';
+						document.body.appendChild(play_sound);
+					}
+					if ($E('live_audio')) {
+						play_sound.removeChild($E('live_audio'));
+					}
+					audio = document.createElement(GBrowser.IE ? 'bgsound' : 'embed');
+					audio.setAttribute('src', src);
+					audio.setAttribute('autostart', true);
+					audio.setAttribute('hidden', true);
+					audio.setAttribute('id', 'live_audio');
+					play_sound.appendChild(audio);
 				}
-				var audio = document.createElement(GBrowser.IE ? 'bgsound' : 'embed');
-				audio.setAttribute('src', WEB_URL + 'widgets/chat/sound/' + id + '.wav');
-				audio.setAttribute('autostart', true);
-				audio.setAttribute('hidden', true);
-				audio.setAttribute('id', 'live_audio');
-				play_sound.appendChild(audio);
 			}
 		}
 		function entityify(s) {
@@ -91,39 +103,48 @@ GChat.prototype = {
 			return false;
 		};
 		$E('gchat_frm').onsubmit = _doSend;
-		gchat_sound.addEvent('click', function () {
-			this.className = this.className == 'soundon' ? 'soundoff' : 'soundon';
+		callClick(gchat_sound, function () {
+			this.className = this.className == 'icon-vol-up' ? 'icon-vol-down' : 'icon-vol-up';
 		});
 		var _getChat = function () {
 			return 'id=' + gchat_id;
 		};
-		new GAjax().autoupdate(WEB_URL + 'widgets/chat/chat.php', gchat_interval, _getChat, function (xhr) {
-			var ds = xhr.responseText.toJSON();
-			if (ds) {
-				if (ds[0]['user']) {
-					gchat_user = ds[0]['user'];
-					text.disabled = false;
-				} else {
-					text.disabled = true;
-				}
-				if (ds[0]['time']) {
-					gchat_time = ds[0]['time'].toInt();
-				}
-				if (ds[0]['id']) {
-					gchat_id = ds[0]['id'].toInt();
-				}
-				if (ds[0]['content']) {
-					var hs = decodeURIComponent(ds[0]['content']).split(/\n/g);
-					for (var i = hs.length - 1; i >= 0; i--) {
-						var ds = hs[i].split(/\t/g);
-						addMessage(ds[2], ds[1], ds[0]);
+		var _chat = new GAjax();
+		_chat.inint = true;
+		_chat.autoupdate(WEB_URL + 'widgets/chat/chat.php', gchat_interval, _getChat, function (xhr) {
+			if ($E(content.id)) {
+				var ds = xhr.responseText.toJSON();
+				if (ds) {
+					if (ds[0]['user']) {
+						gchat_user = ds[0]['user'];
+						text.disabled = false;
+					} else {
+						text.disabled = true;
 					}
-					limitContent();
-					content.scrollTop = content.scrollHeight;
-					playSound('type');
+					if (ds[0]['time']) {
+						gchat_time = ds[0]['time'].toInt();
+					}
+					if (ds[0]['id']) {
+						gchat_id = ds[0]['id'].toInt();
+					}
+					if (ds[0]['content']) {
+						var hs = decodeURIComponent(ds[0]['content']).split(/\n/g);
+						for (var i = hs.length - 1; i >= 0; i--) {
+							var ds = hs[i].split(/\t/g);
+							addMessage(ds[2], ds[1], ds[0]);
+						}
+						limitContent();
+						content.scrollTop = content.scrollHeight;
+						if (!_chat.inint) {
+							playSound('type');
+						}
+						_chat.inint = false;
+					}
+				} else if (xhr.responseText != '') {
+					alert(xhr.responseText);
 				}
-			} else if (xhr.responseText != '') {
-				alert(xhr.responseText);
+			} else {
+				_chat.abort();
 			}
 		});
 		// time

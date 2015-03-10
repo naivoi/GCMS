@@ -6,7 +6,7 @@
 		$config['chat_lines'] = gcms::getVars($config, 'chat_lines', 10);
 		// chat window
 		$widget = array();
-		$widget[] = '<div id=gchat_div >';
+		$widget[] = '<div id=gchat_div>';
 		$widget[] = '<div id=gchat_body>';
 		$widget[] = '<dl id=gchat_content></dl>';
 		$widget[] = '<p id=gchat_smile>';
@@ -21,11 +21,12 @@
 			}
 			closedir($f);
 		}
+		$t = gcms::isMember() ? 'LNG_CHAT_TEXT_TITLE' : 'LNG_CHAT_INVALID_LOGIN';
 		$widget[] = '</p>';
-		$widget[] = '<form id=gchat_frm method=post action='.WEB_URL.'>';
-		$widget[] = '<label><input type=text id=gchat_text size=40 maxlength=50 disabled title="{LNG_CHAT_TEXT_TITLE}"></label>';
-		$widget[] = '<input type=submit class="button send" id=gchat_send value="{LNG_SEND_MESSAGE}">';
-		$widget[] = '<span id=gchat_sound class=soundon title="{LNG_CHAT_SOUND}">&nbsp;</span>';
+		$widget[] = '<form id=gchat_frm class=input-groups method=post action='.WEB_URL.'/index.php>';
+		$widget[] = '<label class="width g-input"><input type=text id=gchat_text maxlength=50 disabled placeholder="{'.$t.'}"></label>';
+		$widget[] = '<label class=width><input type=submit class="button wide send" value="Send"></label>';
+		$widget[] = '<span class=width><a id=gchat_sound class=icon-vol-up title="{LNG_CHAT_SOUND}"></a></span>';
 		$widget[] = '</form>';
 		$widget[] = '</div>';
 		$widget[] = '</div>';

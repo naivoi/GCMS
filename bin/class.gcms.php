@@ -701,11 +701,14 @@
 			if ($email == '') {
 				// ไม่กรอก email มา
 				return 0;
-			} elseif ($config['demo_mode'] === 1 && $email == 'demo' && $password == 'demo') {
+			} elseif (isset($config['demo_mode']) && $config['demo_mode'] === 1 && $email == 'demo' && $password == 'demo') {
 				$login_result = array();
+				$login_result['id'] = 0;
 				$login_result['email'] = 'demo';
 				$login_result['password'] = 'demo';
 				$login_result['displayname'] = 'demo';
+				$login_result['fname'] = '';
+				$login_result['lname'] = '';
 				$login_result['status'] = 1;
 				$login_result['admin_access'] = 1;
 				$login_result['account'] = 'demo';
@@ -1313,8 +1316,9 @@
 			}
 			if ($f != '') {
 				foreach (explode('&', str_replace('&amp;', '&', $f)) AS $item) {
-					list($key, $value) = explode('=', $item);
-					$qs[$key] = $value == '' ? $key : "$key=$value";
+					if (preg_match('/^(.*)=(.*)$/', $item, $match)) {
+						$qs[$match[1]] = empty($match[2]) ? $match[1] : "$match[1]=$match[2]";
+					}
 				}
 			}
 			return str_replace('&amp;id=0', '', 'index.php'.(sizeof($qs) > 0 ? '?'.implode('&amp;', $qs) : ''));
@@ -1698,17 +1702,21 @@
 			}
 		}
 		/**
-		 * get2Input($q)
+		 * get2Input($q, $ex)
 		 * สร้าง input สำหรับส่งกลับที่มาจากการโพสต์
 		 * $q (array) มาจาก $_GET หรือ $_POST
+		 * $ex (string) ตัวแปรที่ไม่ต้องการให้ส่งค่าไปด้วย คั่นแต่ละรายการด้วย,
 		 *
 		 * @return (string) เข้ารหัสแล้ว
 		 */
-		public static function get2Input($q) {
+		public static function get2Input($q, $ex = '') {
+			$exs = explode(',', $ex);
 			$ret = array();
 			if (isset($q)) {
 				foreach ($q AS $k => $v) {
-					$ret[$k] = '<input type=hidden name="_'.$k.'" value="'.$v.'">';
+					if (!in_array($k, $exs)) {
+						$ret[$k] = '<input type=hidden name="_'.$k.'" value="'.$v.'">';
+					}
 				}
 			}
 			return implode('', $ret);

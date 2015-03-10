@@ -26,11 +26,14 @@
 		} elseif (version_compare($current_version, '9.0.0') == -1) {
 			// upgrade to 9.0.0
 			include (ROOT_PATH.'admin/install/900.php');
-		} else {
-			$m = str_replace('.', '', $version);
-			if (is_file(ROOT_PATH."admin/install/$m.php")) {
-				// upgrade
-				include (ROOT_PATH."admin/install/$m.php");
-			}
+		} elseif (version_compare($current_version, '9.3.0') == -1) {
+			// upgrade to 9.3.0
+			include (ROOT_PATH.'admin/install/930.php');
+		} elseif (version_compare($current_version, '10.0.0') == -1) {
+			// upgrade to 10.0.0
+			include (ROOT_PATH.'admin/install/1000.php');
+		} elseif (version_compare($current_version, '10.0.1') == -1) {
+			// upgrade to 10.0.1
+			include (ROOT_PATH.'admin/install/1001.php');
 		}
 	}

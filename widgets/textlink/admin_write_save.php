@@ -24,7 +24,7 @@
 			if (isset($_POST['textlink_dateless']) && $_POST['textlink_dateless'] == 1) {
 				$save['publish_end'] = 0;
 			} else {
-				list($y, $m, $d) = explode('-', $_POST['textlink_publish_end']);
+				list($y, $m, $d) = explode('-', gcms::getVars($_POST, 'textlink_publish_end', '0-0-0'));
 				$save['publish_end'] = mktime(23, 59, 59, (int)$m, (int)$d, (int)$y);
 			}
 			$id = gcms::getVars($_POST, 'textlink_id', 0);

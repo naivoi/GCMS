@@ -29,13 +29,13 @@
 		$s = $start < 0 ? 0 : $start + 1;
 		$e = min($count[0]['count'], $s + $list_per_page - 1);
 		$patt2 = array('/{SEARCH}/', '/{COUNT}/', '/{PAGE}/', '/{TOTALPAGE}/', '/{START}/', '/{END}/');
-		$replace2 = array($search, $count[0]['count'], $page, $totalpage, $s, $e);
+		$replace2 = array('', $count[0]['count'], $page, $totalpage, $s, $e);
 		// title
 		$title = $lng['LNG_CHAT_HISTORY'];
 		$a = array();
 		$a[] = '<span class=icon-widgets>{LNG_WIDGETS}</span>';
-		$a[] = '<a href="{URLQUERY?module=chat-setup}">{LNG_SHOUTBOX}</a>';
-		$a[] = '{LNG_CHAT}';
+		$a[] = '<a href="{URLQUERY?module=chat-setup}">{LNG_CHAT}</a>';
+		$a[] = '{LNG_CHAT_HISTORY}';
 		// แสดงผล
 		$content[] = '<div class=breadcrumbs><ul><li>'.implode('</li><li>', $a).'</li></ul></div>';
 		$content[] = '<section>';
@@ -98,13 +98,13 @@
 		} else {
 			$start = 1;
 		}
-		$splitpage = ($start > 2) ? sprintf($url, $order, 1, 1) : '';
+		$splitpage = ($start > 2) ? str_replace('%d', 1, $url) : '';
 		for ($i = $start; $i <= $totalpage && $maxlink > 0; $i++) {
-			$splitpage .= ($i == $page) ? '<strong>'.$i.'</strong>' : sprintf($url, $order, $i, $i);
+			$splitpage .= ($i == $page) ? '<strong title="{LNG_DISPLAY_PAGE} '.$i.'">'.$i.'</strong>' : str_replace('%d', $i, $url);
 			$maxlink--;
 		}
-		$splitpage .= ($i < $totalpage) ? sprintf($url, $order, $totalpage, $totalpage) : '';
-		$splitpage = $splitpage == '' ? '<strong>1</strong>' : $splitpage;
+		$splitpage .= ($i < $totalpage) ? str_replace('%d', $totalpage, $url) : '';
+		$splitpage = $splitpage == '' ? '<strong title="{LNG_DISPLAY_PAGE} '.$i.'">1</strong>' : $splitpage;
 		$content[] = '<div class=splitpage>'.$splitpage.'</div>';
 		$content[] = '<div class=table_nav>';
 		// sel action

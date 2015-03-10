@@ -36,6 +36,8 @@
 				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'loginfrm'));
 			}
 		} elseif (!empty($config['custom_member']) && is_file(ROOT_PATH.$config['custom_member'])) {
+			// อ่านข้อมูลสมาชิก
+			$login_result = $db->getRec(DB_USER, $_SESSION['login']['id']);
 			// custom member form
 			include_once (ROOT_PATH.$config['custom_member']);
 		} else {

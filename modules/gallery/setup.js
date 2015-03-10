@@ -53,7 +53,7 @@ function inintGalleryUpload(id) {
 		});
 	};
 	callClick('btnDelete', _doDelete);
-	callClick("btnCancle", function(){upload.cancle()})
+	callClick("btnCancle", function(){upload.cancle()});
 	callClick("selectAll", _setSel);
 	callClick("clearSelected", _setSel);
 }

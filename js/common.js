@@ -473,7 +473,7 @@ function checkAntispam() {
 	if (value.length > 3) {
 		return 'action=antispam&value=' + value + '&antispam=' + $E('antispam').value;
 	} else {
-		this.invalid(this.title);
+		this.invalid(this.placeholder);
 	}
 }
 function checkIdcard() {
@@ -527,27 +527,6 @@ function checkSaved(button, url, write_id, target) {
 			window.open(url.replace('&amp;', '&') + '&id=' + id);
 		}
 	});
-}
-function inintSearch(form, input, module) {
-	var _callSearch = function (e) {
-		var q = $E(input);
-		if (q) {
-			var v = q.value.trim();
-			var l = v.length;
-			if (l == 0) {
-				alert(SEARCH_EMPTY);
-				q.focus();
-			} else if (l < 2) {
-				alert(SEARCH_SHORT);
-				q.focus();
-			} else {
-				loaddoc('{WEBURL}/index.php?module=' + $E(module).value + '&q=' + encodeURIComponent(v));
-			}
-		}
-		GEvent.stop(e);
-		return false;
-	};
-	$G(form).addEvent('submit', _callSearch);
 }
 function callModal(id, src, qstr) {
 	var doClick = function () {
@@ -766,7 +745,9 @@ $G(window).Ready(function () {
 		});
 	}
 	var _doMenuClick = function () {
-		$E('wait').className = 'show';
+		if ($E('wait')) {
+			$E('wait').className = 'show';
+		}
 	};
 	forEach($E(document.body).getElementsByTagName('nav'), function () {
 		if ($G(this).hasClass('topmenu sidemenu slidemenu')) {

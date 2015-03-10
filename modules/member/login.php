@@ -129,7 +129,7 @@
 		} else {
 			// กรอบข้อมูลสมาชิก
 			$patt = array('/{BREADCRUMS}/', '/{WEBTITLE}/', '/{SUBTITLE}/', '/{WEBURL}/', '/{DISPLAYNAME}/', '/{ID}/',
-				'/{POINT}/', '/{STATUS}/', '/{ADMIN}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{FACEBOOK}/');
+				'/{STATUS}/', '/{ADMIN}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{FACEBOOK}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $config['web_title'];
@@ -137,7 +137,6 @@
 			$replace[] = WEB_URL;
 			$replace[] = empty($login_result['displayname']) ? $login_result['email'] : $login_result['displayname'];
 			$replace[] = $login_result['id'];
-			$replace[] = gcms::getVars($login_result, 'point', '');
 			$replace[] = $login_result['status'];
 			$replace[] = isset($login_result['admin_access']) && ($login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1) ? 'admin' : ' hidden';
 			$replace[] = 'gcms::getLng';

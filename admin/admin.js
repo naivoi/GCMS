@@ -101,17 +101,18 @@ function inintTemplate(id) {
 	});
 }
 function inintList(id, tag, patt, action, callback, onconfirm) {
+	var _doClick = function(){
+		if (Object.isNull(onconfirm) || onconfirm.call(this)) {
+			var temp = this;
+			send(action, 'data=' + this.id, function(xhr) {
+				callback.call(temp, xhr);
+			});
+		}
+		return false;
+	};
 	forEach($E(id).getElementsByTagName(tag), function() {
 		if (patt.test(this.id)) {
-			callClick(this, function() {
-				if (Object.isNull(onconfirm) || onconfirm.call(this)) {
-					var temp = this;
-					send(action, 'data=' + this.id, function(xhr) {
-						callback.call(temp, xhr);
-					});
-				}
-				return false;
-			});
+			callClick(this, _doClick);
 		}
 	});
 }
@@ -186,12 +187,15 @@ function inintLanguage(id) {
 		}
 	});
 }
-function inintPMTable(id, onchanged, prefix) {
+function inintPMTable(id, onchanged, prefix, onrow) {
 	var hs,
 		patt = /^unlimited[\s]+(([a-z_]+)[0-9]+)$/,
 		patt2 = /^(([a-z_]+)_([a-z]+)_)[0-9]+$/;
 	if (prefix == null) {
 		prefix = 'M';
+	}
+	if (!Object.isFunction(onrow)) {
+		onrow = null;
 	}
 	function inintBGTr(id) {
 		var row = 0,
@@ -201,22 +205,26 @@ function inintPMTable(id, onchanged, prefix) {
 				bg = bg == 'bg2' ? 'bg1' : 'bg2';
 				item.className = bg;
 				item.id = prefix + '_' + row;
-				forEach(item.getElementsByTagName('input'), function() {
-					if (this.id == '') {
-						this.id = this.name.replace(/([\[\]_]+)/g, '_') + row;
-					} else {
-						hs = patt2.exec(this.id);
-						if (hs) {
-							this.id = hs[1] + row;
+				if (onrow) {
+					onrow(item, row);
+				} else {
+					forEach(item.getElementsByTagName('input'), function() {
+						if (this.id == '') {
+							this.id = this.name.replace(/([\[\]_]+)/g, '_') + row;
+						} else {
+							hs = patt2.exec(this.id);
+							if (hs) {
+								this.id = hs[1] + row;
+							}
 						}
-					}
-					hs = patt.exec(this.className);
-					if (hs) {
-						this.className = 'unlimited ' + hs[2] + row;
-						callClick(this, _doUnlimited);
-						_doUnlimited.call(this);
-					}
-				});
+						hs = patt.exec(this.className);
+						if (hs) {
+							this.className = 'unlimited ' + hs[2] + row;
+							callClick(this, _doUnlimited);
+							_doUnlimited.call(this);
+						}
+					});
+				}
 				row++;
 			}
 		});
@@ -245,9 +253,6 @@ function inintPMTable(id, onchanged, prefix) {
 			var tbody = tr.parentNode;
 			var ntr = tr.copy(false);
 			tr.after(ntr);
-			if (Object.isFunction(onchanged)) {
-				onchanged(tbody);
-			}
 			inintBGTr(tbody);
 			inintPMTable(ntr, onchanged, prefix);
 			ntr.highlight();
@@ -277,10 +282,10 @@ function inintPMTable(id, onchanged, prefix) {
 			inputValidate(this, c);
 		}
 	});
+	inintBGTr(id);
 	if (Object.isFunction(onchanged)) {
 		onchanged(id);
 	}
-	inintBGTr(id);
 }
 function inintLanguages(id) {
 	var patt = /^(edit|delete|check)_([a-z]{2,2})$/;

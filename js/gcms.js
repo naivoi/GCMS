@@ -461,3 +461,24 @@ function inintFacebook(appId, lng) {
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 }
+function inintSearch(form, input, module) {
+	var _callSearch = function (e) {
+		var q = $E(input);
+		if (q) {
+			var v = q.value.trim();
+			var l = v.length;
+			if (l == 0) {
+				alert(SEARCH_EMPTY);
+				q.focus();
+			} else if (l < 2) {
+				alert(SEARCH_SHORT);
+				q.focus();
+			} else {
+				loaddoc(WEB_URL + 'index.php?module=' + $E(module).value + '&q=' + encodeURIComponent(v));
+			}
+		}
+		GEvent.stop(e);
+		return false;
+	};
+	$G(form).addEvent('submit', _callSearch);
+}

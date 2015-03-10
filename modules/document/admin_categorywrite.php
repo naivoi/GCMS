@@ -35,6 +35,9 @@
 			if ($category_id > 0) {
 				// config ของหมวด
 				gcms::r2config($index['config'], $index);
+			} else {
+				// ใหม่
+				$index['can_reply'] = 0;
 			}
 			// title
 			$m = ucwords($index['module']);

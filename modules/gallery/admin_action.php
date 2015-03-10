@@ -47,7 +47,7 @@
 						@unlink(DATA_PATH."gallery/$item[album_id]/thumb_$item[image]");
 						$ret['remove'.$item['id']] = 'L_'.$item['id'];
 					}
-					// ลบb
+					// ลบ
 					$db->query("DELETE FROM `".DB_GALLERY."` WHERE `id` IN ($ids) AND `album_id`=$album_id");
 					// อัปเดทจำนวนรูปภาพในอัลบัม
 					$sql = "SELECT COUNT(*) FROM `".DB_GALLERY."` WHERE `module_id`=C.`module_id` AND `album_id`=$album_id";

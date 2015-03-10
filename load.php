@@ -86,7 +86,7 @@
 			$sql .= " FROM `".DB_MENUS."` AS U";
 			$sql .= " LEFT JOIN `".DB_INDEX."` AS I ON I.`id`=U.`index_id` AND I.`index`='1' AND I.`language` IN ('".LANGUAGE."','')";
 			$sql .= " LEFT JOIN `".DB_MODULES."` AS M ON M.`id`=I.`module_id`";
-			$sql .= " WHERE U.`language` IN ('".LANGUAGE."','') AND U.`published`!='0'";
+			$sql .= " WHERE U.`language` IN ('".LANGUAGE."','')";
 			$sql .= " ORDER BY `pos` ASC,U.`parent` ASC ,U.`menu_order` ASC";
 			$menus = $cache->get($sql);
 			if (!$menus) {
@@ -227,18 +227,20 @@
 							if (isset($items[$level]) && sizeof($items[$level]) > 0) {
 								$mymenu .= gcms::getMenu($name, true).'<ul>';
 								foreach ($items[$level] AS $level2 => $item2) {
-									if (isset($items[$level2]) && sizeof($items[$level2]) > 0) {
-										$mymenu .= gcms::getMenu($item2, true).'<ul>';
-										foreach ($items[$level2] AS $item3) {
-											$mymenu .= gcms::getMenu($item3).'</li>';
+									if ($item2['published'] != 0) {
+										if (isset($items[$level2]) && sizeof($items[$level2]) > 0) {
+											$mymenu .= gcms::getMenu($item2, true).'<ul>';
+											foreach ($items[$level2] AS $item3) {
+												$mymenu .= gcms::getMenu($item3).'</li>';
+											}
+											$mymenu .= '</ul></li>';
+										} else {
+											$mymenu .= gcms::getMenu($item2).'</li>';
 										}
-										$mymenu .= '</ul></li>';
-									} else {
-										$mymenu .= gcms::getMenu($item2).'</li>';
 									}
 								}
 								$mymenu .= '</ul>';
-							} else {
+							} elseif ($name['published'] != 0) {
 								$mymenu .= gcms::getMenu($name);
 							}
 							$mymenu .= '</li>';

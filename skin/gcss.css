@@ -3498,6 +3498,9 @@ ol.multi_step li.current:before {
 	text-decoration: none;
 	color: #FFF;
 }
+.responsive-ads {
+	display: block;
+}
 @media only screen and (max-width: 1360px) {
 	/* side menu */
 	body.responsive .sidemenu.responsive > ul ul a {

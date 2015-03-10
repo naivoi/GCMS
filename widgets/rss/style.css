@@ -69,7 +69,7 @@
 }
 .rss_widget td > span {
 	display: block;
-	max-height: 3em;
+	max-height: 3.2em;
 	overflow: hidden;
 }
 .rss_widget .rss_row, .rss_widget .table_rsstab_class, table.table_rss_class {

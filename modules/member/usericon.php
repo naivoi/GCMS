@@ -28,10 +28,6 @@
 		$info = getImageSize($picture);
 		if (empty($info['error'])) {
 			header("Content-type: $info[mime]");
-			// โหลดจากไฟล์
-			$f = fopen($picture, 'rb');
-			$data = fread($f, filesize($picture));
-			fclose($f);
-			echo $data;
+			echo file_get_contents($picture);
 		}
 	}

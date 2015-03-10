@@ -180,12 +180,16 @@
 						$index_save['index'] = 1;
 						$index_save['module_id'] = $module_id;
 						$id = $db->add(DB_INDEX, $index_save);
+						// ตั้งค่าโมดูล
+						$ret['location'] = rawurlencode(WEB_URL.'/admin/index.php?module='.$owner.'-config&id='.$module_id);
 					} else {
 						// แก้ไข
 						$module_id = $index['module_id'];
 						$db->edit(DB_INDEX, $id, $index_save);
 						$db->edit(DB_MODULES, $module_id, $module_save);
 						$db->query("DELETE FROM `".DB_INDEX_DETAIL."` WHERE `id`='$id' AND `module_id`='$module_id' AND `language`='$index[language]'");
+						// กลับไปก่อนหน้า
+						$ret['location'] = 'back';
 					}
 					// detail
 					$detail_save['id'] = $id;
@@ -194,7 +198,6 @@
 					$db->add(DB_INDEX_DETAIL, $detail_save);
 					// ส่งค่ากลับ
 					$ret['error'] = 'SAVE_COMPLETE';
-					$ret['location'] = 'back';
 				} else {
 					// คืนค่า input ตัวแรกที่ error
 					if ($input) {

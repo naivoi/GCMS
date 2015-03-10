@@ -18,7 +18,7 @@
 	// ตรวจสอบ referer และ admin
 	if (gcms::isReferer() && gcms::isAdmin() && $ids != '') {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
-			echo $lng['EX_MODE_ERROR'];
+			echo $lng['ACTION_FORBIDDEN'];
 		} else {
 			if ($action == 'delete') {
 				// ลบสมาชิกที่เลือก
@@ -78,5 +78,5 @@
 			}
 		}
 	} else {
-		echo $lng['ACTION_ERROR'];
+		echo $lng['ACTION_FORBIDDEN'];
 	}

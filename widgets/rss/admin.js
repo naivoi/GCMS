@@ -1,5 +1,5 @@
 // widgets/rss/admin.js
-var doRSSSubmit = function(xhr) {
+var doRSSSubmit = function (xhr) {
 	var prop, val, el, tag;
 	var datas = xhr.responseText.toJSON();
 	if (datas) {
@@ -45,7 +45,7 @@ var doRSSSubmit = function(xhr) {
 		alert(xhr.responseText);
 	}
 };
-var rssReset = function(e) {
+var rssReset = function (e) {
 	$E('rss_id').value = 0;
 	$E('rss_topic').value = '';
 	$E('rss_index').value = '';
@@ -53,15 +53,15 @@ var rssReset = function(e) {
 	rssIndexChanged.call($E('rss_index'));
 	$E('rss_url').focus();
 };
-var rssIndexChanged = function(e) {
+var rssIndexChanged = function (e) {
 	var n = this.value.toInt();
 	$E('rss_index_result').innerHTML = '{WIDGET_RSS' + (n == 0 ? '' : '_' + n) + '}';
 };
-function doInintRSSSetup(id) {
+function doInintRSSSetup (id) {
 	new GSortTable(id, {
-		endDrag: function() {
+		endDrag: function () {
 			var trs = new Array();
-			forEach($E(id).getElementsByTagName('tr'), function() {
+			forEach($E(id).getElementsByTagName('tr'), function () {
 				if (this.id) {
 					trs.push(this.id);
 				}

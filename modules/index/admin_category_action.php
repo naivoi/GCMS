@@ -42,7 +42,7 @@
 					gcms::r2config($index['config'], $index);
 					$admin = gcms::canConfig($index, 'can_config');
 				} else {
-					$admin = gcms::canConfig($config[$index['owner'].'_can_config']);
+					$admin = gcms::canConfig($config, $index['owner'].'_can_config');
 				}
 				if ($admin && $action == 'delete') {
 					// ลบหมวดหมู่, ตรวจสอบรายการที่เลือก และลบ icon ของหมวด

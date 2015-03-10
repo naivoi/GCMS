@@ -45,7 +45,7 @@
 		$facebook = gcms::getVars($config, 'facebook', array());
 		$content[] = '<div class=item>';
 		$content[] = '<label for=facebook_appId>{LNG_FACEBOOK_APPID}</label>';
-		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId', '' ).'" title="{LNG_FACEBOOK_COMMENT}"></span>';
+		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId', '').'" title="{LNG_FACEBOOK_COMMENT}"></span>';
 		$content[] = '</div>';
 		// facebook_secret
 		$content[] = '<div class=item>';

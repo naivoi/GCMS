@@ -28,7 +28,7 @@
 			$sql .= " FROM `".DB_MENUS."` AS U";
 			$sql .= " LEFT JOIN `".DB_INDEX."` AS I ON I.`id`=U.`index_id` AND I.`index`='1' AND I.`language` IN ('".LANGUAGE."','')";
 			$sql .= " LEFT JOIN `".DB_MODULES."` AS M ON M.`id`=I.`module_id`";
-			$sql .= " WHERE U.`language` IN ('".LANGUAGE."','') AND U.`published`='1'";
+			$sql .= " WHERE U.`language` IN ('".LANGUAGE."','')";
 			$sql .= " ORDER BY `pos` ASC,U.`parent` ASC ,U.`menu_order` ASC";
 			$menus = $cache->get($sql);
 			if (!$menus) {
