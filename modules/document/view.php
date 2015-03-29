@@ -140,35 +140,34 @@
 				// แก้ไขบทความ เจ้าของหรือ mod
 				$canEdit = is_file(ROOT_PATH.'modules/document/write.php') && ($moderator || ($isMember && $login['id'] == $index['member_id']));
 				// แทนที่ลงใน template ของโมดูล
-				$patt = array('/{BREADCRUMS}/', '/{COMMENTLIST}/', '/{URL}/', '/{TOPIC(-([0-9]+))?}/e', '/{REPLYFORM}/',
+				$patt = array('/{BREADCRUMS}/', '/{COMMENTLIST}/', '/{REPLYFORM}/', '/{TOPIC}/',
 					'/<MEMBER>(.*)<\/MEMBER>/s', '/(edit-{QID}-0-0-{MODULE})/', '/(delete-{QID}-0-0-{MODULE})/',
-					'/(quote-{QID}-0-0-{MODULE})/', '/{DETAIL}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{UID}/', '/{DISPLAYNAME}/',
+					'/(quote-{QID}-0-0-{MODULE})/', '/{DETAIL}/', '/{LANGUAGE}/', '/{UID}/', '/{DISPLAYNAME}/', '/{IMG}/',
 					'/{STATUS}/', '/{LASTUPDATE}/', '/{LASTUPDATE2}/', '/{CREATEDATE}/', '/{CREATEDATE2}/', '/{VISITED}/',
 					'/{TAGS}/', '/{COMMENTS}/', '/{QID}/', '/{LOGIN_PASSWORD}/', '/{LOGIN_EMAIL}/', '/{ANTISPAM}/',
-					'/{ANTISPAMVAL}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{DELETE}/', '/{MODULE}/', '/{MODULEID}/', '/{VOTE}/', '/{VOTE_COUNT}/');
+					'/{ANTISPAMVAL}/', '/{DELETE}/', '/{MODULE}/', '/{MODULEID}/', '/{VOTE}/', '/{VOTE_COUNT}/', '/{CATID}/');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
 				$replace[] = sizeof($comments) == 0 ? '' : implode("\n", $comments);
-				$replace[] = $canonical;
-				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
 				$replace[] = $canReply ? gcms::loadtemplate($index['module'], 'document', 'reply') : '';
+				$replace[] = $index['topic'];
 				$replace[] = $isMember ? '' : '$1';
 				$replace[] = $canEdit ? '\\1' : 'hidden';
 				$replace[] = $canDelete ? '\\1' : 'hidden';
 				$replace[] = $canReply ? '\\1' : 'hidden';
 				$replace[] = gcms::HighlightSearch(gcms::showDetail($index['detail'], $canview, false), $search);
 				$replace[] = LANGUAGE;
-				$replace[] = 'gcms::getWidgets';
 				$replace[] = (int)$index['member_id'];
 				$replace[] = empty($index['displayname']) ? $index['email'] : $index['displayname'];
+				$replace[] = $image_src;
 				$replace[] = $index['status'];
 				$replace[] = gcms::mktime2date($index['last_update']);
 				$replace[] = date('Y-m-d', $index['last_update']);
 				$replace[] = gcms::mktime2date($index['create_date']);
 				$replace[] = date('Y-m-d', $index['create_date']);
-				$replace[] = $index['visited'];
-				$replace[] = sizeof($relate) == 0 ? '' : implode(', ', $relate);
-				$replace[] = (int)$index['comments'];
+				$replace[] = number_format($index['visited']);
+				$replace[] = sizeof($relate) == 0 ? '' : implode('', $relate);
+				$replace[] = number_format($index['comments']);
 				$replace[] = $index['id'];
 				$replace[] = $login['password'];
 				$replace[] = $login['email'];
@@ -179,15 +178,16 @@
 					$replace[] = '';
 					$replace[] = '';
 				}
-				$replace[] = 'gcms::getLng';
-				$replace[] = $moderator ? $lng['LNG_DELETE'] : $lng['LNG_SEND_DELETE'];
+				$replace[] = $moderator ? '{LNG_DELETE}' : '{LNG_SEND_DELETE}';
 				$replace[] = $index['module'];
 				$replace[] = $index['module_id'];
 				$replace[] = (int)$index['vote'];
 				$replace[] = (int)$index['vote_count'];
-				// ใส่ลงใน template
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'view'));
-				// title, description, keywords
+				$replace[] = $index['category_id'];
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'view'));
+				// ตัวแปรหลังจากแสดงผลแล้ว
+				$custom_patt['/{TYPE}/'] = $index['img_typies'];
+				// title,keywords,description
 				$title = $index['topic'];
 				$keywords = $index['keywords'];
 				$description = $index['description'];

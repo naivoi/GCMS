@@ -11,8 +11,9 @@
 		} else {
 			$error = false;
 			$save = array();
+			$save['name'] = $db->sql_trim_str($_POST, 'textlink_name');
 			$save['description'] = $db->sql_trim_str($_POST, 'textlink_description');
-			$save['type'] = $_POST['textlink_type'].((int)$_POST['textlink_prefix'] == 0 ? '' : (int)$_POST['textlink_prefix']);
+			$save['type'] = $db->sql_trim_str($_POST, 'textlink_type');
 			$save['text'] = $db->sql_trim($_POST, 'textlink_text');
 			$save['url'] = trim(gcms::getVars($_POST, 'textlink_url', ''));
 			$save['target'] = trim(gcms::getVars($_POST, 'textlink_target', ''));
@@ -39,13 +40,9 @@
 			if (sizeof($textlink) == 0) {
 				$ret['error'] = 'ACTION_ERROR';
 				$error = true;
-			} elseif ($save['type'] == '') {
-				$ret['error'] = 'TEXTLINK_TYPE_EMPTY';
-				$ret['input'] = 'textlink_type';
-				$error = true;
-			} elseif (!preg_match('/^[a-z0-9]{1,}$/u', $save['type'])) {
-				$ret['error'] = 'TEXTLINK_TYPE_ERROR';
-				$ret['input'] = 'textlink_type';
+			} elseif (!preg_match('/^[a-z0-9]{1,}$/u', $save['name'])) {
+				$ret['ret_textlink_name'] = 'this';
+				$ret['input'] = 'textlink_name';
 				$error = true;
 			} else {
 				$textlink = $textlink[0];
@@ -79,7 +76,7 @@
 					}
 					// คืนค่า
 					$ret['error'] = 'SAVE_COMPLETE';
-					$ret['location'] = gcms::retURL(WEB_URL.'/admin/index.php', array('module' => 'textlink-setup', 'type' => $save['type']));
+					$ret['location'] = gcms::retURL(WEB_URL.'/admin/index.php', array('module' => 'textlink-setup', 'name' => $save['name']));
 				}
 			}
 		}

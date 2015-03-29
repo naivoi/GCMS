@@ -32,16 +32,16 @@
 		$days_of_last_month = $c_month == 1 ? date('t', mktime(0, 0, 0, 12, 1, $c_year - 1)) : date('t', mktime(0, 0, 0, $c_month - 1, 1, $c_year));
 		// ตรวจสอบรายการที่เกี่ยวข้องจากฐานข้อมูล
 		$events = array();
-		$sql = "SELECT D.`id`,D.`last_update`,M.`module` FROM `$config[calendar_db]` AS D";
+		$sql = "SELECT D.`id`,D.`create_date`,M.`module` FROM `$config[calendar_db]` AS D";
 		$sql .= " INNER JOIN `".DB_MODULES."` AS M ON M.`id`=D.`module_id` AND M.`owner`='$config[calendar_owner]'";
-		$sql .= " WHERE D.`last_update`>='$mkdate' AND D.`last_update`<'$mk31th' AND D.`published`='1'";
+		$sql .= " WHERE D.`create_date`>='$mkdate' AND D.`create_date`<'$mk31th' AND D.`published`='1'";
 		$datas = $cache->get($sql);
 		if (!$datas) {
 			$datas = $db->customQuery($sql);
 			$cache->save($sql, $datas);
 		}
 		foreach ($datas AS $item) {
-			$cd = (int)date('d', $item['last_update']);
+			$cd = (int)date('d', $item['create_date']);
 			$events[$cd]['id'][] = $item['id'];
 			$events[$cd]['module'] = $item['module'];
 		}

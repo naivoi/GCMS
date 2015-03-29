@@ -1,8 +1,9 @@
 <?php
 	// widgets/tags/index.php
 	if (defined('MAIN_INIT')) {
+		$widget_id = gcms::rndName(10);
 		$keyword = array();
-		$keyword[] = '<div id=widget-tags>';
+		$keyword[] = '<div id='.$widget_id.' class=widget-tags>';
 		$sql = 'SELECT * FROM `'.DB_TAGS.'` ORDER BY `count` ASC';
 		$tag_result = $cache->get($sql);
 		if (!$tag_result) {
@@ -13,8 +14,8 @@
 			$min = 1000000;
 			$max = 0;
 			$nmax = sizeof($tag_result) - 1;
-			$min = $tag_result[1]['count'];
-			$max = $tag_result[$nmax - 1]['count'];
+			$min = isset($tag_result[1]) ? $tag_result[1]['count'] : 0;
+			$max = isset($tag_result[$nmax - 1]) ? $tag_result[$nmax - 1]['count'] : 0;
 			$step = ($max - $min > 0) ? ($max - $min) / 7 : 0.1;
 			for ($i = $nmax; $i >= 0; $i--) {
 				$value = $tag_result[$i]['count'];
@@ -38,7 +39,7 @@
 		$keyword[] = '</div>';
 		$keyword[] = '<script>';
 		$content[] = '$G(window).Ready(function(){';
-		$keyword[] = "inintTags('widget-tags', '".SKIN."');";
+		$keyword[] = "inintTags('$widget_id', '".SKIN."');";
 		$content[] = '});';
 		$keyword[] = '</script>';
 		$widget = implode("\n", $keyword);

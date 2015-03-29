@@ -2,28 +2,28 @@
 	// widgets/textlink/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin && defined('DB_TEXTLINK')) {
 		// ค่าที่ส่งมา
-		$type = $db->sql_trim_str($_GET, 'type');
+		$name = $db->sql_trim_str($_GET, 'name');
 		// title
 		$title = $lng['LNG_TEXTLINK_TITLE'];
 		$a = array();
 		$a[] = '<span class=icon-widgets>{LNG_WIDGETS}</span>';
 		$a[] = '<a href="index.php?module=textlink-setup">{LNG_TEXTLINK}</a>';
-		if ($type != '') {
-			$a[] = $type;
+		if ($name != '') {
+			$a[] = $name;
 		}
 		// แสดงผล
 		$content[] = '<div class=breadcrumbs><ul><li>'.implode('</li><li>', $a).'</li></ul></div>';
 		$content[] = '<section>';
 		$content[] = '<header><h1 class=icon-ads>'.$title.'</h1></header>';
 		$content[] = '<form class=table_nav method=get action=index.php>';
-		// type
-		$sql = "SELECT `type` FROM `".DB_TEXTLINK."` GROUP BY `type`";
+		// name
+		$sql = "SELECT `name`,`type` FROM `".DB_TEXTLINK."` GROUP BY `name`";
 		$content[] = '<fieldset>';
-		$content[] = '<label>{LNG_TEXTLINK_TYPE} <select name=type>';
+		$content[] = '<label>{LNG_TEXTLINK_TYPE} <select name="name">';
 		$content[] = '<option value="">{LNG_VIEW_ALL}</option>';
 		foreach ($db->customQuery($sql) AS $item) {
-			$sel = $item['type'] == $type ? ' selected' : '';
-			$content[] = '<option value='.$item['type'].$sel.'>'.$item['type'].'</option>';
+			$sel = $item['name'] == $name ? ' selected' : '';
+			$content[] = '<option value='.$item['name'].$sel.'>'.$item['name'].' ('.$item['type'].')</option>';
 		}
 		$content[] = '</select></label>';
 		$content[] = '</fieldset>';
@@ -33,10 +33,10 @@
 		$content[] = '<input type=hidden name=module value=textlink-setup>';
 		$content[] = '</fieldset>';
 		$content[] = '</form>';
-		if ($type == '') {
-			$sql = "SELECT * FROM `".DB_TEXTLINK."` ORDER BY `link_order`,`type`";
+		if ($name == '') {
+			$sql = "SELECT * FROM `".DB_TEXTLINK."` ORDER BY `link_order`,`name`";
 		} else {
-			$sql = "SELECT * FROM `".DB_TEXTLINK."` WHERE `type`='$type' ORDER BY `link_order`";
+			$sql = "SELECT * FROM `".DB_TEXTLINK."` WHERE `name`='$name' ORDER BY `link_order`";
 		}
 		$datas = $db->customQuery($sql);
 		$patt2 = array('/{SEARCH}/', '/{COUNT}/', '/{PAGE}/', '/{TOTALPAGE}/', '/{START}/', '/{END}/');
@@ -46,10 +46,10 @@
 		$content[] = '<caption>'.preg_replace($patt2, $replace2, $lng['ALL_ITEMS']).'</caption>';
 		$content[] = '<thead>';
 		$content[] = '<tr>';
-		$content[] = '<th scope=col id=c0>{LNG_TYPE}</th>';
+		$content[] = '<th scope=col id=c0>{LNG_NAME}</th>';
 		$content[] = '<th scope=col id=c1 class=check-column><a class="checkall icon-uncheck"></a></th>';
 		$content[] = '<th scope=col id=c2 class=menu>&nbsp;</th>';
-		$content[] = '<th scope=col id=c3 class=tablet>{LNG_DESCRIPTION}</th>';
+		$content[] = '<th scope=col id=c3 class=tablet>{LNG_DESCRIPTION} ({LNG_TYPE})</th>';
 		$content[] = '<th scope=col id=c4 class=tablet>{LNG_URL}</th>';
 		$content[] = '<th scope=col id=c5 class=tablet>{LNG_TEXT}</th>';
 		$content[] = '<th scope=col id=c6 class="center tablet">{LNG_SIZE_OF} {LNG_IMAGE}</th>';
@@ -62,10 +62,10 @@
 		foreach ($datas AS $item) {
 			$id = $item['id'];
 			$tr = '<tr id=user-'.$id.' class=sort>';
-			$tr .= '<th headers=c0 scope=row id=r'.$id.'><a href="index.php?module=textlink-setup&amp;type='.$item['type'].'" title="'.$item['description'].'"'.($item['published'] == 0 ? ' class=ban' : '').'>'.$item['type'].'</a></th>';
+			$tr .= '<th headers=c0 scope=row id=r'.$id.'><a href="index.php?module=textlink-setup&amp;name='.$item['name'].'" title="'.$item['description'].'"'.($item['published'] == 0 ? ' class=ban' : '').'>'.$item['name'].'</a></th>';
 			$tr .= '<td headers="r'.$id.' c1" class=check-column><a id=check_'.$id.' class=icon-uncheck></a></td>';
 			$tr .= '<td headers="r'.$id.' c2"><a id=move_'.$id.' title="{LNG_DRAG_MOVE}" class=icon-move></a></td>';
-			$tr .= '<td headers="r'.$id.' c3" class=tablet>'.$item['description'].'</td>';
+			$tr .= '<td headers="r'.$id.' c3" class=tablet>'.$item['description'].' ('.$item['type'].')</td>';
 			$tr .= '<td headers="r'.$id.' c4" class=tablet><a href="'.$item['url'].'" target=_blank>'.$item['url'].'</a></td>';
 			$tr .= '<td headers="r'.$id.' c5" class=tablet>'.$item['text'].'</td>';
 			$tr .= '<td headers="r'.$id.' c6" class="center tablet">'.$item['width'].' * '.$item['height'].'</td>';
@@ -105,7 +105,7 @@
 		$content[] = '</fieldset>';
 		// add
 		$content[] = '<fieldset>';
-		$content[] = '<a class="button add" href="{URLQUERY?module=textlink-write&src=textlink-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_TEXTLINK}</span></a>';
+		$content[] = '<a class="button add" href="{URLQUERY?module=textlink-write&src=textlink-setup}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_TEXTLINK}</span></a>';
 		$content[] = '</fieldset>';
 		$content[] = '</div>';
 		$content[] = '</section>';
@@ -115,7 +115,7 @@
 		$content[] = '</script>';
 		// หน้านี้
 		$url_query['module'] = 'textlink-setup';
-		$url_query['type'] = $type;
+		$url_query['name'] = $name;
 	} else {
 		$title = $lng['LNG_DATA_NOT_FOUND'];
 		$content[] = '<aside class=error>'.$title.'</aside>';

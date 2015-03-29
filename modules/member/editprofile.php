@@ -111,12 +111,11 @@
 					}
 				}
 			}
-			$patt = array('/{BREADCRUMS}/', '/{TAB}/', '/{DETAIL}/', '/{(LNG_[A-Z0-9_]+)}/e');
+			$patt = array('/{BREADCRUMS}/', '/{TAB}/', '/{DETAIL}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = implode('', $tabs);
 			$replace[] = $content;
-			$replace[] = 'gcms::getLng';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'main'));
 			// เลือกเมนูตาม tab
 			$menu = $tab;

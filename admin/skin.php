@@ -48,7 +48,7 @@
 			$content[] = '<legend><span>{LNG_SKIN_SETTINGS_TITLE}</span></legend>';
 			// logo
 			$content[] = '<div class=item>';
-			$image = is_file(DATA_PATH."image/$config[logo]") ? DATA_URL."image/$config[logo]" : '../skin/img/blank.gif';
+			$image = !empty($config['logo']) && is_file(DATA_PATH."image/$config[logo]") ? DATA_URL."image/$config[logo]" : '../skin/img/blank.gif';
 			$content[] = '<div class=usericon><span><img src="'.$image.'" alt=logo id=logoDemo></span></div>';
 			$content[] = '<label for=input_logo>{LNG_UPLOAD_LOGO}</label>';
 			$content[] = '<span class="table g-input icon-upload"><input class=g-file type=file name=logo id=input_logo title="'.strip_tags($lng['LNG_UPLOAD_LOGO_COMMENT']).'" placeholder="{LNG_UPLOAD_LOGO}" data-preview=logoDemo></span>';

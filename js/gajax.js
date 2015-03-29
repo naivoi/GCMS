@@ -5,11 +5,8 @@
  23-10-57
 */
 var domloaded = false;
-var emptyFunction = function() {
-};
-var resultFunction = function() {
-	return true;
-};
+var emptyFunction = function() {};
+var resultFunction = function() {return true;};
 var ajaxAccepts = {
 	xml: "application/xml, text/xml",
 	html: "text/html",
@@ -1618,6 +1615,8 @@ GForm.prototype = {
 				forEach(elements, function() {
 					var val = this.element.value;
 					if (this.required !== null && val == '') {
+						var title = this.title !== '' ? this.title : DO_NOT_EMPTY;
+						alert(title);
 						this.element.addClass('required').highlight().focus();
 						ret = false;
 						return true;
@@ -1625,7 +1624,9 @@ GForm.prototype = {
 						if (this.pattern.test(val)) {
 							this.element.valid();
 						} else {
-							this.element.invalid(this.title !== '' ? this.title : DATA_NOT_MATCH);
+							var title = this.title !== '' ? this.title : DATA_NOT_MATCH;
+							this.element.invalid(title);
+							alert(title);
 							this.element.highlight().focus();
 							this.element.select();
 							ret = false;
@@ -3137,7 +3138,7 @@ GCalendar.prototype = {
 		this.calendar = $G('gcalendar_div');
 		this.calendar.style.position = 'absolute';
 		this.calendar.style.display = 'none';
-		this.calendar.style.zIndex = 99;
+		this.calendar.style.zIndex = 1001;
 		this._datechanged();
 		var self = this;
 		this.input.addEvent('click', function(e) {
@@ -3659,8 +3660,7 @@ var G_ddcolors = new Array();
 var GDDColor = GClass.create();
 GDDColor.prototype = {
 	initialize: function(id, onchanged) {
-		this.onchanged = onchanged || function() {
-		};
+		this.onchanged = onchanged || function() {};
 		this.color = '';
 		var self = this;
 		self.input = $G(id);
@@ -3674,6 +3674,7 @@ GDDColor.prototype = {
 		div.className = 'gddcolor_div';
 		div.style.display = 'none';
 		div.style.position = 'absolute';
+		div.style.zIndex = 1001;
 		self.ddcolor = $G(div);
 		self.createColors();
 		var _doPreview = function(e) {

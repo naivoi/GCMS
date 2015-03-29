@@ -195,11 +195,9 @@
 			$description = $config['web_description'];
 			$keywords = $config['web_description'];
 			// แสดงผล template หลัก
-			$main_replace = array();
 			$main_patt = array();
 			// ฟอร์ม login
-			$main_patt[] = '/{LOGIN}/';
-			$main_replace[] = $mainlogin;
+			$main_patt['/{LOGIN}/'] = $mainlogin;
 			if (!empty($config['google_site_verification'])) {
 				$meta['google-site-verification'] = '<meta name=google-site-verification content='.$config['google_site_verification'].'>';
 			}
@@ -207,6 +205,8 @@
 				$meta['author'] = '<link rel=author href=https://plus.google.com/'.$config['google_profile'].'>';
 				$meta['publisher'] = '<link rel=publisher href=https://plus.google.com/'.$config['google_profile'].'>';
 			}
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$custom_patt = array();
 			if (is_file(ROOT_PATH."modules/$modules[2]/index.php")) {
 				// เรียกหน้าหลักโมดูล
 				include ROOT_PATH."modules/$modules[2]/index.php";
@@ -215,12 +215,10 @@
 				$content = '<div class=error>'.$title.'</div>';
 			}
 			// เนื้อหา
-			$main_patt[] = '/{CONTENT}/';
-			$main_replace[] = $content;
+			$main_patt['/{CONTENT}/'] = $content;
 			// เมนู
 			foreach ($mainmenu AS $parent => $items) {
 				if ($parent != '') {
-					$main_patt[$parent] = '/{'.$parent.'}/';
 					$mymenu = '';
 					if (isset($items['toplevel'])) {
 						foreach ($items['toplevel'] AS $level => $name) {
@@ -246,25 +244,23 @@
 							$mymenu .= '</li>';
 						}
 					}
-					$main_replace[$parent] = $mymenu;
+					$main_patt['/{'.$parent.'}/'] = $mymenu;
 				}
 			}
-			if ($menu != '' && $main_replace['MAINMENU'] != '') {
+			if ($menu != '' && $main_patt['/{MAINMENU}/'] != '') {
 				// ตรวจสอบเมนูที่เลือก
 				$menu = '/class="('.preg_replace('/([\/\-])/u', '\\1', preg_quote($menu)).')(.*?)"/';
-				if (!preg_match($menu, $main_replace['MAINMENU'])) {
+				if (!preg_match($menu, $main_patt['/{MAINMENU}/'])) {
 					// ถ้าไม่มีจะใช้่โมดูลแรกสุด
 					$menu = $install_modules[$module_list[0]]['alias'];
 					$menu = '/class="('.preg_replace('/([\/\-])/u', '\\1', preg_quote($menu)).')(.*?)"/';
 				}
-				$main_replace['MAINMENU'] = preg_replace($menu, 'class="\\1 select\\2"', $main_replace['MAINMENU']);
+				$main_patt['/{MAINMENU}/'] = preg_replace($menu, 'class="\\1 select\\2"', $main_patt['/{MAINMENU}/']);
 			}
 			// เวอร์ชั่น
-			$main_patt[] = '/{VERSION}/';
-			$main_replace[] = VERSION;
+			$main_patt['/{VERSION}/'] = VERSION;
 			// ข้อความบน title bar
-			$main_patt[] = '/{TITLE}/';
-			$main_replace[] = strip_tags($title);
+			$main_patt['/{TITLE}/'] = strip_tags($title);
 			// ภาษาที่ติดตั้ง
 			$languages = array();
 			$skin = gcms::loadfile(ROOT_PATH.SKIN.'language.html');
@@ -272,61 +268,53 @@
 				$languages[] = preg_replace('/{LNG}/', $language, $skin);
 			}
 			$script[] = 'changeLanguage("'.implode(',', $config['languages']).'");';
-			$main_patt[] = '/{LANGUAGES}/';
-			$main_replace[] = implode('', $languages);
+			$main_patt['/{LANGUAGES}/'] = implode('', $languages);
 			// ขนาดตัวอักษร
-			$main_patt[] = '/{FONTSIZE}/';
-			$main_replace[] = '<p id=change_display><a class=small title="{LNG_CHANGE_FONT_SMALL}">A<sup>-</sup></a><a class=normal title="{LNG_CHANGE_FONT_NORMAL}">A</a><a class=large title="{LNG_CHANGE_FONT_LARGE}">A<sup>+</sup></a></p>';
+			$main_patt['/{FONTSIZE}/'] = '<p id=change_display><a class=small title="{LNG_CHANGE_FONT_SMALL}">A<sup>-</sup></a><a class=normal title="{LNG_CHANGE_FONT_NORMAL}">A</a><a class=large title="{LNG_CHANGE_FONT_LARGE}">A<sup>+</sup></a></p>';
 			// widgets
-			$main_patt[] = '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e';
-			$main_replace[] = 'gcms::getWidgets';
+			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = 'gcms::getWidgets';
+			// ภาษา
+			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = 'gcms::getLng';
 			// meta, keywords และ description
 			$meta['description'] = '<meta name=description content="'.$description.'">';
 			$meta['keywords'] = '<meta name=keywords content="'.$keywords.'">';
+			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
 			if (!empty($config['facebook']['appId'])) {
 				$meta['facebook_appId'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
+				$script[] = 'window.FB_APPID = "'.$config['facebook']['appId'].'";';
 			}
 			if (!empty($image_src)) {
 				$meta['image_src'] = '<link rel=image_src href='.$image_src.'>';
+				$meta['og:image'] = '<meta property="og:image" content="'.$image_src.'">';
 			}
 			// logo
-			$main_patt[] = '/{LOGO}/';
-			$main_replace[] = $image_logo;
+			$main_patt['/{LOGO}/'] = $image_logo;
 			$meta['canonical'] = '<link rel=canonical href="'.$canonical.'">';
 			$meta['hreflang'] = '<link rel=alternate hreflang='.LANGUAGE.' href="'.$canonical.'">';
-			$main_patt[] = '/{META}/';
-			$main_replace[] = implode("\n", $meta);
+			$main_patt['/{URL}/'] = $canonical;
+			$main_patt['/{XURL}/'] = rawurlencode($canonical);
+			$main_patt['/{META}/'] = implode("\n", $meta);
 			// javascript
-			$main_patt[] = '/{SCRIPT}/';
-			$main_replace[] = implode("\n", $script);
+			$main_patt['/{SCRIPT}/'] = implode("\n", $script);
 			// เวลาประมวลผล
-			$main_patt[] = '/{ELAPSED}/';
-			$main_replace[] = $db->timer_stop();
+			$main_patt['/{ELAPSED}/'] = $db->timer_stop();
 			// จำนวน query
-			$main_patt[] = '/{QURIES}/';
-			$main_replace[] = $db->query_count();
+			$main_patt['/{QURIES}/'] = $db->query_count();
 			// path ของ tempalate
-			$main_patt[] = '/{SKIN}/';
-			$main_replace[] = SKIN;
+			$main_patt['/{SKIN}/'] = SKIN;
 			// ภาษาที่เลือก
-			$main_patt[] = '/{LANGUAGE}/';
-			$main_replace[] = LANGUAGE;
-			// ภาษา
-			$main_patt[] = '/{(LNG_[A-Z0-9_]+)}/e';
-			$main_replace[] = 'gcms::getLng';
+			$main_patt['/{LANGUAGE}/'] = LANGUAGE;
 			// URL ของเว็บไซต์
-			$main_patt[] = '/{WEBURL}/';
-			$main_replace[] = WEB_URL;
+			$main_patt['/{WEBURL}/'] = WEB_URL;
 			// URL ของ datas/
-			$main_patt[] = '/{DATAURL}/';
-			$main_replace[] = DATA_URL;
+			$main_patt['/{DATAURL}/'] = DATA_URL;
 			// ชื่อเว็บ
-			$main_patt[] = '/{WEBTITLE}/';
-			$main_replace[] = $config['web_title'];
+			$main_patt['/{WEBTITLE}/'] = $config['web_title'];
 			// คำอธิบายย่อของเว็บ
-			$main_patt[] = '/{WEBDESCRIPTION}/';
-			$main_replace[] = $config['web_description'];
+			$main_patt['/{WEBDESCRIPTION}/'] = $config['web_description'];
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$main_patt = array_merge($main_patt, $custom_patt);
 			// แสดงผล
-			echo gcms::pregReplace($main_patt, $main_replace, gcms::loadtemplate('index', '', 'index'));
+			echo gcms::pregReplace(array_keys($main_patt), array_values($main_patt), gcms::loadtemplate('index', '', 'index'));
 		}
 	}

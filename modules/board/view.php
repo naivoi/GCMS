@@ -124,12 +124,11 @@
 				// แทนที่ลงใน template ของโมดูล
 				$patt = array('/{BREADCRUMS}/', '/{COMMENTLIST}/', '/(edit-{QID}-0-0-{MODULE})/', '/(delete-{QID}-0-0-{MODULE})/',
 					'/(quote-{QID}-0-0-{MODULE})/', '/(pin-{QID}-0-0-{MODULE})/', '/(lock-{QID}-0-0-{MODULE})/',
-					'/{URL}/', '/{TOPIC(-([0-9]+))?}/e', '/{PIN}/', '/{LOCK}/', '/{PIN_TITLE}/', '/{LOCK_TITLE}/',
+					'/{URL}/', '/{TOPIC}/', '/{PIN}/', '/{LOCK}/', '/{PIN_TITLE}/', '/{LOCK_TITLE}/',
 					'/{DETAIL}/', '/{UID}/', '/{DISPLAYNAME}/', '/{STATUS}/', '/{LASTUPDATE}/',
 					'/{LASTUPDATE2}/', '/{VISITED}/', '/{COMMENTS}/', '/{REPLYFORM}/', '/<MEMBER>(.*)<\/MEMBER>/s',
 					'/<UPLOAD>(.*)<\/UPLOAD>/s', '/{LOGIN_PASSWORD}/', '/{LOGIN_EMAIL}/', '/{ANTISPAM}/',
-					'/{ANTISPAMVAL}/', '/{QID}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{DELETE}/', '/{MODULE}/',
-					'/{MODULEID}/', '/{SIZE}/', '/{TYPE}/');
+					'/{ANTISPAMVAL}/', '/{QID}/', '/{DELETE}/');
 				if ($index['picture'] != '' && is_file($imagedir.$index['picture'])) {
 					$image_src = $imageurl.$index['picture'];
 					$picture = '<figure class=center><img src="'.$image_src.'" alt="'.$index['topic'].'"></figure>';
@@ -148,7 +147,7 @@
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $moderator ? '\\1' : 'hidden';
 				$replace[] = $canonical;
-				$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
+				$replace[] = $index['topic'];
 				$replace[] = $index['pin'] == 0 ? 'un' : '';
 				$replace[] = $index['locked'] == 0 ? 'un' : '';
 				$replace[] = $index['pin'] == 0 ? $lng['LNG_PIN'] : $lng['LNG_UNPIN'];
@@ -157,10 +156,10 @@
 				$replace[] = (int)$index['member_id'];
 				$replace[] = $index['displayname'];
 				$replace[] = $index['status'];
-				$replace[] = gcms::mktime2date($index['last_update']);
-				$replace[] = date('Y-m-d H:i', $index['last_update']);
-				$replace[] = $index['visited'];
-				$replace[] = (int)$index['comments'];
+				$replace[] = gcms::mktime2date($index['create_date']);
+				$replace[] = date('Y-m-d H:i', $index['create_date']);
+				$replace[] = number_format($index['visited']);
+				$replace[] = number_format($index['comments']);
 				$replace[] = $index['locked'] == 1 ? '' : gcms::loadtemplate($index['module'], 'board', 'reply');
 				$replace[] = $isMember ? '' : '$1';
 				$replace[] = $index['img_upload_type'] == '' ? '' : '$1';
@@ -169,13 +168,13 @@
 				$replace[] = $register_antispamchar;
 				$replace[] = $isAdmin ? $_SESSION[$register_antispamchar] : '';
 				$replace[] = $index['id'];
-				$replace[] = 'gcms::getLng';
-				$replace[] = $moderator ? $lng['LNG_DELETE'] : $lng['LNG_SEND_DELETE'];
-				$replace[] = $index['module'];
-				$replace[] = $index['module_id'];
-				$replace[] = $index['img_upload_size'];
-				$replace[] = $index['img_upload_type'];
+				$replace[] = $moderator ? '{LNG_DELETE}' : '{LNG_SEND_DELETE}';
 				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'board', 'view'));
+				// ตัวแปรหลังจากแสดงผลแล้ว
+				$custom_patt['/{MODULE}/'] = $index['module'];
+				$custom_patt['/{MODULEID}/'] = $index['module_id'];
+				$custom_patt['/{SIZE}/'] = $index['img_upload_size'];
+				$custom_patt['/{TYPE}/'] = $index['img_upload_type'];
 				// title,keywords,description
 				$title = $index['topic'];
 				$keywords = $index['topic'];

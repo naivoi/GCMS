@@ -10,8 +10,6 @@
 		$script = array();
 		// เมนู
 		$menus = array();
-		// ภาษาที่ติดตั้ง
-		$install_languages = array();
 		// ไฟล์ css
 		$stylesheet = array();
 		// ไฟล์ javascript
@@ -43,13 +41,16 @@
 			}
 		}
 		// ภาษาที่ติดตั้ง
+		$install_languages = $config['languages'];
 		$languages = array();
 		$l = array('id', 'key', 'type', 'owner', 'js');
 		foreach ($db->customQuery("SHOW FIELDS FROM ".DB_LANGUAGE) AS $item) {
-			if (!in_array($item['Field'], $l)) {
+			if (!in_array($item['Field'], $l) && !in_array($item['Field'], $install_languages)) {
 				$install_languages[] = $item['Field'];
-				$languages[] = '<a href="{URLQUERY?lang='.$item['Field'].'}" title="{LNG_LANGUAGE} '.strtoupper($item['Field']).'" style="background-image:url('.DATA_URL.'language/'.$item['Field'].'.gif)" tabindex=1>&nbsp;</a>';
 			}
+		}
+		foreach ($install_languages AS $i => $item) {
+			$languages[] = '<a href="{URLQUERY?lang='.$item.'}" title="{LNG_LANGUAGE} '.strtoupper($item).'" style="background-image:url('.DATA_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a>';
 		}
 		// ภาษา js
 		$javascript[] = '<script src='.DATA_URL.'/language/'.LANGUAGE.'.js></script>';

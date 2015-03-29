@@ -117,12 +117,12 @@
 					}
 				}
 				if (!$error) {
+					$save['published'] = $_POST['category_published'] == 1 ? 1 : 0;
 					$save['category_id'] = $category_id;
 					$save['topic'] = gcms::array2Ser($topic);
 					$save['detail'] = gcms::array2Ser($detail);
 					// config
 					$cfg = array();
-					$cfg[] = "published=".(int)$_POST['category_published'];
 					$cfg[] = "can_reply=".(int)$_POST['category_can_reply'];
 					$save['config'] = implode("\n", $cfg);
 					// save

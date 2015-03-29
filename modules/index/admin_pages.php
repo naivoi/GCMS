@@ -57,7 +57,7 @@
 		$content[] = '</fieldset>';
 		// add
 		$content[] = '<fieldset>';
-		$content[] = '<a class="button add" href="{URLQUERY?module=index-write&owner=index&src=index-pages}"><span class=icon-add>{LNG_ADD_NEW} {LNG_PAGE}</span></a>';
+		$content[] = '<a class="button add" href="{URLQUERY?module=index-write&owner=index&src=index-pages}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_PAGE}</span></a>';
 		$content[] = '</fieldset>';
 		// search
 		$content[] = '<fieldset class=search>';

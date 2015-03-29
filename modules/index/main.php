@@ -50,17 +50,13 @@
 			}
 			$cache->save($sql, $index);
 			// แทนที่ลงใน template ของโมดูล
-			$patt = array('/{BREADCRUMS}/', '/{TOPIC}/', '/{DETAIL}/', '/{MODULE}/',
-				'/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e');
+			$patt = array('/{BREADCRUMS}/', '/{TOPIC}/', '/{DETAIL}/', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $index['topic'];
 			$replace[] = gcms::showDetail($index['detail'], true, false);
 			$replace[] = $module;
-			$replace[] = LANGUAGE;
-			$replace[] = 'gcms::getWidgets';
-			$replace[] = 'gcms::getLng';
-			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], '', 'main'));
+			$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], '', 'main'));
 			// title,keywords,description
 			$title = $index['topic'];
 			$keywords = $index['keywords'];

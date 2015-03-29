@@ -71,6 +71,7 @@
 				}
 				if ($canWrite) {
 					$save['can_reply'] = (int)(isset($_POST['write_can_reply']) ? $_POST['write_can_reply'] : $index['can_reply'] != '');
+					$save['show_news'] = $_POST['write_show_news'] == 0 ? 0 : 1;
 					// ตรวจสอบข้อมูลที่กรอก
 					if (sizeof($details) == 0) {
 						$item = $config['languages'][0];

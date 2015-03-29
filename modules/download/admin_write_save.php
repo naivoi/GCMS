@@ -4,7 +4,7 @@
 	// inint
 	include '../../bin/inint.php';
 	$ret = array();
-	// referer, admin
+	// ตรวจสอบ referer และ สมาชิก
 	if (gcms::isReferer() && gcms::canConfig($config, 'download_can_upload')) {
 		if (isset($_SESSION['login']['account']) && $_SESSION['login']['account'] == 'demo') {
 			$ret['error'] = 'EX_MODE_ERROR';

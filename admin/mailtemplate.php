@@ -13,7 +13,7 @@
 		if (is_dir(ROOT_PATH.'modules/mailmerge')) {
 			// เขียนจดหมายเวียน
 			$content[] = '<div class=table_nav>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=mailwrite}"><span class=icon-add>{LNG_ADD_NEW} {LNG_EMAIL_TEMPLATE}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=mailwrite}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_EMAIL_TEMPLATE}</span></a>';
 			$content[] = '</div>';
 		}
 		// ตารางข้อมูล

@@ -178,7 +178,7 @@ img[alt=usericon] {
 	display: block;
 	color: #78BD72;
 }
-.share {
+.widget_share {
 	position: fixed;
 	background-color: #E9212D;
 	background-color: rgba(233,33,45,0.7);
@@ -195,10 +195,10 @@ img[alt=usericon] {
 	transition: all 0.5s ease;
 	z-index: 10;
 }
-.share:hover {
+.widget_share:hover {
 	left: 0;
 }
-.share a {
+.widget_share a {
 	background-position: 50% 50%;
 	margin: 0;
 	float: left;
@@ -216,27 +216,30 @@ img[alt=usericon] {
 	-ms-transition: background-color 0.5s ease;
 	transition: background-color 0.5s ease;
 }
-.share a:before {
+.widget_share a:before {
 	display: none;
 }
-.share a:hover, .share a:focus {
+.widget_share a:hover, .widget_share a:focus {
 	background-color: #FFF;
 	box-shadow: 0 0 10px #333;
 }
-.share a.fb_share {
+.widget_share a.fb_share {
 	background-image: url(img/social_facebook.png);
 }
-.share a.twitter_share {
+.widget_share a.twitter_share {
 	background-image: url(img/social_twitter.png);
 }
-.share a.email_share {
+.widget_share a.email_share {
 	background-image: url(img/social_email.png);
 }
-.share a.gplus_share {
+.widget_share a.gplus_share {
 	background-image: url(img/social_google.png);
 }
-.share a.google_profile {
+.widget_share a.google_profile {
 	background-image: url(img/social_google_share.png);
+}
+.widget_share a.line {
+	display: none;
 }
 #headmenu > li > a {
 	cursor: pointer;

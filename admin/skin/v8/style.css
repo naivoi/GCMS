@@ -344,10 +344,14 @@ section > header {
 	font-size: 1.8em;
 }
 .infobox a,
+.breadcrumbs [class^="icon-"]:before,
+.breadcrumbs [class*="icon-"]:before,
 h1[class^="icon-"]:before,
 h1[class*="icon-"]:before,
 h2[class^="icon-"]:before,
-h2[class*="icon-"]:before {
+h2[class*="icon-"]:before,
+h1[class]:before,
+h2[class]:before {
 	color: inherit;
 }
 .ggraphs {
@@ -733,10 +737,6 @@ header .inline {
 .icon-newtopic:before,
 .icon-minus:before {
 	color: #FF5722;
-}
-h1[class]:before,
-h2[class]:before {
-	color: inherit;
 }
 .icon-check:before,
 .icon-uncheck:before,

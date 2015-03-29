@@ -176,7 +176,7 @@
 		$content[] = '<div class=table_nav>';
 		// เพิ่มข้อความ
 		$content[] = '<fieldset>';
-		$content[] = '<a class="button large add" id=btn_addb href="index.php?module=languageedit&amp;src=language"><span class=icon-add>{LNG_ADD_NEW} {LNG_LANGUAGE_VARIABLE}</span></a>';
+		$content[] = '<a class="button large add" id=btn_addb href="index.php?module=languageedit&amp;src=language"><span class=icon-plus>{LNG_ADD_NEW} {LNG_LANGUAGE_VARIABLE}</span></a>';
 		$content[] = '</fieldset>';
 		$content[] = '</div>';
 		$content[] = '</section>';

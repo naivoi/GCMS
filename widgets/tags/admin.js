@@ -1,5 +1,5 @@
 // widgets/tags/admin.js
-var doTagsSubmit = function(xhr) {
+var doTagsSubmit = function (xhr) {
 	var prop, val, el, tag;
 	var datas = xhr.responseText.toJSON();
 	if (datas) {
@@ -42,7 +42,7 @@ var doTagsSubmit = function(xhr) {
 		alert(xhr.responseText);
 	}
 };
-var tagsReset = function(e) {
+var tagsReset = function (e) {
 	$E('tags_id').value = 0;
 	$E('tags_tag').value = '';
 };

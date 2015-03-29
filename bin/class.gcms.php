@@ -15,11 +15,11 @@
 				$ret = '';
 				foreach ($match[0] AS $item) {
 					switch ($item) {
-						case 'D':
-							$ret .= $lng['DATE_SHORT'][date('j', $mmktime) - 1];
-							break;
 						case 'l':
-							$ret .= $lng['DATE_LONG'][date('j', $mmktime) - 1];
+							$ret .= $lng['DATE_SHORT'][date('w', $mmktime)];
+							break;
+						case 'L':
+							$ret .= $lng['DATE_LONG'][date('w', $mmktime)];
 							break;
 						case 'M':
 							$ret .= $lng['MONTH_SHORT'][date('n', $mmktime) - 1];
@@ -815,14 +815,14 @@
 			$patt[] = '/{module}/u';
 			$replace[] = $encode ? rawurlencode($module) : $module;
 			if ($catid == 0) {
-				$patt[] = '/((cat={catid}&amp;)|(\/{catid}))/u';
+				$patt[] = '/((cat={catid}&amp;)|([\/-]{catid}))/u';
 				$replace[] = '';
 			} else {
 				$patt[] = '/{catid}/u';
 				$replace[] = (int)$catid;
 			}
 			if ((int)$id == 0) {
-				$patt[] = '/(((&amp;|\?)id={id})|(\/{id}))/u';
+				$patt[] = '/(((&amp;|\?)id={id})|([\/-]{id}))/u';
 				$replace[] = '';
 			} else {
 				$patt[] = '/{id}/u';
@@ -867,7 +867,7 @@
 				}
 				return "[{'".implode("','", $ret)."'}]";
 			} else {
-				return $array;
+				return '';
 			}
 		}
 		/**
@@ -1482,7 +1482,7 @@
 		 * @return (string)
 		 */
 		public static function aliasName($text) {
-			return preg_replace(array('/[_\(\)\-\+\r\n\s\"\'<>\.\/\\\?&\{\}]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('_', '\\2'), strtolower(trim(strip_tags($text))));
+			return preg_replace(array('/[_\(\)\-\+\#\r\n\s\"\'<>\.\/\\\?&\{\}]{1,}/isu', '/^(_)?(.*?)(_)?$/'), array('_', '\\2'), strtolower(trim(strip_tags($text))));
 		}
 		/**
 		 * checkIDCard($id)

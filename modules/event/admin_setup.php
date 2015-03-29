@@ -160,7 +160,7 @@
 			$content[] = '</fieldset>';
 			// add
 			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=event-write&src=event-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_EVENT}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=event-write&src=event-setup}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_EVENT}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

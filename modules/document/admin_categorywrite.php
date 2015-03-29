@@ -22,6 +22,7 @@
 		$index = $db->customQuery($sql);
 		if (sizeof($index) == 1) {
 			$index = $index[0];
+			$published = $index['published'];
 			// อ่าน config ของโมดูล
 			gcms::r2config($index['mconfig'], $index);
 			// ตรวจสอบสถานะที่สามารถเข้าหน้านี้ได้
@@ -38,7 +39,9 @@
 			} else {
 				// ใหม่
 				$index['can_reply'] = 0;
+				$published = 1;
 			}
+			$index['published'] = $published;
 			// title
 			$m = ucwords($index['module']);
 			$title = "$lng[LNG_CREATE] - $lng[LNG_EDIT] $lng[LNG_CATEGORY]";

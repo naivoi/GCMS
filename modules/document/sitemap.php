@@ -1,7 +1,7 @@
 <?php
 	// modules/document/sitemap.php
-	if (is_array($owners['document'])) {
-		$sql = "SELECT `id`,`module_id`,`alias`,`published_date`";
+	if (isset($owners['document'])) {
+		$sql = "SELECT `id`,`module_id`,`alias`,`create_date`";
 		$sql .= " FROM `".DB_INDEX."`";
 		$sql .= " WHERE `module_id` IN(".implode(',', $owners['document']).") AND `index`='0' AND `published`='1' AND `published_date`<='$cdate'";
 		$datas = $cache->get($sql);
@@ -17,7 +17,7 @@
 			}
 			echo '<url>';
 			echo '<loc>'.$link.'</loc>';
-			echo '<lastmod>'.$item['published_date'].'</lastmod>';
+			echo '<lastmod>'.date('Y-m-d', $item['create_date']).'</lastmod>';
 			echo '<changefreq>daily</changefreq>';
 			echo '<priority>0.5</priority>';
 			echo '</url>';

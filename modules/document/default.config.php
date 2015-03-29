@@ -15,7 +15,7 @@
 	$default['document']['viewing'] = 0;
 	$default['document']['category_display'] = 1;
 	$default['document']['default_icon'] = 'modules/document/img/document-icon.png';
-	$default['document']['sort'] = 0;
+	$default['document']['sort'] = 1;
 	$default['document']['new_date'] = 0;
 	$default['document']['news_count'] = 15;
 	$default['document']['news_sort'] = 0;

@@ -1,44 +1,44 @@
-#widget-tags {
+.widget-tags {
 	padding: 3px 4px 4px 4px;
 	text-align: center;
 }
-#widget-tags > a {
+.widget-tags > a {
 	margin: 2px;
 	display: inline;
 }
-div#widget-tags > a:hover {
+.widget-tags > a:hover {
 	background: #FEE8FF;
 	color: #F0C;
 	text-decoration: underline;
 }
-div#widget-tags > a.class0 {
+.widget-tags > a.class0 {
 	font-size: 1em;
 }
-div#widget-tags > a.class1 {
+.widget-tags > a.class1 {
 	font-size: 1.1em;
 }
-div#widget-tags > a.class2 {
+.widget-tags > a.class2 {
 	font-size: 1.2em;
 }
-div#widget-tags > a.class3 {
+.widget-tags > a.class3 {
 	font-size: 1.3em;
 }
-div#widget-tags > a.class4 {
+.widget-tags > a.class4 {
 	font-size: 1.4em;
 }
-div#widget-tags > a.class5 {
+.widget-tags > a.class5 {
 	font-size: 1.5em;
 }
-div#widget-tags > a.class6 {
+.widget-tags > a.class6 {
 	font-size: 1.6em;
 }
-div#widget-tags > a.class7 {
+.widget-tags > a.class7 {
 	font-size: 1.7em;
 }
-div#widget-tags > a.class8 {
+.widget-tags > a.class8 {
 	font-size: 1.8em;
 }
-div#widget-tags > a.class9 {
+.widget-tags > a.class9 {
 	font-size: 1.9em;
 }
 div.tag-tooltip h5 {

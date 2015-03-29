@@ -77,10 +77,12 @@
 							$ret['input'] = 'lang_name';
 							$ret['ret_lang_name'] = $ret['error'];
 						} else {
-							if ($icon['tmp_name'] != '' && !@copy($icon['tmp_name'], DATA_PATH."language/$name.gif")) {
-								$ret['ret_lang_icon'] = 'DO_NOT_UPLOAD';
-								$ret['input'] = 'lang_icon';
-								$ret['error'] = 'DO_NOT_UPLOAD';
+							if ($icon['tmp_name'] != '') {
+								if (!@copy($icon['tmp_name'], DATA_PATH."language/$name.gif")) {
+									$ret['ret_lang_icon'] = 'DO_NOT_UPLOAD';
+									$ret['input'] = 'lang_icon';
+									$ret['error'] = 'DO_NOT_UPLOAD';
+								}
 							}
 							if ($name != $id) {
 								// แก้ไขชื่อภาษา

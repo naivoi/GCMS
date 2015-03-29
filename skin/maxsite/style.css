@@ -9,9 +9,7 @@ body {
 	background-image: url(img/bg.gif);
 	background-repeat: repeat;
 }
-.wrapper_bg_color,
-.header_bg_color,
-.footer_bg_color {
+.wrapper_bg_color, .header_bg_color, .footer_bg_color {
 	background-color: #FFF;
 }
 .wrapper_top_bg {

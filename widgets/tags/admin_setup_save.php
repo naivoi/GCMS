@@ -35,7 +35,7 @@
 						// คืนค่ารายการใหม่
 						$tr = '<tr id="L_'.$id.'">';
 						$tr .= '<th headers="c1" id="r'.$id.'" scope="row" class="topic"><a id="edit_'.$id.'" href="'.WEB_URL.'/admin/index.php?module=tags-setup&amp;id='.$id.'">'.htmlspecialchars($save['tag']).'</a></th>';
-						$tr .= '<td headers="r'.$id.' c2" class="check-column"><a id="check_'.$id.'" class="uncheck"></a></td>';
+						$tr .= '<td headers="r'.$id.' c2" class="check-column"><a id="check_'.$id.'" class="icon-uncheck"></a></td>';
 						$tr .= '<td headers="r'.$id.' c3" class="visited">0</td>';
 						$tr .= '</tr>';
 						$ret['content'] = rawurlencode($tr);

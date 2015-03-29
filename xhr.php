@@ -93,19 +93,33 @@
 			$isMember = gcms::isMember();
 			// admin
 			$isAdmin = gcms::isAdmin();
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$custom_patt = array();
+			// เรียกโมดูล
 			if (is_file(ROOT_PATH."modules/$modules[2]/$modules[3].php")) {
-				// เรียกโมดูล
 				include ROOT_PATH."modules/$modules[2]/$modules[3].php";
 			} else {
+				// ไม่พบ module
 				$title = $lng['PAGE_NOT_FOUND'];
 				$content = '<div class=error>'.$title.'</div>';
 			}
-			$patt = array('/{SKIN}/', '/{WEBURL}/', '/{LANGUAGE}/', '/{WEBTITLE}/');
-			$replace = array(SKIN, WEB_URL, LANGUAGE, strip_tags($config['web_title']));
 			// คืนค่าเนื้อหา
 			$ret['menu'] = rawurlencode($menu);
 			$ret['title'] = rawurlencode(strip_tags($title));
-			$ret['content'] = rawurlencode(preg_replace($patt, $replace, $content));
+			// เตรียมข้อมูลสำหรับใส่ใน template
+			$main_patt = array();
+			$main_patt['/{URL}/'] = $canonical;
+			$main_patt['/{XURL}/'] = rawurlencode($canonical);
+			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = 'gcms::getWidgets';
+			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = 'gcms::getLng';
+			$main_patt['/{SKIN}/'] = SKIN;
+			$main_patt['/{WEBURL}/'] = WEB_URL;
+			$main_patt['/{LANGUAGE}/'] = LANGUAGE;
+			$main_patt['/{WEBTITLE}/'] = strip_tags($config['web_title']);
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$main_patt = array_merge($main_patt, $custom_patt);
+			// แสดงผล
+			$ret['content'] = rawurlencode(gcms::pregReplace(array_keys($main_patt), array_values($main_patt), $content));
 			if (isset($_POST['to'])) {
 				$ret['to'] = rawurlencode($_POST['to']);
 			}

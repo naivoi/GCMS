@@ -8,17 +8,17 @@
 		gcms::r2config($index['config'], $index);
 		// ค่าที่ส่งมา
 		$id = $index['module_id'];
-		$cat = isset($cat) ? (int)$cat : 0;
+		$cat = isset($cat) ? $cat : 0;
 		$new_date = (int)$index['new_date'];
 		$interval = isset($interval) ? (int)$interval : 0;
-		$cols = isset($cols) ? (int)$cols : 0;
+		$cols = isset($cols) ? (int)$cols : 1;
 		$rows = isset($rows) ? (int)$rows : 0;
-		if ($rows > 0 && $cols > 0) {
+		$news = isset($news) ? (int)$news : 1;
+		if ($rows > 0) {
 			$count = $rows * $cols;
 		} else {
 			$count = isset($count) ? (int)$count : 0;
 			$count = $count == 0 ? $index['news_count'] : $count;
-			$cols = 1;
 		}
 		$sort = isset($sort) ? (int)$sort : $index['news_sort'];
 		if ($count > 0) {
@@ -26,7 +26,7 @@
 			// แสดงผล
 			$patt = array('/{ID}/', '/{DETAIL}/', '/{MODULE}/');
 			$replace = array();
-			$replace[0] = "widget_".(empty($index['module']) ? '' : $index['module'])."_{$id}_{$cat}_{$count}_{$new_date}_{$sort}_{$cols}_{$styles}";
+			$replace[0] = "widget_".(empty($index['module']) ? '' : $index['module'])."_{$id}_{$cat}_{$count}_{$new_date}_{$sort}_{$cols}_{$styles}_{$news}";
 			$replace[1] = "<script>getWidgetNews('$replace[0]', 'document', $interval);</script>";
 			$replace[2] = $index['module'];
 			$widget = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'widget'));

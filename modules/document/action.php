@@ -75,7 +75,7 @@
 			} elseif (in_array($action, array('deleting', 'mdelete')) && $moderator) {
 				// ลบ mod หรือ เจ้าของ
 				if ($rid > 0) {
-					// ลบคำตอบ
+					// ลบความคิดเห็น
 					$db->delete(DB_COMMENT, $rid);
 					// อัปเดทจำนวนคำตอบของคำถาม
 					$sql = "UPDATE `".DB_INDEX."`";
@@ -87,7 +87,7 @@
 				} else {
 					// ลบคำถาม
 					$db->delete(DB_INDEX, $qid);
-					// ลบคำตอบ
+					// ลบความคิดเห็น
 					$db->query("DELETE FROM `".DB_COMMENT."` WHERE `index_id`='$qid'");
 					if ($action == 'deleting') {
 						// กลับไปหน้าหลักของโมดูลที่เลือก

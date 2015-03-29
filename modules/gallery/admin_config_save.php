@@ -23,8 +23,8 @@
 				}
 				// ค่าที่ส่งมา
 				$config['gallery_image_type'] = gcms::getVars($_POST, 'config_image_type', '');
-				$config['gallery_thumb_w'] = max(480, (int)$_POST['config_thumb_w']);
-				$config['gallery_thumb_h'] = max(360, (int)$_POST['config_thumb_h']);
+				$config['gallery_thumb_w'] = max(200, (int)$_POST['config_thumb_w']);
+				$config['gallery_thumb_h'] = max(200, (int)$_POST['config_thumb_h']);
 				$config['gallery_image_w'] = max(600, (int)$_POST['config_image_w']);
 				$config['gallery_cols'] = gcms::getVars($_POST, 'config_cols', 0);
 				$config['gallery_rows'] = gcms::getVars($_POST, 'config_rows', 0);

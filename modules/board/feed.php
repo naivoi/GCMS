@@ -1,6 +1,6 @@
 <?php
 	// modules/board/feed.php
-	if (is_array($modules)) {
+	if (isset($modules)) {
 		$sql = "SELECT I.`id`,(CASE WHEN I.`comment_date`='0' THEN I.`last_update` ELSE I.`comment_date` END) AS `last_update`";
 		$sql .= ",I.`topic`,I.`detail`,I.`picture` FROM `".DB_BOARD_Q."` AS I";
 		$cat = isset($_GET['cat']) ? ' AND I.`category_id`='.(int)$_GET['cat'] : '';

@@ -8,7 +8,7 @@
 	line-height: 1.8em;
 	overflow: hidden;
 }
-#download-list > article h3 {
+#download-list > article h6 {
 	display: inline;
 	margin-right: 5px;
 	font-size: 100%;

@@ -9,6 +9,7 @@
 		if (!empty($config['google_profile'])) {
 			$widget[] = '<a rel=nofollow href="http://plus.google.com/'.$config['google_profile'].'" class="google_profile icon-google" target=_blank title="Google Profile"></a>';
 		}
+		$widget[] = '<a rel=nofollow class="line_share icon-comments" title="LINE it!"></a>';
 		$widget[] = '<a rel=nofollow class="email_share icon-email" title="{LNG_SHARE_TITLE}"></a>';
 		$widget[] = '<script>';
 		$widget[] = '$G(window).Ready(function(){';

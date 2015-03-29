@@ -4,7 +4,7 @@
 		// list รายการหมวดหมู่
 		$listitem = gcms::loadtemplate($index['module'], 'document', 'categoryitem');
 		$patt = array('/{THUMB}/', '/{URL}/', '/{TOPIC}/', '/{COUNT}/', '/{COMMENTS}/', '/{DETAIL}/');
-		$sql = "SELECT * FROM `".DB_CATEGORY."` WHERE `module_id`='$index[id]' ORDER BY `category_id` DESC";
+		$sql = "SELECT * FROM `".DB_CATEGORY."` WHERE `module_id`='$index[id]' AND `published`='1' ORDER BY `category_id` DESC";
 		$datas = $cache->get($sql);
 		if (!$datas) {
 			$datas = $db->customQuery($sql);

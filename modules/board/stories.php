@@ -100,8 +100,8 @@
 			$replace[] = $item['sender'];
 			$replace[] = $item['status'];
 			$replace[] = gcms::mktime2date($item['create_date']);
-			$replace[] = $item['visited'];
-			$replace[] = $item['comments'];
+			$replace[] = number_format($item['visited']);
+			$replace[] = number_format($item['comments']);
 			$replace[] = $item['comment_date'] == 0 ? '&nbsp;' : gcms::mktime2date($item['comment_date']);
 			$replace[] = $item['comment_date'] == 0 ? '&nbsp;' : $item['commentator'];
 			$replace[] = (int)$item['commentator_id'];

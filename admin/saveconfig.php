@@ -20,7 +20,7 @@
 			// system.php
 			// web_title
 			if (isset($_POST['web_title'])) {
-				$config['web_title'] = htmlspecialchars($db->sql_trim($_POST, 'web_title', ''), ENT_QUOTES);
+				$config['web_title'] = $db->sql_trim($_POST, 'web_title', '');
 				if (empty($config['web_title'])) {
 					$ret['ret_web_title'] = 'DO_NOT_EMPTY';
 					$error = !$error ? 'DO_NOT_EMPTY' : $error;

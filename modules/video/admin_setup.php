@@ -19,6 +19,7 @@
 			foreach (explode(' ', $search) AS $item) {
 				// แยกข้อความค้นหาออกเป็นคำๆ ค้นหาข้อความที่มีความยาวมากกว่า 2 ตัวอักษร
 				if (mb_strlen($item) > 2) {
+					$item = addslashes($item);
 					$searchs[] = "`topic` LIKE '%$item%' OR `detail` LIKE '%$item%'";
 				}
 			}
@@ -154,7 +155,7 @@
 			$content[] = '</fieldset>';
 			// add
 			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=video-write&src=video-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_VIDEO}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=video-write&src=video-setup}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_VIDEO}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

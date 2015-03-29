@@ -60,7 +60,7 @@
 		$content[] = '</fieldset>';
 		// add
 		$content[] = '<fieldset>';
-		$content[] = '<a class="button add" href="{URLQUERY?module=index-add&src=index-insmod}"><span class=icon-add>{LNG_ADD_NEW} {LNG_MODULE}</span></a>';
+		$content[] = '<a class="button add" href="{URLQUERY?module=index-add&src=index-insmod}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_MODULE}</span></a>';
 		$content[] = '</fieldset>';
 		// search
 		$content[] = '<fieldset class=search>';

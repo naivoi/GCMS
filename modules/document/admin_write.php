@@ -79,6 +79,7 @@
 				$index['alias'] = '';
 				$index['picture'] = '';
 				$index['can_reply'] = 0;
+				$index['show_news'] = 1;
 			}
 			// แสดงผล
 			$content[] = '<div class=breadcrumbs><ul><li>'.implode('</li><li>', $a).'</li></ul></div>';
@@ -199,7 +200,18 @@
 			$content[] = '</select></span>';
 			$content[] = '<div class=comment>{LNG_CANREPLY_SETTING}</div>';
 			$content[] = '</div>';
-			// published date
+			// show_news
+			$content[] = '<div class=item>';
+			$content[] = '<label for=write_show_news>{LNG_SHOW_NEWS}</label>';
+			$content[] = '<span class="g-input icon-widgets"><select id=write_show_news name=write_show_news title="{LNG_SHOW_NEWS_COMMENT}">';
+			foreach ($lng['SHOW_NEWS'] AS $i => $item) {
+				$sel = $index['show_news'] == $i ? ' selected' : '';
+				$content[] = '<option value='.$i.$sel.'>'.$item.'</option>';
+			}
+			$content[] = '</select></span>';
+			$content[] = '<div class=comment>{LNG_SHOW_NEWS_COMMENT}</div>';
+			$content[] = '</div>';
+			// published_date
 			$content[] = '<div class=item>';
 			$content[] = '<label for=write_published_date>{LNG_PUBLISHED_DATE}</label>';
 			$content[] = '<span class="g-input icon-calendar"><input type=date id=write_published_date name=write_published_date value="'.gcms::getVars($index, 'published_date', date('Y-m-d', $mmktime)).'" title="{LNG_PUBLISHED_DATE_COMMENT}"></span>';

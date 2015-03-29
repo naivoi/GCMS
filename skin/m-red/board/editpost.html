@@ -4,7 +4,7 @@
 		<nav class=breadcrumbs>
 			<ul>
 				{BREADCRUMS}
-				<li><a href="{WEBURL}/index.php?module={MODULE}&amp;wbid={QID}" title="{TOPIC}"><span>{TOPIC-50}</span></a></li>
+				<li><a href="{WEBURL}/index.php?module={MODULE}&amp;wbid={QID}" title="{TOPIC}"><span>{TOPIC}</span></a></li>
 			</ul>
 		</nav>
 	</header>
@@ -18,6 +18,16 @@
 				<label for=board_category>{LNG_CATEGORY}</label>
 				<span class="g-input icon-category"><select id=board_category name=board_category title="{LNG_CATEGORY_SELECT}">{CATEGORIES}</select></span>
 			</div>
+			<ADMIN>
+				<div class=item>
+					<label for=board_create_date>{LNG_DATE}</label>
+					<div class="input-groups-table">
+						<span class="width g-input icon-calendar"><input type=date id=board_create_date name=board_create_date value="{DATE}"></span>
+						<label class="width">{LNG_TIME}&nbsp;<select name="board_hour">{HOUR}</select></label>
+						<label class="width">:&nbsp;<select name="board_minute">{MINUTE}</select></label>
+					</div>
+				</div>
+			</ADMIN>
 			<div class=item>
 				<label for=board_detail>{LNG_DETAIL}</label>
 				<span class="g-input icon-file"><textarea id=board_detail name=board_detail rows=10 placeholder="{LNG_DETAIL_COMMENT}">{DETAIL}</textarea></span>

@@ -5,8 +5,8 @@
 		if (!isset($ds) && empty($tag)) {
 			// list รายการเรื่องปกติ
 			$sqls[] = "D.`module_id`='$index[id]'";
-			if ($cat > 0) {
-				$sqls[] = "I.`category_id`='$cat'";
+			if ($cat_count > 0) {
+				$sqls[] = "I.`category_id` IN ($cat)";
 			}
 		}
 		$sqls[] = "D.`language` IN('".LANGUAGE."','')";
@@ -52,7 +52,6 @@
 			$patt = array('/{ID}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{UID}/', '/{SENDER}/',
 				'/{STATUS}/', '/{LASTUPDATE}/', '/{VISITED}/', '/{COMMENTS}/', '/{THUMB}/', '/{ICON}/');
 			foreach ($datas AS $item) {
-				$d = empty($index['document_sort']) ? $item['last_update'] : $item['create_date'];
 				$replace = array();
 				$replace[] = $item['id'];
 				if ($config['module_url'] == '1') {
@@ -65,9 +64,9 @@
 				$replace[] = $item['member_id'];
 				$replace[] = $item['displayname'] == '' ? $item['email'] : $item['displayname'];
 				$replace[] = $item['status'];
-				$replace[] = gcms::mktime2date($d, 'd M Y');
-				$replace[] = $item['visited'];
-				$replace[] = $item['comments'];
+				$replace[] = gcms::mktime2date($item['create_date'], 'd M Y');
+				$replace[] = number_format($item['visited']);
+				$replace[] = number_format($item['comments']);
 				if ($item['picture'] != '' && is_file(DATA_PATH."document/$item[picture]")) {
 					$replace[] = DATA_URL."document/$item[picture]";
 				} elseif (!empty($index['icon'])) {
@@ -87,12 +86,13 @@
 			// แบ่งหน้า
 			$maxlink = 9;
 			// query สำหรับ URL และ canonical
+			$c = $cat_count > 0 ? "&cat=$cat" : '';
 			if (empty($tag)) {
-				$url = '<a href="'.gcms::getURL($index['module'], '', $cat, 0, 'page=%1').'">%1</a>';
-				$canonical = gcms::getURL($index['module'], '', $cat, 0, "page=$page");
+				$url = '<a href="'.gcms::getURL($index['module'], '', 0, 0, "page=%1$c").'">%1</a>';
+				$canonical = gcms::getURL($index['module'], '', 0, 0, "page=$page$c");
 			} else {
-				$url = '<a href="'.gcms::getURL('tag', $tag, $cat, 0, 'page=%1').'">%1</a>';
-				$canonical = gcms::getURL('tag', $tag, $cat, 0, "page=$page");
+				$url = '<a href="'.gcms::getURL('tag', $tag, 0, 0, "page=%1$c").'">%1</a>';
+				$canonical = gcms::getURL('tag', $tag, 0, 0, "page=$page$c");
 			}
 			if ($totalpage > $maxlink) {
 				$start = $page - floor($maxlink / 2);

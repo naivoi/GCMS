@@ -12,7 +12,7 @@
 			$replace = array();
 			$replace[] = 'gcms::getLng';
 			$replace[] = $tag['tag'];
-			$replace[] = $tag['count'];
+			$replace[] = number_format($tag['count']);
 			echo gcms::pregReplace($patt, $replace, gcms::loadfile('tags.tpl'));
 		}
 	}

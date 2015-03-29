@@ -14,10 +14,10 @@ function inintTextlinkWrite() {
 	$G('textlink_type').addEvent('change', _stylesChanged);
 	_stylesChanged.call($E('textlink_type'));
 	var doTextlinkDemo = function() {
-		$E('textlink_demo').innerHTML = '{WIDGET_TEXTLINK_' + $E('textlink_type').value + $E('textlink_prefix').value + '}';
+		$E('textlink_demo').innerHTML = '{WIDGET_TEXTLINK_' + $E('textlink_name').value + '}';
 	};
-	$G('textlink_prefix').addEvent('keyup', doTextlinkDemo);
-	$G('textlink_prefix').addEvent('change', doTextlinkDemo);
+	$G('textlink_name').addEvent('keyup', doTextlinkDemo);
+	$G('textlink_name').addEvent('change', doTextlinkDemo);
 }
 function doInintTextlink(id) {
 	inintCheck(id);

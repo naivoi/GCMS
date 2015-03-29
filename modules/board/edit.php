@@ -7,7 +7,7 @@
 		if ($rid > 0) {
 			// คำตอบ
 			$sql = "SELECT R.`id` AS `comment_id`,R.`index_id`,R.`detail`,M.`config`";
-			$sql .= ",R.`module_id`,M.`module`,Q.`topic`,U.`id` AS `member_id`,U.`status`";
+			$sql .= ",R.`create_date`,R.`module_id`,M.`module`,Q.`topic`,U.`id` AS `member_id`,U.`status`";
 			$sql .= " FROM `".DB_BOARD_R."` AS R";
 			$sql .= " INNER JOIN `".DB_BOARD_Q."` AS Q ON Q.`id`=R.`index_id`";
 			$sql .= " INNER JOIN `".DB_MODULES."` AS M ON M.`id`=Q.`module_id`";
@@ -17,7 +17,7 @@
 		} else {
 			// คำถาม
 			$sql = "SELECT I.`id` AS `index_id`,I.`topic`,I.`detail`,I.`module_id`,I.`category_id`,I.`comments`,0 AS `comment_id`";
-			$sql .= ",M.`module`,U.`id` AS `member_id`,U.`status`,M.`config`";
+			$sql .= ",I.`create_date`,M.`module`,U.`id` AS `member_id`,U.`status`,M.`config`";
 			$sql .= " FROM `".DB_BOARD_Q."` AS I";
 			$sql .= " INNER JOIN `".DB_MODULES."` AS M ON M.`id`=I.`module_id`";
 			$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=I.`member_id`";
@@ -69,24 +69,44 @@
 			// antispam
 			$register_antispamchar = gcms::rndname(32);
 			$_SESSION[$register_antispamchar] = gcms::rndname(4);
-			$patt = array('/{BREADCRUMS}/', '/<UPLOAD>(.*)<\/UPLOAD>/s', '/{CATEGORIES}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{ANTISPAM}/',
-				'/{ANTISPAMVAL}/', '/{QID}/', '/{RID}/', '/{TOPIC(-([0-9]+))?}/e', '/{DETAIL}/', '/{SIZE}/', '/{TYPE}/', '/{MODULE}/', '/{MODULEID}/');
+			$patt = array('/{BREADCRUMS}/', '/<UPLOAD>(.*)<\/UPLOAD>/s', '/<ADMIN>(.*)<\/ADMIN>/s', '/{CATEGORIES}/',
+				'/{ANTISPAM}/', '/{ANTISPAMVAL}/', '/{QID}/', '/{RID}/', '/{TOPIC}/', '/{DETAIL}/', '/{DATE}/', '/{HOUR}/', '/{MINUTE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $index['img_upload_type'] == '' ? '' : '$1';
+			$replace[] = $moderator ? '$1' : '';
 			$replace[] = implode("\n", $categories);
-			$replace[] = 'gcms::getLng';
 			$replace[] = $register_antispamchar;
 			$replace[] = $isAdmin ? $_SESSION[$register_antispamchar] : '';
 			$replace[] = (int)$index['index_id'];
 			$replace[] = (int)$index['comment_id'];
-			$replace[] = create_function('$matches', 'return gcms::cutstring("'.$index['topic'].'", gcms::getVars($matches, 2, 0));');
+			$replace[] = $index['topic'];
 			$replace[] = gcms::txtQuote($index['detail']);
-			$replace[] = $index['img_upload_size'];
-			$replace[] = $index['img_upload_type'];
-			$replace[] = $index['module'];
-			$replace[] = $index['module_id'];
-			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'board', "edit$form"));
+			preg_match('/([0-9]{4,4}\-[0-9]{2,2}\-[0-9]{2,2})\s([0-9]+):([0-9]+)/', date('Y-m-d H:i', $index['create_date']), $match);
+			// วันที่ของบอร์ด
+			$replace[] = $match[1];
+			// hour
+			$datas = array();
+			for ($i = 0; $i < 24; $i++) {
+				$d = sprintf('%02d', $i);
+				$sel = $d == $match[2] ? ' selected' : '';
+				$datas[] = '<option value='.$d.$sel.'>'.$d.'</option>';
+			}
+			$replace[] = implode('', $datas);
+			// minute
+			$datas = array();
+			for ($i = 0; $i < 60; $i++) {
+				$d = sprintf('%02d', $i);
+				$sel = $d == $match[3] ? ' selected' : '';
+				$datas[] = '<option value='.$d.$sel.'>'.$d.'</option>';
+			}
+			$replace[] = implode('', $datas);
+			$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', "edit$form"));
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$custom_patt['/{MODULE}/'] = $index['module'];
+			$custom_patt['/{MODULEID}/'] = $index['module_id'];
+			$custom_patt['/{SIZE}/'] = $index['img_upload_size'];
+			$custom_patt['/{TYPE}/'] = $index['img_upload_type'];
 			// title,keywords,description
 			$title = "$lng[LNG_EDIT] $index[topic]";
 			$keywords = $title;

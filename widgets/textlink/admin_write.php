@@ -3,14 +3,14 @@
 	if (MAIN_INIT == 'admin' && $isAdmin && defined('DB_TEXTLINK')) {
 		// รายการที่แก้ไข
 		$id = gcms::getVars($_GET, 'id', 0);
-		$type = $db->sql_trim_str($_GET, 'type');
+		$name = $db->sql_trim_str($_GET, 'name');
 		unset($_GET['id']);
-		unset($_GET['type']);
+		unset($_GET['name']);
 		// รายการที่เลือก
 		if ($id > 0) {
 			$textlink = $db->getRec(DB_TEXTLINK, $id);
 		} else {
-			$textlink = array('id' => 0, 'type' => $type, 'description' => '', 'text' => '', 'url' => '', 'target' => '', 'logo' => '', 'publish_start' => $mmktime, 'publish_end' => $mmktime);
+			$textlink = array('id' => 0, 'name' => $name, 'type' => '', 'description' => '', 'text' => '', 'url' => '', 'target' => '', 'logo' => '', 'publish_start' => $mmktime, 'publish_end' => $mmktime);
 		}
 		// title
 		$title = $lng['LNG_TEXTLINK_TITLE'];
@@ -25,36 +25,38 @@
 		$content[] = '<form id=setup_frm class=setup_frm method=post action=index.php>';
 		$content[] = '<fieldset>';
 		$content[] = '<legend><span>{LNG_CONFIG}</span></legend>';
+		// name
+		$content[] = '<div class=item>';
+		$content[] = '<label for=textlink_name>{LNG_NAME}</label>';
+		$content[] = '<div class=input-groups-table>';
+		$content[] = '<span class="width g-input icon-edit"><input type=text id=textlink_name name=textlink_name maxlength=11 value="'.$textlink['name'].'" title="{LNG_TEXTLINK_NAME_COMMENT}" autofocus></span>';
+		$content[] = '<em class=width id=textlink_demo>{WIDGET_TEXTLINK}</em>';
+		$content[] = '</div>';
+		$content[] = '<div class=comment id=result_textlink_name>{LNG_TEXTLINK_NAME_COMMENT}</div>';
+		$content[] = '</div>';
 		// description
 		$content[] = '<div class=item>';
 		$content[] = '<label for=textlink_description>{LNG_DESCRIPTION}</label>';
-		$content[] = '<span class="g-input icon-file"><input type=text id=textlink_description name=textlink_description maxlength=49 value="'.$textlink['description'].'" title="{LNG_TEXTLINK_DESCRIPTION_COMMENT}" autofocus></span>';
+		$content[] = '<span class="g-input icon-file"><input type=text id=textlink_description name=textlink_description maxlength=49 value="'.$textlink['description'].'" title="{LNG_TEXTLINK_DESCRIPTION_COMMENT}"></span>';
 		$content[] = '<div class=comment id=result_textlink_description>{LNG_TEXTLINK_DESCRIPTION_COMMENT}</div>';
 		$content[] = '</div>';
 		// โหลด styles
 		include (ROOT_PATH.'widgets/textlink/styles.php');
 		// type
 		$content[] = '<div class=item>';
-		if (!preg_match('/([a-z]+)([0-9]{0,2})/', $textlink['type'], $match)) {
-			$match = array(1 => '', 2 => '');
-		}
 		$content[] = '<label for=textlink_type>{LNG_TYPE}</label>';
-		$content[] = '<div class="table fullwidth">';
-		$content[] = '<div class=td><span class="g-input icon-file"><select name=textlink_type id=textlink_type title="{LNG_TEXTLINK_TYPE_COMMENT}">';
+		$content[] = '<span class="g-input icon-category"><select name=textlink_type id=textlink_type title="{LNG_TEXTLINK_TYPE_COMMENT}">';
 		foreach ($textlink_typies AS $key => $values) {
-			$sel = $match[1] == $key ? ' selected' : '';
-			$content[] = '<option value='.$key.$sel.'>'.ucfirst($key).'</option>';
+			$sel = $textlink['type'] == $key ? ' selected' : '';
+			$content[] = '<option value='.$key.$sel.'>'.$lng['TEXTLINK_TYPIES'][$key].'</option>';
 		}
-		$content[] = '</select></span></div>';
-		$content[] = '<div class=td><label class="g-input icon-file"><input type=text id=textlink_prefix name=textlink_prefix value="'.$match[2].'" maxlength=2 title="{LNG_TEXTLINK_PREFIX_TITLE}" pattern="[1-9]+"></label></div>';
-		$content[] = '<em class=td id=textlink_demo>{WIDGET_TEXTLINK}</em>';
-		$content[] = '</div>';
+		$content[] = '</select></span>';
 		$content[] = '<div class=comment id=result_textlink_description>{LNG_TEXTLINK_TYPE_COMMENT}</div>';
 		$content[] = '</div>';
 		// template
 		$content[] = '<div class=item>';
 		$content[] = '<label for=textlink_template>{LNG_TEMPLATE}</label>';
-		$content[] = '<span class="g-input icon-edit"><textarea name=textlink_template id=textlink_template rows=5 placeholder="&lt;HTML&gt;" title="{LNG_TEXTLINK_TEMPLATE_COMMENT}"></textarea></span>';
+		$content[] = '<span class="g-input icon-file"><textarea name=textlink_template id=textlink_template rows=5 placeholder="&lt;HTML&gt;" title="{LNG_TEXTLINK_TEMPLATE_COMMENT}"></textarea></span>';
 		$content[] = '<div class=comment id=result_textlink_template>{LNG_TEXTLINK_TEMPLATE_COMMENT}</div>';
 		$content[] = '</div>';
 		$content[] = '</fieldset>';
@@ -120,7 +122,7 @@
 		$content[] = '</script>';
 		// หน้านี้
 		$url_query['module'] = 'textlink-write';
-		$url_query['type'] = $type;
+		$url_query['name'] = $name;
 	} else {
 		$title = $lng['LNG_DATA_NOT_FOUND'];
 		$content[] = '<aside class=error>'.$title.'</aside>';

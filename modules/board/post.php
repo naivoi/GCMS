@@ -18,7 +18,7 @@
 			$category_id = gcms::getVars($_POST, 'board_category', 0);
 			$board_id = gcms::getVars($_POST, 'board_id', 0);
 			$module_id = gcms::getVars($_POST, 'module_id', 0);
-			$picture = $_FILES['board_picture'];
+			$picture = gcms::getVars($_FILES, 'board_picture', array('tmp_name' => ''));
 			// login
 			$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'email' => '', 'password' => ''));
 			// อ่านโมดูลและ config
@@ -208,6 +208,9 @@
 				$save['last_update'] = $mmktime;
 				if ($board_id > 0) {
 					// แก้ไข
+					if (isset($_POST['board_create_date'])) {
+						$save['create_date'] = $db->sql_datetime2mktime("$_POST[board_create_date] $_POST[board_hour]:$_POST[board_minute]:00");
+					}
 					$db->edit(DB_BOARD_Q, $board_id, $save);
 					$ret['error'] = 'BOARD_POST_EDIT_SUCCESS';
 				} else {

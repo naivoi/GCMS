@@ -263,6 +263,9 @@ h4 {
 h5 {
 	font-size: 1.2em;
 }
+h6 {
+	font-size: 1em;
+}
 .comment,
 .create,
 .date,
@@ -316,6 +319,7 @@ time {
 	color: #FD971F;
 }
 .html,
+.icon-widgets:before,
 .icon-unpin:before,
 .icon-pin:before {
 	color: #E91E63;
@@ -325,7 +329,7 @@ time {
 .icon-sex-u:before,
 .icon-thumbnail:before,
 .disabled {
-	color: #DDD;
+	color: #CCC;
 }
 .sql,
 .tags,
@@ -418,11 +422,16 @@ body.responsive .gcss-wrapper {
 #logo {
 	background-position: 0 50%;
 }
-header a:hover,
+.header h1 > a {
+	display: block;
+}
 header a,
-footer a,
-footer a:hover {
+footer a {
 	color: inherit;
+}
+header a:hover,
+footer a:hover {
+	color: none;
 }
 header p,
 footer p {
@@ -901,6 +910,9 @@ textarea.cke_editable {
 	background-color: #4A4D50;
 	color: #FFF;
 }
+.button [class^="icon-"]:before {
+	color: inherit;
+}
 .button.wait {
 	color: transparent;
 	background-color: #B71C1C;
@@ -1096,24 +1108,24 @@ textarea.cke_editable {
 	100% {background-color: #0F0}
 }
 @keyframes blinker {
-    0% {opacity: 1.0;}
-    50% {opacity: 0.0;}
-    100% {opacity: 1.0;}
+	0% {opacity: 1.0;}
+	50% {opacity: 0.0;}
+	100% {opacity: 1.0;}
 }
 @-moz-keyframes blinker {
-    0% {opacity: 1.0;}
-    50% {opacity: 0.0;}
-    100% {opacity: 1.0;}
+	0% {opacity: 1.0;}
+	50% {opacity: 0.0;}
+	100% {opacity: 1.0;}
 }
 @-ms-keyframes blinker {
-    0% {opacity: 1.0;}
-    50% {opacity: 0.0;}
-    100% {opacity: 1.0;}
+	0% {opacity: 1.0;}
+	50% {opacity: 0.0;}
+	100% {opacity: 1.0;}
 }
 @-webkit-keyframes blinker {
-    0% {opacity: 1.0;}
-    50% {opacity: 0.0;}
-    100% {opacity: 1.0;}
+	0% {opacity: 1.0;}
+	50% {opacity: 0.0;}
+	100% {opacity: 1.0;}
 }
 #wait {
 	position: fixed;
@@ -2200,11 +2212,7 @@ div.gddcolor_div > p.gddcolor_p > a:hover {
 	background-color: #DDF4FF;
 }
 div.gddcolor_div {
-	position: absolute;
-	top: 0;
-	left: 0;
 	background-color: #FFF;
-	z-index: 9999;
 }
 .gddcolor,
 input.gddcolor.valid,
@@ -2902,8 +2910,9 @@ tr.select {
 	border-top-style: none;
 	border-bottom-style: none;
 }
-table.border > caption {
-	border-style: solid;
+table.border > caption,
+.data > caption {
+	border-style: solid solid none solid;
 }
 .data > thead > tr > th,
 .data > thead > tr > td {
@@ -3134,9 +3143,8 @@ header.list > h2 > :last-child {
 .document-list {
 	display: block;
 }
-.document-list h3,
+.document-list h6,
 .document-list p {
-	font-size: 1em;
 	font-weight: normal;
 	margin: 0;
 }
@@ -3188,7 +3196,7 @@ header.list > h2 > :last-child {
 	max-width: 40%;
 	vertical-align: top;
 }
-.document-list .iconview h3,
+.document-list .iconview h6,
 .document-list .iconview .icon {
 	display: inline;
 }
@@ -3199,8 +3207,8 @@ header.list > h2 > :last-child {
 .document-list .icon span:first-child {
 	margin-left: 0;
 }
-.document-list .iconview h3,
-.document-list .listview h3 {
+.document-list .iconview h6,
+.document-list .listview h6 {
 	margin-right: 5px;
 }
 .q.imgicon .detail,
@@ -3345,6 +3353,9 @@ header.list > h2 > :last-child {
 	margin: 0;
 	padding: 2px 5px;
 }
+.login #usericon {
+	width: 50px;
+}
 /* multi step indicator */
 ol.multi_step {
 	counter-reset: item;
@@ -3395,11 +3406,14 @@ ol.multi_step li.current:before {
 	margin: 0;
 	width: auto !important;
 }
+.search-form #widget-search-input {
+	display: block;
+	width: 100%;
+}
 .search-form input,
 .search-form button {
 	color: inherit;
 	background-color: transparent;
-	width: 100%;
 	border: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -3448,7 +3462,7 @@ ol.multi_step li.current:before {
 .search-item > p.link {
 	color: #008000;
 }
-.search-item h3 {
+.search-item h6 {
 	color: #333;
 	font-family: arial, sans-serif;
 	font-size: 1.4em;
@@ -3498,8 +3512,12 @@ ol.multi_step li.current:before {
 	text-decoration: none;
 	color: #FFF;
 }
-.responsive-ads {
+.ads_728_90 {
 	display: block;
+	width: 728px;
+	height: 90px;
+	max-width: 100%;
+	margin: 0 auto;
 }
 @media only screen and (max-width: 1360px) {
 	/* side menu */
@@ -4037,6 +4055,10 @@ ol.multi_step li.current:before {
 		display: table-cell;
 		vertical-align: top;
 	}
+	body.responsive .ads_728_90 {
+		width: 468px;
+		height: 60px;
+	}
 }
 /* iphone and small device */
 @media only screen and (max-width: 480px) {
@@ -4124,6 +4146,10 @@ ol.multi_step li.current:before {
 	body.responsive .textlink_image > a {
 		max-width: 48%;
 		margin: 1%;
+	}
+	body.responsive .ads_728_90 {
+		width: 320px;
+		height: 100px;
 	}
 }
 .circle {

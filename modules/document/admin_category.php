@@ -18,7 +18,7 @@
 		if ($index) {
 			// title
 			$m = ucwords($index['module']);
-			$title = "$lng[LNG_CREATE] - $lng[LNG_EDIT] $lng[LNG_CATEGORY]";
+			$title = "$lng[LNG_CREATE]-$lng[LNG_EDIT] $lng[LNG_CATEGORY]";
 			$a = array();
 			$a[] = '<span class=icon-documents>{LNG_MODULES}</span>';
 			$a[] = '<a href="{URLQUERY?module=document-config&id='.$index['id'].'}">'.$m.'</a>';
@@ -52,6 +52,7 @@
 				$save = array();
 				gcms::r2config($item['config'], $save);
 				$save['category_id'] = $item['category_id'];
+				$save['published'] = $item['published'];
 				$save['c1'] = $item['c1'];
 				$topics = gcms::ser2Array($item, 'topic');
 				$details = gcms::ser2Array($item, 'detail');
@@ -113,7 +114,7 @@
 			// sel action
 			$content[] = '<select id=sel_action><option value=delete_'.$index['id'].'>{LNG_DELETE}</option></select>';
 			$content[] = '<label accesskey=e for=sel_action class="button go" id=btn_action>{LNG_SELECT_ACTION}</label>';
-			$content[] = '<a class="button add" href="index.php?module=document-categorywrite&amp;src=document-category&amp;id='.$index['id'].'"><span class=icon-add>{LNG_ADD_NEW} {LNG_CATEGORY}</span></a>';
+			$content[] = '<a class="button add" href="index.php?module=document-categorywrite&amp;src=document-category&amp;id='.$index['id'].'"><span class=icon-plus>{LNG_ADD_NEW} {LNG_CATEGORY}</span></a>';
 			$content[] = '</div>';
 			$content[] = '</section>';
 			$content[] = '<script>';

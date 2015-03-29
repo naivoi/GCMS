@@ -254,6 +254,8 @@ function doAction(action, id, target, callback, customconfirm, input) {
 				query = 'action=unban&id=' + cs;
 			} else if (hs[1] == 'delete' && confirm(CONFIRM_DELETE_SELECTED)) {
 				query = 'action=delete&id=' + cs;
+			} else if (hs[1] == 'news' && confirm(CONFIRM_PUBLISHED)) {
+				query = 'action=news&value=' + (hs[5] ? hs[5] : hs[3]) + '&id=' + cs;
 			} else if (hs[1] == 'published' && confirm(CONFIRM_PUBLISHED)) {
 				query = 'action=published&value=' + (hs[5] ? hs[5] : hs[3]) + '&id=' + cs;
 			} else if (hs[1] == 'canreply' && confirm(CONFIRM_CAN_REPLY)) {
@@ -723,27 +725,27 @@ function inintFilesUpload(input, div, url) {
 }
 var _scrolltop = 0;
 $G(window).Ready(function () {
-	if ($E('change_display')) {
-		forEach($E('change_display').getElementsByTagName('a'), function () {
-			var f = new Array('small', 'normal', 'large');
-			if (f.indexOf(this.className) > -1) {
-				callClick(this, function () {
-					var fontSize = floatval(Cookie.get('fontSize'));
-					fontSize = fontSize == 0 ? document.body.getStyle('fontSize').toInt() : fontSize;
-					if (this.className == 'small') {
-						fontSize = Math.max(6, fontSize - 2);
-					} else if (this.className == 'large') {
-						fontSize = Math.min(24, fontSize + 2);
-					} else {
-						fontSize = 12;
-					}
-					document.body.setStyle('fontSize', fontSize + 'px');
-					Cookie.set('fontSize', fontSize);
-					return false;
-				});
-			}
-		});
-	}
+	var patt = /font_size(.*?)\s(small|normal|large)/;
+	var _doChangeFontSize = function () {
+		var fontSize = floatval(Cookie.get('fontSize'));
+		fontSize = fontSize == 0 ? document.body.getStyle('fontSize').toInt() : fontSize;
+		var hs = patt.exec(this.className);
+		if (hs[2] == 'small') {
+			fontSize = Math.max(6, fontSize - 2);
+		} else if (hs[2] == 'large') {
+			fontSize = Math.min(24, fontSize + 2);
+		} else {
+			fontSize = 12;
+		}
+		document.body.setStyle('fontSize', fontSize + 'px');
+		Cookie.set('fontSize', fontSize);
+		return false;
+	};
+	forEach($E(document.body).getElementsByTagName('a'), function () {
+		if (patt.test(this.className)) {
+			callClick(this, _doChangeFontSize);
+		}
+	});
 	var _doMenuClick = function () {
 		if ($E('wait')) {
 			$E('wait').className = 'show';

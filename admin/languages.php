@@ -30,7 +30,7 @@
 		$content[] = '</div>';
 		// submit
 		$content[] = '<div class=submit>';
-		$content[] = '<a href="index.php?module=languageadd" class="button add large"><span class=icon-add>{LNG_ADD_NEW} {LNG_LANGUAGE}</span></a>';
+		$content[] = '<a href="index.php?module=languageadd" class="button add large"><span class=icon-plus>{LNG_ADD_NEW} {LNG_LANGUAGE}</span></a>';
 		$content[] = '</div>';
 		$content[] = '</section>';
 		$content[] = '<script>';

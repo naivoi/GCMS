@@ -172,7 +172,7 @@
 			$content[] = '</fieldset>';
 			// add
 			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=download-write&src=download-setup}"><span class=icon-add>{LNG_UPLOAD}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=download-write&src=download-setup}"><span class=icon-plus>{LNG_UPLOAD}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

@@ -12,12 +12,12 @@
 			// ค่าที่ส่งมา
 			if (isset($_POST['data'])) {
 				list($action, $module, $id) = explode('-', $_POST['data']);
-			} elseif (preg_match('/^category_([0-9]+)$/', $_POST['id'], $match)) {
+			} elseif (isset($_POST['id']) && preg_match('/^category_([0-9]+)$/', $_POST['id'], $match)) {
 				// เลือก category ตอน เขียน
 				$action = 'changecategory';
 				$module = (int)$match[1];
 				$value = gcms::getVars($_POST, 'value', 0);
-			} elseif (preg_match('/^categoryid_([0-9]+)_([0-9]+)$/', $_POST['module'], $match)) {
+			} elseif (isset($_POST['module']) && preg_match('/^categoryid_([0-9]+)_([0-9]+)$/', $_POST['module'], $match)) {
 				// เปลี่ยน category_id ที่หน้า category
 				$action = 'categoryid';
 				$module = (int)$match[1];
@@ -93,7 +93,6 @@
 							$category = $category[0];
 							// config
 							gcms::r2config($category['config'], $category);
-							$ret['write_published'] = (int)$category['published'];
 							$ret['write_can_reply'] = (int)$category['can_reply'];
 						}
 					}

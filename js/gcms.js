@@ -5,11 +5,11 @@ var doLoginSubmit = function(xhr) {
 		if (ds[0] !== '') {
 			alert(ds[0]);
 		}
-		if (ds[2] == 'home') {
+		if (ds[2] == 'home' || ds[1] == 3) {
 			window.location = WEB_URL + 'index.php';
 		} else if (ds[2] == 'editprofile') {
 			window.location = WEB_URL + 'index.php?module=editprofile';
-		} else if (ds[1] == 3) {
+		} else if (ds[1] == 4) {
 			window.location = decodeURIComponent(ds[2]);
 		} else if (ds[2] == 'back' || ds[1] == 2) {
 			if (loader) {

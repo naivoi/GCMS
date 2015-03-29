@@ -34,10 +34,9 @@
 				$register_antispamchar = gcms::rndname(32);
 				$_SESSION[$register_antispamchar] = gcms::rndname(4);
 				// แสดงผล
-				$patt = array('/{BREADCRUMS}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{ANTISPAM}/', '/{ANTISPAMVAL}/', '/{QID}/', '/{RID}/', '/{DETAIL}/', '/{MODULEID}/', '/{TOPIC}/');
+				$patt = array('/{BREADCRUMS}/', '/{ANTISPAM}/', '/{ANTISPAMVAL}/', '/{QID}/', '/{RID}/', '/{DETAIL}/', '/{MODULEID}/', '/{TOPIC}/');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
-				$replace[] = 'gcms::getLng';
 				$replace[] = $register_antispamchar;
 				$replace[] = $isAdmin ? $_SESSION[$register_antispamchar] : '';
 				$replace[] = $index['index_id'];
@@ -45,7 +44,7 @@
 				$replace[] = htmlspecialchars(preg_replace('/&#39;/', "'", $index['detail']));
 				$replace[] = $index['module_id'];
 				$replace[] = $index['topic'];
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'editreply'));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'editreply'));
 				// title,keywords,description
 				$title = "$lng[LNG_EDIT] $index[topic]";
 				$keywords = $title;

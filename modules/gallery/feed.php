@@ -1,6 +1,6 @@
 <?php
 	// modules/gallery/feed.php
-	if (is_array($modules)) {
+	if (isset($modules)) {
 		// ค่าที่ีส่งมา
 		$aid = gcms::getVars($_GET, 'album', 0);
 		// query

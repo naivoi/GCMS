@@ -154,4 +154,3 @@
 	}
 	// คืนค่าเป็น JSON
 	echo gcms::array2json($ret);
-	

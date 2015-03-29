@@ -2,7 +2,14 @@
 	// modules/document/list.php
 	if (defined('MAIN_INIT')) {
 		// ค่าที่ส่งมา
-		$cat = gcms::getVars($_REQUEST, 'cat', 0);
+		$cat = array();
+		foreach (explode(',', gcms::getVars($_REQUEST, 'cat', '')) AS $c) {
+			if ((int)$c > 0) {
+				$cat[] = $c;
+			}
+		}
+		$cat_count = sizeof($cat);
+		$cat = implode(',', $cat);
 		$page = gcms::getVars($_REQUEST, 'page', 0);
 		$module_id = gcms::getVars($_REQUEST, 'mid', 0);
 		$sqls = array();
@@ -23,8 +30,8 @@
 				// เรียกจากวันที่
 				$selday = mktime(0, 0, 0, $ds[2], $ds[1], (int)$ds[3] - $lng['YEAR_OFFSET']);
 				$nextday = $selday + 86400;
-				$sqls[] = "I.`last_update` >= $selday";
-				$sqls[] = "I.`last_update` < $nextday";
+				$sqls[] = "I.`create_date` >= $selday";
+				$sqls[] = "I.`create_date` < $nextday";
 				$index['topic'] = $lng['LNG_DOCUMENT_DATE'].' '.gcms::mktime2date($selday, 'd F Y');
 				// breadcrumb ของวันที่ที่เรียก
 				$breadcrumbs['MODULE'] = gcms::breadcrumb('', gcms::getURL('calendar', "$ds[1]-$ds[2]-$ds[3]"), $index['topic'], $index['topic'], $breadcrumb);
@@ -44,16 +51,16 @@
 			// ตรวจสอบโมดูลที่เลือก และ จำนวนหมวดในโมดูล
 			$sql = "SELECT M.`id`,M.`module`,D.`detail`,D.`keywords`";
 			$sql .= ",(SELECT COUNT(*) FROM `".DB_CATEGORY."` WHERE `module_id`=M.`id`) AS `categories`";
-			if ($cat == 0) {
-				// ไม่ได้เลือกหมวดมา
-				$sql .= ",D.`topic`,D.`description`,M.`config`";
-				$sql .= " FROM `".DB_INDEX_DETAIL."` AS D";
-			} else {
-				// มีการเลือกหมวด
+			if ($cat_count == 1) {
+				// มีการเลือกหมวด เพียงหมวดเดียว
 				$sql .= ",CASE WHEN ISNULL(C.`config`) THEN M.`config` ELSE CONCAT(M.`config` ,'\n' ,C.`config`) END AS `config`";
 				$sql .= ",C.`category_id`,C.`topic`,C.`detail` AS `description`,C.`icon`";
 				$sql .= " FROM `".DB_INDEX_DETAIL."` AS D";
-				$sql .= " INNER JOIN `".DB_CATEGORY."` AS C ON C.`category_id`=$cat AND C.`module_id`=D.`module_id`";
+				$sql .= " INNER JOIN `".DB_CATEGORY."` AS C ON C.`category_id` IN ($cat) AND C.`module_id`=D.`module_id`";
+			} else {
+				// ไม่ได้เลือกหมวดมา หรือมีการเลือกหลายหมวด
+				$sql .= ",D.`topic`,D.`description`,M.`config`";
+				$sql .= " FROM `".DB_INDEX_DETAIL."` AS D";
 			}
 			$sql .= " INNER JOIN `".DB_INDEX."` AS I ON I.`id`=D.`id` AND I.`index`='1' AND I.`module_id`=D.`module_id` AND I.`language`=D.`language`";
 			if ($module_id > 0) {
@@ -93,18 +100,18 @@
 			$title = $lng['LNG_DOCUMENT_NOT_FOUND'];
 			$content = '<div class=error>'.$title.'</div>';
 		} else {
-			if ($cat > 0) {
+			if ($cat_count == 1) {
 				$index['topic'] = gcms::ser2Str($index, 'topic');
 				$index['description'] = gcms::ser2Str($index, 'description');
 				$index['icon'] = gcms::ser2Str($index, 'icon');
 			}
 			// category
-			if ($cat > 0 && $index['topic'] != '') {
+			if ($cat_count == 1 && $index['topic'] != '') {
 				$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module'], '', (int)$index['category_id']), $index['description'], $index['topic'], $breadcrumb);
 			}
 			$splitpage = '';
 			$list = array();
-			if ($cat > 0 || $index['categories'] == 0 || $index['category_display'] == 0) {
+			if ($cat_count > 0 || $index['categories'] == 0 || $index['category_display'] == 0) {
 				// เลือกหมวดมา หรือไม่มีหมวด หรือปิดการแสดงผลหมวดหมู่ แสดงรายการเรื่อง
 				include (ROOT_PATH.'modules/document/stories.php');
 				$template = 'list';
@@ -115,24 +122,21 @@
 			}
 			// แสดงผลหน้าเว็บ
 			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/',
-				'/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e',
-				'/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
+				'/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';
 			$replace[] = is_file(ROOT_PATH.'modules/document/write.php') && gcms::canConfig($index, 'can_write') ? '' : 'hidden';
-			$replace[] = (int)$cat;
+			$replace[] = $cat;
 			$replace[] = $index['topic'];
 			$replace[] = gcms::getVars($index, 'detail', '');
 			$replace[] = $splitpage;
 			$replace[] = LANGUAGE;
-			$replace[] = 'gcms::getWidgets';
-			$replace[] = 'gcms::getLng';
 			$replace[] = $index['module'];
 			if (sizeof($list) > 0) {
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'document', $template));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', $template));
 			} else {
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'empty'));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'empty'));
 			}
 			// title,keywords,description
 			$title = $index['topic'];

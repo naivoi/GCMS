@@ -25,7 +25,8 @@
 			// ข้อความค้นหา
 			$search = preg_replace('/[\+\s]+/u', ' ', $db->sql_trim_str($_GET, 'search', ''));
 			if (mb_strlen($search) > 2) {
-				$q[] = "(D.`topic` LIKE '%$search%' OR D.`detail` LIKE '%$search%')";
+				$question = addslashes($search);
+				$q[] = "(D.`topic` LIKE '%$question%' OR D.`detail` LIKE '%$question%')";
 				$url_query['search'] = urlencode($search);
 			}
 			// หมวดที่เลือก
@@ -123,9 +124,7 @@
 			$content[] = '<tr>';
 			$content[] = '<th id=c0 scope=col>{LNG_TOPIC}</th>';
 			$content[] = '<th id=c1 scope=col class=check-column><a class="checkall icon-uncheck"></a></th>';
-			$content[] = '<th id=c2 scope=col class="center mobile">{LNG_THUMBNAIL}</th>';
-			$content[] = '<th id=c3 scope=col class="center mobile">{LNG_CAN_REPLY}</th>';
-			$content[] = '<th id=c4 scope=col class="center mobile">{LNG_PUBLISHED}</th>';
+			$content[] = '<th id=c2 scope=col class=mobile colspan=4></th>';
 			$content[] = '<th id=c5 scope=col class=tablet>{LNG_CATEGORY}</th>';
 			$content[] = '<th id=c6 scope=col class=tablet>{LNG_SENDER}</th>';
 			$content[] = '<th id=c7 scope=col class="center tablet">{LNG_ARTICLE_DATE}</th>';
@@ -137,7 +136,7 @@
 			$content[] = '<tbody>';
 			if ($count[0]['count'] > 0) {
 				// รายการทั้งหมด
-				$sql = "SELECT P.`id`,P.`category_id`,P.`can_reply`,P.`published`,P.`last_update`,P.`create_date`,P.`member_id`,P.`email`,P.`picture`,P.`visited`,D.`topic`";
+				$sql = "SELECT P.`id`,P.`category_id`,P.`can_reply`,P.`published`,P.`show_news`,P.`last_update`,P.`create_date`,P.`member_id`,P.`email`,P.`picture`,P.`visited`,D.`topic`";
 				$sql .= ",U.`status`,CASE WHEN ISNULL(U.`id`) THEN P.`email` WHEN U.`displayname`='' THEN U.`email` ELSE U.`displayname` END AS `sender`";
 				$sql .= " $sql1 LEFT JOIN `".DB_USER."` AS U ON U.`id`=P.`member_id`";
 				$sql .= " $where ORDER BY P.`id` DESC LIMIT $start,$list_per_page";
@@ -147,18 +146,17 @@
 					$tr .= '<th headers=c0 id=r'.$id.' class=topic scope=row><a href="../index.php?module='.$index['module'].'&amp;id='.$id.'" title="{LNG_PREVIEW}" target=_blank>'.$item['topic'].'</a></th>';
 					$tr .= '<td headers="r'.$id.' c1" class=check-column><a id=check_'.$id.' class=icon-uncheck></a></td>';
 					if ($index['img_typies'] != '' && is_file(DATA_PATH."document/$item[picture]")) {
-						$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><img src="'.DATA_URL.'document/'.$item['picture'].'" title="'.$lng['LNG_THUMBNAILS'][1].'" width=16 height=16 alt=thumbnail>';
+						$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><img src="'.DATA_URL.'document/'.$item['picture'].'" title="'.$lng['LNG_THUMBNAILS'][1].'" width=22 height=22 alt=thumbnail>';
 					} else {
 						$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class=icon-thumbnail title="'.$lng['LNG_THUMBNAILS'][0].'"></span>';
 					}
-					$tr .= '<td headers="r'.$id.' c3" class="menu mobile"><span class="icon-reply reply'.$item['can_reply'].'" title="'.$lng['LNG_CAN_REPLIES'][$item['can_reply']].'"></span></td>';
-					$tr .= '<td headers="r'.$id.' c4" class="menu mobile"><span class="icon-published'.$item['published'].'" title="'.$lng['LNG_PUBLISHEDS'][$item['published']].'"></span></td>';
+					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-reply reply'.$item['can_reply'].'" title="'.$lng['LNG_CAN_REPLIES'][$item['can_reply']].'"></span></td>';
+					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-published'.$item['published'].'" title="'.$lng['LNG_PUBLISHEDS'][$item['published']].'"></span></td>';
+					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-widgets reply'.$item['show_news'].'" title="'.$lng['SHOW_NEWS'][$item['show_news']].'"></span></td>';
 					$tr .= '<td headers="r'.$id.' c5" class=mobile>';
 					if (isset($categories[$item['category_id']])) {
 						$category = $categories[$item['category_id']];
 						$tr .= '<a href="{URLQUERY?cat='.$item['category_id'].'}" title="{LNG_SELECT_ITEM}">'.gcms::cutstring($category, 10).'</a>';
-					} else {
-						$tr .= '-';
 					}
 					$tr .= '</td>';
 					$tr .= '<td headers="r'.$id.' c6" class="username tablet"><a href="index.php?module=editprofile&amp;id='.$item['member_id'].'" class=status'.$item['status'].' title="{LNG_MEMBER_PROFILE}">'.$item['sender'].'</a></td>';
@@ -175,7 +173,7 @@
 			$content[] = '<tr>';
 			$content[] = '<td headers=c0>&nbsp;</td>';
 			$content[] = '<td headers=c1 class=check-column><a class="checkall icon-uncheck"></a></td>';
-			$content[] = '<td headers=c2 colspan=9></td>';
+			$content[] = '<td headers=c2 colspan=10></td>';
 			$content[] = '</tr>';
 			$content[] = '</tfoot>';
 			$content[] = '</table>';
@@ -211,6 +209,10 @@
 			foreach ($lng['LNG_PUBLISHEDS'] AS $i => $value) {
 				$sel[] = '<option value=published_'.$index['id'].'_'.$i.'>'.$value.'</option>';
 			}
+			// show_news
+			foreach ($lng['SHOW_NEWS'] AS $i => $value) {
+				$sel[] = '<option value=news_'.$index['id'].'_'.$i.'>'.$value.'</option>';
+			}
 			// can_reply
 			foreach ($lng['LNG_CAN_REPLIES'] AS $i => $value) {
 				$sel[] = '<option value=canreply_'.$index['id'].'_'.$i.'>'.$value.'</option>';
@@ -222,7 +224,7 @@
 			$content[] = '</fieldset>';
 			// add
 			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=document-write&src=document-setup}"><span class=icon-add>{LNG_DOCUMENT_WRITE}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=document-write&src=document-setup}"><span class=icon-plus>{LNG_DOCUMENT_WRITE}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

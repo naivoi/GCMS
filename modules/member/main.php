@@ -2,7 +2,7 @@
 	// modules/member/main.php
 	if (defined('MAIN_INIT') && $isMember) {
 		// query ข้อมูลสมาชิก
-		$sql = "SELECT * FROM `".DB_USER."` WHERE `id`=".(int)$_REQUEST['id']." LIMIT 1";
+		$sql = "SELECT * FROM `".DB_USER."` WHERE `id`=".gcms::getVars($_REQUEST, 'id', 0)." LIMIT 1";
 		$result = $cache->get($sql);
 		if (!$result) {
 			$result = $db->customQuery($sql);
@@ -48,7 +48,7 @@
 			$replace[] = in_array($result['sex'], array_keys($lng['SEX'])) ? $result['sex'] : 'u';
 			$replace[] = gcms::mktime2date($result['create_date'], 'd M Y');
 			$replace[] = ($result['website'] == '' ? '-' : "<a href=\"http://$result[website]\" target=_blank>$result[website]</a>");
-			$replace[] = $result['visited'];
+			$replace[] = number_format($result['visited']);
 			$replace[] = $result['fb'] == 1 ? 'icon-facebook' : '';
 			$replace[] = gcms::mktime2date($result['lastvisited'], 'd M Y');
 			$replace[] = $result['post'];

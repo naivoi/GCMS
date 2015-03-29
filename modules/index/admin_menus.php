@@ -30,7 +30,7 @@
 		$content[] = '</fieldset>';
 		// add
 		$content[] = '<fieldset>';
-		$content[] = '<a class="button add" href="{URLQUERY?module=index-menu&src=index-menus&id=0}"><span class=icon-add>{LNG_ADD_NEW} {LNG_MENU}</span></a>';
+		$content[] = '<a class="button add" href="{URLQUERY?module=index-menu&src=index-menus&id=0}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_MENU}</span></a>';
 		$content[] = '</fieldset>';
 		$content[] = '</form>';
 		// query เมนูที่เลือก เรียงตามลำดับ menu_order

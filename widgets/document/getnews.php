@@ -4,9 +4,9 @@
 	// inint
 	include ('../../bin/inint.php');
 	// ตรวจสอบ referer
-	if (gcms::isReferer() && preg_match('/^widget_([a-z0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_(list|icon|thumb)$/', $_POST['id'], $match)) {
+	if (gcms::isReferer() && preg_match('/^widget_([a-z0-9]+)_([0-9]+)_([0-9,]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_(list|icon|thumb)_([0-9]+)$/', $_POST['id'], $match)) {
 		// อ่านโมดูล
-		$sql = "SELECT `id`,`config`,`module` FROM `".DB_MODULES."` WHERE `id`=".(int)$match[2]." LIMIT 1";
+		$sql = "SELECT `id`,`config`,`module` FROM `".DB_MODULES."` WHERE `id`=".(int)$match[2]." AND `owner`='document' LIMIT 1";
 		$index = $cache->get($sql);
 		if (!$index) {
 			$index = $db->customQuery($sql);
@@ -25,13 +25,18 @@
 			// เรียงลำดับ
 			$sorts = array('Q.`last_update` DESC,Q.`id` DESC', 'Q.`create_date` DESC,Q.`id` DESC', 'Q.`published_date` DESC,Q.`last_update` DESC', 'Q.`id` DESC');
 			// query
-			$sql = "SELECT Q.`id`,D.`topic`,Q.`alias`,Q.`picture`,Q.`comment_date`,Q.`last_update`,Q.`create_date`,Q.`picture`,D.`description`,Q.`comments`,Q.`visited`,U.`status`,U.`id` AS `member_id`,U.`displayname`,U.`email`";
+			$sql = "SELECT Q.`id`,D.`topic`,Q.`alias`,Q.`picture`,Q.`comment_date`,Q.`last_update`,Q.`create_date`";
+			$sql .= ",D.`description`,Q.`comments`,Q.`visited`,U.`status`,U.`id` AS `member_id`,U.`displayname`,U.`email`,C.`topic` AS `category`";
 			$sql .= " FROM `".DB_INDEX."` AS Q";
-			$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=Q.`member_id`";
 			$sql .= " INNER JOIN `".DB_INDEX_DETAIL."` AS D ON D.`id`=Q.`id` AND D.`module_id`=Q.`module_id` AND D.`language` IN ('".LANGUAGE."','')";
+			$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=Q.`member_id`";
+			$sql .= " LEFT JOIN `".DB_CATEGORY."` AS C ON C.`category_id`=Q.`category_id` AND C.`module_id`=Q.`module_id`";
 			$sql .= " WHERE Q.`module_id`=$index[id]";
-			if ($match[3] > 0) {
-				$sql .= " AND Q.category_id=$match[3]";
+			if ($match[3] != '0') {
+				$sql .= " AND Q.`category_id` IN ($match[3])";
+			}
+			if ($match[9] == 1) {
+				$sql .= " AND Q.`show_news`='1'";
 			}
 			$sql .= " AND Q.`published`='1' AND Q.`index`='0' ORDER BY ".$sorts[$match[6]]." LIMIT $match[4]";
 			$datas = $cache->get($sql);
@@ -45,7 +50,7 @@
 			$valid_date = $mmktime - $match[5];
 			// template
 			$skin = gcms::loadtemplate($index['module'], 'document', 'widgetitem');
-			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{LASTUPDATE}/', '/{UID}/',
+			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{CATEGORY}/', '/{LASTUPDATE}/', '/{UID}/',
 				'/{SENDER}/', '/{STATUS}/', '/{COMMENTS}/', '/{VISITED}/', '/{THUMB}/', '/{ICON}/');
 			$widget = array();
 			$bg = 'bg2';
@@ -63,12 +68,13 @@
 				}
 				$replace[] = $item['topic'];
 				$replace[] = $item['description'];
+				$replace[] = gcms::ser2Str($item, 'category');
 				$replace[] = gcms::mktime2date($item['create_date'], 'd M Y');
 				$replace[] = $item['member_id'];
 				$replace[] = $item['displayname'] == '' ? $item['email'] : $item['displayname'];
 				$replace[] = $item['status'];
-				$replace[] = $item['comments'];
-				$replace[] = $item['visited'];
+				$replace[] = number_format($item['comments']);
+				$replace[] = number_format($item['visited']);
 				if ($item['picture'] != '' && is_file(DATA_PATH."document/$item[picture]")) {
 					$replace[] = DATA_URL."document/$item[picture]";
 				} else {

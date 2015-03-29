@@ -120,7 +120,7 @@
 	$lng['LNG_CONFIG_OTHER'] = 'อื่นๆ';
 	$lng['LNG_CONFIG_OTHER_SETTINGS'] = 'กำหนดค่าอื่นๆของเว็บไซต์';
 	$lng['LNG_CONFIG_OTHER_TITLE'] = 'ค่ากำหนดอื่นๆของเว็บไซต์';
-	$lng['LNG_CONTENTS'] = 'เนิ้อหา';
+	$lng['LNG_CONTENTS'] = 'เนื้อหา';
 	$lng['LNG_CONTINUE_READING'] = 'อ่านต่อ';
 	$lng['LNG_COPY'] = 'สำเนารายการนี้ไปยังภาษาที่เลือก';
 	$lng['LNG_COUNT'] = 'ครั้ง';
@@ -138,6 +138,7 @@
 	$lng['LNG_COUNTRY_NAME_COMMENT'] = 'ชื่อประเทศ เช่น Thailand';
 	$lng['LNG_COUNTRY_NO_ZONE'] = 'ไม่มีโซน';
 	$lng['LNG_COUNTRY_ZONE'] = 'โซนประเทศ';
+	$lng['LNG_COUNTRY_ZONE_COMMENT'] = 'ใช้สำหรับจัดกลุ่มหรือภูมิภาคของประเทศเช่น เอเซีย';
 	$lng['LNG_CREATE'] = 'สร้าง';
 	$lng['LNG_CREATED'] = 'เมื่อ';
 	$lng['LNG_CREATED_DATE'] = 'วันที่สร้าง';
@@ -211,7 +212,6 @@
 	$lng['LNG_EMAIL_FROM_COMMENT'] = 'ที่อยู่อีเมล์ของผู้ส่ง หากไม่ต้องการตอบกลับให้เว้นว่างไว้ หรือกรอกที่อยู่อีเมล์ที่ต้องการให้ตอบกลับ';
 	$lng['LNG_EMAIL_FROM_NAME'] = 'ชื่อผู้ส่ง';
 	$lng['LNG_EMAIL_HOST'] = 'ชื่อเมล์เซิร์ฟเวอร์';
-	$lng['LNG_MAILSERVER_COMMENT'] = 'ชื่อของเมล์เซิร์ฟเวอร์ เช่น localhost หรือ smtp.gmail.com (ต้องการเปลี่ยนค่ากำหนดของอีเมล์ทั้งหมดเป็นค่าเริ่มต้น ให้ลบข้อความในช่องนี้ออกทั้งหมด)';
 	$lng['LNG_EMAIL_KEYWORDS_COMMENT'] = 'คุณสามารถใส่ข้อความเหล่านี้ ซึ่งจะถูกแทนที่ด้วยข้อมูลในตอนส่งได้';
 	$lng['LNG_EMAIL_LANGUAGE_COMMENT'] = 'จดหมายนี้จะถูกส่งตามภาษาที่เลือก (ถ้าไม่มีพบจะถูกส่งตามภาษาหลัก)';
 	$lng['LNG_EMAIL_NOREPLY'] = 'noreply email';
@@ -342,7 +342,7 @@
 	$lng['LNG_LOGIN'] = 'Login';
 	$lng['LNG_LOGIN_ACTION'] = 'การเข้าระบบ';
 	$lng['LNG_LOGIN_ACTION_COMMENT'] = 'กำหนดวิธีการหลังจากเข้าระบบเรียบร้อยแล้ว';
-	$lng['LNG_LOGIN_ACTIONS'] = Array(0 => 'ไม่ต้องดำเนินการใดๆ (Ajax Login)', 1 => 'โหลดหน้าเว็บใหม่', 2 => 'กลับไปหน้าก่อนหน้า');
+	$lng['LNG_LOGIN_ACTIONS'] = Array(0 => 'ไม่ต้องดำเนินการใดๆ (Ajax Login)', 1 => 'โหลดหน้าเว็บใหม่', 2 => 'กลับไปหน้าก่อนหน้า', 3 => 'ไปหน้าหลัก');
 	$lng['LNG_LOGIN_BY_PHONE'] = 'เข้าระบบด้วยหมายเลขโทรศัพท์';
 	$lng['LNG_LOGIN_BY_PHONE_COMMENT'] = 'เมื่อคุณเปิดใช้งานตัวเลือกนี้ ระบบจะยอมให้คุณเข้าระบบโดยใช้หมายเลขโทรศัพท์ได้';
 	$lng['LNG_LOGIN_NOT_FOUND'] = '<strong>คุณยังไม่ได้เข้าระบบ</strong> กรุณาเข้าระบบก่อนดำเนินการต่อ...';
@@ -358,6 +358,7 @@
 	$lng['LNG_MAIL_TO_ADMIN'] = 'ส่งข้อความถึงแอดมิน';
 	$lng['LNG_MAILBOX'] = 'จดหมาย';
 	$lng['LNG_MAILSERVER'] = 'เมล์เซิร์ฟเวอร์';
+	$lng['LNG_MAILSERVER_COMMENT'] = 'ชื่อของเมล์เซิร์ฟเวอร์ เช่น localhost หรือ smtp.gmail.com (ต้องการเปลี่ยนค่ากำหนดของอีเมล์ทั้งหมดเป็นค่าเริ่มต้น ให้ลบข้อความในช่องนี้ออกทั้งหมด)';
 	$lng['LNG_MAIN_CONFIG'] = 'ค่ากำหนดทั่วไปของโมดูล';
 	$lng['LNG_MAIN_MENU'] = 'เมนูหลัก';
 	$lng['LNG_MAINTENANCE'] = 'โหมดบำรุงรักษา';
@@ -545,6 +546,8 @@
 	$lng['LNG_SETTINGS'] = 'ค่ากำหนด';
 	$lng['LNG_SEX'] = 'เพศ';
 	$lng['LNG_SHARE_TITLE'] = 'ส่งเมล์บอกเพื่อน';
+	$lng['LNG_SHOW_NEWS'] = 'การแสดงผลในหน้าแรก';
+	$lng['LNG_SHOW_NEWS_COMMENT'] = 'ใช้ตัวเลือกนี้หากต้องการกำหนดรายการที่จะนำไปแสดงในส่วนเสริมด้วยตัวเอง';
 	$lng['LNG_SITE_EX_COMMENT'] = 'ตั้งค่าการเปิดใช้งานบัญชีตัวอย่าง เมื่อเปิดใช้งานบัญชีนี้ ระบบจะยอมให้บัญชี demo เข้าสู่ระบบได้ และบางฟังก์ชั่นจะถูกระงับใช้งาน (ใช้สำหรับเป็นตัวอย่างเว็บไซต์เท่านั้น)';
 	$lng['LNG_SITE_REPORT'] = 'รายงานภาพรวมของระบบ';
 	$lng['LNG_SITE_SETTINGS'] = 'กำหนดค่าไซต์';
@@ -698,6 +701,8 @@
 	$lng['SEARCH_RESULT'] = 'ค้นหา <strong>{SEARCH}</strong> พบ <strong>{COUNT}</strong> รายการ, แสดงรายการที่ <strong>{START}</strong> ถึง <strong>{END}</strong>, หน้าที่ <strong>{PAGE}</strong> จากทั้งหมด <strong>{TOTALPAGE}</strong> หน้า';
 	$lng['SEND_MAIL_ERROR'] = '<strong>ขออภัย : </strong>ไม่สามารถส่งอีเมล์หาสมาชิกที่เลือกได้ เนื่องจาก ไม่สามารถส่งหาตัวเองได้ หรือ ไม่พบสมาชิกที่ต้องการ';
 	$lng['SEX'] = Array('f' => 'หญิง', 'm' => 'ชาย');
+	$lng['SHOW_NEWS'] = Array(0 => 'ไม่แสดงในส่วนเสริม', 1 => 'แสดงในส่วนเสริม');
+	$lng['TEXTLINK_TYPIES'] = Array('custom' => 'กำหนดเองเช่น Adsense', 'text' => 'ลิงค์ข้อความอย่างเดียว', 'menu' => 'ลิงค์ข้อความอย่างเดียว แสดงเป็นเมนู', 'image' => 'แบนเนอร์รูปภาพ แสดงทั้งหมด', 'banner' => 'แบนเนอร์รูปภาพ แสดงแบบวน', 'slideshow' => 'แบนเนอร์ไสลด์โชว์');
 	$lng['USERONLINE_PAGE_VIEW_SUB_TITLE'] = 'Pages View ประจำเดือน %s รวม %d ครั้ง/%d วัน';
 	$lng['USERONLINE_PAGE_VIEW_TITLE'] = 'รายงาน Pages View ประจำเดือน <strong>%s</strong>';
 	$lng['USERONLINE_REPORT_TITLE'] = 'สถิติการเยี่ยมชมเว็บไซต์ในวันที่ %s';

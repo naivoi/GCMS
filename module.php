@@ -14,6 +14,16 @@
 			$modules[3] = $modules[1];
 			$modules[4] = $modules[2];
 			$modules[2] = 'document';
+		} elseif (preg_match('/^(calendar)-(today|(([0-3]?[0-9])[\-|\s]([0-1]?[0-9])[\-|\s]([0-9]{4,4})))$/', $module, $modules)) {
+			// ค้นหาจาก วันที่ เรียก document			
+			if ($modules[2] == 'today') {
+				$ds = array(1 => $mtoday, 2 => $mmonth, 3 => $myear + $lng['YEAR_OFFSET']);
+			} else {
+				$ds = array(1 => $modules[4], 2 => $modules[5], 3 => $modules[6]);
+			}
+			$modules[3] = 'main';
+			$modules[4] = $modules[2];
+			$modules[2] = 'document';
 		} elseif (preg_match('/^('.implode('|', $module_list).')[\/\-]([0-9]+)[\/\-]([0-9]+)([\/\-](.*))?$/u', $module, $modules)) {
 			// module/category/id/document
 			$_REQUEST['cat'] = (int)$modules[2];

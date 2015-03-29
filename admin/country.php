@@ -178,7 +178,7 @@
 		$content[] = '<label accesskey=e for=sel_action id=member_action class="button ok"><span>{LNG_SELECT_ACTION}</span></label>';
 		$content[] = '</fieldset>';
 		// add
-		$content[] = '<a class="button add" href="{URLQUERY?module=countrywrite&src=country}"><span class=icon-add>{LNG_ADD_NEW} {LNG_COUNTRY}</span></a>';
+		$content[] = '<a class="button add" href="{URLQUERY?module=countrywrite&src=country}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_COUNTRY}</span></a>';
 		$content[] = '</div>';
 		$content[] = '</section>';
 		$content[] = '<script>';

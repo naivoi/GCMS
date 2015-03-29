@@ -125,7 +125,7 @@
 			// sel action
 			$content[] = '<select id=sel_action><option value=delete_'.$index['id'].'>{LNG_DELETE}</option></select>';
 			$content[] = '<label accesskey=e for=sel_action class="button go" id=btn_action>{LNG_SELECT_ACTION}</label>';
-			$content[] = '<a class="button add" href="index.php?module=board-categorywrite&amp;src=board-category&amp;id='.$index['id'].'"><span class=icon-add>{LNG_ADD_NEW} {LNG_CATEGORY}</span></a>';
+			$content[] = '<a class="button add" href="index.php?module=board-categorywrite&amp;src=board-category&amp;id='.$index['id'].'"><span class=icon-plus>{LNG_ADD_NEW} {LNG_CATEGORY}</span></a>';
 			$content[] = '</div>';
 			$content[] = '</section>';
 			$content[] = '<script>';

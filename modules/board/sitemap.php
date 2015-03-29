@@ -1,6 +1,6 @@
 <?php
 	// modules/board/sitemap.php
-	if (is_array($owners['board'])) {
+	if (isset($owners['board'])) {
 		$sql = "SELECT `id`,`module_id`,`last_update`,`comment_date`";
 		$sql .= " FROM `".DB_BOARD_Q."` WHERE `module_id` IN(".implode(',', $owners['board']).")";
 		$datas = $cache->get($sql);

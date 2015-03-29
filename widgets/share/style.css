@@ -30,7 +30,24 @@
 	display: inline-block;
 	padding: 0 5px;
 }
-.widget_share a:before {
+.share .widget_share > a {
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	border-radius: 50em;
+	-moz-border-radius: 50em;
+	-webkit-border-radius: 50em;
+	text-shadow: -1px -1px 0 #000;
+	background-color: #555;
+	color: #EEE;
+}
+.share .widget_share > a:hover {
+	background-color: #111;
+	color: #FFF;
+}
+.widget_share > a:before {
 	margin-right: 0;
 }
 .color .widget_share > a {
@@ -59,6 +76,9 @@
 }
 .color .widget_share a.icon-twitter {
 	background-color: #65CCF7;
+}
+.color .widget_share a.icon-comments {
+	background-color: #008000;
 }
 .color .widget_share a.icon-email {
 	background-color: #F6881F;

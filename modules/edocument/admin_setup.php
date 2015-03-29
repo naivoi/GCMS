@@ -154,7 +154,7 @@
 			$content[] = '</fieldset>';
 			// add
 			$content[] = '<fieldset>';
-			$content[] = '<a class="button add" href="{URLQUERY?module=edocument-write&src=edocument-setup}"><span class=icon-add>{LNG_ADD_NEW} {LNG_EDOCUMENT_ITEM}</span></a>';
+			$content[] = '<a class="button add" href="{URLQUERY?module=edocument-write&src=edocument-setup}"><span class=icon-plus>{LNG_ADD_NEW} {LNG_EDOCUMENT_ITEM}</span></a>';
 			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			$content[] = '</section>';

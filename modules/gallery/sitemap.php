@@ -1,6 +1,6 @@
 <?php
 	// modules/gallery/sitemap.php
-	if (is_array($owners['gallery'])) {
+	if (isset($owners['gallery'])) {
 		// อัลบัมทั้งหมด
 		$sql = "SELECT `id`,`module_id`,`last_update` FROM `".DB_GALLERY_ALBUM."`";
 		$datas = $cache->get($sql);
