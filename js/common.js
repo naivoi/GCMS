@@ -772,5 +772,5 @@ $G(window).Ready(function () {
 	});
 });
 function getWebURL() {
-	return window.location.hostname + window.location.port == 80 ? '' : ':' + window.location.port;
+	return window.location.hostname + (window.location.port == 80 ? '' : ':' + window.location.port);
 }

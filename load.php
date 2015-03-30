@@ -276,9 +276,12 @@
 			// ภาษา
 			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = 'gcms::getLng';
 			// meta, keywords และ description
-			$meta['description'] = '<meta name=description content="'.$description.'">';
-			$meta['keywords'] = '<meta name=keywords content="'.$keywords.'">';
 			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
+			$meta['description'] = '<meta name=description content="'.$description.'">';
+			$meta['og:description'] = '<meta name="og:description" content="'.$description.'">';
+			$meta['keywords'] = '<meta name=keywords content="'.$keywords.'">';
+			$meta['og:keywords'] = '<meta name="og:keywords" content="'.$keywords.'">';
+			$meta['og:type'] = '<meta property="og:type" content="website">';
 			if (!empty($config['facebook']['appId'])) {
 				$meta['facebook_appId'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
 				$script[] = 'window.FB_APPID = "'.$config['facebook']['appId'].'";';
@@ -290,6 +293,7 @@
 			// logo
 			$main_patt['/{LOGO}/'] = $image_logo;
 			$meta['canonical'] = '<link rel=canonical href="'.$canonical.'">';
+			$meta['og:url'] = '<meta property="og:url" content="'.$canonical.'">';
 			$meta['hreflang'] = '<link rel=alternate hreflang='.LANGUAGE.' href="'.$canonical.'">';
 			$main_patt['/{URL}/'] = $canonical;
 			$main_patt['/{XURL}/'] = rawurlencode($canonical);
