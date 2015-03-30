@@ -85,6 +85,8 @@
 					include_once (ROOT_PATH."modules/$owner/inint.php");
 				}
 			}
+			// canonical
+			$canonical = WEB_URL.'/index.php';
 			// ค่า title,description และ keywords ของเว็บหลัก
 			$title = strip_tags($config['web_title']);
 			$description = $config['web_description'];

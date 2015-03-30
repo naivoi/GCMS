@@ -1,5 +1,5 @@
 // js/gcms.js
-var doLoginSubmit = function(xhr) {
+var doLoginSubmit = function (xhr) {
 	var ds = xhr.responseText.split('|');
 	if (ds.length == 3) {
 		if (ds[0] !== '') {
@@ -43,10 +43,10 @@ var doLoginSubmit = function(xhr) {
 		}
 	}
 };
-var doLogout = function(e) {
+var doLogout = function (e) {
 	setQueryURL('action', 'logout');
 };
-var doMember = function(e) {
+var doMember = function (e) {
 	GEvent.stop(e);
 	var action = $G(this).id;
 	if (this.hasClass('register')) {
@@ -57,7 +57,7 @@ var doMember = function(e) {
 	showModal(WEB_URL + 'xhr.php', 'action=modal&module=' + action);
 	return false;
 };
-var onMemberSubmit = function(e) {
+var onMemberSubmit = function (e) {
 	if (!$E('register_accept').checked) {
 		alert(REGISTER_NOT_ACCEPT);
 		$G('register_accept').highlight().focus();
@@ -88,7 +88,7 @@ function getCurrentURL() {
 	var us1 = u.split('?');
 	u = us1.length == 2 ? us1[0] : u;
 	if (us1.length == 2) {
-		forEach(us1[1].split('&'), function() {
+		forEach(us1[1].split('&'), function () {
 			hs = patt.exec(this);
 			if (hs) {
 				urls[hs[1].toLowerCase()] = this;
@@ -98,7 +98,7 @@ function getCurrentURL() {
 		});
 	}
 	if (us2.length == 2) {
-		forEach(us2[1].split('&'), function() {
+		forEach(us2[1].split('&'), function () {
 			hs = patt.exec(this);
 			if (hs) {
 				if (MODULE_URL == '1' && hs[1] == 'module') {
@@ -126,12 +126,12 @@ function getCurrentURL() {
 }
 var createLikeButton = emptyFunction;
 var counter_time = 0;
-$G(window).Ready(function() {
+$G(window).Ready(function () {
 	if (navigator.userAgent.indexOf("MSIE") > -1) {
 		document.body.addClass("ie");
 	}
 	if (typeof use_ajax != 'undefined' && use_ajax == 1) {
-		loader = new GLoader(WEB_URL + 'xhr.php', getURL, function(xhr) {
+		loader = new GLoader(WEB_URL + 'xhr.php', getURL, function (xhr) {
 			var content = $G('content');
 			var datas = xhr.responseText.toJSON();
 			if (datas) {
@@ -164,15 +164,15 @@ $G(window).Ready(function() {
 		loader.inint(document);
 	}
 	var hs, q2, patt = /^lang_([a-z]{2,2})$/;
-	forEach(document.body.getElementsByTagName("a"), function(item) {
+	forEach(document.body.getElementsByTagName("a"), function (item) {
 		hs = patt.exec(item.id);
 		if (hs) {
-			item.onclick = function() {
+			item.onclick = function () {
 				var lang = this.id.replace('lang_', '');
 				var urls = document.location.toString().replace('#', '&').split('?');
 				if (urls[1]) {
 					var new_url = new Object();
-					forEach(urls[1].split('&'), function(q) {
+					forEach(urls[1].split('&'), function (q) {
 						q2 = q.split('=');
 						if (q2.length == 2) {
 							new_url[q2[0]] = q2[1];
@@ -191,10 +191,10 @@ $G(window).Ready(function() {
 			};
 		}
 	});
-	var _getCounter = function() {
+	var _getCounter = function () {
 		return 'counter=' + counter_time;
 	};
-	new GAjax().autoupdate(WEB_URL + 'useronline.php', counter_refresh_time, _getCounter, function(xhr) {
+	new GAjax().autoupdate(WEB_URL + 'useronline.php', counter_refresh_time, _getCounter, function (xhr) {
 		var datas = xhr.responseText.toJSON();
 		if (datas) {
 			var d, v;
@@ -213,7 +213,7 @@ $G(window).Ready(function() {
 				} else if (d == 'useronline') {
 					var online = $E('counter-online');
 					if (online) {
-						forEach(online.getElementsByTagName('img'), function() {
+						forEach(online.getElementsByTagName('img'), function () {
 							this.onmouseover = null;
 						});
 						var lis = online.getElementsByTagName('li');
@@ -221,14 +221,14 @@ $G(window).Ready(function() {
 							online.removeChild(lis[i]);
 						}
 						var li, img, span;
-						forEach(v, function() {
+						forEach(v, function () {
 							li = document.createElement('li');
 							online.appendChild(li);
 							img = document.createElement('img');
 							img.id = this.id;
 							img.src = this.icon;
 							img.style.cursor = 'pointer';
-							img.onclick = function() {
+							img.onclick = function () {
 								loaddoc(WEB_URL + 'index.php?module=member&id=' + this.id);
 							};
 							li.appendChild(img);
@@ -243,8 +243,26 @@ $G(window).Ready(function() {
 			}
 		}
 	});
+	document.addEventListener('copy', addCopyLink);
 });
-var getURL = function(url) {
+function addCopyLink() {
+	var selection = window.getSelection();
+	var selText = selection + '<br /><br /> อ่านต่อได้ที่: ' + getCurrentURL();
+	if (window.clipboardData) {
+		window.clipboardData.setData("Text", selText);
+	} else {
+		var div = document.createElement('div');
+		div.style.position = 'absolute';
+		div.style.left = '-99999px';
+		document.body.appendChild(div);
+		div.innerHTML = copytext;
+		selection.selectAllChildren(div);
+		window.setTimeout(function () {
+			document.body.removeChild(div);
+		}, 100);
+	}
+}
+var getURL = function (url) {
 	var loader_patt0 = /.*?module=.*?/;
 	var loader_patt1 = new RegExp('^' + WEB_URL + '(.*)/([0-9]+)/([0-9]+)/(.*).html$');
 	var loader_patt2 = new RegExp('^' + WEB_URL + '(.*)/([0-9]+)/(.*).html$');
@@ -267,7 +285,7 @@ var getURL = function(url) {
 		return null;
 	}
 	if (urls[1]) {
-		forEach(urls[1].split('&'), function(q) {
+		forEach(urls[1].split('&'), function (q) {
 			if (q != 'action=logout' && q != 'action=login' && !p1.test(q)) {
 				new_q.push(q);
 			}
@@ -278,12 +296,12 @@ var getURL = function(url) {
 function selectMenu(module) {
 	if ($E('topmenu')) {
 		var tmp = false;
-		forEach($E('topmenu').getElementsByTagName('li'), function(item, index) {
+		forEach($E('topmenu').getElementsByTagName('li'), function (item, index) {
 			var cs = new Array();
 			if (index == 0) {
 				tmp = item;
 			}
-			forEach(this.className.split(' '), function(c) {
+			forEach(this.className.split(' '), function (c) {
 				if (c == module) {
 					tmp = false;
 					cs.push(c + ' select');
@@ -299,15 +317,15 @@ function selectMenu(module) {
 	}
 }
 function inintIndex() {
-	$G(window).Ready(function() {
+	$G(window).Ready(function () {
 		if (G_Lightbox === null) {
 			G_Lightbox = new GLightbox();
 		} else {
 			G_Lightbox.clear();
 		}
-		forEach($E('content').getElementsByTagName('img'), function(item, index) {
+		forEach($E('content').getElementsByTagName('img'), function (item, index) {
 			if (!$G(item).hasClass('nozoom')) {
-				new preload(item, function() {
+				new preload(item, function () {
 					if (floatval(this.width) > floatval(item.width)) {
 						G_Lightbox.add(item);
 					}
@@ -317,9 +335,9 @@ function inintIndex() {
 	});
 }
 function changeLanguage(lang) {
-	$G(window).Ready(function() {
-		forEach(lang.split(','), function() {
-			$G('lang_' + this).addEvent('click', function(e) {
+	$G(window).Ready(function () {
+		forEach(lang.split(','), function () {
+			$G('lang_' + this).addEvent('click', function (e) {
 				GEvent.stop(e);
 				window.location = replaceURL('lang', this.title);
 			});
@@ -337,7 +355,7 @@ function replaceURL(keys, values, url) {
 	var us1 = u.split('?');
 	u = us1.length == 2 ? us1[0] : u;
 	if (us1.length == 2) {
-		forEach(us1[1].split('&'), function() {
+		forEach(us1[1].split('&'), function () {
 			hs = patt.exec(this);
 			if (!hs || ks.indexOf(hs[1].toLowerCase()) == -1) {
 				urls[this] = this;
@@ -345,7 +363,7 @@ function replaceURL(keys, values, url) {
 		});
 	}
 	if (us2.length == 2) {
-		forEach(us2[1].split('&'), function() {
+		forEach(us2[1].split('&'), function () {
 			hs = patt.exec(this);
 			if (!hs || ks.indexOf(hs[1].toLowerCase()) == -1) {
 				urls[this] = this;
@@ -356,7 +374,7 @@ function replaceURL(keys, values, url) {
 	for (var p in urls) {
 		us.push(urls[p]);
 	}
-	forEach(ks, function(item, index) {
+	forEach(ks, function (item, index) {
 		if (vs[index] && vs[index] != '') {
 			us.push(item + '=' + vs[index]);
 		}
@@ -366,7 +384,7 @@ function replaceURL(keys, values, url) {
 }
 function getWidgetNews(id, module, interval, callback) {
 	var req = new GAjax();
-	var _callback = function(xhr) {
+	var _callback = function (xhr) {
 		if (xhr.responseText !== '') {
 			if ($E(id)) {
 				var div = $G(id);
@@ -382,7 +400,7 @@ function getWidgetNews(id, module, interval, callback) {
 			}
 		}
 	};
-	var _getRequest = function() {
+	var _getRequest = function () {
 		return 'id=' + id;
 	};
 	if (interval == 0) {
@@ -391,9 +409,9 @@ function getWidgetNews(id, module, interval, callback) {
 		req.autoupdate(WEB_URL + 'widgets/' + module + '/getnews.php', floatval(interval), _getRequest, _callback);
 	}
 }
-var fbLogin = function() {
-	FB.login(function(response) {
-		FB.api('/me', function(response) {
+var fbLogin = function () {
+	FB.login(function (response) {
+		FB.api('/me', function (response) {
 			if (!response.error) {
 				if (!response.email || response.email == '') {
 					alert(EMAIL_EMPTY);
@@ -402,7 +420,7 @@ var fbLogin = function() {
 					for (var prop in response) {
 						q.push(prop + '=' + response[prop]);
 					}
-					send(WEB_URL + 'modules/member/fb_login.php', 'u=' + encodeURIComponent(getCurrentURL()) + '&data=' + encodeURIComponent(q.join('&')), function(xhr) {
+					send(WEB_URL + 'modules/member/fb_login.php', 'u=' + encodeURIComponent(getCurrentURL()) + '&data=' + encodeURIComponent(q.join('&')), function (xhr) {
 						var ds = xhr.responseText.toJSON();
 						if (ds) {
 							if (ds[0].error) {
@@ -444,7 +462,7 @@ var fbLogin = function() {
 	}, {scope: 'email,user_birthday,publish_stream'});
 };
 function inintFacebook(appId, lng) {
-	window.fbAsyncInit = function() {
+	window.fbAsyncInit = function () {
 		FB.init({
 			appId: appId,
 			cookie: false,
@@ -452,7 +470,7 @@ function inintFacebook(appId, lng) {
 			version: 'v2.1'
 		});
 	};
-	(function(d, s, id) {
+	(function (d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s);

@@ -18,8 +18,7 @@
 			$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
 			$breadcrumbs = array();
 			// หน้าหลัก
-			$canonical = WEB_URL.'/index.php';
-			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', $canonical, $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
+			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 			// โมดูล
 			if ($index['module'] != $module_list[0]) {
 				if (isset($install_modules[$index['module']]['menu_text'])) {
@@ -69,8 +68,7 @@
 				$moderator = $isAdmin || gcms::canConfig($config, 'edocument_moderator');
 				// อ่านรายการลงใน $list
 				$list = array();
-				$patt = array('/(edit\s{ID})/', '/(report\s{ID})/', '/(delete\s{ID})/', '/{ID}/', '/{NAME}/', '/{EXT}/',
-					'/{ICON}/', '/{DETAIL}/', '/{LASTUPDATE}/', '/{NO}/', '/{SIZE}/', '/{SENDER}/', '/{STATUS}/', '/{UID}/');
+				$patt = array('/(edit\s{ID})/', '/(report\s{ID})/', '/(delete\s{ID})/', '/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/', '/{LASTUPDATE}/', '/{NO}/', '/{SIZE}/', '/{SENDER}/', '/{STATUS}/', '/{UID}/');
 				$listitem = gcms::loadtemplate($index['module'], 'edocument', 'listitem');
 				foreach ($datas AS $item) {
 					$replace = array();
@@ -113,8 +111,7 @@
 				$splitpage .= ($i < $totalpage) ? str_replace('%1', $totalpage, $url) : '';
 				$splitpage = $splitpage == '' ? '<strong>1</strong>' : $splitpage;
 				// แสดงผล list รายการ
-				$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/',
-					'/{MODULE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e');
+				$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/', '/{MODULE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
 				$replace[] = implode("\n", $list);

@@ -1,7 +1,7 @@
 <?php
 	// modules/download/main.php
 	if (defined('MAIN_INIT')) {
-		// ตรวจสอบโมดูล
+		// ตรวจสอบโมดูลที่ติดตั้ง
 		$sql = "SELECT I.`module_id`,M.`module`,D.`detail`,D.`topic`,D.`description`,D.`keywords`";
 		$sql .= " FROM `".DB_INDEX_DETAIL."` AS D";
 		$sql .= " INNER JOIN `".DB_INDEX."` AS I ON I.`id`=D.`id` AND I.`module_id`=D.`module_id` AND I.`index`='1' AND I.`language`=D.`language`";
@@ -29,8 +29,7 @@
 			$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
 			$breadcrumbs = array();
 			// หน้าหลัก
-			$canonical = WEB_URL.'/index.php';
-			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', $canonical, $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
+			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 			// โมดูล
 			if ($index['module'] != $module_list[0]) {
 				if (isset($install_modules[$index['module']]['menu_text'])) {
@@ -80,17 +79,17 @@
 				$page = $page > $totalpage ? $totalpage : $page;
 				$page = $page < 1 ? 1 : $page;
 				$start = $config['download_list_per_page'] * ($page - 1);
+				// อ่านรายการลงใน $list
+				$list = array();
+				$patt = array('/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/',
+					'/{LASTUPDATE}/', '/{DOWNLOADS}/', '/{SIZE}/');
+				$listitem = gcms::loadtemplate($index['module'], 'download', 'listitem');
 				$sql = "SELECT * FROM `".DB_DOWNLOAD."` $where ORDER BY `last_update` DESC LIMIT $start,$config[download_list_per_page]";
 				$datas = $cache->get($sql);
 				if (!$datas) {
 					$datas = $db->customQuery($sql);
 					$cache->save($sql, $datas);
 				}
-				// อ่านรายการลงใน $list
-				$list = array();
-				$patt = array('/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/',
-					'/{LASTUPDATE}/', '/{DOWNLOADS}/', '/{SIZE}/');
-				$listitem = gcms::loadtemplate($index['module'], 'download', 'listitem');
 				foreach ($datas AS $item) {
 					$replace = array();
 					$replace[] = $item['id'];

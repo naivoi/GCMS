@@ -9,7 +9,7 @@
 		// บอกว่ายังไม่มีคนเปลี่ยนแปลงไว้ก่อน
 		$validtime = $mmktime - COUNTER_GAP;
 		// เวลาที่บอกว่า user logout ไปแล้ว
-		$online = 1;
+		$online = 0;
 		// ตัวเอง online อยู่
 		$useronline = array();
 		// แอเร์ยเก็บชื่อคน online
@@ -19,35 +19,22 @@
 		$updateid = 0;
 		$onlinechanged = false;
 		$userupdate = false;
-		$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'email' => '', 'password' => ''));
+		$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'displayname' => '', 'email' => '', 'password' => ''));
 		// เพิ่มตัวเอง online
 		$my['member_id'] = (int)$login['id'];
-		$my['displayname'] = trim(gcms::cutstring($login['displayname'] == '' ? $login['email'] : $login['displayname'], 10));
-		$my['icon'] = WEB_URL.'/modules/member/usericon.php?w=50&id='.$login['id'];
+		$my['displayname'] = trim(gcms::cutstring(empty($login['displayname']) ? $login['email'] : $login['displayname'], 10));
+		$my['icon'] = WEB_URL.'/modules/member/usericon.php?id='.$login['id'];
 		$my['time'] = $mmktime;
 		$my['session'] = $session_id;
-		if ($my['member_id'] > 0) {
-			$useronline[] = array('id' => $my['member_id'], 'icon' => $my['icon'], 'displayname' => $my['displayname']);
-		}
-		// ตรวจสอบคนที่หมดเวลา
+		// ลบคนที่หมดเวลาและตัวเอง
+		$db->query("DELETE FROM `".DB_USERONLINE."` WHERE `session`='$session_id' OR `time`<$validtime");
+		// บันทึกตัวเองออนไลน์
+		$db->add(DB_USERONLINE, $my);
+		// รายการคนออนไลน์
 		foreach ($db->customQuery('SELECT * FROM `'.DB_USERONLINE.'`') AS $item) {
-			if ($item['time'] < $validtime) {
-				// หมดเวลา
-				$deleteid[] = $item['id'];
-				$onlinechanged = true;
-			} elseif ($item['session'] != $session_id) {
-				// คนอื่น บอกว่า online ไว้
-				$online++;
-				if ($item['member_id'] > 0) {
-					$useronline[] = array('id' => $item['member_id'], 'icon' => $item['icon'], 'displayname' => $item['displayname']);
-				}
-			} else {
-				// ตัวเอง เก็บ id ไว้อัปเดท
-				$updateid = $item['id'];
-				if ($item['member_id'] != $my['member_id']) {
-					// login หรือ logout
-					$userupdate = true;
-				}
+			$online++;
+			if ($item['member_id'] > 0) {
+				$useronline[] = array('id' => $item['member_id'], 'icon' => $item['icon'], 'displayname' => $item['displayname']);
 			}
 		}
 		// ลบคนที่หมดเวลาออกจาก db
@@ -67,18 +54,16 @@
 		$my_counter = $db->customQuery($sql);
 		$my_counter = $my_counter[0];
 		$c = gcms::getVars($_POST, 'counter', 0);
-		if ($onlinechanged || $userupdate || $c != $my_counter['time']) {
-			$my_counter['time'] = ($userupdate || $c == 0) ? $mmktime : $my_counter['time'];
-			$db->edit(DB_COUNTER, $my_counter['id'], $my_counter);
-			$ret['all'] = $my_counter['counter'];
-			$ret['today'] = $my_counter['visited'];
-			$ret['online'] = $online;
-			$ret['pagesview'] = $my_counter['pages_view'];
-			$ret['count'] = $my_counter['time'];
-			$ret['useronline'] = $useronline;
-		}
+		$my_counter['time'] = ($userupdate || $c == 0) ? $mmktime : $my_counter['time'];
+		$db->edit(DB_COUNTER, $my_counter['id'], $my_counter);
+		$ret['all'] = $my_counter['counter'];
+		$ret['today'] = $my_counter['visited'];
+		$ret['online'] = $online;
+		$ret['pagesview'] = $my_counter['pages_view'];
+		$ret['count'] = $my_counter['time'];
+		$ret['useronline'] = $useronline;
 		// include ไฟล์อื่นๆที่ต้องการประมวลผล
-		if (is_array($config['useronline_include'])) {
+		if (isset($config['useronline_include'])) {
 			foreach ($config['useronline_include'] AS $item) {
 				include ROOT_PATH.$item;
 			}

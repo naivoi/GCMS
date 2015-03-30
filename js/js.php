@@ -59,7 +59,7 @@
 	}
 	// web url ใช้ตาม addressbar
 	preg_match('/^(http(s)?:\/\/)(.*)(\/(.*))?$/U', WEB_URL, $match);
-	$js[] = "window.WEB_URL='$match[1]'+window.location.hostname+'".(empty($match[4]) ? '' : $match[4])."/';";
+	$js[] = "window.WEB_URL = '$match[1]' + getWebURL() + '".(isset($match[4]) ? $match[4] : '')."/';";
 	// skin ที่เรียกใช้
 	$js[] = "window.SKIN='".SKIN."';";
 	// module url

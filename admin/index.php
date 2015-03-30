@@ -217,7 +217,7 @@
 		}
 		// web url ใช้ตาม addressbar
 		preg_match('/^(http(s)?:\/\/)(.*)(\/(.*))?$/U', WEB_URL, $match);
-		$script[] = "window.WEB_URL = '$match[1]' + window.location.hostname + '".(isset($match[4]) ? $match[4] : '')."/';";
+		$script[] = "window.WEB_URL = '$match[1]' + getWebURL() + '".(isset($match[4]) ? $match[4] : '')."/';";
 		$script[] = "window.SKIN = '".SKIN."';";
 		// สีของสมาชิก
 		if (isset($config['color_status'])) {
