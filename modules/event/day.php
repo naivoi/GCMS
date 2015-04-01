@@ -66,7 +66,7 @@
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = implode('', $calendar);
 			$replace[] = $index['topic'];
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = (int)$match[1] + $lng['YEAR_OFFSET'];
 			$replace[] = $lng['MONTH_SHORT'][(int)$match[2] - 1];
 			$replace[] = (int)$match[3];

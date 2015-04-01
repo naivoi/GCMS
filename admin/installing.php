@@ -19,7 +19,7 @@
 			if ($redirect != '') {
 				$content[] = '<meta http-equiv=refresh content="5;url='.$redirect.'">';
 			}
-			echo gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', 'gcms::getLng', implode('', $content));
+			echo gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', (OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng'), implode('', $content));
 		} else {
 			echo "<aside class=error>$lng[LNG_DATA_NOT_FOUND]</aside>";
 		}

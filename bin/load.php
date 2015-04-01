@@ -84,6 +84,8 @@
 	$language = is_file(DATA_PATH."language/$language.php") ? $language : 'th';
 	setCookie('gcms_language', $language, time() + 3600 * 24 * 365);
 	$_SESSION['gcms_language'] = $language;
+	// เวอร์ชั่นของ PHP
+	define('OLD_PHP', version_compare(PHP_VERSION, '5.3.0', '<'));
 	// ภาษาที่เลือก
 	define('LANGUAGE', $language);
 	// โหลดไฟล์ภาษา

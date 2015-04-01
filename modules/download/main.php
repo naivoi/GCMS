@@ -124,8 +124,8 @@
 				$splitpage .= ($i < $totalpage) ? str_replace('%1', $totalpage, $url) : '';
 				$splitpage = $splitpage == '' ? '<strong>1</strong>' : $splitpage;
 				// แสดงผล list รายการ
-				$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{SPLITPAGE}/', '/{MODULE}/',
-					'/{SEARCH}/', '/{LANGUAGE}/', '/^{WIDGET_([A-Z]+)(([\s_])(.*))?}$/e', '/{(LNG_[A-Z0-9_]+)}/e');
+				$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/',
+					'/{SPLITPAGE}/', '/{MODULE}/', '/{SEARCH}/', '/{LANGUAGE}/');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
 				$replace[] = implode("\n", $list);
@@ -135,9 +135,7 @@
 				$replace[] = $index['module'];
 				$replace[] = $search;
 				$replace[] = LANGUAGE;
-				$replace[] = 'gcms::getWidgets';
-				$replace[] = 'gcms::getLng';
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'download', 'main'));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'download', 'main'));
 			}
 			// title,keywords,description
 			$title = $index['topic'];

@@ -18,7 +18,7 @@
 			$patt = array('/{BREADCRUMS}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{WEBURL}/', '/{MODAL}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = WEB_URL;
 			$replace[] = gcms::getVars($_POST, 'action', '') == 'modal' ? 'true' : 'false';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'forgotfrm'));

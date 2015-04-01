@@ -40,7 +40,7 @@
 			$patt2 = array('/{TITLE}/', '/{(LNG_[A-Z0-9_]+)}/e', '/\%1/', '/\%2/', '/\%3/', '/{ADMIN}/', '/{ACCEPT}/');
 			$replace2 = array();
 			$replace2[] = $title;
-			$replace2[] = 'gcms::getLng';
+			$replace2[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace2[] = $config['user_icon_w'];
 			$replace2[] = $config['user_icon_h'] == 0 ? $config['user_icon_w'] : $config['user_icon_h'];
 			$replace2[] = empty($config['user_icon_typies']) ? 'jpg' : implode(', ', $config['user_icon_typies']);

@@ -64,7 +64,7 @@
 			$replace[] = $isMember ? '' : '$1';
 			$replace[] = $index['img_upload_type'] == '' ? '' : '$1';
 			$replace[] = implode("\n", $categories);
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = $login['password'];
 			$replace[] = $login['email'];
 			$replace[] = $register_antispamchar;

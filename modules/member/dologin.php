@@ -24,7 +24,7 @@
 					'/{PASSWORD}/', '/{REMEMBER}/', '/{WEBURL}/', '/{FACEBOOK}/', '/{NEXT}/');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
-				$replace[] = 'gcms::getLng';
+				$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 				$replace[] = $config['web_title'];
 				$replace[] = empty($error) ? $config['web_description'] : '<span class=error>'.$error.'</span>';
 				$replace[] = $login_email;
@@ -56,7 +56,7 @@
 			$replace[] = $login_result['point'];
 			$replace[] = $login_result['status'];
 			$replace[] = $login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1 ? 'admin' : ' hidden';
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'memberfrm'));
 		}

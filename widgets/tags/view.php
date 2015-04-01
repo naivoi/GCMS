@@ -10,7 +10,7 @@
 		if ($tag) {
 			$patt = array('/{(LNG_[A-Z0-9_]+)}/e', '/{TAG}/', '/{COUNT}/');
 			$replace = array();
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = $tag['tag'];
 			$replace[] = number_format($tag['count']);
 			echo gcms::pregReplace($patt, $replace, gcms::loadfile('tags.tpl'));

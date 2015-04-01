@@ -72,7 +72,7 @@
 				$patt = array('/{COLS}/', '/{(LNG_[A-Z0-9_]+)}/e');
 				$replace = array();
 				$replace[] = $match[7];
-				$replace[] = 'gcms::getLng';
+				$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 				echo gcms::pregReplace($patt, $replace, '<div class="row listview">'.implode('', $widget).'</div>');
 			}
 		}

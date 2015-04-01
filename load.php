@@ -247,7 +247,7 @@
 					$main_patt['/{'.$parent.'}/'] = $mymenu;
 				}
 			}
-			if ($menu != '' && $main_patt['/{MAINMENU}/'] != '') {
+			if ($menu != '' && !empty($main_patt['/{MAINMENU}/'])) {
 				// ตรวจสอบเมนูที่เลือก
 				$menu = '/class="('.preg_replace('/([\/\-])/u', '\\1', preg_quote($menu)).')(.*?)"/';
 				if (!preg_match($menu, $main_patt['/{MAINMENU}/'])) {
@@ -272,9 +272,9 @@
 			// ขนาดตัวอักษร
 			$main_patt['/{FONTSIZE}/'] = '<p id=change_display><a class=small title="{LNG_CHANGE_FONT_SMALL}">A<sup>-</sup></a><a class=normal title="{LNG_CHANGE_FONT_NORMAL}">A</a><a class=large title="{LNG_CHANGE_FONT_LARGE}">A<sup>+</sup></a></p>';
 			// widgets
-			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = 'gcms::getWidgets';
+			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = OLD_PHP ? 'gcms::getWidgets(array(1=>\'$1\',3=>\'$3\',4=>\'$4\'))' : 'gcms::getWidgets';
 			// ภาษา
-			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = 'gcms::getLng';
+			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			// meta, keywords และ description
 			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
 			$meta['description'] = '<meta name=description content="'.$description.'">';

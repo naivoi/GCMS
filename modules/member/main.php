@@ -55,7 +55,7 @@
 			$replace[] = $result['reply'];
 			$replace[] = $config['member_status'][(int)$result['status']];
 			$replace[] = $result['point'];
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'view'));
 		} else {
 			$title = $lng['LNG_ID_NOT_FOUND'];

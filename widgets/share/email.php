@@ -33,7 +33,7 @@
 			$widget[] = 'new GForm("share_frm", "'.WEB_URL.'/widgets/share/sendmail.php").onsubmit(doFormSubmit);';
 			$widget[] = '});';
 			$widget[] = '</script>';
-			$ret['content'] = rawurlencode(gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', 'gcms::getLng', implode('', $widget)));
+			$ret['content'] = rawurlencode(gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', (OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng'), implode('', $widget)));
 		}
 		// คืนค่า JSON
 		echo gcms::array2json($ret);

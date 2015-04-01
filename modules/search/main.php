@@ -174,7 +174,7 @@
 		$patt = array('/{BREADCRUMS}/', '/{(LNG_[A-Z0-9_]+)}/e', '/{WEBURL}/', '/{MODULE}/', '/{SEARCH}/', '/{RESULT}/', '/{LIST}/', '/{SPLITPAGE}/');
 		$replace = array();
 		$replace[] = implode("\n", $breadcrumbs);
-		$replace[] = 'gcms::getLng';
+		$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 		$replace[] = WEB_URL;
 		$replace[] = $module;
 		$replace[] = $search;

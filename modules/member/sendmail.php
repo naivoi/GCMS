@@ -50,7 +50,7 @@
 				'/{RECIEVER}/', '/{RECIEVERID}/', '/{ANTISPAM}/', '/{ANTISPAMVAL}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = $title;
 			$replace[] = $isMember ? $_SESSION['login']['email'] : '';
 			$replace[] = implode(',', $emails);

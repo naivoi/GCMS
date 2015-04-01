@@ -78,7 +78,7 @@
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
 				$replace[] = implode('', $status);
-				$replace[] = 'gcms::getLng';
+				$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 				$replace[] = implode(', ', $config['edocument_file_typies']);
 				$replace[] = gcms::formatFileSize($config['edocument_upload_size']);
 				$replace[] = $antispam;

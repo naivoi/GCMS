@@ -86,8 +86,7 @@
 			}
 			// แสดงผลหน้าเว็บ
 			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/',
-				'/{DETAIL}/', '/{SPLITPAGE}/', '/{LANGUAGE}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e',
-				'/{(LNG_[A-Z0-9_]+)}/e', '/{MODULE}/');
+				'/{DETAIL}/', '/{SPLITPAGE}/', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';
@@ -96,14 +95,11 @@
 			$replace[] = $index['topic'];
 			$replace[] = $index['detail'];
 			$replace[] = $splitpage;
-			$replace[] = LANGUAGE;
-			$replace[] = 'gcms::getWidgets';
-			$replace[] = 'gcms::getLng';
 			$replace[] = $index['module'];
 			if (sizeof($list) > 0) {
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'board', $template));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', $template));
 			} else {
-				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'board', 'empty'));
+				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', 'empty'));
 			}
 			// title,keywords,description
 			$title = $index['topic'];

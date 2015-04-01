@@ -114,7 +114,7 @@
 			$replace[] = implode("\n", $list);
 			$replace[] = "$index[topic].$index[ext]";
 			$replace[] = $splitpage;
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'edocument', 'report'));
 			// title,keywords,description
 			$title = $index['title'];

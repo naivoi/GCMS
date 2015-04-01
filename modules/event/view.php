@@ -38,14 +38,14 @@
 			}
 			$canonical = gcms::getURL($index['module'], '', 0, 0, "id=$index[id]");
 			// แทนที่ลงใน template ของโมดูล
-			$patt = array('/{BREADCRUMS}/', '/{TOPIC}/', '/{DETAIL}/', '/{COLOR}/',
-				'/{(LNG_[A-Z0-9_]+)}/e', '/{YEAR}/', '/{MONTH}/', '/{DATE}/', '/{TIME}/', '/{DAYURL}/', '/{URL}/');
+			$patt = array('/{BREADCRUMS}/', '/{TOPIC}/', '/{DETAIL}/', '/{COLOR}/', '/{(LNG_[A-Z0-9_]+)}/e',
+				'/{YEAR}/', '/{MONTH}/', '/{DATE}/', '/{TIME}/', '/{DAYURL}/', '/{URL}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $index['topic'];
 			$replace[] = gcms::showDetail($index['detail'], true, false);
 			$replace[] = $index['color'];
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			preg_match('/^([0-9]+)\-([0-9]+)\-([0-9]+)\s([0-9]{2,2}:[0-9]{2,2}):([0-9]{2,2})$/', $index['begin_date'], $match);
 			$replace[] = (int)$match[1] + $lng['YEAR_OFFSET'];
 			$replace[] = $lng['MONTH_SHORT'][(int)$match[2] - 1];

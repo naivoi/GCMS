@@ -229,8 +229,8 @@
 		$replace = array();
 		$patt = array('/{CONTENT}/', '/{MENUS}/', '/{LANGUAGES}/', '/{MSG}/', '/{MESSAGE}/', '/{STYLESHEET}/',
 			'/{JAVASCRIPT}/', '/{SCRIPT}/', '/{CSS}/', '/{TITLE}/', '/{WEBTITLE}/', '/{LOGINNAME}/', '/{LOGINID}/',
-			'/{(LNG_[A-Z0-9_]+)}/e', '/{VERSION}/', '/{LANGUAGE}/', '/{SKIN}/', '/{WEBURL}/', '/{EMAIL}/',
-			'/{PASSWORD}/', '/{DATAURL}/', '/{SRC}/', '/{REMEMBER}/', '/{LOGINEMAIL}/', '/{LOGINPASSWORD}/');
+			'/{(LNG_[A-Z0-9_]+)}/e', '/{VERSION}/', '/{LANGUAGE}/', '/{SKIN}/', '/{WEBURL}/', '/{EMAIL}/', '/{PASSWORD}/',
+			'/{DATAURL}/', '/{URLQUERY(\?([a-zA-Z0-9=&\-_@\.]+))?}/e', '/{SRC}/', '/{REMEMBER}/', '/{LOGINEMAIL}/', '/{LOGINPASSWORD}/');
 		$replace[] = implode("\n", $content);
 		$replace[] = implode('', $menus);
 		$replace[] = implode('', $languages);
@@ -255,7 +255,7 @@
 			$replace[] = '';
 			$replace[] = 0;
 		}
-		$replace[] = 'gcms::getLng';
+		$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 		$replace[] = VERSION;
 		$replace[] = LANGUAGE;
 		$replace[] = $config['admin_skin'];
@@ -268,11 +268,10 @@
 			$replace[] = '';
 		}
 		$replace[] = DATA_URL;
+		$replace[] = OLD_PHP ? 'gcms::adminURL(array(2 => \'$2\'))' : 'gcms::adminURL';
 		$replace[] = gcms::getVars($_GET, 'src', '');
 		$replace[] = $login_remember == 1 ? 'checked' : '';
 		$replace[] = $login_email;
 		$replace[] = $login_password;
-		echo preg_replace_callback('/{URLQUERY(\?([a-zA-Z0-9=&\-_@\.]+))?}/', function($matches) use ($url_query) {
-			return gcms::adminURL($url_query, (isset($matches[2]) ? $matches[2] : ''));
-		}, gcms::pregReplace($patt, $replace, gcms::loadfile(ROOT_PATH."admin/skin/$config[admin_skin]/index.html")));
+		echo gcms::pregReplace($patt, $replace, gcms::loadfile(ROOT_PATH."admin/skin/$config[admin_skin]/index.html"));
 	}

@@ -43,7 +43,7 @@
 			$replace[] = implode('', $calendar);
 			$replace[] = $index['topic'];
 			$replace[] = $index['detail'];
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'event', 'main'));
 			// title,keywords,description
 			$title = $index['topic'];

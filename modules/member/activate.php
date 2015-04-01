@@ -26,7 +26,7 @@
 	$main_patt = array();
 	$main_replace = array();
 	$main_patt[] = '/{(LNG_[A-Z0-9_]+)}/e';
-	$main_replace[] = 'gcms::getLng';
+	$main_replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 	$main_patt[] = '/{VERSION}/';
 	$main_replace[] = VERSION;
 	$main_patt[] = '/{WEBTITLE}/';

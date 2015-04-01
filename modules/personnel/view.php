@@ -46,8 +46,7 @@
 			$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', $canonical, $index['category'], $index['category'], $breadcrumb);
 			// แสดงผล list รายการ
 			$patt = array('/{BREADCRUMS}/', '/{NAME}/', '/{POSITION}/', '/{CATEGORY}/',
-				'/{DETAIL}/', '/{ADDRESS}/', '/{PHONE}/', '/{EMAIL}/', '/{PICTURE}/',
-				'/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e', '/{W}/');
+				'/{DETAIL}/', '/{ADDRESS}/', '/{PHONE}/', '/{EMAIL}/', '/{PICTURE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = $index['name'];
@@ -58,10 +57,9 @@
 			$replace[] = $index['phone'];
 			$replace[] = $index['email'];
 			$replace[] = ($index['picture'] != '' && is_file(DATA_PATH."personnel/$index[picture]")) ? DATA_URL."personnel/$index[picture]" : WEB_URL.'/modules/personnel/img/noicon.jpg';
-			$replace[] = 'gcms::getWidgets';
-			$replace[] = 'gcms::getLng';
-			$replace[] = $config['personnel_image_w'];
-			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'personnel', 'view'));
+			$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'personnel', 'view'));
+			// ตัวแปรหลังจากแสดงผลแล้ว
+			$custom_patt['/{W}/'] = $config['personnel_image_w'];
 			// title,keywords,description
 			$title = $index['topic'];
 			$keywords = $index['keywords'];

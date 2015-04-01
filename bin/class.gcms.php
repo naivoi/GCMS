@@ -1,6 +1,7 @@
 <?php
 	// bin/class.gcms.php
 	mb_internal_encoding('utf-8');
+	date_default_timezone_set('Asia/Bangkok');
 	// เวลาปัจจุบัน
 	$mmktime = mktime(date("H") + $config['hour']);
 	$myear = (int)date('Y', $mmktime);
@@ -574,20 +575,25 @@
 		}
 		// ฟังก์ชั่น preg_replace ของ gcms
 		public static function pregReplace($patt, $replace, $skin) {
-			if (!is_array($patt)) {
-				$patt = array($patt);
-			}
-			if (!is_array($replace)) {
-				$replace = array($replace);
-			}
-			foreach ($patt AS $i => $item) {
-				if (strpos($item, '/e') === FALSE) {
-					$skin = preg_replace($item, $replace[$i], $skin);
-				} else {
-					$skin = preg_replace_callback(str_replace('/e', '/', $item), $replace[$i], $skin);
+			global $lng;
+			if (OLD_PHP) {
+				return preg_replace($patt, $replace, $skin);
+			} else {
+				if (!is_array($patt)) {
+					$patt = array($patt);
 				}
+				if (!is_array($replace)) {
+					$replace = array($replace);
+				}
+				foreach ($patt AS $i => $item) {
+					if (strpos($item, '/e') === FALSE) {
+						$skin = preg_replace($item, $replace[$i], $skin);
+					} else {
+						$skin = preg_replace_callback(str_replace('/e', '/', $item), $replace[$i], $skin);
+					}
+				}
+				return $skin;
 			}
-			return $skin;
 		}
 		// HTML highlighter
 		public static function htmlhighlighter($text, $canview) {
@@ -1309,13 +1315,14 @@
 			}
 		}
 		// URL สำหรับ admin
-		public static function adminURL($query, $f) {
+		public static function adminURL($f) {
+			global $url_query;
 			$qs = array();
-			foreach ($query AS $key => $value) {
+			foreach ($url_query AS $key => $value) {
 				$qs[$key] = "$key=$value";
 			}
-			if ($f != '') {
-				foreach (explode('&', str_replace('&amp;', '&', $f)) AS $item) {
+			if (!empty($f[2])) {
+				foreach (explode('&', str_replace('&amp;', '&', $f[2])) AS $item) {
 					if (preg_match('/^(.*)=(.*)$/', $item, $match)) {
 						$qs[$match[1]] = empty($match[2]) ? $match[1] : "$match[1]=$match[2]";
 					}

@@ -112,8 +112,8 @@
 			$main_patt = array();
 			$main_patt['/{URL}/'] = $canonical;
 			$main_patt['/{XURL}/'] = rawurlencode($canonical);
-			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = 'gcms::getWidgets';
-			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = 'gcms::getLng';
+			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = OLD_PHP ? 'gcms::getWidgets(array(1=>\'$1\',3=>\'$3\',4=>\'$4\'))' : 'gcms::getWidgets';
+			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$main_patt['/{SKIN}/'] = SKIN;
 			$main_patt['/{WEBURL}/'] = WEB_URL;
 			$main_patt['/{LANGUAGE}/'] = LANGUAGE;

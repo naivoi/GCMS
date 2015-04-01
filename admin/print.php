@@ -27,7 +27,7 @@
 		echo '<link rel=stylesheet href='.WEB_URL.'/'.SKIN.'/print.css>';
 		echo '</head>';
 		echo '<body>';
-		echo gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', 'gcms::getLng', implode("\n", $content));
+		echo gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', (OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng'), implode("\n", $content));
 		echo '</body>';
 		echo '</html>';
 	}

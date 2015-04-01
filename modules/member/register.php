@@ -25,7 +25,7 @@
 			$replace[] = empty($config['member_phone']) ? '' : '\\1';
 			$replace[] = empty($config['member_idcard']) ? '' : '\\1';
 			$replace[] = empty($config['member_invitation']) ? '' : '\\1';
-			$replace[] = 'gcms::getLng';
+			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			$replace[] = $register_antispamchar;
 			$replace[] = WEB_URL;
 			$replace[] = gcms::getVars($_POST, 'action', '') != 'modal' ? 'false' : 'true';

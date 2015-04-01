@@ -98,16 +98,14 @@
 				$n++;
 			}
 			// แสดงผล list รายการ
-			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{CATEGORY}/', '/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e', '/{(LNG_[A-Z0-9_]+)}/e');
+			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{TOPIC}/', '/{DETAIL}/', '/{CATEGORY}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
 			$replace[] = sizeof($items) == 0 ? '<div class=error>{LNG_LIST_EMPTY}</div>' : '<article>'.implode("\n", $items).'</ul></article>';
 			$replace[] = $index['topic'];
 			$replace[] = $index['detail'];
 			$replace[] = gcms::getVars($categories, $id, '');
-			$replace[] = 'gcms::getWidgets';
-			$replace[] = 'gcms::getLng';
-			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate($index['module'], 'personnel', 'main'));
+			$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'personnel', 'main'));
 			// title,keywords,description
 			$title = $index['topic'];
 			$keywords = $index['keywords'];
