@@ -276,18 +276,19 @@
 			// ภาษา
 			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
 			// meta, keywords และ description
+			$meta['og:site_name'] = '<meta property="og:site_name" content="'.strip_tags($config['web_title']).'">';
 			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
 			$meta['description'] = '<meta name=description content="'.$description.'">';
 			$meta['og:description'] = '<meta name="og:description" content="'.$description.'">';
 			$meta['keywords'] = '<meta name=keywords content="'.$keywords.'">';
 			$meta['og:keywords'] = '<meta name="og:keywords" content="'.$keywords.'">';
-			$meta['og:type'] = '<meta property="og:type" content="website">';
+			$meta['og:type'] = '<meta property="og:type" content="article">';
 			if (!empty($config['facebook']['appId'])) {
-				$meta['facebook_appId'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
+				$meta['og:app_id'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
 				$script[] = 'window.FB_APPID = "'.$config['facebook']['appId'].'";';
 			}
 			if (!empty($image_src)) {
-				$meta['image_src'] = '<link rel=image_src href='.$image_src.'>';
+				$meta['image_src'] = '<link rel=image_src href="'.$image_src.'">';
 				$meta['og:image'] = '<meta property="og:image" content="'.$image_src.'">';
 			}
 			// logo

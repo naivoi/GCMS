@@ -14,10 +14,13 @@
 		$total = 0;
 		$thead = array();
 		$tbody = array();
-		$sql = "SELECT * FROM `".DB_COUNTER."` WHERE MONTH(`date`)=$m AND YEAR(`date`)=$y ORDER BY `date` ASC";
+		$sql = "SELECT `date`,SUM(`pages_view`) AS `pages_view` FROM `".DB_COUNTER."` WHERE MONTH(`date`)=$m AND YEAR(`date`)=$y GROUP BY `date` ORDER BY `date` ASC";
 		$datas = $db->customQuery($sql);
-		$l = sizeof($datas);
-		foreach ($datas AS $i => $item) {
+		foreach ($datas AS $item) {
+			$list[$item['date']] = $item;
+		}
+		$l = sizeof($list);
+		foreach ($list AS $i => $item) {
 			list($y, $m, $d) = explode('-', $item['date']);
 			$d = (int)$d;
 			if (is_file(DATA_PATH.'counter/'.(int)$y.'/'.(int)$m.'/'.$d.'.dat')) {
@@ -25,7 +28,7 @@
 			}
 			$c = $i > $l - 13 ? $i > $l - 7 ? '' : 'mobile' : 'tablet';
 			$thead[] = '<td class='.$c.'>'.$d.'</td>';
-			$tbody[] = '<td class='.$c.'>'.$item['pages_view'].'</td>';
+			$tbody[] = '<td class='.$c.'>'.number_format($item['pages_view']).'</td>';
 			$total = $total + $item['pages_view'];
 		}
 		// title
@@ -33,7 +36,7 @@
 		// แสดงผล
 		$content[] = '<div class=breadcrumbs><ul><li><span class=icon-summary>'.$title.'</span></li></ul></div>';
 		$content[] = '<section>';
-		$content[] = '<header><h1 class=icon-stats>'.sprintf($lng['USERONLINE_PAGE_VIEW_SUB_TITLE'], $lng['MONTH_LONG'][$m - 1], $total, sizeof($tbody)).'</h1></header>';
+		$content[] = '<header><h1 class=icon-stats>'.sprintf($lng['USERONLINE_PAGE_VIEW_SUB_TITLE'], $lng['MONTH_LONG'][$m - 1], number_format($total), sizeof($tbody)).'</h1></header>';
 		$content[] = '<div id=pageview_graph class=ggraphs>';
 		$content[] = '<canvas></canvas>';
 		$content[] = '<table class="data fullwidth">';

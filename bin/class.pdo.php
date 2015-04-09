@@ -311,9 +311,9 @@
 		 */
 		public function query($sql) {
 			try {
-				$result = $this->connection->query($sql);
+				$result = $this->connection->exec($sql);
 				$this->time++;
-				return true;
+				return $result;
 			} catch (PDOException $e) {
 				$this->debug("Error in $sql Message : ".$e->getMessage());
 				return false;

@@ -69,7 +69,7 @@ gGraphs.prototype = {
 				if (this.dataset.value) {
 					val.value = floatval(this.dataset.value);
 				} else {
-					val.value = floatval(this.innerHTML);
+					val.value = floatval(this.innerHTML.replace(/,/g, ''));
 				}
 				val.title = this.innerHTML.strip_tags();
 				sum = sum + val.value;

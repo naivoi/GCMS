@@ -703,7 +703,7 @@
 	$lng['SEX'] = Array('f' => 'หญิง', 'm' => 'ชาย');
 	$lng['SHOW_NEWS'] = Array(0 => 'ไม่แสดงในส่วนเสริม', 1 => 'แสดงในส่วนเสริม');
 	$lng['TEXTLINK_TYPIES'] = Array('custom' => 'กำหนดเองเช่น Adsense', 'text' => 'ลิงค์ข้อความอย่างเดียว', 'menu' => 'ลิงค์ข้อความอย่างเดียว แสดงเป็นเมนู', 'image' => 'แบนเนอร์รูปภาพ แสดงทั้งหมด', 'banner' => 'แบนเนอร์รูปภาพ แสดงแบบวน', 'slideshow' => 'แบนเนอร์ไสลด์โชว์');
-	$lng['USERONLINE_PAGE_VIEW_SUB_TITLE'] = 'Pages View ประจำเดือน %s รวม %d ครั้ง/%d วัน';
+	$lng['USERONLINE_PAGE_VIEW_SUB_TITLE'] = 'Pages View ประจำเดือน %s รวม %s ครั้ง/%d วัน';
 	$lng['USERONLINE_PAGE_VIEW_TITLE'] = 'รายงาน Pages View ประจำเดือน <strong>%s</strong>';
 	$lng['USERONLINE_REPORT_TITLE'] = 'สถิติการเยี่ยมชมเว็บไซต์ในวันที่ %s';
 	$lng['YEAR_OFFSET'] = 543;

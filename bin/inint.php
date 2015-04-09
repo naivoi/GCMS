@@ -3,9 +3,9 @@
 	// running mode
 	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 	// comment 3 บรรทัดด้านล่าง เมือต้องการใช้งานจริง (debug mode)
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(-1);
+	//ini_set('display_errors', 1);
+	//ini_set('display_startup_errors', 1);
+	//error_reporting(-1);
 	// session, cookie
 	session_start();
 	if (!ob_get_status()) {

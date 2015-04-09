@@ -195,6 +195,10 @@
 					// แก้ไข
 					$db->edit(DB_USER, $user['id'], $save);
 					$ret['error'] = 'REGISTER_UPDATE_SUCCESS';
+					// อัปเดท session
+					$old_password = $_SESSION['login']['password'];
+					$_SESSION['login'] = array_merge($_SESSION['login'], $save);
+					$_SESSION['login']['password'] = empty($password) ? $old_password : $password;
 				}
 			} else {
 				// คืนค่า input ตัวแรกที่ error

@@ -45,4 +45,9 @@
 		}
 		ob_flush();
 		flush();
+		$db->query("DROP TABLE `".DB_USERONLINE."`");
+		$db->query("CREATE TABLE IF NOT EXISTS `".DB_USERONLINE."` (`id` int(11) NOT NULL auto_increment,`member_id` int(11) NOT NULL,`displayname` text collate utf8_unicode_ci NOT NULL,`icon` text collate utf8_unicode_ci NOT NULL,`time` int(11) NOT NULL,`session` varchar(32) collate utf8_unicode_ci NOT NULL,`ip` varchar(50) collate utf8_unicode_ci NOT NULL,PRIMARY KEY (`id`,`session`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+		echo '<li class=correct>Update database <strong>'.DB_USERONLINE.'</strong> <i>complete...</i></li>';
+		ob_flush();
+		flush();
 	}

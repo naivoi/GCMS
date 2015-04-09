@@ -14,12 +14,16 @@ a {
 		background-color: #FFF;
 	}
 	.scroller,
+	.breadcrumbs,
 	body > header,
 	nav,
 	footer,
 	article > header > h1,
 	.table_nav {
 		display: none !important;
+	}
+	header {
+		background-color: transparent !important;
 	}
 }
 .scroller {

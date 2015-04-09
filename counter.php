@@ -5,6 +5,17 @@
 		$y = (int)date('Y', $mmktime);
 		$m = (int)date('m', $mmktime);
 		$d = (int)date('d', $mmktime);
+		// ตรวจสอบ ว่าเคยเยี่ยมชมหรือไม่
+		$old_counter = gcms::getVars($_COOKIE, 'counter_date', 0);
+		if ($old_counter != $d) {
+			// เข้ามาครั้งแรกในวันนี้
+			$old_counter = $d;
+			$counter_visited = false;
+		} else {
+			$counter_visited = true;
+		}
+		// บันทึก counter 1 วัน
+		setCookie('counter_date', $old_counter, time() + 3600 * 24, '/');
 		// โฟลเดอร์ของ counter
 		$counter_dir = DATA_PATH.'counter';
 		// ตรวจสอบโฟลเดอร์
@@ -41,31 +52,22 @@
 		// อ่านข้อมูล counter ล่าสุด
 		$sql = "SELECT * FROM `".DB_COUNTER."` ORDER BY `id` DESC LIMIT 1";
 		$my_counter = $db->customQuery($sql);
-		$my_counter = sizeof($my_counter) == 1 ? $my_counter[0] : array('date' => 0, 'counter' => 0);
+		$my_counter = sizeof($my_counter) == 1 ? $my_counter[0] : array('date' => '', 'counter' => 0);
 		if ($my_counter['date'] != $counter_day) {
 			// วันใหม่
 			$my_counter['visited'] = 0;
 			$my_counter['pages_view'] = 0;
 			$my_counter['date'] = $counter_day;
 			$counter_add = true;
+			// clear useronline
+			$db->query("TRUNCATE `".DB_USERONLINE."`");
 		} else {
 			$counter_add = false;
 		}
-		// บันทึกลง log และตรวจสอบว่าเคยเยี่ยมชมวันนี้หรือไม่
-		$counter_visited = false;
+		// บันทึกลง log
 		$counter_log = "$counter_dir/$y/$m/$d.dat";
-		$i = 0;
 		if (is_file($counter_log)) {
-			// ตรวจสอบว่าเคยเยี่ยมชมวันนี้หรือไม่
-			$logs = file($counter_log);
-			foreach ($logs AS $item) {
-				list($sid, $sip, $sref, $sagent) = explode(chr(1), $item);
-				if ($sid == $counter_ssid || $sip == $counter_ip) {
-					$counter_visited = true;
-					break;
-				}
-			}
-			// บันทึกต่อจากของเดิม
+			// เปิดไฟล์เพื่อเขียนต่อ
 			$f = @fopen($counter_log, 'ab');
 		} else {
 			// สร้างไฟล์ log ใหม่
@@ -85,8 +87,6 @@
 			unset($my_counter['id']);
 			$db->add(DB_COUNTER, $my_counter);
 		} else {
-			$id = $my_counter['id'];
-			unset($my_counter['id']);
-			$db->edit(DB_COUNTER, $id, $my_counter);
+			$db->edit(DB_COUNTER, $my_counter['id'], $my_counter);
 		}
 	}

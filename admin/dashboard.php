@@ -6,13 +6,13 @@
 		$sql2 = "SELECT COUNT(*) FROM `".DB_USER."` WHERE `activatecode`<>''";
 		$sql3 = "SELECT COUNT(*) FROM `".DB_USER."` WHERE `ban_count` > 0";
 		$sql4 = "SELECT COUNT(*) FROM `".DB_USERONLINE."`";
-		$sql = "SELECT C.`counter`,C.`visited`,($sql1) AS `members`,($sql2) AS `activate`,($sql3) AS `ban`,($sql4) AS `useronline` ";
-		$sql .= "FROM `".DB_COUNTER."` AS C ";
-		$sql .= "ORDER BY C.`id` DESC LIMIT 1";
+		$sql = "SELECT C.`counter`,C.`visited`,($sql1) AS `members`,($sql2) AS `activate`,($sql3) AS `ban`,($sql4) AS `useronline`";
+		$sql .= " FROM `".DB_COUNTER."` AS C ";
+		$sql .= " ORDER BY C.`id` DESC LIMIT 1";
 		$datas = $db->customQuery($sql);
 		$datas = sizeof($datas) == 1 ? $datas[0] : array('visited' => 0, 'useronline' => 0);
-		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', (int)$datas['visited']);
-		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', (int)$datas['useronline']);
+		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', number_format($datas['visited']));
+		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', number_format($datas['useronline']));
 		// สี สำหรับส่งให้ graphs
 		$color = "['".implode("', '", $colors)."']";
 		// title
@@ -57,12 +57,12 @@
 		$content[] = '<table class="summary fullwidth">';
 		$content[] = '<caption>{LNG_REPORT_MEMBER}</caption>';
 		$content[] = '<tbody>';
-		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=0">{LNG_REPORT_MEMBER_ALL}</a></th><td class=right>'.(int)$datas['members'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=2">{LNG_MEMBER_NOT_CONFIRM}</a></th><td class=right>'.(int)$datas['activate'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=9">{LNG_MEMBER_BAN}</a></th><td class=right>'.(int)$datas['ban'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_ALL}</th><td class=right>'.(int)$datas['counter'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr><th scope=row>{LNG_COUNTER_ONLINE}</th><td class=right>'.(int)$datas['useronline'].' {LNG_PEOPLE}</td></tr>';
-		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=report">{LNG_COUNTER_TODAY}</a></th><td class=right>'.(int)$datas['visited'].' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=0">{LNG_REPORT_MEMBER_ALL}</a></th><td class=right>'.number_format($datas['members']).' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=2">{LNG_MEMBER_NOT_CONFIRM}</a></th><td class=right>'.number_format($datas['activate']).' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=member&amp;order=9">{LNG_MEMBER_BAN}</a></th><td class=right>'.number_format($datas['ban']).' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_ALL}</th><td class=right>'.number_format($datas['counter']).' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr><th scope=row>{LNG_COUNTER_ONLINE}</th><td class=right>'.number_format($datas['useronline']).' {LNG_PEOPLE}</td></tr>';
+		$content[] = '<tr class=bg2><th scope=row><a href="'.WEB_URL.'/admin/index.php?module=report">{LNG_COUNTER_TODAY}</a></th><td class=right>'.number_format($datas['visited']).' {LNG_PEOPLE}</td></tr>';
 		if (is_file(DATA_PATH.'index.php')) {
 			$date = file_get_contents(DATA_PATH.'index.php');
 			if (preg_match('/([0-9]+){0,2}-([0-9]+){0,2}-([0-9]+){0,4}\s([0-9]+){0,2}:([0-9]+){0,2}:([0-9]+){0,2}/', $date, $match)) {
@@ -103,8 +103,8 @@
 		foreach ($list AS $i => $item) {
 			$c = $i > $l - 8 ? $i > $l - 4 ? '' : 'mobile' : 'tablet';
 			$thead[] = '<td class="'.$c.'"><a href="'.WEB_URL.'/admin/index.php?module=pagesview&amp;date='.$item['year'].'-'.$item['month'].'">'.$lng['MONTH_SHORT'][$item['month'] - 1].'</a></td>';
-			$pageview[] = '<td class="'.$c.'">'.$item['pages_view'].'</td>';
-			$visited[] = '<td class="'.$c.'">'.$item['visited'].'</td>';
+			$pageview[] = '<td class="'.$c.'">'.number_format($item['pages_view']).'</td>';
+			$visited[] = '<td class="'.$c.'">'.number_format($item['visited']).'</td>';
 		}
 		$content[] = '<section class=section>';
 		$content[] = '<header><h1 class=icon-stats>{LNG_PAGE_VIEW_REPORT}</h1></header>';
@@ -113,8 +113,8 @@
 		$content[] = '<table class="data fullwidth border">';
 		$content[] = '<thead><tr><th>{LNG_MONTHLY}</th>'.implode('', $thead).'</tr></thead>';
 		$content[] = '<tbody>';
-		$content[] = '<tr><th scope=row>{LNG_COUNTER_ALL}</th>'.implode('', $pageview).'</tr>';
-		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_PAGES_VIEW}</th>'.implode('', $visited).'</tr>';
+		$content[] = '<tr><th scope=row>{LNG_COUNTER_ALL}</th>'.implode('', $visited).'</tr>';
+		$content[] = '<tr class=bg2><th scope=row>{LNG_COUNTER_PAGES_VIEW}</th>'.implode('', $pageview).'</tr>';
 		$content[] = '</tbody>';
 		$content[] = '</table>';
 		$content[] = '</div>';
