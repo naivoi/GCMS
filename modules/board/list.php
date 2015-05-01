@@ -84,23 +84,27 @@
 				include (ROOT_PATH.'modules/board/categories.php');
 				$template = 'category';
 			}
+			if (sizeof($list) == 0) {
+				$template = 'empty';
+				$list = '';
+			} elseif ($template == 'category') {
+				$list = '<div class="row iconview">'.implode("\n", $list).'</div>';
+			} else {
+				$list = implode("\n", $list);
+			}
 			// แสดงผลหน้าเว็บ
 			$patt = array('/{BREADCRUMS}/', '/{LIST}/', '/{NEWTOPIC}/', '/{CATEGORY}/', '/{TOPIC}/',
 				'/{DETAIL}/', '/{SPLITPAGE}/', '/{MODULE}/');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);
-			$replace[] = sizeof($list) > 0 ? '<div class="row iconview">'.implode("\n", $list).'</div>' : '';
+			$replace[] = $list;
 			$replace[] = $isAdmin || in_array($status, explode(',', $index['can_post'])) ? '' : 'hidden';
 			$replace[] = (int)$cat;
 			$replace[] = $index['topic'];
 			$replace[] = $index['detail'];
 			$replace[] = $splitpage;
 			$replace[] = $index['module'];
-			if (sizeof($list) > 0) {
-				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', $template));
-			} else {
-				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', 'empty'));
-			}
+			$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'board', $template));
 			// title,keywords,description
 			$title = $index['topic'];
 			$keywords = $index['keywords'];

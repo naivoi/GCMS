@@ -49,8 +49,8 @@
 			$valid_date = $mmktime - $index['new_date'];
 			// อ่านรายการลงใน $list
 			$listitem = gcms::loadtemplate($index['module'], 'document', 'listitem');
-			$patt = array('/{ID}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{UID}/', '/{SENDER}/',
-				'/{STATUS}/', '/{LASTUPDATE}/', '/{VISITED}/', '/{COMMENTS}/', '/{THUMB}/', '/{ICON}/');
+			$patt = array('/{ID}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{UID}/', '/{SENDER}/', '/{STATUS}/',
+				'/{DATE}/', '/{DATEISO}/', '/{VISITED}/', '/{COMMENTS}/', '/{THUMB}/', '/{ICON}/');
 			foreach ($datas AS $item) {
 				$replace = array();
 				$replace[] = $item['id'];
@@ -62,9 +62,10 @@
 				$replace[] = $item['topic'];
 				$replace[] = $item['description'];
 				$replace[] = $item['member_id'];
-				$replace[] = $item['displayname'] == '' ? $item['email'] : $item['displayname'];
+				$replace[] = empty($item['displayname']) ? $item['email'] : $item['displayname'];
 				$replace[] = $item['status'];
 				$replace[] = gcms::mktime2date($item['create_date'], 'd M Y');
+				$replace[] = date(DATE_ISO8601, $item['create_date']);
 				$replace[] = number_format($item['visited']);
 				$replace[] = number_format($item['comments']);
 				if ($item['picture'] != '' && is_file(DATA_PATH."document/$item[picture]")) {
@@ -75,9 +76,9 @@
 					$replace[] = WEB_URL."/$index[default_icon]";
 				}
 				if ($item['create_date'] > $valid_date && $item['comment_date'] == 0) {
-					$replace[] = 'new';
+					$replace[] = ' new';
 				} elseif ($item['last_update'] > $valid_date || $item['comment_date'] > $valid_date) {
-					$replace[] = 'update';
+					$replace[] = ' update';
 				} else {
 					$replace[] = '';
 				}
@@ -86,7 +87,7 @@
 			// แบ่งหน้า
 			$maxlink = 9;
 			// query สำหรับ URL และ canonical
-			$c = $cat_count > 0 ? "&cat=$cat" : '';
+			$c = $cat_count > 0 ? "&amp;cat=$cat" : '';
 			if (empty($tag)) {
 				$url = '<a href="'.gcms::getURL($index['module'], '', 0, 0, "page=%1$c").'">%1</a>';
 				$canonical = gcms::getURL($index['module'], '', 0, 0, "page=$page$c");

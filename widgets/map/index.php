@@ -1,5 +1,5 @@
 <?php
 	// widgets/map/index.php
 	if (defined('MAIN_INIT')) {
-		$widget = '<div class=youtube><iframe src="'.WEB_URL.'/widgets/map/map.php?p='.rawurlencode($module).'"></iframe></div>';
+		$widget = '<iframe src="'.WEB_URL.'/widgets/map/map.php?p='.rawurlencode($module).'" style="width:100%;height:'.$config['map_height'].'px"></iframe>';
 	}

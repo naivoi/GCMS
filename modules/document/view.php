@@ -57,14 +57,16 @@
 				$cache->save($sql, $index);
 				// relate
 				$relate = array();
+				$patt = array('/{URL}/', '/{TOPIC}/');
+				$skin = gcms::loadtemplate($index['module'], 'document', 'relate');
 				foreach (explode(',', $index['relate']) AS $tag) {
-					$relate[] = '<a href="'.gcms::getURL('tag', $tag).'" title="'.$tag.'">'.$tag.'</a>';
+					$relate[] = preg_replace($patt, array(gcms::getURL('tag', $tag), $tag), $skin);
 				}
 				// breadcrumbs
 				$breadcrumb = gcms::loadtemplate($index['module'], '', 'breadcrumb');
 				$breadcrumbs = array();
 				// หน้าหลัก
-				$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
+				$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', $canonical, $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 				// โมดูล
 				if ($index['module'] != $module_list[0]) {
 					if (isset($install_modules[$index['module']]['menu_text'])) {
@@ -84,9 +86,9 @@
 				// ความคิดเห็น
 				$comments = array();
 				if ($canReply) {
-					$patt = array('/(edit-{QID}-{RID}-{NO}-{MODULE})/', '/(delete-{QID}-{RID}-{NO}-{MODULE})/isu',
-						'/{DETAIL}/', '/{UID}/', '/{DISPLAYNAME}/', '/{STATUS}/', '/{EMAIL}/', '/{CREATE}/',
-						'/{CREATE2}/', '/{IP}/', '/{NO}/', '/{QID}/', '/{RID}/');
+					$patt = array('/(edit-{QID}-{RID}-{NO}-{MODULE})/', '/(delete-{QID}-{RID}-{NO}-{MODULE})/', '/{DETAIL}/',
+						'/{UID}/', '/{DISPLAYNAME}/', '/{STATUS}/', '/{EMAIL}/', '/{DATE}/', '/{DATEISO}/',
+						'/{IP}/', '/{NO}/', '/{QID}/', '/{RID}/');
 					$skin = gcms::loadtemplate($index['module'], 'document', 'commentitem');
 					// query
 					$sql = "SELECT C.*,U.`status`,U.`displayname`,U.`email`";
@@ -116,7 +118,7 @@
 						$replace[] = $item['status'];
 						$replace[] = $item['email'];
 						$replace[] = gcms::mktime2date($item['last_update']);
-						$replace[] = date('Y-m-d H:i', $item['last_update']);
+						$replace[] = date(DATE_ISO8601, $item['last_update']);
 						$replace[] = gcms::showip($item['ip']);
 						$replace[] = $i + 1;
 						$replace[] = $item['index_id'];
@@ -140,11 +142,10 @@
 				// แก้ไขบทความ เจ้าของหรือ mod
 				$canEdit = is_file(ROOT_PATH.'modules/document/write.php') && ($moderator || ($isMember && $login['id'] == $index['member_id']));
 				// แทนที่ลงใน template ของโมดูล
-				$patt = array('/{BREADCRUMS}/', '/{COMMENTLIST}/', '/{REPLYFORM}/', '/{TOPIC}/',
-					'/<MEMBER>(.*)<\/MEMBER>/s', '/(edit-{QID}-0-0-{MODULE})/', '/(delete-{QID}-0-0-{MODULE})/',
-					'/(quote-{QID}-0-0-{MODULE})/', '/{DETAIL}/', '/{LANGUAGE}/', '/{UID}/', '/{DISPLAYNAME}/', '/{IMG}/',
-					'/{STATUS}/', '/{LASTUPDATE}/', '/{LASTUPDATE2}/', '/{CREATEDATE}/', '/{CREATEDATE2}/', '/{VISITED}/',
-					'/{TAGS}/', '/{COMMENTS}/', '/{QID}/', '/{LOGIN_PASSWORD}/', '/{LOGIN_EMAIL}/', '/{ANTISPAM}/',
+				$patt = array('/{BREADCRUMS}/', '/{COMMENTLIST}/', '/{REPLYFORM}/', '/{TOPIC}/', '/<MEMBER>(.*)<\/MEMBER>/s',
+					'/(edit-{QID}-0-0-{MODULE})/', '/(delete-{QID}-0-0-{MODULE})/', '/(quote-{QID}-0-0-{MODULE})/', '/{DETAIL}/',
+					'/{LANGUAGE}/', '/{UID}/', '/{DISPLAYNAME}/', '/{IMG}/', '/{STATUS}/', '/{DATE}/', '/{DATEISO}/',
+					'/{VISITED}/', '/{TAGS}/', '/{COMMENTS}/', '/{QID}/', '/{LOGIN_PASSWORD}/', '/{LOGIN_EMAIL}/', '/{ANTISPAM}/',
 					'/{ANTISPAMVAL}/', '/{DELETE}/', '/{MODULE}/', '/{MODULEID}/', '/{VOTE}/', '/{VOTE_COUNT}/', '/{CATID}/');
 				$replace = array();
 				$replace[] = implode("\n", $breadcrumbs);
@@ -161,10 +162,8 @@
 				$replace[] = empty($index['displayname']) ? $index['email'] : $index['displayname'];
 				$replace[] = $image_src;
 				$replace[] = $index['status'];
-				$replace[] = gcms::mktime2date($index['last_update']);
-				$replace[] = date('Y-m-d', $index['last_update']);
 				$replace[] = gcms::mktime2date($index['create_date']);
-				$replace[] = date('Y-m-d', $index['create_date']);
+				$replace[] = date(DATE_ISO8601, $index['create_date']);
 				$replace[] = number_format($index['visited']);
 				$replace[] = sizeof($relate) == 0 ? '' : implode('', $relate);
 				$replace[] = number_format($index['comments']);

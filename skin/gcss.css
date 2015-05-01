@@ -14,40 +14,13 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
-*:before,
-*:after {
+*:before, *:after {
 	-ms-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
-table,
-caption,
-thead,
-tbody,
-tfoot,
-tr,
-td,
-th,
-p,
-div,
-article,
-section,
-figure,
-header,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-footer,
-.table,
-.tr,
-.th,
-.td,
-ul,
-ol {
+table, caption, thead, tbody, tfoot, tr, td, th, p, div, article, section, figure, header, h1, h2, h3, h4, h5, h6, footer, .table, .tr, .th, .td, ul, ol {
 	border-color: inherit;
 }
 @media print {
@@ -81,42 +54,20 @@ body {
 	font-family: Tahoma, Arial, Helvetica, sans-serif;
 	-webkit-animation: bugfix infinite 1s;
 }
-p,
-div,
-legend,
-fieldset,
-form,
-article,
-main,
-aside,
-details,
-figcaption,
-footer,
-header,
-hgroup,
-nav,
-section,
-summary,
-code,
-blockquote {
+p, div, legend, fieldset, form, article, main, aside, details, figcaption, footer, header, hgroup, nav, section, summary, code, blockquote {
 	display: block;
 }
-keygen,
-meter,
-progress {
+keygen, meter, progress {
 	display: inline-block;
 	*display: inline;
 	zoom: 1;
 }
-acronym,
-abbr {
+acronym, abbr {
 	border-bottom: 1px #aaa dotted;
 	font-variant: small-caps;
 	letter-spacing: .07em;
 }
-fieldset,
-abbr[title],
-acronym[title] {
+fieldset, abbr[title], acronym[title] {
 	border: none;
 }
 legend {
@@ -239,12 +190,7 @@ html[dir="rtl"] ul,
 html[dir="rtl"] ol {
 	padding: 10px 25px 10px 0;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	font-weight: inherit;
 	position: relative;
 }
@@ -252,18 +198,15 @@ h1 {
 	font-size: 2em;
 }
 h2 {
-	font-size: 1.8em;
+  font-size: 1.625em;
 }
 h3 {
-	font-size: 1.6em;
+  font-size: 1.375em;
 }
 h4 {
-	font-size: 1.4em;
+  font-size: 1.125em;
 }
-h5 {
-	font-size: 1.2em;
-}
-h6 {
+h5, h6 {
 	font-size: 1em;
 }
 .comment,
@@ -415,9 +358,11 @@ body.responsive .gcss-wrapper {
 .header h1 {
 	font-size: 4em;
 	padding: 10px 0 0 10px;
+	line-height: 1;
 }
 .header .description {
 	padding: 0 0 10px 40px;
+	line-height: 1;
 }
 #logo {
 	background-position: 0 50%;
@@ -425,16 +370,13 @@ body.responsive .gcss-wrapper {
 .header h1 > a {
 	display: block;
 }
-header a,
-footer a {
+.header a, header a, footer a {
 	color: inherit;
 }
-header a:hover,
-footer a:hover {
+.header a:hover, header a:hover, footer a:hover {
 	color: none;
 }
-header p,
-footer p {
+header p, footer p {
 	margin: 0;
 }
 .wrapper {
@@ -855,15 +797,14 @@ input[type="radio"] {
 	vertical-align: middle;
 }
 /* ckeditor */
-.content-box,
-.cke_panel {
+.content-box, .cke_panel {
 	-ms-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 }
 body.cke-body {
-	padding: 5px;
+	margin: 0.5%;
 	width: auto;
 }
 textarea.cke_editable {
@@ -2804,31 +2745,28 @@ body .tooltip-bottom {
 	color: #000;
 }
 /* table */
-.table,
-table {
+.table, table {
 	display: table;
 	border-color: #EFEFEF;
 	border-color: rgba(0,0,0,0.1);
 	border-spacing: 0;
 	border-collapse: collapse;
 }
-.table.border,
-table.border {
+.table.border, table.border {
 	border-width: 1px;
 	border-style: solid;
 }
 .data.border {
 	border-style: none;
 }
-.tr,
-tr {
+.table.center, table.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.tr, tr {
 	display: table-row;
 }
-.td,
-.th,
-td,
-th,
-caption {
+.td, .th, td, th, caption {
 	padding: 5px;
 	border-width: 1px;
 	vertical-align: middle;
@@ -2836,10 +2774,7 @@ caption {
 	font-weight: normal;
 	text-align: left;
 }
-.td,
-.th,
-td,
-th {
+.td, .th, td, th {
 	display: table-cell;
 }
 table.collapse > thead > tr > th,
@@ -2879,13 +2814,11 @@ th[scope=rowgroup],
 .thead > .th {
 	background-color: #EEE;
 }
-tr.bg2,
-.tr.bg2 {
+tr.bg2, .tr.bg2 {
 	background-color: #F9F9F9;
 	background-color: rgba(0,0,0,0.01);
 }
-tr.highlight,
-tr.select {
+tr.highlight, tr.select {
 	background-color: rgba(0,0,0,0.02);
 }
 .border.horiz-table > thead > tr > td,
@@ -2992,22 +2925,17 @@ a.skip_content {
 	left: -1000em;
 }
 /* default for gcms */
-#change_display {
+.font_size, a[id^='lang_'] {
+	color: inherit;
+	margin: 0 5px;
 	display: inline-block;
-}
-#change_display a,
-a[id^='lang_'] {
-	margin: 0 7px;
-	display: inline-block;
-}
-#change_display a {
+	vertical-align: middle;
 	font-family: Arial;
 	text-align: center;
 	width: 2em;
 	height: 2em;
 	line-height: 2em;
-	background-color: #005B95;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.05);
 	background-repeat: no-repeat;
 	background-position: center;
 	-webkit-border-radius: 50em;
@@ -3019,9 +2947,9 @@ a[id^='lang_'] {
 	-ms-transition: all 0.5s ease-out;
 	transition: all 0.5s ease-out;
 }
-#change_display a:hover {
-	background-color: #005185;
+a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
 	background-color: rgba(0,0,0,0.2);
+	color: inherit;
 }
 header.list > h2 {
 	display: table;
@@ -3207,12 +3135,24 @@ header.list > h2 > :last-child {
 .document-list .icon span:first-child {
 	margin-left: 0;
 }
-.document-list .iconview h6,
-.document-list .listview h6 {
+.document-list .iconview h6, .document-list .listview h6 {
 	margin-right: 5px;
 }
-.q.imgicon .detail,
-.r .detail {
+.post-author {
+	float: left;
+	width: 70px;
+	text-align: center;
+}
+.post-author .cuttext {
+	display: block;
+}
+.post-author img {
+	width: 50px;
+}
+.post-detail {
+	margin-left: 80px;
+}
+.q.imgicon .detail, .r .detail {
 	padding-left: 60px;
 }
 .usericon {
@@ -3229,21 +3169,13 @@ header.list > h2 > :last-child {
 	max-height: 200px;
 	max-width: 200px;
 }
-.q .detail,
-.r .detail {
+.q .detail, .r .detail {
 	position: relative;
-}
-.q img.usericon,
-.r img.usericon {
-	float: left;
-	width: 50px;
-	min-width: 0;
 }
 #comment-list .r {
 	margin-bottom: 10px;
 }
-#comment-list,
-#reply-form {
+#comment-list, #reply-form {
 	margin-top: 10px;
 }
 #comment-list .reaction,
@@ -3259,35 +3191,29 @@ header.list > h2 > :last-child {
 	margin: 0;
 }
 .content-action {
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.05);
+	font-size: 20px;
 	position: absolute;
-	right: 0;
-	top: 0;
-	height: 0;
-	margin: 0;
+	overflow: hidden;
 	z-index: 1;
-	visibility: hidden;
-	opacity: 0;
-	-webkit-transition: 0.2s ease-out;
-	-moz-transition: 0.2s ease-out;
-	-o-transition: 0.2s ease-out;
-	transition: 0.2s ease-out;
-	-webkit-transition-property: opacity, height, visibility;
-	-moz-transition-property: opacity, height, visibility;
-	-o-transition-property: opacity, height, visibility;
-	transition-property: opacity, height, visibility;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0.3;
+	-webkit-transition: opacity 0.2s;
+	-moz-transition: opacity 0.2s;
+	-o-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+.content-action:hover {
+	opacity: 1;
 }
 .content-action a {
-	font-size: 1.4em;
-	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 	margin: 0 5px;
+	float: left;
 }
 .content-action a:hover {
 	text-decoration: none !important;
-}
-.detail:hover .content-action {
-	height: auto;
-	visibility: visible;
-	opacity: 1;
 }
 #member-view {
 	padding: 0;
@@ -3488,14 +3414,15 @@ ol.multi_step li.current:before {
 	right: 10px;
 	bottom: -1.6em;
 	font-size: 2em;
+	font-family: Tahoma;
 	text-decoration: none;
 	background-color: #493434;
 	background-color: rgba(0,0,0,0.2);
 	color: #FFF;
-	height: 1.6em;
-	width: 1.6em;
+	height: 1.5em;
+	width: 1.5em;
 	text-align: center;
-	line-height: 1.9em;
+	line-height: 1.7em;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;

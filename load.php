@@ -188,8 +188,9 @@
 			$isMember = gcms::isMember();
 			// admin
 			$isAdmin = gcms::isAdmin();
-			// บันทึก counter
+			// บันทึก counter และ useronline
 			include ROOT_PATH.'counter.php';
+			include ROOT_PATH.'useronline.php';
 			// ค่า title,description และ keyword ของเว็บหลัก
 			$title = $config['web_title'];
 			$description = $config['web_description'];
@@ -199,11 +200,11 @@
 			// ฟอร์ม login
 			$main_patt['/{LOGIN}/'] = $mainlogin;
 			if (!empty($config['google_site_verification'])) {
-				$meta['google-site-verification'] = '<meta name=google-site-verification content='.$config['google_site_verification'].'>';
+				$meta['google-site-verification'] = '<meta name=google-site-verification content="'.$config['google_site_verification'].'">';
 			}
 			if (!empty($config['google_profile'])) {
-				$meta['author'] = '<link rel=author href=https://plus.google.com/'.$config['google_profile'].'>';
-				$meta['publisher'] = '<link rel=publisher href=https://plus.google.com/'.$config['google_profile'].'>';
+				$meta['author'] = '<link rel=author href="https://plus.google.com/'.$config['google_profile'].'">';
+				$meta['publisher'] = '<link rel=publisher href="https://plus.google.com/'.$config['google_profile'].'">';
 			}
 			// ตัวแปรหลังจากแสดงผลแล้ว
 			$custom_patt = array();
@@ -237,11 +238,10 @@
 										}
 									}
 								}
-								$mymenu .= '</ul>';
+								$mymenu .= '</ul></li>';
 							} elseif ($name['published'] != 0) {
-								$mymenu .= gcms::getMenu($name);
+								$mymenu .= gcms::getMenu($name).'</li>';
 							}
-							$mymenu .= '</li>';
 						}
 					}
 					$main_patt['/{'.$parent.'}/'] = $mymenu;
@@ -249,10 +249,11 @@
 			}
 			if ($menu != '' && !empty($main_patt['/{MAINMENU}/'])) {
 				// ตรวจสอบเมนูที่เลือก
-				$menu = '/class="('.preg_replace('/([\/\-])/u', '\\1', preg_quote($menu)).')(.*?)"/';
+				$menu = '/class="('.preg_replace('/([\/\-])/', '\\1', preg_quote($menu)).')(.*?)"/';
 				if (!preg_match($menu, $main_patt['/{MAINMENU}/'])) {
 					// ถ้าไม่มีจะใช้่โมดูลแรกสุด
-					$menu = $install_modules[$module_list[0]]['alias'];
+					$menu = $install_modules[$module_list[0]];
+					$menu = empty($menu['alias']) ? $menu['module'] : $menu['alias'];
 					$menu = '/class="('.preg_replace('/([\/\-])/u', '\\1', preg_quote($menu)).')(.*?)"/';
 				}
 				$main_patt['/{MAINMENU}/'] = preg_replace($menu, 'class="\\1 select\\2"', $main_patt['/{MAINMENU}/']);
@@ -270,32 +271,31 @@
 			$script[] = 'changeLanguage("'.implode(',', $config['languages']).'");';
 			$main_patt['/{LANGUAGES}/'] = implode('', $languages);
 			// ขนาดตัวอักษร
-			$main_patt['/{FONTSIZE}/'] = '<p id=change_display><a class=small title="{LNG_CHANGE_FONT_SMALL}">A<sup>-</sup></a><a class=normal title="{LNG_CHANGE_FONT_NORMAL}">A</a><a class=large title="{LNG_CHANGE_FONT_LARGE}">A<sup>+</sup></a></p>';
+			$main_patt['/{FONTSIZE}/'] = '<a class="font_size small" title="{LNG_CHANGE_FONT_SMALL}">A<sup>-</sup></a><a class="font_size normal" title="{LNG_CHANGE_FONT_NORMAL}">A</a><a class="font_size large" title="{LNG_CHANGE_FONT_LARGE}">A<sup>+</sup></a>';
 			// widgets
 			$main_patt['/{WIDGET_([A-Z]+)(([\s_])(.*))?}/e'] = OLD_PHP ? 'gcms::getWidgets(array(1=>\'$1\',3=>\'$3\',4=>\'$4\'))' : 'gcms::getWidgets';
 			// ภาษา
 			$main_patt['/{(LNG_[A-Z0-9_]+)}/e'] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
+			// logo
+			$main_patt['/{LOGO}/'] = $image_logo;
 			// meta, keywords และ description
-			$meta['og:site_name'] = '<meta property="og:site_name" content="'.strip_tags($config['web_title']).'">';
-			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
 			$meta['description'] = '<meta name=description content="'.$description.'">';
-			$meta['og:description'] = '<meta name="og:description" content="'.$description.'">';
 			$meta['keywords'] = '<meta name=keywords content="'.$keywords.'">';
-			$meta['og:keywords'] = '<meta name="og:keywords" content="'.$keywords.'">';
-			$meta['og:type'] = '<meta property="og:type" content="article">';
-			if (!empty($config['facebook']['appId'])) {
-				$meta['og:app_id'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
-				$script[] = 'window.FB_APPID = "'.$config['facebook']['appId'].'";';
-			}
+			$meta['canonical'] = '<link rel=canonical href="'.$canonical.'">';
 			if (!empty($image_src)) {
 				$meta['image_src'] = '<link rel=image_src href="'.$image_src.'">';
 				$meta['og:image'] = '<meta property="og:image" content="'.$image_src.'">';
 			}
-			// logo
-			$main_patt['/{LOGO}/'] = $image_logo;
-			$meta['canonical'] = '<link rel=canonical href="'.$canonical.'">';
+			if (!empty($config['facebook']['appId'])) {
+				$meta['og:app_id'] = '<meta property="fb:app_id" content="'.$config['facebook']['appId'].'">';
+				$script[] = 'window.FB_APPID = "'.$config['facebook']['appId'].'";';
+			}
 			$meta['og:url'] = '<meta property="og:url" content="'.$canonical.'">';
-			$meta['hreflang'] = '<link rel=alternate hreflang='.LANGUAGE.' href="'.$canonical.'">';
+			$meta['og:title'] = '<meta property="og:title" content="'.$title.'">';
+			//$meta['og:description'] = '<meta name="og:description" content="'.$description.'">';
+			$meta['og:site_name'] = '<meta property="og:site_name" content="'.strip_tags($config['web_title']).'">';
+			//$meta['og:keywords'] = '<meta name="og:keywords" content="'.$keywords.'">';
+			$meta['og:type'] = '<meta property="og:type" content="article">';
 			$main_patt['/{URL}/'] = $canonical;
 			$main_patt['/{XURL}/'] = rawurlencode($canonical);
 			$main_patt['/{META}/'] = implode("\n", $meta);
@@ -315,6 +315,7 @@
 			$main_patt['/{DATAURL}/'] = DATA_URL;
 			// ชื่อเว็บ
 			$main_patt['/{WEBTITLE}/'] = $config['web_title'];
+			$main_patt['/{SITENAME}/'] = strip_tags($config['web_title']);
 			// คำอธิบายย่อของเว็บ
 			$main_patt['/{WEBDESCRIPTION}/'] = $config['web_description'];
 			// ตัวแปรหลังจากแสดงผลแล้ว

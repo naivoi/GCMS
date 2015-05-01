@@ -12,9 +12,5 @@
 		// เมนูแสดงเรื่องที่เขียนโดยสมาชิก
 		if (is_file(ROOT_PATH.'modules/document/write.php')) {
 			$member_tabs['document'] = array('{LNG_DOCUMENT_MEMBER}', 'modules/document/member');
-			// path ของ CKEDITOR
-			$script[] = "window.CKEDITOR_BASEPATH='".WEB_URL."/ckeditor/';";
-			// ckeditor
-			$meta['CKEDITOR'] = '<script src='.WEB_URL.'/ckeditor/ckeditor.js></script>';
 		}
 	}

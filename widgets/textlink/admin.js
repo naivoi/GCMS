@@ -14,7 +14,8 @@ function inintTextlinkWrite() {
 	$G('textlink_type').addEvent('change', _stylesChanged);
 	_stylesChanged.call($E('textlink_type'));
 	var doTextlinkDemo = function() {
-		$E('textlink_demo').innerHTML = '{WIDGET_TEXTLINK_' + $E('textlink_name').value + '}';
+		var v = $E('textlink_name').value;
+		$E('textlink_demo').innerHTML = '{WIDGET_TEXTLINK' + (v == '' ? '' : '_' + v) + '}';
 	};
 	$G('textlink_name').addEvent('keyup', doTextlinkDemo);
 	$G('textlink_name').addEvent('change', doTextlinkDemo);

@@ -11,8 +11,8 @@
 		$sql .= " ORDER BY C.`id` DESC LIMIT 1";
 		$datas = $db->customQuery($sql);
 		$datas = sizeof($datas) == 1 ? $datas[0] : array('visited' => 0, 'useronline' => 0);
-		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', number_format($datas['visited']));
-		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', number_format($datas['useronline']));
+		$dashboard_menus[] = array('clock', '{LNG_COUNTER_TODAY}', 'index.php?module=report', number_format($datas['visited']), 'visited');
+		$dashboard_menus[] = array('users', '{LNG_COUNTER_ONLINE}', '', number_format($datas['useronline']), 'useronline');
 		// สี สำหรับส่งให้ graphs
 		$color = "['".implode("', '", $colors)."']";
 		// title
@@ -29,7 +29,8 @@
 			$z = $i % $l;
 			$row = '<li class="table bdr-'.$z.'">';
 			$row .= '<span class="td icon-'.$items[0].' bg-'.$z.'"></span>';
-			$t = $items[3] == '' ? '' : '<span class=c-'.$i.'>'.$items[3].'</span>';
+			$d = !empty($items[4]) ? ' id="'.$items[4].'"' : '';
+			$t = $items[3] == '' ? '' : '<span class=c-'.$i.$d.'>'.$items[3].'</span>';
 			if ($items[2] == '') {
 				$row .= '<span class="detail td">'.$t.$items[1].'</span>';
 			} else {
@@ -41,13 +42,13 @@
 		$content[] = '</ul>';
 		$content[] = '</div>';
 		$content[] = '<div class="ggrid collapse dashboard">';
-		$content[] = '<div class="block5 float-left">';
+		$content[] = '<div class="block4 float-left">';
 		// summary
 		$sql1 = "SELECT COUNT(*) FROM `".DB_USER."`";
 		$sql2 = "SELECT COUNT(*) FROM `".DB_USER."` WHERE `activatecode`<>''";
 		$sql3 = "SELECT COUNT(*) FROM `".DB_USER."` WHERE `ban_count` > 0";
 		$sql4 = "SELECT COUNT(*) FROM `".DB_USERONLINE."`";
-		$sql = "SELECT C.`counter`,C.`visited`,($sql1) AS `members`,($sql2) AS `activate`,($sql3) AS `ban`,($sql4) AS `useronline` ";
+		$sql = "SELECT C.`counter`, C.`visited`, ($sql1) AS `members`, ($sql2) AS `activate`, ($sql3) AS `ban`, ($sql4) AS `useronline` ";
 		$sql .= "FROM `".DB_COUNTER."` AS C ";
 		$sql .= "ORDER BY C.`id` DESC LIMIT 1";
 		$datas = $db->customQuery($sql);
@@ -73,7 +74,7 @@
 		} else {
 			$cron_time = '-';
 		}
-		$content[] = '<tr><th scope=row>{LNG_CRON_CREATED}</th><td class="right data">'.$cron_time.'</td></tr>';
+		$content[] = '<tr><th scope=row>{LNG_CRON_CREATED}</th><td class=right>'.$cron_time.'</td></tr>';
 		$content[] = '</tbody>';
 		$content[] = '<tfoot>';
 		$content[] = '<tr><td colspan=2 class=right>{LNG_REPORT_VERSION}</td></tr>';
@@ -89,7 +90,7 @@
 		$content[] = '</div>';
 		$content[] = '</section>';
 		$content[] = '</div>';
-		$content[] = '<div class="block7 float-right">';
+		$content[] = '<div class="block8 float-right">';
 		// แสดงรายการ pagesview
 		$y = (int)date('Y', $mmktime);
 		$pages_view = 0;

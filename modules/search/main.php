@@ -182,7 +182,7 @@
 		if ($search == '') {
 			$replace[] = $lng['LNG_SEARCH_TIP'];
 		} elseif (sizeof($list) == 0) {
-			$replace[] = sprintf($lng['LNG_SEARCH_NOT_FOUND'], $search, $index['menu_text']).$lng['LNG_SEARCH_TIP'];
+			$replace[] = sprintf($lng['LNG_SEARCH_NOT_FOUND'], $search).$lng['LNG_SEARCH_TIP'];
 		} else {
 			$replace[] = gcms::HighlightSearch(implode("\n", $list), $search);
 		}

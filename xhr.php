@@ -125,6 +125,8 @@
 			if (isset($_POST['to'])) {
 				$ret['to'] = rawurlencode($_POST['to']);
 			}
+			// บันทึก useronline
+			include ROOT_PATH.'useronline.php';
 			// อัปเดท pagesview
 			$counter_day = date('Y-m-d', $mmktime);
 			$sql = "UPDATE `".DB_COUNTER."` SET `pages_view`=`pages_view`+1,`time`='$mmktime' WHERE `date`='$counter_day' LIMIT 1";

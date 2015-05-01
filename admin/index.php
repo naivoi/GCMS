@@ -27,10 +27,6 @@
 		$module_menus = array();
 		// dashboard menu
 		$dashboard_menus = array();
-		// font size
-		$fontSize = max(8, min(18, empty($_COOKIE['fontSize']) ? 12 : (int)$_COOKIE['fontSize']));
-		$css[] = 'body{font-size:'.$fontSize.'px}';
-		$css[] = 'body.cke-body{font-size:'.$fontSize.'px}';
 		// query จาก URL ที่ส่งมา
 		$url_query = array();
 		foreach ($_GET AS $key => $value) {
@@ -50,7 +46,7 @@
 			}
 		}
 		foreach ($install_languages AS $i => $item) {
-			$languages[] = '<a href="{URLQUERY?lang='.$item.'}" title="{LNG_LANGUAGE} '.strtoupper($item).'" style="background-image:url('.DATA_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a>';
+			$languages[] = '<a id=lang_'.$item.' href="{URLQUERY?lang='.$item.'}" title="{LNG_LANGUAGE} '.strtoupper($item).'" style="background-image:url('.DATA_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a>';
 		}
 		// ภาษา js
 		$javascript[] = '<script src='.DATA_URL.'/language/'.LANGUAGE.'.js></script>';

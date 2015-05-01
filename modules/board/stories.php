@@ -25,8 +25,9 @@
 		// อ่านรายการลงใน $list
 		$pins = array();
 		$listitem = gcms::loadtemplate($index['module'], 'board', 'listitem');
-		$patt = array('/{ID}/', '/{PICTURE}/', '/{URL}/', '/{TOPIC}/', '/{UID}/', '/{SENDER}/', '/{STATUS}/', '/{CREATE}/',
-			'/{VISITED}/', '/{REPLY}/', '/{REPLYDATE}/', '/{REPLYER}/', '/{RID}/', '/{STATUS2}/', '/{ICON}/');
+		$patt = array('/{ID}/', '/{PICTURE}/', '/{URL}/', '/{TOPIC}/', '/{UID}/',
+			'/{SENDER}/', '/{STATUS}/', '/{DATE}/', '/{DATEISO}/', '/{VISITED}/',
+			'/{REPLY}/', '/{REPLYDATE}/', '/{REPLYER}/', '/{RID}/', '/{STATUS2}/', '/{ICON}/');
 		// pin
 		$sql1 = "SELECT Q.*,U1.`status`,U2.`status` AS `replyer_status`";
 		$sql1 .= ",(CASE WHEN Q.`comment_date` > 0 THEN Q.`comment_date` ELSE Q.`last_update` END) AS `d`";
@@ -100,6 +101,7 @@
 			$replace[] = $item['sender'];
 			$replace[] = $item['status'];
 			$replace[] = gcms::mktime2date($item['create_date']);
+			$replace[] = date(DATE_ISO8601, $item['create_date']);
 			$replace[] = number_format($item['visited']);
 			$replace[] = number_format($item['comments']);
 			$replace[] = $item['comment_date'] == 0 ? '&nbsp;' : gcms::mktime2date($item['comment_date']);

@@ -16,7 +16,7 @@
 			$content[] = '</ol>';
 			$content[] = '<p>{LNG_INSTALL_COMPLETE}</p>';
 			$content[] = '</div>';
-			if ($redirect != '') {
+			if (!empty($redirect)) {
 				$content[] = '<meta http-equiv=refresh content="5;url='.$redirect.'">';
 			}
 			echo gcms::pregReplace('/{(LNG_[A-Z0-9_]+)}/e', (OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng'), implode('', $content));

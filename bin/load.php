@@ -42,11 +42,9 @@
 	}
 	// ไฟล์ config
 	define('CONFIG', ROOT_PATH.'bin/config.php');
-	// ช่วงเวลาของ counter
-	define('COUNTER_REFRESH_TIME', 30);
 	// เวลาที่บอกว่า user logout
 	// ควรมากกว่า counter_refresh_time อย่างน้อย 2 เท่า
-	define('COUNTER_GAP', 60);
+	define('COUNTER_GAP', 120);
 	// ชื่อสงวนสำหรับโมดูล ที่ไม่สามารถนำมาตั้งได้ นอกจากชื่อของโฟลเดอร์หรือไฟล์ต่างๆบนระบบ
 	// ภาษาอังกฤษตัวพิมพ์เล็กเท่านั้น
 	define('MODULE_RESERVE', 'admin,register,forgot,editprofile,sendpm,sendmail,email');

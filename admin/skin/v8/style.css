@@ -136,39 +136,6 @@ a {
 #to-top .label {
 	vertical-align: baseline;
 }
-#change_display a, .widget a[id^='lang_'] {
-	margin: 0 5px;
-	display: inline-block;
-}
-#change_display a {
-	display: inline-block;
-	width: 2em;
-	height: 2em;
-	line-height: 2em;
-	background-color: #005B95;
-	background-color: rgba(0,0,0,0.1);
-	background-repeat: no-repeat;
-	background-position: center;
-	-webkit-border-radius: 50em;
-	-moz-border-radius: 50em;
-	border-radius: 50em;
-	-webkit-transition: all 0.5s ease-out;
-	-moz-transition: all 0.5s ease-out;
-	-o-transition: all 0.5s ease-out;
-	-ms-transition: all 0.5s ease-out;
-	transition: all 0.5s ease-out;
-}
-#change_display a:focus,
-#change_display a:hover {
-	background-color: #005185;
-	background-color: rgba(0,0,0,0.2);
-}
-#change_display a.small {
-	font-size: 90%;
-}
-#change_display a.large {
-	font-size: 110%;
-}
 #to-bottom p {
 	border-top: 1px solid #FFF;
 	margin: 0;

@@ -28,7 +28,9 @@
 	vertical-align: middle;
 	text-align: center;
 	display: inline-block;
-	padding: 0 5px;
+	width: 1.75em;
+	height: 1.75em;
+	line-height: 1.75em;
 }
 .share .widget_share > a {
 	-webkit-transition: all 0.5s ease;
@@ -39,31 +41,25 @@
 	border-radius: 50em;
 	-moz-border-radius: 50em;
 	-webkit-border-radius: 50em;
-	text-shadow: -1px -1px 0 #000;
-	background-color: #555;
-	color: #EEE;
+	border-width: 1px;
+	border-style: solid;
 }
 .share .widget_share > a:hover {
-	background-color: #111;
-	color: #FFF;
+	color: #111;
 }
 .widget_share > a:before {
 	margin-right: 0;
 }
 .color .widget_share > a {
-	padding: 10px 15px;
 	color: #FFF;
 	float: left;
-	font-size: 1.6em;
 	border-width: 5px;
 	border-color: rgba(0,0,0,0.1);
 	border-style: solid none none none;
+	line-height: 1.6em;
 }
 .color .widget_share > a:hover {
 	border-color: rgba(0,0,0,0.3);
-}
-.color .widget_share a:before {
-	margin: 0;
 }
 .color .widget_share a.icon-facebook {
 	background-color: #2C5FA1;

@@ -625,8 +625,8 @@
 			$replace[] = '<blockquote><b>{LNG_R_QUOTE} <em>#\\1</em></b>';
 			$patt[] = '/\[google\](.*?)\[\/google\]/usi';
 			$replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
-			$patt[] = '/((^http|\shttp):\/\/([^\s<>\"\']+))/';
-			$replace[] = '<a href="\\1" target="_blank" rel="nofollow">\\1</a>';
+			$patt[] = '/([^["]]|\r|\n|\s|\t)(https?:\/\/([^\s<>\"\']+))/';
+			$replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
 			$patt[] = '/\[WEBURL\]/isu';
 			$replace[] = WEB_URL;
 			$patt[] = '/\[youtube\]([a-z0-9-_]+)\[\/youtube\]/i';
@@ -1070,7 +1070,7 @@
 		// อ่าน info ของ theme
 		public static function parse_theme($theme) {
 			$result = array();
-			if (is_file($theme) && preg_match('/^[\s]{0,}\/\*(.*)\*\//s', file_get_contents($theme), $match)) {
+			if (is_file($theme) && preg_match('/^[\s]{0,}\/\*(.*?)\*\//is', file_get_contents($theme), $match)) {
 				if (preg_match_all('/([a-zA-Z]+)[\s:]{0,}(.*)?[\r\n]+/i', $match[1], $datas)) {
 					foreach ($datas[1] AS $i => $v) {
 						$result[strtolower($v)] = $datas[2][$i];
@@ -1198,7 +1198,7 @@
 		}
 		// install database
 		public static function install($sql, $owner = '') {
-			global $db, $content, $defines, $config;
+			global $db, $content, $defines, $config, $q;
 			// โหลดฐานข้อมูลของโมดูล
 			$fr = file($sql);
 			foreach ($fr AS $value) {

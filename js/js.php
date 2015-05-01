@@ -3,12 +3,11 @@
 	header('Content-type: text/javascript; charset: UTF-8');
 	// inint
 	include '../bin/inint.php';
-	// cache
-	$expirse = 60 * 60 * 24 * 30;
-	$gmt = gmdate("D, d M Y H:i:s", time() + $expirse).' GMT';
-	header("Expires: $gmt");
-	header("Last-Modified: $gmt");
-	header("Cache-Control: max-age=$expirse, must-revalidate, public");
+	// cache 1 month
+	$expire = 2592000;
+	header("Cache-Control: max-age=$expire, must-revalidate, public");
+	header('Expires: '.gmdate("D, d M Y H:i:s", time() + $expire)." GMT");
+	header('Last-Modified:'.gmdate("D, d M Y H:i:s", time() - $expire)." GMT");
 	// default js
 	$js = array();
 	$js[] = file_get_contents('gajax.js');
@@ -19,6 +18,11 @@
 	$js[] = file_get_contents('gddmenu.js');
 	if (is_file(DATA_PATH.'language/'.LANGUAGE.'.js')) {
 		$js[] = file_get_contents(DATA_PATH.'language/'.LANGUAGE.'.js');
+	}
+	// CKEDITOR
+	if (is_file(ROOT_PATH.'modules/document/write.php')) {
+		$js[] = "window.CKEDITOR_BASEPATH='".WEB_URL."/ckeditor/';";
+		$js[] = file_get_contents(WEB_URL.'/ckeditor/ckeditor.js');
 	}
 	// js ของโมดูล
 	$dir = ROOT_PATH.'modules/';
@@ -53,7 +57,6 @@
 	if ((int)$config['counter_digit'] > 0) {
 		$js[] = "var counter_digit = $config[counter_digit];";
 	}
-	$js[] = "var counter_refresh_time = ".COUNTER_REFRESH_TIME.";";
 	if ($config['use_ajax'] == 1) {
 		$js[] = "var use_ajax = $config[use_ajax];";
 	}

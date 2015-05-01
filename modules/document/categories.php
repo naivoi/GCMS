@@ -26,5 +26,7 @@
 			$list[] = preg_replace($patt, $replace, $listitem);
 		}
 		// canonical
-		$canonical = gcms::getURL($index['module']);
+		if ($index['module'] != $module_list[0]) {
+			$canonical = gcms::getURL($index['module']);
+		}
 	}

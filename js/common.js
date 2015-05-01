@@ -725,27 +725,32 @@ function inintFilesUpload(input, div, url) {
 }
 var _scrolltop = 0;
 $G(window).Ready(function () {
-	var patt = /font_size(.*?)\s(small|normal|large)/;
+	var fontSize = floatval(Cookie.get('fontSize')),
+		patt = /font_size(.*?)\s(small|normal|large)/,
+		_body = document.body;
 	var _doChangeFontSize = function () {
-		var fontSize = floatval(Cookie.get('fontSize'));
-		fontSize = fontSize == 0 ? document.body.getStyle('fontSize').toInt() : fontSize;
+		fontSize = floatval(_body.getStyle('fontSize'));
 		var hs = patt.exec(this.className);
 		if (hs[2] == 'small') {
 			fontSize = Math.max(6, fontSize - 2);
 		} else if (hs[2] == 'large') {
 			fontSize = Math.min(24, fontSize + 2);
 		} else {
-			fontSize = 12;
+			fontSize = _body.get('data-fontSize');
 		}
-		document.body.setStyle('fontSize', fontSize + 'px');
+		_body.setStyle('fontSize', fontSize + 'px');
 		Cookie.set('fontSize', fontSize);
 		return false;
 	};
-	forEach($E(document.body).getElementsByTagName('a'), function () {
+	_body.set('data-fontSize', floatval(_body.getStyle('fontSize')));
+	forEach(_body.getElementsByTagName('a'), function () {
 		if (patt.test(this.className)) {
 			callClick(this, _doChangeFontSize);
 		}
 	});
+	if (fontSize > 5) {
+		_body.setStyle('fontSize', fontSize + 'px');
+	}
 	var _doMenuClick = function () {
 		if ($E('wait')) {
 			$E('wait').className = 'show';
@@ -762,15 +767,17 @@ $G(window).Ready(function () {
 		if (_scrolltop != c) {
 			_scrolltop = c;
 			if (c) {
-				this.body.addClass('toTop');
+				_body.addClass('toTop');
 				document.callEvent('toTopChange');
 			} else {
-				this.body.removeClass('toTop');
+				_body.removeClass('toTop');
 				document.callEvent('toTopChange');
 			}
 		}
 	});
 });
 function getWebURL() {
-	return window.location.hostname + (window.location.port == 80 ? '' : ':' + window.location.port);
+	var p = floatval(window.location.port);
+	p = p == 0 ? 80 : p;
+	return window.location.hostname + (p == 80 ? '' : ':' + p);
 }

@@ -41,7 +41,7 @@
 			$valid_date = $mmktime - $match[5];
 			// template
 			$skin = gcms::loadtemplate($index['module'], 'board', 'widgetitem');
-			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{LASTUPDATE}/', '/{UID}/', '/{SENDER}/', '/{STATUS}/', '/{THUMB}/', '/{ICON}/');
+			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{DATE}/', '/{UID}/', '/{SENDER}/', '/{STATUS}/', '/{THUMB}/', '/{ICON}/');
 			$widget = array();
 			$bg = 'bg2';
 			foreach ($datas AS $item) {

@@ -49,9 +49,9 @@
 			$cat = gcms::getVars($_REQUEST, 'cat', 0);
 			if ($cat > 0) {
 				$q[] = "`category_id`='$cat'";
-				if ($categories[$cat] != '') {
+				if (!empty($categories[$cat])) {
 					// category
-					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module']).'?cat='.$id, $categories[$cat], $categories[$cat], $breadcrumb);
+					$breadcrumbs['CATEGORY'] = gcms::breadcrumb('', gcms::getURL($index['module']).'?cat='.$cat, $categories[$cat], $categories[$cat], $breadcrumb);
 				}
 			}
 			// ข้อความค้นหา

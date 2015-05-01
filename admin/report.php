@@ -14,7 +14,7 @@
 			foreach (file($counter_dat) AS $item) {
 				list($sid, $sip, $sref, $sagent) = explode(chr(1), $item);
 				$ssid[$sid] = empty($ssid[$sid]) ? 1 : $ssid[$sid] + 1;
-				$ssid[$sip] = empty($ssid[$sip]) ? 1 : $ssid[$sip] + 1;
+				$ips[$sip] = empty($ips[$sip]) ? 1 : $ips[$sip] + 1;
 				$k = $type == 'ip' ? $sip : $sref;
 				$datas[$k]['ip'] = $sip;
 				$datas[$k]['agent'] = $sagent;
@@ -84,7 +84,7 @@
 			// แสดงผล
 			$content[] = '<div class=breadcrumbs><ul><li><span class=icon-summary>'.$title.'</span></li></ul></div>';
 			$content[] = '<section>';
-			$content[] = '<header><h1 class=icon-stats>{LNG_TOTAL} '.$total.' {LNG_COUNT}, '.sizeof($ips).' Uniqe IP, '.sizeof($ips).' Uniqe Session</h1></header>';
+			$content[] = '<header><h1 class=icon-stats>{LNG_TOTAL} '.number_format($total).' {LNG_COUNT} '.number_format(sizeof($ips)).' Uniqe IP '.number_format(sizeof($ssid)).' Uniqe Session</h1></header>';
 			// ตารางข้อมูล
 			$content[] = '<table id=report class="tbl_list fullwidth">';
 			$content[] = '<thead>';

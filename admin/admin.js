@@ -92,16 +92,16 @@ function inintMemberStatus(id) {
 	_doInintStatusMethod(id);
 }
 function inintTemplate(id) {
-	forEach($E(id).getElementsByTagName('a'), function () {
+	forEach($E(id).getElementsByTagName('a'), function() {
 		if (this.className == 'delete') {
-			this.onclick = function () {
+			this.onclick = function() {
 				return confirm(CONFIRM_REMOVE_TEMPLATE);
 			};
 		}
 	});
 }
 function inintList(id, tag, patt, action, callback, onconfirm) {
-	var _doClick = function(){
+	var _doClick = function() {
 		if (Object.isNull(onconfirm) || onconfirm.call(this)) {
 			var temp = this;
 			send(action, 'data=' + this.id, function(xhr) {
@@ -289,7 +289,7 @@ function inintPMTable(id, onchanged, prefix, onrow) {
 }
 function inintLanguages(id) {
 	var patt = /^(edit|delete|check)_([a-z]{2,2})$/;
-	var doClick = function () {
+	var doClick = function() {
 		var hs = patt.exec(this.id);
 		var q = '';
 		if (hs[1] == 'check') {
@@ -303,16 +303,16 @@ function inintLanguages(id) {
 			send('language_action.php', q, doFormSubmit, this);
 		}
 	};
-	forEach($E(id).getElementsByTagName('span'), function () {
+	forEach($E(id).getElementsByTagName('span'), function() {
 		if (patt.test(this.id)) {
 			callClick(this, doClick);
 		}
 	});
 	new GSortTable(id, {
 		'tag': 'dd',
-		'endDrag': function () {
+		'endDrag': function() {
 			var trs = new Array();
-			forEach($E(id).getElementsByTagName('dd'), function () {
+			forEach($E(id).getElementsByTagName('dd'), function() {
 				if (this.id) {
 					trs.push(this.id);
 				}
@@ -409,3 +409,19 @@ function inintModuleCategory(id, mid, module) {
 	callClick(id + '_add', _doAction);
 	_doInint(id);
 }
+$G(window).Ready(function() {
+	new GAjax().autoupdate('useronline.php', 30, null, function(xhr) {
+		var datas = xhr.responseText.toJSON();
+		if (datas) {
+			var d, v;
+			for (d in datas) {
+				v = datas[d];
+				if ($E(d)) {
+					$E(d).innerHTML = v;
+				} else if (window[d] && typeof window[d] == 'function') {
+					window[d](v);
+				}
+			}
+		}
+	});
+});
