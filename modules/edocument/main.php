@@ -68,7 +68,7 @@
 				$moderator = $isAdmin || gcms::canConfig($config, 'edocument_moderator');
 				// อ่านรายการลงใน $list
 				$list = array();
-				$patt = array('/(edit\s{ID})/', '/(report\s{ID})/', '/(delete\s{ID})/', '/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/', '/{LASTUPDATE}/', '/{NO}/', '/{SIZE}/', '/{SENDER}/', '/{STATUS}/', '/{UID}/');
+				$patt = array('/(edit\s{ID})/', '/(report\s{ID})/', '/(delete\s{ID})/', '/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/', '/{DATE}/', '/{NO}/', '/{SIZE}/', '/{SENDER}/', '/{STATUS}/', '/{UID}/');
 				$listitem = gcms::loadtemplate($index['module'], 'edocument', 'listitem');
 				foreach ($datas AS $item) {
 					$replace = array();

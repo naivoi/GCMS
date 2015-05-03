@@ -55,7 +55,7 @@
 					$ret['error'] = 'INVALID_FILE_TYPE';
 					$ret['input'] = 'download_upload';
 				} elseif ($file['size'] > ($config['download_upload_size'])) {
-					$ret['ret_download_file'] = 'FILE_TOO_BIG';
+					$ret['ret_download_upload'] = 'FILE_TOO_BIG';
 					$ret['error'] = 'FILE_TOO_BIG';
 					$ret['input'] = 'download_upload';
 				} else {

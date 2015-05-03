@@ -82,7 +82,7 @@
 				// อ่านรายการลงใน $list
 				$list = array();
 				$patt = array('/{ID}/', '/{NAME}/', '/{EXT}/', '/{ICON}/', '/{DETAIL}/',
-					'/{LASTUPDATE}/', '/{DOWNLOADS}/', '/{SIZE}/');
+					'/{DATE}/', '/{DOWNLOADS}/', '/{SIZE}/');
 				$listitem = gcms::loadtemplate($index['module'], 'download', 'listitem');
 				$sql = "SELECT * FROM `".DB_DOWNLOAD."` $where ORDER BY `last_update` DESC LIMIT $start,$config[download_list_per_page]";
 				$datas = $cache->get($sql);

@@ -180,16 +180,14 @@ a {
 #comment-list .r {
 	margin-bottom: 10px;
 }
-#comment-list .r, #document-view .reaction, #board-view .body .reaction {
+#comment-list .r, #document-view .reaction, #board-view .reaction {
 	background-color: #f4f2ea;
-	text-align: right;
 	border-width: 1px;
 	border-style: dashed;
 	border-color: #BCC2B7;
 }
 #comment-list .clear {
 	padding: 10px 10px 0 10px;
-	text-align: left;
 }
 #comment-list .reaction {
 	background-color: #f4f2ea;

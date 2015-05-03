@@ -4,14 +4,14 @@
 	// inint
 	$folder = basename(dirname(__FILE__));
 	require (str_replace(array('\\', 'skin/'.$folder.'/css.php'), array('/', ''), __FILE__).'/bin/inint.php');
-	// cache 1 เดือน
-	$expirse = 60 * 60 * 24 * 30;
-	$gmt = gmdate("D, d M Y H:i:s", time() + $expirse).' GMT';
-	header("Expires: $gmt");
-	header("Last-Modified: $gmt");
-	header("Cache-Control: max-age=$expirse, must-revalidate, public");
+	// cache 1 month
+	$expire = 2592000;
+	header("Cache-Control: max-age=$expire, must-revalidate, public");
+	header('Expires: '.gmdate("D, d M Y H:i:s", time() + $expire)." GMT");
+	header('Last-Modified:'.gmdate("D, d M Y H:i:s", time() - $expire)." GMT");
 	// โหลด css หลัก
-	$data = preg_replace('/url\(([\'\"])fonts\//isu', 'url($1'.WEB_URL.'/skin/fonts/', @file_get_contents('../fonts.css'));
+	$data = @file_get_contents('../fonts.css');
+	$data = preg_replace('/url\(([\'\"])fonts\//isu', 'url($1'.WEB_URL.'/skin/fonts/', $data);
 	$data .= @file_get_contents('../gcss.css');
 	$data .= @file_get_contents('style.css');
 	$body = '';
@@ -27,7 +27,8 @@
 	}
 	if (!empty($config['logo']) && is_file(DATA_PATH."image/$config[logo]")) {
 		$info = getImageSize(DATA_PATH."image/$config[logo]");
-		$ext = strtolower(end(explode('.', $config['logo'])));
+		$ext = explode('.', $config['logo']);
+		$ext = strtolower(end($ext));
 		if (in_array($ext, array('jpg', 'gif', 'png'))) {
 			$data .= "html > body #logo{background-image:url(".DATA_URL."image/$config[logo])";
 		} elseif ($ext == 'swf') {

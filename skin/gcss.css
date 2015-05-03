@@ -3151,6 +3151,7 @@ header.list > h2 > :last-child {
 }
 .post-detail {
 	margin-left: 80px;
+	position: relative;
 }
 .q.imgicon .detail, .r .detail {
 	padding-left: 60px;
@@ -3184,6 +3185,9 @@ header.list > h2 > :last-child {
 	margin-top: 10px;
 	padding: 5px;
 	clear: both;
+}
+#comment-list .r .reaction {
+	text-align: right;
 }
 #comment-list .reaction p,
 #document-view .reaction p,

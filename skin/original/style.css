@@ -180,7 +180,7 @@ div.body-wrapper {
 #comment-list .r {
 	margin-bottom: 10px;
 }
-#board-view .q .detail:after, .r .detail:after {
+#board-view .q .post-detail:after, .r .post-detail:after {
 	position: absolute;
 	background-image: url(img/msg_arrow.gif);
 	content: ' ';
@@ -189,12 +189,12 @@ div.body-wrapper {
 	left: -11px;
 	top: 5px;
 }
-#board-view .q .detail, .r .detail {
+#board-view .q .post-detail, .r .post-detail {
 	border: 1px solid #CDCDCD;
 	background-color: #F3F3F3;
-	margin-left: 65px;
 	position: relative;
 	padding: 5px;
+	min-height: 80px;
 }
 .bottomline {
 	background: #FFF url(img/bottom-content.png) 0 0 repeat-x;

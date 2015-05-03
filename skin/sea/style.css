@@ -134,12 +134,11 @@ a {
 #comment-list .r {
 	margin-bottom: 10px;
 }
-#comment-list .detail {
+#comment-list .post-detail {
 	border: 1px solid #CDCDCD;
 	background-color: #F3F3F3;
-	margin-left: 65px;
 }
-#board-view .q .detail:after, .r .detail:after {
+#board-view .q .post-detail:after, .r .post-detail:after {
 	position: absolute;
 	background-image: url(img/msg_arrow.gif);
 	content: ' ';
@@ -148,12 +147,12 @@ a {
 	left: -11px;
 	top: 5px;
 }
-#board-view .q .detail, .r .detail {
+#board-view .q .post-detail, .r .post-detail {
 	border: 1px solid #CDCDCD;
 	background-color: #F3F3F3;
-	margin-left: 65px;
 	position: relative;
 	padding: 5px;
+	min-height: 80px;
 }
 #comment-list .r-body .reaction {
 	padding: 0;

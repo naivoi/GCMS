@@ -68,7 +68,7 @@
 			}
 			// อ่านรายการลงใน $list
 			$list = array();
-			$patt = array('/{LASTUPDATE}/', '/{DOWNLOADS}/', '/{NAME}/', '/{GROUP}/', '/{STATUS}/', '/{UID}/');
+			$patt = array('/{DATE}/', '/{DOWNLOADS}/', '/{NAME}/', '/{GROUP}/', '/{STATUS}/', '/{UID}/');
 			$listitem = gcms::loadtemplate($index['module'], 'edocument', 'reportitem');
 			foreach ($datas AS $item) {
 				$replace = array();

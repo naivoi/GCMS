@@ -17,7 +17,7 @@
 			$breadcrumbs['HOME'] = gcms::breadcrumb('icon-home', WEB_URL.'/index.php', $install_modules[$module_list[0]]['menu_tooltip'], $install_modules[$module_list[0]]['menu_text'], $breadcrumb);
 			// แสดงผล
 			$patt = array('/{BREADCRUMS}/', '/{WEBURL}/', '/{WEBTITLE}/', '/{SKIN}/', '/{ID}/', '/{COLOR}/',
-				'/{DISPLAYNAME}/', '/{EMAIL}/', '/{SEX}/', '/{CREATE}/', '/{WEBSITE}/', '/{VISITED}/',
+				'/{DISPLAYNAME}/', '/{EMAIL}/', '/{SEX}/', '/{DATE}/', '/{WEBSITE}/', '/{VISITED}/',
 				'/{SOCIAL}/', '/{LASTVISITED}/', '/{POST}/', '/{REPLY}/', '/{STATUS}/', '/{POINT}/', '/{(LNG_[A-Z0-9_]+)}/e');
 			$replace = array();
 			$replace[] = implode("\n", $breadcrumbs);

@@ -1,0 +1,30 @@
+<div id=document-view>
+	<div class=bdr_content>
+		<header>
+			<nav class=breadcrumbs>
+				<ul>
+					{BREADCRUMS}
+					<li><a href="{URL}" title="{TOPIC}" target=_blank><span>{TOPIC}</span></a></li>
+				</ul>
+			</nav>
+			<h2 class=cuttext>{TOPIC}</h2>
+		</header>
+		<div class=detail>
+			<p class=content-action>
+				<a class="icon-print print-{QID}-0-0-{MODULE}" title="{LNG_PRINT_PAGE}"></a>
+				<a class="icon-quote quote-{QID}-0-0-{MODULE}" title="{LNG_QUOTE}"></a>
+			</p>
+			{DETAIL}
+			<footer class=reaction>
+				<p>{LNG_WRITER} : <a class="icon-user status{STATUS}" href="{WEBURL}/index.php?module=member&amp;id={UID}">{DISPLAYNAME}</a></p>
+				<p>{LNG_POSTED} : <span class="icon-create create">{DATE}</span></p>
+				<p>{LNG_TAGS} : <span class="icon-tags keywords">{TAGS}</span></p>
+			</footer>
+		</div>
+	</div>
+	<div id=comment-list>{COMMENTLIST}</div>
+	{REPLYFORM}
+</div>
+<script>
+	inintDocumentView('document-view', 'document');
+</script>

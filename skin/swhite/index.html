@@ -21,7 +21,7 @@
 			<div id=top-wrapper>
 				<div class=block_left id=language_menu>{LNG_LANGUAGE} {LANGUAGES} {FONTSIZE}</div>
 				<div class=block_left>
-					<ul id=headmenu>
+					<ul id=headmenu class=icon-user>
 						<li>
 							<a id=login-a title="{LNG_LOGIN_SUBMIT_TITLE}">{LNG_LOGIN}</a>
 							<section id=login-box>{LOGIN}</section>
@@ -65,7 +65,7 @@
 				</p>
 			</footer>
 		</div>
-		<div class=widget_share>{WIDGET_SHARE}</div>
+		{WIDGET_SHARE}
 		<script>
 			new GDPanel('login-a', 'login-box');
 			$G('facebook_login').addEvent('click', fbLogin);

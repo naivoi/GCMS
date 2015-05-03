@@ -1,0 +1,301 @@
+/*
+ Name: Goragod.com 2013
+ Description: Template Responsive สำหรับ Goragod.com (ห้าม copy)
+ Author: Goragod.com
+ Responsive
+ */
+body {
+	font-size: 14px;
+	background-image: url(img/bg.jpg);
+	background-repeat: repeat;
+	color: #666;
+}
+a {
+	color: #000;
+}
+a:hover {
+	text-decoration: underline;
+}
+.gcss-wrapper {
+	background-color: #F5F5F5;
+	margin: 10px auto;
+	padding: 10px;
+	border: 1px solid #DDD;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	box-shadow: 0 0 0 1px #FFF inset;
+}
+.topmenu {
+	color: #C6C6C6;
+}
+.topmenu > ul > li > a {
+	color: #FFF;
+	background-color: #506D8D;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#506D8D), to(#2D547F));
+	background-image: -webkit-linear-gradient(top, #506D8D, #2D547F);
+	background-image: -moz-linear-gradient(top, #506D8D, #2D547F);
+	background-image: -ms-linear-gradient(top, #506D8D, #2D547F);
+	background-image: -o-linear-gradient(top, #506D8D, #2D547F);
+	background-image: linear-gradient(top, #506D8D, #2D547F);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#506D8D, endColorstr=#2D547F);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#506D8D, endColorstr=#2D547F)";
+}
+.topmenu > ul > li > a > span {
+	padding: 10px 0;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.2) rgba(0,0,0,0.2);
+	border-width: 1px;
+	border-style: solid;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.4), 1px 1px 0 rgba(0,0,0,0.2);
+	text-transform: uppercase;
+}
+.topmenu ul > li > a:hover > span, .topmenu ul > li.select > a > span {
+	background-color: #3F3F3F;
+	color: #FFF;
+}
+.topmenu a:hover {
+	text-decoration: none;
+}
+.header {
+	display: table;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.header > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+.header a:hover {
+	text-decoration: none;
+}
+.header h1 {
+	font-size: 4em;
+	text-shadow: -1px -1px rgba(0,0,0,0.2), 1px 1px rgba(255,255,255,0.2);
+	font-family: 'Special Elite', cursive;
+	text-transform: lowercase;
+	margin: 0;
+}
+.header .description {
+	color: #AAA;
+	font-style: italic;
+	margin: 0;
+}
+#widget-search-form {
+	display: inline-block;
+	border: 1px solid #DDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	white-space: nowrap;
+	background-color: #FFF;
+}
+.footer {
+	padding: 10px 0;
+}
+.footer > p {
+	text-align: center;
+	padding-top: 10px;
+	font-size: 0.9em;
+	border-top: 1px solid #FFF;
+	box-shadow: 0 -1px 0 #DDD;
+}
+.footer ul {
+	padding: 0;
+}
+.member_section {
+	border: 1px solid #DDD;
+	box-shadow: 0 0 0 1px #FFF inset;
+	background-color: #F9F9F9;
+	padding: 10px 10px 0;
+}
+.member_section .data tbody th {
+	text-align: left;
+}
+#document-view .post-detail {
+	position: relative;
+}
+#document-view .reaction {
+	background-color: rgba(255,255,255,0.5);
+}
+img.usericon, img[alt=usericon] {
+	-moz-border-radius: 50em;
+	-webkit-border-radius: 50em;
+	border-radius: 50em;
+}
+#comment-list > header {
+	margin: 20px 0 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDD;
+}
+.r > div, .q > div {
+	line-height: 1.8em;
+}
+#comment-list {
+	margin-bottom: 10px;
+}
+#comment-list .r {
+	margin-bottom: 0;;
+}
+#comment-list .r > div {
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #DDD;
+	padding: 10px 0;
+}
+code, blockquote {
+	background-color: rgba(255,255,255,0.5);
+}
+#comment-list .r:last-child > div {
+	box-shadow: 0 1px 0 0 #FFF;
+}
+#comment-list span.no {
+	position: absolute;
+	font-size: 3em;
+	right: 0;
+	bottom: 0;
+	color: rgba(150,150,150,0.1);
+	font-family: serif;
+}
+#content .post-detail {
+	margin-bottom: 5px;
+}
+#document-view > .detail {
+	position: relative;
+	clear: both;
+}
+#bottommenu {
+	text-align: right;
+	margin-bottom: 10px;
+	background-color: #FFF;
+	padding: 5px 0;
+}
+#bottommenu ul {
+	list-style-type: none;
+}
+#bottommenu ul > li {
+	display: inline-block;
+}
+#bottommenu ul > li > a {
+	border-left: 1px solid #DDD;
+	padding: 0 10px;
+	position: relative;
+}
+#bottommenu ul > li > a:hover {
+	color: #000;
+}
+#bottommenu ul > li:first-child > a {
+	border-left: none;
+}
+.header div.widget_share > a {
+	color: #C6C6C6;
+	-webkit-transition: color 0.5s ease;
+	-moz-transition: color 0.5s ease;
+	-o-transition: color 0.5s ease;
+	-ms-transition: color 0.5s ease;
+	transition: color 0.5s ease;
+}
+.header div.widget_share > a:hover {
+	color: #000;
+}
+.content .widget-tags a {
+	color: inherit;
+	background-color: #FDFDFD;
+	border: 1px solid #EEE;
+	padding: 2px 10px;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	line-height: 2.4em;
+	margin: 0 0.5em;
+	box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset;
+	text-shadow: 1px 1px 0 rgba(0,0,0,0.1), -1px -1px 0 rgba(0,0,0,0.2);
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.content .widget-tags a:hover {
+	background-color: #75AD0E;
+	color: #FFF;
+	border: 1px solid transparent;
+	box-shadow: 0 0 3px #000;
+	text-decoration: none;
+}
+@media only screen and (max-width: 960px) {
+	.topmenu.responsive > ul > li > a > span {
+		padding-left: 3.5em !important;
+	}
+}
+@media screen and (max-width: 599px) {
+	.header h1 {
+		font-size: 3em;
+	}
+	.header, .header hgroup, .header div {
+		display: block;
+		text-align: center !important;
+		padding: 5px 0;
+	}
+}
+#text-links {
+	text-align: center;
+	padding-top: 10px;
+}
+#text-links a {
+	margin: 0 3px;
+}
+.breadcrumbs {
+	text-transform: uppercase;
+	padding: 5px;
+	margin: 5px 0;
+	background-color: #FFF;
+}
+.breadcrumbs ul {
+	padding: 0 !important;
+	list-style-type: none;
+}
+.breadcrumbs ul > li {
+	display: inline-block;
+}
+.breadcrumbs li a {
+	position: relative;
+	margin-right: 10px;
+	color: inherit;
+}
+.breadcrumbs li a:hover {
+	color: #75AD0E;
+}
+.breadcrumbs li a:after {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #75AD0E;
+	position: absolute;
+	top: 50%;
+	margin-top: -5px;
+	margin-left: 5px;
+	left: 100%;
+	z-index: 2;
+}
+.breadcrumbs li:last-child a:after {
+	display: none;
+}
+.breadcrumbs li:before {
+	display: none;
+}
+.button {
+	background-color: #75AD0E;
+}
+#GModal_modaldiv > .modaldiv form {
+	padding: 10px;
+	background-color: #FFF;
+}
+form dl.info {
+	background-color: #FFF;
+	border: 2px dotted #DDD;
+	padding: 10px;
+	margin: 10px 0 0 0;
+}

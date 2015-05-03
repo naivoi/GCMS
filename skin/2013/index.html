@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang={LANGUAGE} dir=ltr>
+	<head>
+		<title>{TITLE}</title>
+		<meta charset=utf-8>
+		<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="shortcut icon" href="{WEBURL}/favicon.ico">
+		<link rel=icon href="{WEBURL}/favicon.gif">
+		<link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+		<link rel=stylesheet href={WEBURL}/{SKIN}css.php>
+		<script src="{WEBURL}/js/js.php"></script>
+		<script>
+			{SCRIPT}
+		</script>
+		<!--[if lt IE 9]>
+		<script src={WEBURL}/js/html5.js></script>
+		<![endif]-->
+		{META}
+	</head>
+	<body class=responsive>
+		<a class=skip_content accesskey=s href=#content title="{LNG_SKIP_TO_CONTENT}"></a>
+		<div class=gcss-wrapper>
+			<header class="header header_bg header_bg_color">
+				<div id=logo>
+					<h1><a href="{WEBURL}">{WEBTITLE}</a></h1>
+					<p class=description>{WEBDESCRIPTION}</p>
+				</div>
+				<div class=right>
+					{WIDGET_SEARCH}
+					{WIDGET_SHARE}
+				</div>
+			</header>
+			<div id=scroll-to class="menu_wrapper menu_bg menu_bg_color">
+				<nav id=topmenu class="topmenu responsive fullwidth">
+					<ul>{MAINMENU}</ul>
+				</nav>
+			</div>
+			<div class="wrapper_top_bg wrapper_bg_color clear padding-top">
+				<main class=wrapper_bg>
+					<div class=content>
+						<div id=content class="article clear content_bg content_bg_color">
+							{CONTENT}
+						</div>
+					</div>
+				</main>
+			</div>
+			<div id=text-links></div>
+			<script>
+				$G("text-links").load("{WEBURL}/widgets/textlink/getlinks.php?type=image");
+			</script>
+			<footer class="footer footer_bg_color footer_bg">
+				<nav id=bottommenu><ul id=login-box>{LOGIN}</ul></nav>
+				<p>
+					<iframe src=http://www.webshopready.com/ad_small.html style="width:88px;height:31px;"></iframe>
+					Copyright &copy; 2014
+					<a href="{WEBURL}">{WEBTITLE}</a> GCMS Version {VERSION}
+					designed by <a href="http://www.goragod.com">Goragod.com</a>
+					{LNG_PAGE_PROCESS} <span id=db_elapsed>{ELAPSED}</span> {LNG_SECOND} (<span id=db_quries>{QURIES}</span> quries.)
+					<img src="http://www.thaidvd2u.com/pr.php?url={WEBURL}" alt=Pagerank>
+				</p>
+			</footer>
+		</div>
+		<a href=#scroll-to class=scroller>^</a>
+	</body>
+</html>

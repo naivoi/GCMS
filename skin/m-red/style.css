@@ -165,17 +165,11 @@ body {
 	font-weight: normal;
 	font-size: 180%;
 }
-#board-view .reaction, #document-view .reaction {
-	border: 1px solid #B7DEFF;
-	background-color: #E5F3FF;
+.q .reaction, .r .reaction {
+	background-color: #FDEAFB;
 }
 #comment-list .r {
 	margin-bottom: 10px;
-}
-#comment-list .r > .reaction {
-	border: 1px solid #9EDA9E;
-	background-color: #EDF8ED;
-	text-align: right;
 }
 .content .document .bg1, .content .board .bg1, .content .download .bg1 {
 	background-color: #EEE;

@@ -235,9 +235,6 @@ body > footer a:hover {
 	padding-bottom: 0 !important;
 	border-top: 1px dashed;
 }
-.r .reaction {
-	text-align: right;
-}
 .share-box, .language-menu {
 	margin-bottom: 10px;
 	text-align: right;
