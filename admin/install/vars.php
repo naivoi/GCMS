@@ -32,8 +32,5 @@
 	define('DB_USERONLINE', PREFIX.'_useronline');
 	// ตำบล อำเภอ จังหวัด
 	define('DB_PROVINCE', PREFIX.'_province');
-	define('DB_DISTRICT', PREFIX.'_district');
-	define('DB_TAMBON', PREFIX.'_tambon');
-	define('DB_ZIPCODE', PREFIX.'_zipcode');
 	define('DB_COUNTRY', PREFIX.'_country');
 	// ตารางอื่นๆ
