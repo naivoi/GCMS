@@ -92,6 +92,9 @@
 		unset($defines['MODULE_RESERVE']);
 		unset($defines['LANGUAGE']);
 		unset($defines['SKIN']);
+		unset($defines['DB_DISTRICT']);
+		unset($defines['DB_TAMBON']);
+		unset($defines['DB_ZIPCODE']);
 		// vars.php
 		$datas = array();
 		$datas[] = '<'.'?php';
