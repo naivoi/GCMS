@@ -30,7 +30,7 @@
 	define('DB_COUNTER', PREFIX.'_counter');
 	// ตาราง useronline
 	define('DB_USERONLINE', PREFIX.'_useronline');
-	// ตำบล อำเภอ จังหวัด
+	// จังหวัด ประเทศ
 	define('DB_PROVINCE', PREFIX.'_province');
 	define('DB_COUNTRY', PREFIX.'_country');
 	// ตารางอื่นๆ

@@ -130,9 +130,6 @@
 		$datas[] = getVar($defines, 'DB_USERONLINE', 'PREFIX.\'_useronline\'');
 		$datas[] = '// ตำบล อำเภอ จังหวัด';
 		$datas[] = getVar($defines, 'DB_PROVINCE', 'PREFIX.\'_province\'');
-		$datas[] = getVar($defines, 'DB_DISTRICT', 'PREFIX.\'_district\'');
-		$datas[] = getVar($defines, 'DB_TAMBON', 'PREFIX.\'_tambon\'');
-		$datas[] = getVar($defines, 'DB_ZIPCODE', 'PREFIX.\'_zipcode\'');
 		$datas[] = getVar($defines, 'DB_COUNTRY', 'PREFIX.\'_country\'');
 		$datas[] = '// ค่าคีย์สำหรับการเข้ารหัส';
 		$datas[] = getVar($defines, 'EN_KEY', gcms::rndname(4, '123456789'));
