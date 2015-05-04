@@ -13,7 +13,7 @@
 		$interval = isset($interval) ? (int)$interval : 0;
 		$cols = isset($cols) ? (int)$cols : 1;
 		$rows = isset($rows) ? (int)$rows : 0;
-		$news = isset($news) ? (int)$news : 1;
+		$show = isset($show) && preg_match('/^[a-z0-9]+$/', $show) ? $show : '';
 		if ($rows > 0) {
 			$count = $rows * $cols;
 		} else {
@@ -26,7 +26,7 @@
 			// แสดงผล
 			$patt = array('/{ID}/', '/{DETAIL}/', '/{MODULE}/');
 			$replace = array();
-			$replace[0] = "widget_".(empty($index['module']) ? '' : $index['module'])."_{$id}_{$cat}_{$count}_{$new_date}_{$sort}_{$cols}_{$styles}_{$news}";
+			$replace[0] = "widget_".(empty($index['module']) ? '' : $index['module'])."_{$id}_{$cat}_{$count}_{$new_date}_{$sort}_{$cols}_{$styles}_{$show}";
 			$replace[1] = "<script>getWidgetNews('$replace[0]', 'document', $interval);</script>";
 			$replace[2] = $index['module'];
 			$widget = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'widget'));

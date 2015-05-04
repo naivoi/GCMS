@@ -1,6 +1,6 @@
 <?php
 	// modules/video/admin_inint.php
-	if (MAIN_INIT == 'admin' && $isAdmin && ((isset($install_modules['video']['owner']) && $install_modules['video']['owner'] != 'video') || !defined('DB_VIDEO'))) {
+	if (MAIN_INIT == 'admin' && $isAdmin && (sizeof($install_owners['video']) == 0 || !defined('DB_VIDEO'))) {
 		// เมนูติดตั้ง
 		$admin_menus['tools']['install']['video'] = '<a href="index.php?module=install&amp;modules=video"><span>Video</span></a>';
 	} else {

@@ -79,7 +79,7 @@
 				$index['alias'] = '';
 				$index['picture'] = '';
 				$index['can_reply'] = 0;
-				$index['show_news'] = 1;
+				$index['show_news'] = 'news=1';
 			}
 			// แสดงผล
 			$content[] = '<div class=breadcrumbs><ul><li>'.implode('</li><li>', $a).'</li></ul></div>';
@@ -202,14 +202,14 @@
 			$content[] = '</div>';
 			// show_news
 			$content[] = '<div class=item>';
-			$content[] = '<label for=write_show_news>{LNG_SHOW_NEWS}</label>';
-			$content[] = '<span class="g-input icon-widgets"><select id=write_show_news name=write_show_news title="{LNG_SHOW_NEWS_COMMENT}">';
-			foreach ($lng['SHOW_NEWS'] AS $i => $item) {
-				$sel = $index['show_news'] == $i ? ' selected' : '';
-				$content[] = '<option value='.$i.$sel.'>'.$item.'</option>';
+			$content[] = '<fieldset>';
+			$content[] = '<legend>{LNG_SHOW_NEWS} <a href="http://gcms.in.th/index.php?module=howto&id=311" target=_blank class=icon-help></a></legend>';
+			foreach ($lng['SHOW_NEWS'] AS $key => $value) {
+				$sel = strpos($index['show_news'], "$key=1") === false ? '' : ' checked';
+				$content[] = '<label><input type=checkbox name=write_show_news[] value="'.$key.'"'.$sel.'>&nbsp;'.$value.'&nbsp;</label>';
 			}
-			$content[] = '</select></span>';
 			$content[] = '<div class=comment>{LNG_SHOW_NEWS_COMMENT}</div>';
+			$content[] = '</fieldset>';
 			$content[] = '</div>';
 			// published_date
 			$content[] = '<div class=item>';

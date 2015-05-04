@@ -1,6 +1,6 @@
 <?php
 	// modules/personnel/admin_inint.php
-	if (MAIN_INIT == 'admin' && $isAdmin && ((isset($install_modules['personnel']) && $install_modules['personnel']['owner'] != 'personnel') || !defined('DB_PERSONNEL'))) {
+	if (MAIN_INIT == 'admin' && $isAdmin && (sizeof($install_owners['personnel']) == 0 || !defined('DB_PERSONNEL'))) {
 		// เมนูติดตั้ง
 		$admin_menus['tools']['install']['personnel'] = '<a href="index.php?module=install&amp;modules=personnel"><span>Personnel</span></a>';
 	} else {

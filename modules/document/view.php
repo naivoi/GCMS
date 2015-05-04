@@ -86,12 +86,12 @@
 				// ความคิดเห็น
 				$comments = array();
 				if ($canReply) {
-					$patt = array('/(edit-{QID}-{RID}-{NO}-{MODULE})/', '/(delete-{QID}-{RID}-{NO}-{MODULE})/', '/{DETAIL}/',
-						'/{UID}/', '/{DISPLAYNAME}/', '/{STATUS}/', '/{EMAIL}/', '/{DATE}/', '/{DATEISO}/',
-						'/{IP}/', '/{NO}/', '/{QID}/', '/{RID}/');
+					$patt = array('/(edit-{QID}-{RID}-{NO}-{MODULE})/', '/(delete-{QID}-{RID}-{NO}-{MODULE})/',
+						'/{DETAIL}/', '/{UID}/', '/{DISPLAYNAME}/', '/{STATUS}/', '/{DATE}/', '/{DATEISO}/', '/{IP}/', '/{NO}/', '/{RID}/');
 					$skin = gcms::loadtemplate($index['module'], 'document', 'commentitem');
 					// query
-					$sql = "SELECT C.*,U.`status`,U.`displayname`,U.`email`";
+					$sql = "SELECT C.*,U.`status`";
+					$sql .= ",(CASE WHEN ISNULL(U.`id`) THEN C.`email` WHEN U.`displayname`='' THEN U.`email` ELSE U.`displayname` END) AS `displayname`";
 					$sql .= " FROM `".DB_COMMENT."` AS C";
 					$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=C.`member_id`";
 					$sql .= " WHERE C.`index_id`='$index[id]' AND C.`module_id`='$index[module_id]'";
@@ -114,14 +114,12 @@
 						$replace[] = $canDelete ? '\\1' : 'hidden';
 						$replace[] = gcms::HighlightSearch(gcms::showDetail($item['detail'], $canview), $search);
 						$replace[] = (int)$item['member_id'];
-						$replace[] = empty($item['displayname']) ? $item['email'] : $item['displayname'];
+						$replace[] = $item['displayname'];
 						$replace[] = $item['status'];
-						$replace[] = $item['email'];
 						$replace[] = gcms::mktime2date($item['last_update']);
 						$replace[] = date(DATE_ISO8601, $item['last_update']);
 						$replace[] = gcms::showip($item['ip']);
 						$replace[] = $i + 1;
-						$replace[] = $item['index_id'];
 						$replace[] = $item['id'];
 						$comments[] = preg_replace($patt, $replace, $skin);
 					}

@@ -45,6 +45,8 @@
 				$replace[] = $index['module_id'];
 				$replace[] = $index['topic'];
 				$content = preg_replace($patt, $replace, gcms::loadtemplate($index['module'], 'document', 'editreply'));
+				// ตัวแปรหลังจากแสดงผลแล้ว
+				$custom_patt['/{TYPE}/'] = $index['img_typies'];
 				// title,keywords,description
 				$title = "$lng[LNG_EDIT] $index[topic]";
 				$keywords = $title;

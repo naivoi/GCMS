@@ -152,7 +152,7 @@
 					}
 					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-reply reply'.$item['can_reply'].'" title="'.$lng['LNG_CAN_REPLIES'][$item['can_reply']].'"></span></td>';
 					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-published'.$item['published'].'" title="'.$lng['LNG_PUBLISHEDS'][$item['published']].'"></span></td>';
-					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-widgets reply'.$item['show_news'].'" title="'.$lng['SHOW_NEWS'][$item['show_news']].'"></span></td>';
+					$tr .= '<td headers="r'.$id.' c2" class="menu mobile"><span class="icon-widgets reply'.($item['show_news'] == '' ? 0 : 1).'"></span></td>';
 					$tr .= '<td headers="r'.$id.' c5" class=mobile>';
 					if (isset($categories[$item['category_id']])) {
 						$category = $categories[$item['category_id']];

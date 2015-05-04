@@ -71,7 +71,6 @@
 				}
 				if ($canWrite) {
 					$save['can_reply'] = (int)(isset($_POST['write_can_reply']) ? $_POST['write_can_reply'] : $index['can_reply'] != '');
-					$save['show_news'] = $_POST['write_show_news'] == 0 ? 0 : 1;
 					// ตรวจสอบข้อมูลที่กรอก
 					if (sizeof($details) == 0) {
 						$item = $config['languages'][0];
@@ -179,6 +178,14 @@
 						$save['ip'] = gcms::getip();
 						$save['published'] = $_POST['write_published'] == '1' ? '1' : '0';
 						$save['published_date'] = $db->sql_trim_str($_POST, 'write_published_date');
+						$save['show_news'] = '';
+						if (isset($_POST['write_show_news'])) {
+							$write_show_news = array();
+							foreach ($_POST['write_show_news'] AS $item) {
+								$write_show_news[] = "$item=1";
+							}
+							$save['show_news'] = implode("\n", $write_show_news);
+						}
 						if ($id == 0) {
 							// ใหม่
 							$save['module_id'] = $index['module_id'];

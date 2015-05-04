@@ -1,6 +1,6 @@
 <?php
 	// modules/event/admin_inint.php
-	if (MAIN_INIT == 'admin' && $isAdmin && ((isset($install_modules['event']) && $install_modules['event']['owner'] != 'event') || !defined('DB_EVENTCALENDAR'))) {
+	if (MAIN_INIT == 'admin' && $isAdmin && (sizeof($install_owners['event']) == 0 || !defined('DB_EVENTCALENDAR'))) {
 		// เมนูติดตั้ง
 		$admin_menus['tools']['install']['event'] = '<a href="index.php?module=install&amp;modules=event"><span>Event Calendar</span></a>';
 	} else {

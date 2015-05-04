@@ -16,7 +16,7 @@
 		$id = gcms::getVars($_POST, 'reply_id', 0);
 		if ($id > 0) {
 			// แก้ไขคำตอบ อ่านข้อมูลจาก คำตอบ
-			$sql = "SELECT R.`member_id`,Q.`id`,Q.`comments`,Q.`can_reply`,R.`module_id`,M.`module`,C.`category_id`";
+			$sql = "SELECT R.`member_id`,Q.`id`,Q.`comments`,Q.`can_reply`,R.`module_id`,M.`module`,M.`config`,C.`category_id`";
 			$sql .= ",(CASE WHEN ISNULL(U.`id`) THEN R.`email` ELSE (CASE WHEN U.`displayname`='' THEN U.`email` ELSE U.`displayname` END) END) AS `commentator`";
 			$sql .= " FROM `".DB_COMMENT."` AS R";
 			$sql .= " LEFT JOIN `".DB_USER."` AS U ON U.`id`=R.`member_id`";
@@ -33,6 +33,8 @@
 			$sql .= " WHERE Q.`id`='$index_id' AND Q.`module_id`='$module_id' LIMIT 1";
 		}
 		$index = $db->customQuery($sql);
+		// login
+		$login = gcms::getVars($_SESSION, 'login', array('id' => 0, 'status' => -1, 'email' => '', 'password' => ''));
 		if (sizeof($index) == 1) {
 			$index = $index[0];
 			// สมาชิก
@@ -50,8 +52,8 @@
 			$canReply = $moderator || $canReply;
 			// login ใช้ email และ password ของคน login
 			if ($isMember) {
-				$email = $_SESSION['login']['email'];
-				$password = $_SESSION['login']['password'];
+				$email = $login['email'];
+				$password = $login['password'];
 			}
 		} else {
 			$index = false;
@@ -133,8 +135,8 @@
 			// แก้ไขความคิดเห็น ตรวจสอบ เจ้าของหรือผู้ดูแล
 			$ret['error'] = 'ACTION_ERROR';
 		}
-		if (sizeof($ret) == 0 && $detail != '') {
-			// ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
+		if ($id == 0 && sizeof($ret) == 0 && $detail != '') {
+			// ตอบคำถาม ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
 			$sql = "SELECT `id` FROM `".DB_COMMENT."`";
 			$sql .= " WHERE `detail`='".addslashes($detail)."' AND `email`='$post[email]'";
 			$sql .= " AND `module_id`='$index[module_id]' AND `last_update`>".($mmktime - 86400);

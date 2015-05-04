@@ -3170,7 +3170,7 @@ header.list > h2 > :last-child {
 	max-height: 200px;
 	max-width: 200px;
 }
-.q .detail, .r .detail {
+.detail {
 	position: relative;
 }
 #comment-list .r {

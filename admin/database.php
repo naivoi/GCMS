@@ -23,7 +23,7 @@
 		// ตารางทั้งหมด
 		$tables = $db->customQuery("SHOW TABLE STATUS");
 		foreach ($tables AS $table) {
-			if (preg_match('/^'.PREFIX.'(.*?)$/', $table['Name'], $match)) {
+			if (preg_match('/^'.PREFIX.'_(.*?)$/', $table['Name'], $match)) {
 				$tr = '<tr>';
 				$tr .= '<th>'.$table['Name'].'</th>';
 				$tr .= '<td><label class=nowrap><input type=checkbox name='.$table['Name'].'[] value=sturcture checked>&nbsp;{LNG_STRUCTURE}</label></td>';

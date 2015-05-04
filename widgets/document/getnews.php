@@ -4,7 +4,7 @@
 	// inint
 	include ('../../bin/inint.php');
 	// ตรวจสอบ referer
-	if (gcms::isReferer() && preg_match('/^widget_([a-z0-9]+)_([0-9]+)_([0-9,]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_(list|icon|thumb)_([0-9]+)$/', $_POST['id'], $match)) {
+	if (gcms::isReferer() && preg_match('/^widget_([a-z0-9]+)_([0-9]+)_([0-9,]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_(list|icon|thumb)_([a-z0-9]+)?$/', $_POST['id'], $match)) {
 		// อ่านโมดูล
 		$sql = "SELECT `id`,`config`,`module` FROM `".DB_MODULES."` WHERE `id`=".(int)$match[2]." AND `owner`='document' LIMIT 1";
 		$index = $cache->get($sql);
@@ -35,8 +35,8 @@
 			if ($match[3] != '0') {
 				$sql .= " AND Q.`category_id` IN ($match[3])";
 			}
-			if ($match[9] == 1) {
-				$sql .= " AND Q.`show_news`='1'";
+			if (!empty($match[9]) && preg_match('/^[a-z0-9]+$/', $match[9])) {
+				$sql .= " AND Q.`show_news` LIKE '%".$match[9]."=1%'";
 			}
 			$sql .= " AND Q.`published`='1' AND Q.`index`='0' ORDER BY ".$sorts[$match[6]]." LIMIT $match[4]";
 			$datas = $cache->get($sql);
@@ -50,8 +50,7 @@
 			$valid_date = $mmktime - $match[5];
 			// template
 			$skin = gcms::loadtemplate($index['module'], 'document', 'widgetitem');
-			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{CATEGORY}/', '/{DATE}/', '/{UID}/',
-				'/{SENDER}/', '/{STATUS}/', '/{COMMENTS}/', '/{VISITED}/', '/{THUMB}/', '/{ICON}/');
+			$patt = array('/{BG}/', '/{URL}/', '/{TOPIC}/', '/{DETAIL}/', '/{CATEGORY}/', '/{DATE}/', '/{UID}/', '/{SENDER}/', '/{STATUS}/', '/{COMMENTS}/', '/{VISITED}/', '/{THUMB}/', '/{ICON}/');
 			$widget = array();
 			$bg = 'bg2';
 			foreach ($datas AS $i => $item) {

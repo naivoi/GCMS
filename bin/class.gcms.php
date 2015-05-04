@@ -713,6 +713,7 @@
 				$login_result['email'] = 'demo';
 				$login_result['password'] = 'demo';
 				$login_result['displayname'] = 'demo';
+				$login_result['pname'] = '';
 				$login_result['fname'] = '';
 				$login_result['lname'] = '';
 				$login_result['status'] = 1;
@@ -1212,10 +1213,10 @@
 						}
 					} elseif (preg_match('/DROP[\s]+TABLE[\s]+(IF[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
 						$ret = $db->query($sql);
-						$content[] = '<li class='.($ret ? '' : 'in').'valid>DROP TABLE <strong>'.$match[2].'</strong> ...</li>';
+						$content[] = '<li class='.($ret === false ? 'in' : '').'valid>DROP TABLE <strong>'.$match[2].'</strong> ...</li>';
 					} elseif (preg_match('/CREATE[\s]+TABLE[\s]+(IF[\s]+NOT[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
 						$ret = $db->query($sql);
-						$content[] = '<li class='.($ret ? '' : 'in').'valid>CREATE TABLE <strong>'.$match[2].'</strong> ...</li>';
+						$content[] = '<li class='.($ret === false ? 'in' : '').'valid>CREATE TABLE <strong>'.$match[2].'</strong> ...</li>';
 					} elseif (preg_match('/ALTER[\s]+TABLE[\s]+`?([a-z0-9_]+)`?[\s]+ADD[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
 						// add column
 						$search = $db->customQuery("SELECT * FROM `information_schema`.`columns` WHERE `table_schema`='$config[db_name]' AND `table_name`='$match[1]' AND `column_name`='$match[2]'");
@@ -1224,15 +1225,15 @@
 						}
 						$ret = $db->query($sql);
 						if (sizeof($search) == 1) {
-							$content[] = '<li class='.($ret ? '' : 'in').'valid>REPLACE COLUMN <strong>'.$match[2].'</strong> to TABLE <strong>'.$match[1].'</strong></li>';
+							$content[] = '<li class='.($ret === false ? 'in' : '').'valid>REPLACE COLUMN <strong>'.$match[2].'</strong> to TABLE <strong>'.$match[1].'</strong></li>';
 						} else {
-							$content[] = '<li class='.($ret ? '' : 'in').'valid>ADD COLUMN <strong>'.$match[2].'</strong> to TABLE <strong>'.$match[1].'</strong></li>';
+							$content[] = '<li class='.($ret === false ? 'in' : '').'valid>ADD COLUMN <strong>'.$match[2].'</strong> to TABLE <strong>'.$match[1].'</strong></li>';
 						}
 					} elseif (preg_match('/INSERT[\s]+INTO[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
 						$ret = $db->query($sql);
 						if ($q != $match[1]) {
 							$q = $match[1];
-							$content[] = '<li class='.($ret ? '' : 'in').'valid>INSERT INTO <strong>'.$match[1].'</strong> ...</li>';
+							$content[] = '<li class='.($ret === false ? 'in' : '').'valid>INSERT INTO <strong>'.$match[1].'</strong> ...</li>';
 						}
 					} else {
 						$db->query($sql);

@@ -1,6 +1,6 @@
 <?php
 	// modules/edocument/admin_inint.php
-	if (MAIN_INIT == 'admin' && $isAdmin && ((isset($install_modules['edocument']['owner']) && $install_modules['edocument']['owner'] != 'edocument') || !defined('DB_EDOCUMENT'))) {
+	if (MAIN_INIT == 'admin' && $isAdmin && (sizeof($install_owners['edocument']) == 0 || !defined('DB_EDOCUMENT'))) {
 		// เมนูติดตั้ง
 		$admin_menus['tools']['install']['edocument'] = '<a href="index.php?module=install&amp;modules=edocument"><span>E-Document</span></a>';
 	} else {

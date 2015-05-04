@@ -6,7 +6,7 @@
 	// load
 	include ('../bin/load.php');
 	// แอดมินเท่านั้น
-	if (gcms::isReferer() && gcms::isAdmin()) {
+	if (gcms::isReferer() && gcms::isAdmin() && (!isset($_SESSION['login']['account']) || $_SESSION['login']['account'] != 'demo')) {
 		$sqls = array();
 		$rows = array();
 		$database = array();
@@ -20,7 +20,7 @@
 				}
 			}
 		}
-		$web_url = str_replace(array('/http(s)?:\/\//', '/www\./'), '', WEBURL);
+		$web_url = str_replace(array('http://', 'https://', 'www.'), '', WEB_URL);
 		$web_url = '/http(s)?:\/\/(www\.)?'.preg_quote($web_url).'/';
 		// ชื่อฐานข้อมูล
 		$fname = $config['db_name'].'.sql';
@@ -41,7 +41,7 @@
 						$primarykey[] = '`'.$field['Field'].'`';
 					}
 					$database[$table['Name']]['Field'][] = $field['Field'];
-					$rows[] = '`'.$field['Field'].'` '.$field['Type'].($field['Collation'] != '' ? ' collate '.$field['Collation'] : '').($field['Null'] == 'NO' ? ' NOT NULL' : '').($field['Extra'] != '' ? ' '.$field['Extra'] : '');
+					$rows[] = '`'.$field['Field'].'` '.$field['Type'].($field['Collation'] != '' ? ' collate '.$field['Collation'] : '').($field['Null'] == 'NO' ? ' NOT NULL' : '').($field['Default'] != '' ? " DEFAULT '".$field['Default']."'" : '').($field['Extra'] != '' ? ' '.$field['Extra'] : '');
 				}
 				if (sizeof($primarykey) > 0) {
 					$rows[] = 'PRIMARY KEY ('.implode(',', $primarykey).')';

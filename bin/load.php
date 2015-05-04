@@ -40,8 +40,22 @@
 	if (is_file(ROOT_PATH.'bin/vars.php')) {
 		include (ROOT_PATH.'bin/vars.php');
 	}
+	// debug mode
+	// true ถ้าต้องการให้แสดง error
+	// false ปิดการแสดงผล error (ตอนใช้งานจริง)
+	define('DEBUG_MODE', false);
 	// ไฟล์ config
 	define('CONFIG', ROOT_PATH.'bin/config.php');
+	// display error
+	if (DEBUG_MODE) {
+		// ขณะออกแบบ แสดง error และ warning ของ PHP
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(-1);
+	} else {
+		// ขณะใช้งานจริง
+		error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+	}
 	// เวลาที่บอกว่า user logout
 	// ควรมากกว่า counter_refresh_time อย่างน้อย 2 เท่า
 	define('COUNTER_GAP', 120);

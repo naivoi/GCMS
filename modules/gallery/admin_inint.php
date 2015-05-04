@@ -1,8 +1,9 @@
 <?php
 	// modules/gallery/admin_inint.php
-	if (MAIN_INIT == 'admin' && $isAdmin && ((isset($install_modules['gallery']['owner']) && $install_modules['gallery']['owner'] != 'gallery') || !defined('DB_GALLERY'))) {
+	if (MAIN_INIT == 'admin' && $isAdmin && (sizeof($install_owners['gallery']) == 0 || !defined('DB_GALLERY'))) {
 		// เมนูติดตั้ง
 		$admin_menus['tools']['install']['gallery'] = '<a href="index.php?module=install&amp;modules=gallery"><span>Gallery</span></a>';
+		unset($admin_menus['modules']['gallery']['config']);
 	} else {
 		// เมนูแอดมิน
 		if (!gcms::canConfig($config, 'gallery_can_config')) {

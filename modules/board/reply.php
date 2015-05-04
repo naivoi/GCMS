@@ -57,8 +57,8 @@
 			$moderator = $isMember && gcms::canConfig($index, 'moderator');
 			// login ใช้ email และ password ของคน login
 			if ($isMember) {
-				$email = $_SESSION['login']['email'];
-				$password = $_SESSION['login']['password'];
+				$email = $login['email'];
+				$password = $login['password'];
 			}
 		} else {
 			$index = false;
@@ -143,8 +143,8 @@
 			// แก้ไขความคิดเห็น ตรวจสอบ เจ้าของหรือผู้ดูแล
 			$ret['error'] = 'ACTION_ERROR';
 		}
-		if (sizeof($ret) == 0 && $detail != '' && $id == 0) {
-			// ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
+		if ($id == 0 && sizeof($ret) == 0 && $detail != '') {
+			// ตอบคำถาม ตรวจสอบโพสต์ซ้ำภายใน 1 วัน
 			$sql = "SELECT `id` FROM `".DB_BOARD_R."`";
 			$sql .= " WHERE `detail`='".addslashes($detail)."' AND `email`='$post[email]'";
 			$sql .= " AND `module_id`='$index[module_id]' AND `last_update`>".($mmktime - 86400);
