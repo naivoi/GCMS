@@ -410,8 +410,8 @@ h2[class]:before {
 	background-color: rgba(0,0,0,0.3);
 }
 #admin_template .preview {
-	background-size: cover;
-	background-position: 50% 50%;
+	background-size: contain;
+	background-position: top center;
 	background-repeat: no-repeat;
 	position: absolute;
 	width: 40%;
