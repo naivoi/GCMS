@@ -9,6 +9,9 @@
 		} else {
 			$email['id'] = 0;
 			$email['module'] = 'mailmerge';
+			$email['from_email'] = '';
+			$email['last_update'] = 0;
+			$email['subject'] = '';
 		}
 		if ($id > 0 && !$email) {
 			$title = $lng['LNG_DATA_NOT_FOUND'];

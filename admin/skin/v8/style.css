@@ -768,6 +768,12 @@ div.install p {
 	padding: 10px;
 	background-color: #FFF;
 }
+.postbox {
+	margin: 0 10px;
+}
+.postbox .bottom {
+	margin: 5px 0;
+}
 /* tablet, small device */
 @media only screen and (max-width: 960px) {
 	.topmenu ul > li:hover > a,

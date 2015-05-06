@@ -19,11 +19,6 @@
 	if (is_file(DATA_PATH.'language/'.LANGUAGE.'.js')) {
 		$js[] = file_get_contents(DATA_PATH.'language/'.LANGUAGE.'.js');
 	}
-	// CKEDITOR
-	if (is_file(ROOT_PATH.'modules/document/write.php')) {
-		$js[] = "window.CKEDITOR_BASEPATH='".WEB_URL."/ckeditor/';";
-		$js[] = file_get_contents(WEB_URL.'/ckeditor/ckeditor.js');
-	}
 	// js ของโมดูล
 	$dir = ROOT_PATH.'modules/';
 	$f = @opendir($dir);

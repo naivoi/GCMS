@@ -87,7 +87,7 @@
 		// defailt
 		$config['hour'] = 0;
 		$config['languages'][0] = 'th';
-		$config['skin'] = 'default';
+		$config['skin'] = 'bighead';
 	}
 	// gcms class
 	include ROOT_PATH.'bin/class.gcms.php';

@@ -23,6 +23,9 @@
 #share_frm img {
 	margin-right: 5px;
 }
+.widget_share {
+	display: inline-block;
+}
 .widget_share a {
 	font-size: 1.4em;
 	vertical-align: middle;

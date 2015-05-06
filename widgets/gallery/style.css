@@ -6,9 +6,10 @@
 	text-align: center;
 }
 .widget.gallery .table_rss_gallery_class a {
-	border: 1px solid #000;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000;
 	display: block;
-	background-image: url(img/wait.gif);
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: contain;

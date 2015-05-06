@@ -2958,6 +2958,7 @@ header.list > h2 {
 header.list > h2 > * {
 	display: table-cell;
 	color: inherit;
+	text-align: left;
 }
 header.list > h2 > :last-child {
 	text-align: right;
@@ -3449,6 +3450,9 @@ ol.multi_step li.current:before {
 	height: 90px;
 	max-width: 100%;
 	margin: 0 auto;
+}
+#slidemenu_content {
+	height: 100%;
 }
 @media only screen and (max-width: 1360px) {
 	/* side menu */

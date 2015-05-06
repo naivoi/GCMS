@@ -61,25 +61,27 @@
 					$replace[] = '';
 					$save['detail'] = $db->sql_quote(preg_replace($patt, $replace, $_POST['email_detail']));
 					// ตรวจสอบค่าที่ส่งมา
-					// copy_to
-					$emails = array();
-					foreach (explode(',', $_POST['email_copy_to']) AS $email) {
-						$email = trim($email);
-						if ($email != '') {
-							if (gcms::validMail($email)) {
-								$emails[] = $email;
-							} else {
-								$error = true;
+					if (isset($_POST['email_copy_to'])) {
+						// copy_to
+						$emails = array();
+						foreach (explode(',', $_POST['email_copy_to']) AS $email) {
+							$email = trim($email);
+							if ($email != '') {
+								if (gcms::validMail($email)) {
+									$emails[] = $email;
+								} else {
+									$error = true;
+								}
 							}
 						}
-					}
-					if ($error) {
-						$ret['ret_email_copy_to'] = 'REGISTER_INVALID_EMAIL';
-						$input = !$error ? 'email_copy_to' : $input;
-						$error = !$error ? 'REGISTER_INVALID_EMAIL' : $error;
-					} else {
-						$save['copy_to'] = implode(',', $emails);
-						$ret['ret_email_copy_to'] = '';
+						if ($error) {
+							$ret['ret_email_copy_to'] = 'REGISTER_INVALID_EMAIL';
+							$input = !$error ? 'email_copy_to' : $input;
+							$error = !$error ? 'REGISTER_INVALID_EMAIL' : $error;
+						} else {
+							$save['copy_to'] = implode(',', $emails);
+							$ret['ret_email_copy_to'] = '';
+						}
 					}
 					// from_email
 					if ($save['from_email'] != '' && !gcms::validMail($save['from_email'])) {
@@ -108,7 +110,9 @@
 						$db->edit(DB_EMAIL_TEMPLATE, $id, $save);
 					}
 					$ret['lastupdate'] = gcms::mktime2date($mmktime);
-					$ret['email_copy_to'] = rawurlencode($save['copy_to']);
+					if (isset($_POST['email_copy_to'])) {
+						$ret['email_copy_to'] = rawurlencode($save['copy_to']);
+					}
 					$ret['email_id'] = $id;
 					$ret['error'] = 'SAVE_COMPLETE';
 					$ret['location'] = gcms::retURL(WEB_URL.'/admin/index.php', array('module' => 'mailtemplate'));

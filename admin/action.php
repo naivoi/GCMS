@@ -30,7 +30,7 @@
 					}
 					// คืนค่า
 					$ret['error'] = 'DELETE_SUCCESS';
-					$ret['remove'] = "M_{$email[id]}";
+					$ret['remove'] = 'M_'.$email['id'];
 				} else {
 					$ret['error'] = 'ACTION_ERROR';
 				}
