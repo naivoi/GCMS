@@ -182,10 +182,10 @@
 							$defines[$match[1]] = $match[0];
 						} elseif (preg_match('/DROP[\s]+TABLE[\s]+(IF[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
 							$ret = $db->query($sql);
-							echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">DROP TABLE <b>$match[2]</b> ...</li>";
+							echo "<li class=\"".($ret === false ? 'incorrect' : 'correct')."\">DROP TABLE <b>$match[2]</b> ...</li>";
 						} elseif (preg_match('/CREATE[\s]+TABLE[\s]+(IF[\s]+NOT[\s]+EXISTS[\s]+)?`?([a-z0-9_]+)`?/iu', $sql, $match)) {
 							$ret = $db->query($sql);
-							echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">CREATE TABLE <b>$match[2]</b> ...</li>";
+							echo "<li class=\"".($ret === false ? 'incorrect' : 'correct')."\">CREATE TABLE <b>$match[2]</b> ...</li>";
 						} elseif (preg_match('/ALTER[\s]+TABLE[\s]+`?([a-z0-9_]+)`?[\s]+ADD[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
 							// add column
 							$sql = "SELECT * FROM `information_schema`.`columns` WHERE `table_schema`='$config[db_name]' AND `table_name`='$match[1]' AND `column_name`='$match[2]'";
@@ -196,15 +196,15 @@
 							}
 							$ret = $db->query($match[0]);
 							if (sizeof($search) == 1) {
-								echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">REPLACE COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
+								echo "<li class=\"".($ret === false ? 'incorrect' : 'correct')."\">REPLACE COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
 							} else {
-								echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">ADD COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
+								echo "<li class=\"".($ret === false ? 'incorrect' : 'correct')."\">ADD COLUMN <b>$match[2]</b> to TABLE <b>$match[1]</b></li>";
 							}
 						} elseif (preg_match('/INSERT[\s]+INTO[\s]+`?([a-z0-9_]+)`?(.*)/iu', $sql, $match)) {
 							$ret = $db->query($sql);
 							if (isset($q) && $q != $match[1]) {
 								$q = $match[1];
-								echo "<li class=\"".($ret ? 'correct' : 'incorrect')."\">INSERT INTO <b>$match[1]</b> ...</li>";
+								echo "<li class=\"".($ret === false ? 'incorrect' : 'correct')."\">INSERT INTO <b>$match[1]</b> ...</li>";
 							}
 						} else {
 							$db->query($sql);

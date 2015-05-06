@@ -9,7 +9,7 @@
 		$idH = $_GET['h'];
 		if ($id != '' && is_file($id)) {
 			$image_info = getImageSize($id);
-			if ($image_info['error'] == '') {
+			if (empty($image_info['error'])) {
 				//ปรับขนาดตามที่ต้องการ ถ้ารูปใหญ่กว่าปกติ
 				if ($image_info[0] > $idW || $image_info[1] > $idH) {
 					//คำนวณขนาดใหม่
