@@ -37,14 +37,6 @@
 			$save['create_date'] = $mmktime;
 			$save['ip'] = gcms::getip();
 			$lastid = $db->add(DB_USER, $save);
-			// post to facebook สำหรับครั้งแรก
-			if (!empty($config['facebook_message'])) {
-				$ret['message'] = rawurlencode(stripslashes(str_replace(array('\r', '\n'), array("\r", "\n"), $config['facebook_message'])));
-				if (is_file(DATA_PATH.'image/facebook_photo.jpg')) {
-					$ret['picture'] = DATA_URL.'image/facebook_photo.jpg';
-				}
-				$ret['id'] = $id;
-			}
 		} elseif ($save[0]['fb'] == 1) {
 			$save = $save[0];
 			// facebook เคยเยี่ยมชมแล้ว อัปเดทการเยี่มชม

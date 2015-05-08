@@ -2,13 +2,12 @@
 	// widgets/facebook/admin_setup.php
 	if (MAIN_INIT == 'admin' && $isAdmin) {
 		// ตรวจสอบค่า default
-		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 960);
-		$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
-		$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcms7s');
-		$config['facebook_faces'] = gcms::getVars($config, 'facebook_faces', 0);
-		$config['facebook_border'] = gcms::getVars($config, 'facebook_border', 0);
-		$config['facebook_stream'] = gcms::getVars($config, 'facebook_stream', 0);
-		$config['facebook_header'] = gcms::getVars($config, 'facebook_header', 0);
+		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 0);
+		$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 0);
+		$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcmscms');
+		$config['facebook_show_facepile'] = gcms::getVars($config, 'facebook_show_facepile', 1);
+		$config['facebook_show_posts'] = gcms::getVars($config, 'facebook_show_posts', 0);
+		$config['facebook_hide_cover'] = gcms::getVars($config, 'facebook_hide_cover', 0);
 		// title
 		$title = $lng['LNG_FACEBOOK_SETTINGS'];
 		$a = array();
@@ -45,42 +44,32 @@
 		$content[] = '</div>';
 		$content[] = '<div class=comment id=result_facebook_user>{LNG_FACEBOOK_USER_COMMENT}</div>';
 		$content[] = '</div>';
-		// facebook_faces
+		// facebook_show_facepile
 		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_faces>{LNG_FACEBOOK_SHOW_FACES}</label>';
-		$content[] = '<span class="g-input icon-config"><select id=facebook_faces name=facebook_faces title="{LNG_PLEASE_SELECT}">';
+		$content[] = '<label for=facebook_show_facepile>{LNG_FACEBOOK_SHOW_FACES}</label>';
+		$content[] = '<span class="g-input icon-config"><select id=facebook_show_facepile name=facebook_show_facepile title="{LNG_PLEASE_SELECT}">';
 		foreach ($lng['OPEN_CLOSE'] AS $i => $value) {
-			$sel = $i == $config['facebook_faces'] ? ' selected' : '';
+			$sel = $i == $config['facebook_show_facepile'] ? ' selected' : '';
 			$content[] = '<option value='.$i.$sel.'>'.$value.'</option>';
 		}
 		$content[] = '</select></span>';
 		$content[] = '</div>';
-		// facebook_stream
+		// facebook_show_posts
 		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_stream>{LNG_FACEBOOK_SHOW_STREAM}</label>';
-		$content[] = '<span class="g-input icon-config"><select id=facebook_stream name=facebook_stream title="{LNG_PLEASE_SELECT}">';
+		$content[] = '<label for=facebook_show_posts>{LNG_FACEBOOK_SHOW_STREAM}</label>';
+		$content[] = '<span class="g-input icon-config"><select id=facebook_show_posts name=facebook_show_posts title="{LNG_PLEASE_SELECT}">';
 		foreach ($lng['OPEN_CLOSE'] AS $i => $value) {
-			$sel = $i == $config['facebook_stream'] ? ' selected' : '';
+			$sel = $i == $config['facebook_show_posts'] ? ' selected' : '';
 			$content[] = '<option value='.$i.$sel.'>'.$value.'</option>';
 		}
 		$content[] = '</select></span>';
 		$content[] = '</div>';
-		// facebook_header
+		// facebook_hide_cover
 		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_header>{LNG_FACEBOOK_SHOW_HEADER}</label>';
-		$content[] = '<span class="g-input icon-config"><select id=facebook_header name=facebook_header title="{LNG_PLEASE_SELECT}">';
+		$content[] = '<label for=facebook_hide_cover>{LNG_FACEBOOK_SHOW_HEADER}</label>';
+		$content[] = '<span class="g-input icon-config"><select id=facebook_hide_cover name=facebook_hide_cover title="{LNG_PLEASE_SELECT}">';
 		foreach ($lng['OPEN_CLOSE'] AS $i => $value) {
-			$sel = $i == $config['facebook_header'] ? ' selected' : '';
-			$content[] = '<option value='.$i.$sel.'>'.$value.'</option>';
-		}
-		$content[] = '</select></span>';
-		$content[] = '</div>';
-		// facebook_border
-		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_border>{LNG_FACEBOOK_BORDER}</label>';
-		$content[] = '<span class="g-input icon-config"><select id=facebook_border name=facebook_border>';
-		foreach ($lng['OPEN_CLOSE'] AS $i => $value) {
-			$sel = $i == $config['facebook_border'] ? ' selected' : '';
+			$sel = $i == $config['facebook_hide_cover'] ? ' selected' : '';
 			$content[] = '<option value='.$i.$sel.'>'.$value.'</option>';
 		}
 		$content[] = '</select></span>';
@@ -91,7 +80,7 @@
 		$content[] = '<input type=submit class="button large save" value="{LNG_SAVE}">';
 		$content[] = '</fieldset>';
 		$content[] = '</form>';
-		$content[] = '<div class=center><iframe style="height:'.($config['facebook_height'] + 20).'px;width:'.$config['facebook_width'].'px" src="'.WEB_URL.'/widgets/facebook/facebook.php"></iframe></div>';
+		$content[] = '<div class=center><iframe style="height:'.(max(340, $config['facebook_height']) + 20).'px;width:100%" src="'.WEB_URL.'/widgets/facebook/facebook.php"></iframe></div>';
 		$content[] = '</div>';
 		$content[] = '</section>';
 		$content[] = '<script>';

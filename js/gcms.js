@@ -355,15 +355,6 @@ var fbLogin = function () {
 							if (ds[0].error) {
 								alert(eval(ds[0].error));
 							} else if (ds[0].isMember == 1) {
-								if (ds[0].message) {
-									var data = {};
-									data['message'] = decodeURIComponent(ds[0].message);
-									if (ds[0].picture) {
-										data['picture'] = ds[0].picture;
-									}
-									data['link'] = WEB_URL + 'index.php';
-									FB.api('/me/feed', 'post', data);
-								}
 								if ($E('login_next')) {
 									ds[0].location = $E('login_next').value;
 								}
@@ -388,7 +379,7 @@ var fbLogin = function () {
 				}
 			}
 		});
-	}, {scope: 'email,user_birthday,publish_stream'});
+	}, {scope: 'email,user_birthday'});
 };
 function inintFacebook(appId, lng) {
 	window.fbAsyncInit = function () {
@@ -396,7 +387,7 @@ function inintFacebook(appId, lng) {
 			appId: appId,
 			cookie: false,
 			xfbml: true,
-			version: 'v2.1'
+			version: 'v2.3'
 		});
 	};
 	(function (d, s, id) {

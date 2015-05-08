@@ -3,13 +3,12 @@
 	// inint
 	include '../../bin/inint.php';
 	// ตรวจสอบค่า default
-	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 960);
-	$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 250);
-	$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcms7s');
-	$config['facebook_faces'] = gcms::getVars($config, 'facebook_faces', 0);
-	$config['facebook_border'] = gcms::getVars($config, 'facebook_border', 0);
-	$config['facebook_stream'] = gcms::getVars($config, 'facebook_stream', 0);
-	$config['facebook_header'] = gcms::getVars($config, 'facebook_header', 0);
+	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 0);
+	$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 0);
+	$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcmscms');
+	$config['facebook_show_facepile'] = gcms::getVars($config, 'facebook_show_facepile', 1);
+	$config['facebook_show_posts'] = gcms::getVars($config, 'facebook_show_posts', 0);
+	$config['facebook_hide_cover'] = gcms::getVars($config, 'facebook_hide_cover', 0);
 	// หน้าเว็บ Facebook
 	$facebook = array();
 	$facebook[] = '<!DOCTYPE html>';
@@ -24,18 +23,22 @@
 	$facebook[] = '</head>';
 	$facebook[] = '<body>';
 	$facebook[] = '<div id=fb-root></div>';
-	$facebook[] = '<div class="fb-like-box" data-href="https://www.facebook.com/'.$config['facebook_user'].'"';
-	$facebook[] = ' data-width="'.$config['facebook_width'].'"';
-	$facebook[] = ' data-height="'.$config['facebook_height'].'"';
-	$facebook[] = ' data-show-faces="'.($config['facebook_faces'] == 1 ? 'true' : 'false').'"';
-	$facebook[] = ' data-show-border="'.($config['facebook_border'] == 1 ? 'true' : 'false').'"';
-	$facebook[] = ' data-stream="'.($config['facebook_stream'] == 1 ? 'true' : 'false').'"';
-	$facebook[] = ' data-header="'.($config['facebook_header'] == 1 ? 'true' : 'false').'"></div>';
+	$facebook[] = '<div class="fb-page"';
+	$facebook[] = ' data-href="https://www.facebook.com/'.$config['facebook_user'].'"';
+	if ($config['facebook_width'] > 0) {
+		$facebook[] = ' data-width="'.$config['facebook_width'].'"';
+	}
+	if ($config['facebook_height'] > 0) {
+		$facebook[] = ' data-height="'.$config['facebook_height'].'"';
+	}
+	$facebook[] = ' data-show-facepile="'.($config['facebook_show_facepile'] == 1 ? 'true' : 'false').'"';
+	$facebook[] = ' data-show-posts="'.($config['facebook_show_posts'] == 1 ? 'true' : 'false').'"';
+	$facebook[] = ' data-hide-cover="'.($config['facebook_hide_cover'] == 1 ? 'false' : 'true').'"></div>';
 	$facebook[] = '<script>';
 	$facebook[] = '(function(d, id) {';
 	$facebook[] = 'var js = d.createElement("script");';
 	$facebook[] = 'js.id = id;';
-	$facebook[] = 'js.src = "//connect.facebook.net/th_TH/all.js#xfbml=1&appId='.(empty($config['facebook']['appId']) ? '' : $config['facebook']['appId']).'&version=v2.0";';
+	$facebook[] = 'js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&appId='.(empty($config['facebook']['appId']) ? '' : $config['facebook']['appId']).'&version=v2.3";';
 	$facebook[] = 'd.getElementsByTagName("head")[0].appendChild(js);';
 	$facebook[] = '}(document, "facebook-jssdk"));';
 	$facebook[] = '</script>';

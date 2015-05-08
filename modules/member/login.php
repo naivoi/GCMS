@@ -115,7 +115,7 @@
 				$replace[] = $login_password;
 				$replace[] = $login_remember == 1 ? 'checked' : '';
 				$replace[] = WEB_URL;
-				$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
+				$replace[] = empty($config['facebook']['appId']) ? 'hidden' : 'facebook';
 				$replace[] = empty($next) ? 'back' : $next;
 				$template = gcms::loadtemplate('member', 'member', 'login');
 				if ($template == '') {
@@ -140,7 +140,7 @@
 			$replace[] = $login_result['status'];
 			$replace[] = isset($login_result['admin_access']) && ($login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1) ? 'admin' : ' hidden';
 			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
-			$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
+			$replace[] = empty($config['facebook']['appId']) ? 'hidden' : 'facebook';
 			$template = gcms::loadtemplate('member', 'member', 'member');
 			if ($template == '') {
 				$template = gcms::loadtemplate('member', 'member', 'memberfrm');

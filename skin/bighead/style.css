@@ -115,12 +115,11 @@ body {
 	font-size: 3em;
 	margin: 30px 0;
 	text-align: center;
-	line-height: 1;
 }
 .breadcrumbs {
 	text-align: center;
-	margin-top: -10px;
-	margin-bottom: 40px;
+	margin-top: -20px;
+	margin-bottom: 50px;
 }
 .text-links, .wrapper_top_bg, .footer_grid {
 	padding: 20px 0;

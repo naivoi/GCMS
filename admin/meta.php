@@ -47,18 +47,6 @@
 		$content[] = '<label for=facebook_appId>{LNG_FACEBOOK_APPID}</label>';
 		$content[] = '<span class="g-input icon-password"><input id=facebook_appId name=facebook_appId type=text value="'.gcms::getVars($facebook, 'appId', '').'" title="{LNG_FACEBOOK_COMMENT}"></span>';
 		$content[] = '</div>';
-		// facebook_secret
-		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_secret>{LNG_FACEBOOK_APPSECRET}</label>';
-		$content[] = '<span class="g-input icon-password"><input id=facebook_secret name=facebook_secret type=text value="'.gcms::getVars($facebook, 'secret', '').'" title="{LNG_FACEBOOK_COMMENT}"></span>';
-		$content[] = '<div class=comment id=result_facebook_secret>{LNG_FACEBOOK_COMMENT}</div>';
-		$content[] = '</div>';
-		// facebook_message
-		$content[] = '<div class=item>';
-		$content[] = '<label for=facebook_message>{LNG_FACEBOOK_WELCOME_MESSAGE}</label>';
-		$content[] = '<span class="g-input icon-config"><textarea id=facebook_message name=facebook_message title="{LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT}" cols=50 rows=5>'.gcms::detail2TXT(str_replace(array('\r', '\n'), array("\r", "\n"), gcms::getVars($config, 'facebook_message', ''))).'</textarea></span>';
-		$content[] = '<div class=comment id=result_facebook_message>{LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT}</div>';
-		$content[] = '</div>';
 		// facebook_picture
 		$content[] = '<div class=item>';
 		$image = is_file(DATA_PATH.'image/facebook_photo.jpg') ? DATA_URL.'image/facebook_photo.jpg' : WEB_URL.'/skin/img/blank.gif';

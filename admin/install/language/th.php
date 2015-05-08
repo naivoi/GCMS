@@ -175,7 +175,6 @@
 	$lng['LNG_DISPLAY_ROWS_COLS_COMMENT'] = 'กำหนดจำนวนข้อมูลในการแสดงผล สูงสุดเท่ากับ แถว * สดมภ์';
 	$lng['LNG_DISPLAYNAME'] = 'ชื่อเรียก';
 	$lng['LNG_DISPLAYNAME_COMMENT'] = 'ชื่อเรียกสำหรับแสดงบนเว็บไซต์ (ไม่น้อยกว่า 2 ตัวอักษร)';
-	$lng['LNG_DISTRICT'] = 'อำเภอ';
 	$lng['LNG_DOCUMENT'] = 'โมดูล Document';
 	$lng['LNG_DOCUMENT_CONFIG'] = 'ค่ากำหนดของเรื่อง (ค่าเริ่มต้น)';
 	$lng['LNG_DOCUMENT_DATE'] = 'เรื่องที่เขียนในวันที่';
@@ -239,14 +238,11 @@
 	$lng['LNG_EX'] = 'ตัวอย่าง';
 	$lng['LNG_FACEBOOK'] = 'Facebook';
 	$lng['LNG_FACEBOOK_APPID'] = 'App ID';
-	$lng['LNG_FACEBOOK_APPSECRET'] = 'App Secret';
 	$lng['LNG_FACEBOOK_COMMENT'] = 'ระบุรหัส Login ของคุณที่ได้จาก Facebook Developers (สามารถหาได้จาก https://developers.facebook.com)';
 	$lng['LNG_FACEBOOK_LOGIN'] = 'Login With Facebook';
 	$lng['LNG_FACEBOOK_LOGIN_COMMENT'] = 'เข้าระบบด้วยบัญชี ผู้ใช้ Facebook ของคุณ';
 	$lng['LNG_FACEBOOK_PICTURE_COMMENT'] = 'เลือกไฟล์รูปภาพขนาดไม่น้อยกว่า 200x200 พิกเซล ชนิด jpg เท่านั้น ใช้เป็นรูปภาพสำหรับโพสต์ไปยังเฟซบุ๊คเมื่อมีการโพสต์ไปยังหน้าวอลของเฟซบุ๊ค หรือเมื่อมีการสมัครสมาชิกผ่านเฟซบุ๊ค';
 	$lng['LNG_FACEBOOK_REDIRECT_URL'] = 'ระบุ URL นี้ไปยัง Facebook สำหรับการ Redirect กลับมายัง URL นี้หากเข้าระบบเรียบร้อย';
-	$lng['LNG_FACEBOOK_WELCOME_MESSAGE'] = 'ข้อความต้อนรับ';
-	$lng['LNG_FACEBOOK_WELCOME_MESSAGE_COMMENT'] = 'ข้อความต้อนรับที่จะถูกโพสต์ไปยังเฟซบุ้คของผู้ที่ลงทะเบียนเป็นสมาชิกใหม่ ถ้าไม่กรอกจะไม่มีการโพสต์';
 	$lng['LNG_FAX'] = 'แฟ็กซ์';
 	$lng['LNG_FILE'] = 'ไฟล์';
 	$lng['LNG_FILE_UPLOAD_COMMENT'] = 'รูปภาพอัปโหลด ขนาด {SIZE} Kb. ชนิด {TYPE} เท่านั้น';
@@ -294,6 +290,7 @@
 	$lng['LNG_IMAGE_UPLOAD_COMMENT'] = 'เลือกรูปภาพอัปโหลด ชนิด {T} ขนาด {W}*{H} พิกเซล (ปรับขนาดอัตโนมัติ)';
 	$lng['LNG_IMAGE_UPLOAD_TYPE'] = 'ชนิดของไฟล์รูปภาพที่ยอมให้อัปโหลด';
 	$lng['LNG_IMAGE_UPLOAD_TYPE_COMMENT'] = 'ชนิดของไฟล์รูปภาพที่ต้องการให้อัปโหลดได้ เช่น jpg, gif และ png (ต้องเลือกอย่างน้อย 1 ชนิด)';
+	$lng['LNG_IMAGE_WIDTH_COMMENT'] = 'ขนาดของของรูปภาพที่ถูกจัดเก็บ รูปภาพจะถูกปรับขนาดอัตโนมัติ';
 	$lng['LNG_IMPORT_BROWSER'] = 'เลือกไฟล์สำหรับนำเข้า (ขนาดไม่เกิน %s)';
 	$lng['LNG_INFO_POSITION'] = 'พิกัดตำแหน่งของ Info';
 	$lng['LNG_INSTALL'] = 'ติดตั้ง';
@@ -348,7 +345,7 @@
 	$lng['LNG_LOGIN_NOT_FOUND'] = '<strong>คุณยังไม่ได้เข้าระบบ</strong> กรุณาเข้าระบบก่อนดำเนินการต่อ...';
 	$lng['LNG_LOGIN_ONLY_IP'] = 'เข้าระบบต่อ 1 IP';
 	$lng['LNG_LOGIN_ONLY_IP_COMMENT'] = 'กำหนดวิธีการเข้าระบบ ถ้าคุณเปิดการใช้งานสมาชิกจะสามารถเข้าระบบได้เพียง IP เดียว ต่อช่วงเวลาหนึ่งเท่านั้น';
-	$lng['LNG_LOGIN_REMEMBER'] = 'จำชื่อและรหัสผ่านฉันไว้ ';
+	$lng['LNG_LOGIN_REMEMBER'] = 'จำชื่อและรหัสผ่านฉันไว้';
 	$lng['LNG_LOGIN_SUBMIT_TITLE'] = 'สมาชิกเข้าระบบ';
 	$lng['LNG_LOGIN_TITLE'] = '<span>ผู้มาเยือน</span> กรุณาเข้าระบบ';
 	$lng['LNG_LOGOUT'] = 'Logout';
@@ -574,7 +571,6 @@
 	$lng['LNG_SYSEDIT_TITLE'] = 'เพิ่ม/แก้ไข ข้อมูล';
 	$lng['LNG_TAGS'] = 'ป้ายกำกับ';
 	$lng['LNG_TAGS_COMMENT'] = 'คั่นแต่ละรายการด้วย ลูกน้ำ (,) 4 - 8 คำ ใช้เป็นคีย์เวิร์ดของหน้า';
-	$lng['LNG_TAMBON'] = 'ตำบล';
 	$lng['LNG_TEMPLATE'] = 'แม่แบบ';
 	$lng['LNG_TEMPLATE_CURRENT'] = 'แม่แบบปัจจุบัน';
 	$lng['LNG_TEMPLATE_FOLDER'] = 'ไฟล์ของ Theme นี้ทั้งหมดเก็บอยู่ใน <span>%s</span>';

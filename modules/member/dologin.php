@@ -31,7 +31,7 @@
 				$replace[] = $login_password;
 				$replace[] = $login_remember == 1 ? 'checked' : '';
 				$replace[] = WEB_URL;
-				$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : '';
+				$replace[] = empty($config['facebook']['appId']) ? 'hidden' : '';
 				$replace[] = empty($next) ? 'back' : $next;
 				$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'loginfrm'));
 			}
@@ -57,7 +57,7 @@
 			$replace[] = $login_result['status'];
 			$replace[] = $login_result['admin_access'] == 1 || $_SESSION['login']['status'] == 1 ? 'admin' : ' hidden';
 			$replace[] = OLD_PHP ? '$lng[\'$1\']' : 'gcms::getLng';
-			$replace[] = (empty($config['facebook']['appId']) || empty($config['facebook']['secret'])) ? 'hidden' : 'facebook';
+			$replace[] = empty($config['facebook']['appId']) ? 'hidden' : 'facebook';
 			$content = gcms::pregReplace($patt, $replace, gcms::loadtemplate('member', 'member', 'memberfrm'));
 		}
 		// เลือกเมนู

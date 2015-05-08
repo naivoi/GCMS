@@ -815,6 +815,7 @@ textarea.cke_editable {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	overflow-x: auto;
 }
 .cke-body ol,
 .cke-body ul,
@@ -3398,17 +3399,7 @@ ol.multi_step li.current:before {
 	font-family: arial, sans-serif;
 	font-size: 1.4em;
 }
-/* facbook responsive */
-#fb-root {
-	display: none;
-}
-.fb_iframe_widget,
-.fb_iframe_widget span,
-.fb_iframe_widget span iframe[style] {
-	width: 100% !important;
-}
-#map_canvas img,
-.gmnoprint img {
+#map_canvas img, .gmnoprint img {
 	max-width: none;
 }
 /* scroller */

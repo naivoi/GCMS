@@ -175,14 +175,6 @@
 			if (isset($_POST['facebook_appId'])) {
 				$config['facebook']['appId'] = $db->sql_trim_str($_POST['facebook_appId']);
 			}
-			// facebook_secret
-			if (isset($_POST['facebook_secret'])) {
-				$config['facebook']['secret'] = $db->sql_trim_str($_POST, 'facebook_secret');
-			}
-			// facebook_message
-			if (isset($_POST['facebook_message'])) {
-				$config['facebook_message'] = strip_tags($db->sql_trim($_POST, 'facebook_message', ''));
-			}
 			// facebook_picture
 			if (isset($_FILES['facebook_picture'])) {
 				$facebook_picture = $_FILES['facebook_picture'];

@@ -11,13 +11,12 @@
 			include CONFIG;
 		}
 		// ค่าที่ส่งมา
-		$config['facebook_width'] = max(100, (int)$_POST['facebook_width']);
-		$config['facebook_height'] = max(100, (int)$_POST['facebook_height']);
+		$config['facebook_width'] = (int)$_POST['facebook_width'];
+		$config['facebook_height'] = (int)$_POST['facebook_height'];
 		$config['facebook_user'] = $db->sql_trim_str($_POST, 'facebook_user');
-		$config['facebook_faces'] = gcms::getVars($_POST, 'facebook_faces', 0);
-		$config['facebook_stream'] = gcms::getVars($_POST, 'facebook_stream', 0);
-		$config['facebook_header'] = gcms::getVars($_POST, 'facebook_header', 0);
-		$config['facebook_border'] = gcms::getVars($_POST, 'facebook_border', 0);
+		$config['facebook_show_facepile'] = gcms::getVars($_POST, 'facebook_show_facepile', 0);
+		$config['facebook_show_posts'] = gcms::getVars($_POST, 'facebook_show_posts', 0);
+		$config['facebook_hide_cover'] = gcms::getVars($_POST, 'facebook_hide_cover', 0);
 		// ตรวจสอบค่าที่ส่งมา
 		if (empty($config['facebook_user']) || !preg_match('/^[a-z\d.]{1,}$/i', $config['facebook_user'])) {
 			$ret['error'] = 'FACEBOOK_INVALID_USERNAME';
