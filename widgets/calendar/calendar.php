@@ -1,7 +1,11 @@
 <?php
 	// widgets/calendar/calendar.php
 	if (defined('MAIN_INIT')) {
-		if (empty($config['calendar_owner'])) {
+		if (preg_match('/^[a-z]+$/', $_POST['src'])) {
+			$src = $_POST['src'];
+			$config['calendar_owner'] = 'document';
+			$config['calendar_db'] = DB_INDEX;
+		} elseif (empty($config['calendar_owner'])) {
 			$config['calendar_owner'] = 'document';
 			$config['calendar_db'] = DB_INDEX;
 		}
@@ -34,6 +38,9 @@
 		$events = array();
 		$sql = "SELECT D.`id`,D.`create_date`,M.`module` FROM `$config[calendar_db]` AS D";
 		$sql .= " INNER JOIN `".DB_MODULES."` AS M ON M.`id`=D.`module_id` AND M.`owner`='$config[calendar_owner]'";
+		if (!empty($src)) {
+			$sql .= " AND M.`module`='$src'";
+		}
 		$sql .= " WHERE D.`create_date`>='$mkdate' AND D.`create_date`<'$mk31th' AND D.`published`='1'";
 		$datas = $cache->get($sql);
 		if (!$datas) {

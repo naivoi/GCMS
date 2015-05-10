@@ -1,9 +1,9 @@
 <?php
 	// widgets/calendar/index.php
 	if (defined('MAIN_INIT')) {
-		$widget[] = '<div id=widget-calendar></div>';
+		$widget[] = '<div id=widget-calendar-'.$module.'></div>';
 		$widget[] = '<script>';
-		$widget[] = 'inintCalendar("widget-calendar", false);';
+		$widget[] = 'inintCalendar("widget-calendar-'.$module.'", false);';
 		$widget[] = '</script>';
 		$widget = implode("\n", $widget);
 	}

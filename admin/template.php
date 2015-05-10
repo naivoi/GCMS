@@ -23,6 +23,7 @@
 						$config['skin'] = $theme;
 						// บันทึก config.php
 						if (gcms::saveconfig(CONFIG, $config)) {
+							$_SESSION['skin'] = $config['skin'];
 							$message = '<aside class=message>{LNG_TEMPLATE_SELECT_SUCCESS}</aside>';
 						} else {
 							$message = '<aside class=error>'.sprintf($lng['ERROR_FILE_READ_ONLY'], 'bin/config.php').'</aside>';

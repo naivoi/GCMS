@@ -128,5 +128,9 @@
 		// cache
 		$cache = new gcmsCache(DATA_PATH.'cache/', $config['index_page_cache'], $ftp);
 	}
+	// skin
+	$skin = gcms::getVars('GET,SESSION', 'skin,skin', $config['skin']);
+	$config['skin'] = is_file(ROOT_PATH."skin/$skin/style.css") ? $skin : 'bighead';
+	$_SESSION['skin'] = $config['skin'];
 	// โฟลเดอร์ของ template
 	define('SKIN', "skin/$config[skin]/");

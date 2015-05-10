@@ -6,10 +6,19 @@
  Responsive
 */
 body {
-	font-size: 14px;
+	font-size: 16px;
 	color: #666;
-	font-family: Tahoma, Loma;
 	height: 100%;
+	line-height: 2;
+}
+a {
+	color: #333;
+}
+a:hover {
+	color: #000;
+}
+.topic {
+	font-weight: normal;
 }
 .gcss-wrapper {
 	width: 1170px;
@@ -34,6 +43,8 @@ body {
 	border-bottom: 1px solid #FFF;
 }
 .header_bg {
+	background-size: cover;
+	background-attachment: fixed;
 	background-image: url(img/head_bg.jpg);
 	background-position: top center;
 	height: 100%;
@@ -100,10 +111,12 @@ body {
 	-webkit-border-radius: 50em;
 	width: 1.4em;
 	height: 1.4em;
+	line-height: 1.7;
 	text-align: center;
 	display: block;
 	margin: 0 auto 1%;
 	font-size: 2.2em;
+	font-family: Tahoma;
 	-webkit-transition: all .2s ease-in-out;
 	-moz-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
@@ -115,13 +128,17 @@ body {
 	font-size: 3em;
 	margin: 30px 0;
 	text-align: center;
+	text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
 }
 .breadcrumbs {
 	text-align: center;
 	margin-top: -20px;
 	margin-bottom: 50px;
 }
-.text-links, .wrapper_top_bg, .footer_grid {
+.wrapper_top_bg {
+	padding-bottom: 20px;
+}
+.text-links, .footer_grid {
 	padding: 20px 0;
 }
 .text-links {
@@ -130,12 +147,25 @@ body {
 }
 #login-box a {
 	display: block;
-	line-height: 1.8em;
+}
+.search-box {
+	background-color: #E89980;
+	padding: 10px;
+	margin-bottom: 30px;
+	color: #EEE;
+}
+.widget_share {
+	font-size: 1.3em;
 }
 .footer_grid {
 	background-color: #262626;
 	color: #999;
-	line-height: 2em;
+}
+.footer_grid a {
+	color: inherit;
+}
+.footer_grid a:hover {
+	color: #FFF;
 }
 .footer_grid header {
 	margin-bottom: 20px;
@@ -149,10 +179,21 @@ body {
 	padding: 0 0 30px 0;
 	list-style-type: none;
 }
-.footer_grid .widget.gallery .table_rss_gallery_class a {
-	border-color: rgba(255, 255, 255, 0.5);
-	width: 100px;
-	height: 100px;
+.footer_grid .news .topic {
+	font-weight: normal;
+}
+.footer_grid .news article {
+	padding: 0 !important;
+	border-style: none;
+	display: block;
+}
+.footer_grid .news img {
+	border-radius: 50em;
+	-moz-border-radius: 50em;
+	-webkit-border-radius: 50em;
+}
+.footer_grid #usericon {
+	margin-top: 0.7em;
 }
 .post-detail {
 	border: 1px solid #d1e9ed;

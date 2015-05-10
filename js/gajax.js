@@ -1089,6 +1089,9 @@ GLoader.prototype = {
 		window.setInterval(function() {
 			locs = location.toString().replace('_=_', '').split('#');
 			locs = locs[1] && locs[1].indexOf('=') > -1 ? locs[1] : '';
+			if ( temp.lasturl != '' && locs == '') {
+				locs =  'module=' + FIRST_MODULE;
+			}
 			if (locs !== '' && locs != temp.lasturl) {
 				temp.lasturl = locs;
 				temp.myhistory.push(locs);

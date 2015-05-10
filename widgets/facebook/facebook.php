@@ -3,7 +3,7 @@
 	// inint
 	include '../../bin/inint.php';
 	// ตรวจสอบค่า default
-	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 0);
+	$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 500);
 	$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 0);
 	$config['facebook_user'] = gcms::getVars($config, 'facebook_user', 'gcmscms');
 	$config['facebook_show_facepile'] = gcms::getVars($config, 'facebook_show_facepile', 1);

@@ -2,7 +2,7 @@
 	// widgets/facebook/index.php
 	if (defined('MAIN_INIT')) {
 		$module = empty($module) ? gcms::getVars($config, 'facebook_user', '') : $module;
-		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 0);
+		$config['facebook_width'] = gcms::getVars($config, 'facebook_width', 500);
 		$config['facebook_height'] = gcms::getVars($config, 'facebook_height', 0);
 		$config['facebook_show_facepile'] = gcms::getVars($config, 'facebook_show_facepile', 1);
 		$config['facebook_show_posts'] = gcms::getVars($config, 'facebook_show_posts', 0);
@@ -26,6 +26,7 @@
 			$widget = array($div);
 			$widget[] = '<script>';
 			$widget[] = '(function(d, id) {';
+			$widget[] = 'if (d.getElementById(id)) return;';
 			$widget[] = 'var js = d.createElement("script");';
 			$widget[] = 'js.id = id;';
 			$widget[] = 'js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&appId='.(empty($config['facebook']['appId']) ? '' : $config['facebook']['appId']).'&version=v2.3";';
