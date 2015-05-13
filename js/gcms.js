@@ -201,15 +201,15 @@ var getURL = function (url) {
 	var urls = url.split('?');
 	var new_q = new Array();
 	if (urls[1] && loader_patt0.exec(urls[1])) {
-		return '#' + urls[1];
+		return urls[1];
 	} else if (hs = loader_patt1.exec(urls[0])) {
-		new_q.push('#module=' + hs[1] + '-' + hs[4] + '&cat=' + hs[2] + '&id=' + hs[3]);
+		new_q.push('module=' + hs[1] + '-' + hs[4] + '&cat=' + hs[2] + '&id=' + hs[3]);
 	} else if (hs = loader_patt2.exec(urls[0])) {
-		new_q.push('#module=' + hs[1] + '-' + hs[3] + '&cat=' + hs[2]);
+		new_q.push('module=' + hs[1] + '-' + hs[3] + '&cat=' + hs[2]);
 	} else if (hs = loader_patt3.exec(urls[0])) {
-		new_q.push('#module=' + hs[1] + '-' + hs[2]);
+		new_q.push('module=' + hs[1] + '-' + hs[2]);
 	} else if (hs = loader_patt4.exec(urls[0])) {
-		new_q.push('#module=' + hs[1]);
+		new_q.push('module=' + hs[1]);
 	} else {
 		return null;
 	}
@@ -220,7 +220,7 @@ var getURL = function (url) {
 			}
 		});
 	}
-	return new_q.join('&');
+	return new_q;
 };
 function selectMenu(module) {
 	if ($E('topmenu')) {

@@ -44,9 +44,6 @@
 					$sql2 = "SELECT COUNT(*) FROM `".DB_COMMENT."` WHERE `index_id` IN ($sql2) AND `module_id`='$index[id]'";
 					$sql = "UPDATE `".DB_CATEGORY."` AS C SET C.`c1`=($sql1),C.`c2`=($sql2) WHERE C.`module_id`='$index[id]'";
 					$db->query($sql);
-				} elseif ($moderator && $action == 'news') {
-					// show_news (บทความ)
-					$db->query("UPDATE `".DB_INDEX."` SET `show_news`='$value' WHERE `id` IN($id) AND `module_id`='$index[id]'");
 				} elseif ($moderator && $action == 'published') {
 					// published (บทความ)
 					$db->query("UPDATE `".DB_INDEX."` SET `published`='$value' WHERE `id` IN($id) AND `module_id`='$index[id]'");

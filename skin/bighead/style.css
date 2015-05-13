@@ -135,10 +135,7 @@ a:hover {
 	margin-top: -20px;
 	margin-bottom: 50px;
 }
-.wrapper_top_bg {
-	padding-bottom: 20px;
-}
-.text-links, .footer_grid {
+.text-links, .footer_grid, .wrapper_top_bg {
 	padding: 20px 0;
 }
 .text-links {
@@ -240,6 +237,9 @@ a:hover {
 	-moz-opacity: .40;
 	filter: alpha(opacity=40);
 	opacity: .40;
+}
+#document-view .reaction {
+	background-color: #FFFFDD;
 }
 dl.info {
 	padding: 10px;

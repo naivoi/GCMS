@@ -1087,10 +1087,16 @@ GLoader.prototype = {
 		}
 		var temp = this;
 		window.setInterval(function() {
-			locs = location.toString().replace('_=_', '').split('#');
+			var curr_url = location.toString().replace('_=_', '');
+			if (curr_url.indexOf('#') > -1) {
+				locs = curr_url.split('#');
+			} else {
+				locs = curr_url.split('?');
+			}
 			locs = locs[1] && locs[1].indexOf('=') > -1 ? locs[1] : '';
 			if ( temp.lasturl != '' && locs == '') {
-				locs =  'module=' + FIRST_MODULE;
+				var qs = temp.geturl.call(temp, curr_url);
+				locs = qs === null ? 'module=' + FIRST_MODULE : qs.join('&');
 			}
 			if (locs !== '' && locs != temp.lasturl) {
 				temp.lasturl = locs;
@@ -1126,7 +1132,8 @@ GLoader.prototype = {
 		var locs = window.location.toString().split('#');
 		var ret = this.geturl.call(this, url);
 		if (ret) {
-			window.location = locs[0] + decodeURIComponent(ret) + '&' + new Date().getTime();
+			ret.push(new Date().getTime());
+			window.location = locs[0] + '#' + decodeURIComponent(ret.join('&'));
 			return false;
 		} else {
 			window.location = url;

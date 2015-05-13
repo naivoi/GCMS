@@ -625,7 +625,7 @@
 			$replace[] = '<blockquote><b>{LNG_R_QUOTE} <em>#\\1</em></b>';
 			$patt[] = '/\[google\](.*?)\[\/google\]/usi';
 			$replace[] = '<a class="googlesearch" href="http://www.google.co.th/search?q=\\1&amp;&meta=lr%3Dlang_th" target="_blank" rel="nofollow">\\1</a>';
-			$patt[] = '/([^["]]|\r|\n|\s|\t)(https?:\/\/([^\s<>\"\']+))/';
+			$patt[] = '/([^["]]|\r|\n|\s|\t|^)(https?:\/\/([^\s<>\"\']+))/';
 			$replace[] = '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>';
 			$patt[] = '/\[WEBURL\]/isu';
 			$replace[] = WEB_URL;
